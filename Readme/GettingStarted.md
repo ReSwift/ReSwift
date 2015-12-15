@@ -184,3 +184,44 @@ In the `handleAction` method of your reducers you will always receive plain `Act
 ```
 
 We create a typed action from the plain action and pass it on to a method of the reducer. This way the method has access to the types defined as part of our `CreateContactFromEmail` method.
+
+#Reducers
+
+This is the only place where you should modify application state! Reducers, just as `StoreSubscribers` can define the particular slice of the app state that they are interested in by changing the type in their `handleAction` method. Here's an example of a part of a reducer in an app built with Swift Flow:
+
+```swift
+struct DataMutationReducer: Reducer {
+
+    func handleAction(state: HasDataState, action: Action) -> HasDataState {
+        switch action.type {
+        case CreateContactFromEmail.type:
+            return createContact(state, email: CreateContactFromEmail(action).email)
+        case CreateContactWithTwitterUser.type:
+            return createContact(state, twitterUser: CreateContactWithTwitterUser(action).twitterUser)
+        case DeleteContact.type:
+            return deleteContact(state, identifier: DeleteContact(action).contactID)
+        case SetContacts.type:
+            return setContacts(state, contacts: SetContacts(action).contacts)
+        default:
+            return state
+        }
+    }
+
+    func createContact(var state: HasDataState, email: String) -> HasDataState {
+        let newContactID = state.dataState.contacts.count + 1
+        let newContact = Contact(identifier: newContactID, emailAddress: email)
+        state.dataState.contacts.append(newContact)
+
+        return state
+    }
+
+    func createContact(var state: HasDataState, twitterUser: TwitterUser) -> HasDataState {
+        let newContactID = state.dataState.contacts.count + 1
+        let newContact = Contact(identifier: newContactID, twitterHandle: twitterUser.username)
+        state.dataState.contacts.append(newContact)
+
+        return state
+    }
+```
+
+You typically switch over the types in `handleAction`, then instantiate typed actions from plain actions and finally call a method that implements the actual state mutation.
