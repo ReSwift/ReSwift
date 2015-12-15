@@ -86,3 +86,69 @@ struct Action : ActionType {
 This `Action` type is serializable, which is imported for storing past actions to disk and enabling time traveling and hot reloading. 
 
 For simple actions you can use this type directly; for actions with a complex payload you should make use of Swift's rich type system and create separate type. This type needs to be convertible into plain `Action`s.
+
+##Using Plain Actions
+
+The [Counter Example App](https://github.com/Swift-Flow/CounterExample) makes use of plain actions that don't carry any payload. They are simply initialized with a string constant:
+
+```swift
+    @IBAction func increaseButtonTapped(sender: UIButton) {
+        mainStore.dispatch(
+            Action(CounterActionIncrease)
+        )
+    }
+```
+
+Within your reducer you switch over the `type` string of this plain action to identify the type and perform a state change:
+
+```swift
+struct CounterReducer: Reducer {
+
+    func handleAction(var state: AppState, action: Action) -> AppState {
+        switch action.type {
+        case CounterActionIncrease:
+            state.counter += 1
+        case CounterActionDecrease:
+            state.counter -= 1
+        default:
+            break
+        }
+
+        return state
+    }
+
+}
+```
+This approach works best with simple actions, with no or very simple payloads. For more complex actions you should use a typed action.
+
+##Using Typed Actions
+
+Here's an example from the Meet App that shows you how to define a custom, typed action:
+
+```swift 
+struct CreateContactFromEmail {
+    static let type = "CreateContactFromEmail"
+    let email: String
+
+    init(_ email: String) {
+        self.email = email
+    }
+}
+
+extension CreateContactFromEmail: ActionConvertible, ActionType {
+
+    init(_ action: Action) {
+    	if (action.type != CreateContactFromEmail.type) {
+    		fatalError("Typed Action cannot be initialized with plain Action of wrong type!")
+    	}
+        self.email = action.payload!["email"] as! String
+    }
+
+    func toAction() -> Action {
+        return Action(type: CreateContactFromEmail.type, payload: ["email": email])
+    }
+}
+```
+The `CreateContactFromEmail` struct contains a type string that identifies this action (this preserves the type upon serialization and deserialization) and a payload, in this case an email address. 
+
+In the extension you can see boilerplate code that allows this typed action to be initialized with a plain action and that allows us to convert it into a plain action. [This code will mostly be auto-generated in future, since it is one of the painpoints of working with this framework right now.](https://github.com/Swift-Flow/Swift-Flow/issues/2)
