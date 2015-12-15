@@ -2,9 +2,9 @@
 
 Swift Flow is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift.
 
-#Getting Started
+#Getting Started Guide
 
-I'm currently working on a Getting Started Guide, it will live [here](Readme/GettingStarted.md). In the meantime you can get up to speed using the Redux documentation and the example projects linked below.
+[A Getting Started Guide that describes the core components of apps built with Swift Flow lives here](Readme/GettingStarted.md). It will be expanded in the next few weeks. To get an understanding of the core principles I recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
 
 #Installation
 
@@ -23,3 +23,7 @@ This repository contains the core component for Swift Flow, the following extens
 
 - [CounterExample](https://github.com/Swift-Flow/CounterExample): A very simple counter app implemented with Swift Flow. This app also demonstrates the basics of routing with SwiftFlowRouter.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with Swift Flow - currently still very early on.
+
+#Credits
+
+- Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building redux - all ideas in here and many implementation details were provided by his framework.
