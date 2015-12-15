@@ -152,3 +152,35 @@ extension CreateContactFromEmail: ActionConvertible, ActionType {
 The `CreateContactFromEmail` struct contains a type string that identifies this action (this preserves the type upon serialization and deserialization) and a payload, in this case an email address. 
 
 In the extension you can see boilerplate code that allows this typed action to be initialized with a plain action and that allows us to convert it into a plain action. [This code will mostly be auto-generated in future, since it is one of the painpoints of working with this framework right now.](https://github.com/Swift-Flow/Swift-Flow/issues/2)
+
+###Dispatching a Typed Action
+
+The `Store` will accept your typed action directly, as soon as it conforms to the `ActionType` protocol. You can dispatch a typed action the same way as dispatching a plain action:
+
+```swift
+store.dispatch(CreateContactFromEmail("Benjamin.Encz@gmail.com"))
+```
+
+###Using Typed Actions in a Reducer
+
+In the `handleAction` method of your reducers you will always receive plain `Action`s. This ensure that your reducer works with serialized actions and therefore supports time-traveling and hot-reloading. If your typed action conforms to `ActionConvertible` then it provides a convenience initializer that allows you to easily create a typed action from an untyped one. You should do this as part of your type checking code in the reducers, e.g.:
+
+```swift
+    func handleAction(state: HasDataState, action: Action) -> HasDataState {
+        switch action.type {
+        case CreateContactFromEmail.type:
+            return createContact(state, email: CreateContactFromEmail(action).email)
+			...
+        }
+    }
+    
+    func createContact(var state: HasDataState, email: String) -> HasDataState {
+        let newContactID = state.dataState.contacts.count + 1
+        let newContact = Contact(identifier: newContactID, emailAddress: email)
+        state.dataState.contacts.append(newContact)
+
+        return state
+    }
+```
+
+We create a typed action from the plain action and pass it on to a method of the reducer. This way the method has access to the types defined as part of our `CreateContactFromEmail` method.
