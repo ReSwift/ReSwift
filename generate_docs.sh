@@ -1,0 +1,12 @@
+jazzy \
+  --clean \
+  --author Benjamin Encz \
+  --author_url https://github.com/Swift-Flow/Swift-Flow \
+  --github_url https://github.com/Swift-Flow/Swift-Flow \
+  --github-file-prefix https://github.com/Swift-Flow/Swift-Flow/tree/master \
+  --module-version 0.0.1 \
+  --xcodebuild-arguments -scheme,SwiftFlow \
+  --module SwiftFlow \
+  --root-url https://github.com/Swift-Flow/Swift-Flow \
+  --output docs/swift_output \
+  --template-directory docs/templates

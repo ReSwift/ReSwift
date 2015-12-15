@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Store Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Store" class="dashAnchor"></a>
+    <a title="Store Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftFlow Docs</a> (15% documented)</p>
+        <p class="header-right"><a href="https://github.com/Swift-Flow/Swift-Flow"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fgithub%2Ecom%2FSwift%2DFlow%2Fdocsets%2FSwiftFlow%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftFlow Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Store Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MainStore.html">MainStore</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ActionConvertible.html">ActionConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ActionType.html">ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AnyReducer.html">AnyReducer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AnyStoreSubscriber.html">AnyStoreSubscriber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Coding.html">Coding</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PayloadConvertible.html">PayloadConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Reducer.html">Reducer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/StateType.html">StateType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Store.html">Store</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Action.html">Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MainReducer.html">MainReducer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:9SwiftFlow18AsyncActionCreator">AsyncActionCreator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Store</h1>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP9SwiftFlow5Store8appStatePS_9StateType_"></a>
+                    <a name="//apple_ref/swift/Property/appState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP9SwiftFlow5Store8appStatePS_9StateType_">appState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The current state stored in the store</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L14">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store9subscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_"></a>
+                    <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store9subscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_">subscribe(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribes the provided subscriber to this store.
+Subscribers will receive a call to <code>newState</code> whenever the
+state in this store changes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt">AnyStoreSubscriber</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Subscriber that will receive store updates</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L23">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store11unsubscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_"></a>
+                    <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store11unsubscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_">unsubscribe(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsubscribes the provided subscriber. The subscriber will no longer
+receive state updates from this store.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt">AnyStoreSubscriber</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Subscriber that will be unsubscribed</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L31">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FPS_10ActionType_T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FPS_10ActionType_T_">dispatch(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dispatches an action. This is the simplest way to modify the stores state.</p>
+
+<p>Example of dispatching an action:
+<code>swift
+store.dispatch( CounterAction.IncreaseCounter )
+</code>
+- parameter action: The action that is being dispatched to the store</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">ActionType</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that is being dispatched to the store</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L42">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FFT5statePS_9StateType_5storePS0___GSqPS_10ActionType__T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FFT5statePS_9StateType_5storePS0___GSqPS_10ActionType__T_">dispatch(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dispatches an action creator to the store. Action creators are functions that generate
+actions. They are called by the store and receive the current state of the application
+and a reference to the store as their input.</p>
+
+<p>Based on that input the action creator can either return an action or not. Alternatively
+the action creator can also perform an asynchronous operation and dispatch a new action
+at the end of it.</p>
+
+<p>Example of an action creator:
+<code>swift
+func deleteNote(noteID: Int) -&gt; ActionCreator {
+   return { state, store in
+       // only delete note if editing is enabled
+       if (state.editingEnabled == true) {
+           return NoteDataAction.DeleteNote(noteID)
+       } else {
+           return nil
+       }
+   }
+}
+</code></p>
+
+<p>This action creator can then be dispatched as following:
+<code>swift
+store.dispatch( noteActionCreatore.deleteNote(3) )
+</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">actionCreatorProvider</span><span class="p">:</span> <span class="kt">ActionCreator</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L72">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FFT5statePS_9StateType_5storePS0__21actionCreatorCallbackFFT5statePS1__5storePS0___GSqPS_10ActionType__T__T_T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FFT5statePS_9StateType_5storePS0__21actionCreatorCallbackFFT5statePS1__5storePS0___GSqPS_10ActionType__T__T_T_">dispatch(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dispatches an async action creator to the store. An async action creator generates an
+action creator asynchronously. Use this method if you want to wait for the state change
+triggered by the asynchronously generated action creator.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="k">as</span><span class="nv">yncActionCreatorProvider</span><span class="p">:</span> <span class="kt">AsyncActionCreator</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L79">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTPS_10ActionType_8callbackGSqFPS_9StateType_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTPS_10ActionType_8callbackGSqFPS_9StateType_T___T_">dispatch(_:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dispatches an action and calls the callback as soon as the action has been processed.
+You will receive the updated store state as part of this callback.</p>
+
+<p>Example of dispatching an action and implementing a callback:
+<code>swift
+store.dispatch( CounterAction.IncreaseCounter ) { state in
+   print(&quot;New state: \(state)&quot;)
+}
+</code>
+- parameter action: The action that is being dispatched to the store</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">ActionType</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kt">DispatchCallback</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that is being dispatched to the store</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L93">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTFT5statePS_9StateType_5storePS0___GSqPS_10ActionType__8callbackGSqFPS1__T___T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTFT5statePS_9StateType_5storePS0___GSqPS_10ActionType__8callbackGSqFPS1__T___T_">dispatch(_:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L0">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTFT5statePS_9StateType_5storePS0__21actionCreatorCallbackFFT5statePS1__5storePS0___GSqPS_10ActionType__T__T_8callbackGSqFPS1__T___T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow5Store8dispatchuRq_S0__Fq_FTFT5statePS_9StateType_5storePS0__21actionCreatorCallbackFFT5statePS1__5storePS0___GSqPS_10ActionType__T__T_8callbackGSqFPS1__T___T_">dispatch(_:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L0">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="https://github.com/Swift-Flow/Swift-Flow" target="_blank" rel="external">Benjamin</a>. All rights reserved. (Last updated: 2015-12-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
