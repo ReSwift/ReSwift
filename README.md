@@ -27,3 +27,14 @@ This repository contains the core component for Swift Flow, the following extens
 #Credits
 
 - Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building redux - all ideas in here and many implementation details were provided by his framework.
+
+#Get in touch
+
+If you have any questions, you can find me on twitter [@benjaminencz](https://twitter.com/benjaminencz).
+
+
+#Demo
+
+Here's a brief video that deomstrates the time traveling capabilities provided by Swift Flow:
+
+<iframe src="https://player.vimeo.com/video/149151908" width="500" height="889" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/149151908">
