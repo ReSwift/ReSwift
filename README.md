@@ -35,6 +35,4 @@ If you have any questions, you can find me on twitter [@benjaminencz](https://tw
 
 #Demo
 
-Here's a brief video that deomstrates the time traveling capabilities provided by Swift Flow:
-
-<iframe src="https://player.vimeo.com/video/149151908" width="500" height="889" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/149151908">
+[Here's a brief video](https://vimeo.com/149151908) that demonstrates the time traveling capabilities provided by Swift Flow.
