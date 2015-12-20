@@ -2,7 +2,7 @@
 
 Swift Flow provides the infrastructure for `Store`s, `Action`s and `Reducer`s to enable a unidirectional data flow as shown below. 
 
-![](Assets/redux.png)
+![](Assets/swift_flow_detail.png)
 
 The following steps will describe how to set up the individual components for your Swift Flow app.
 

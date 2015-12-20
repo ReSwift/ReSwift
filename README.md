@@ -3,24 +3,20 @@
 
 ⚠️ **This library is a pre-release. Expect missing docs and breaking API changes** ⚠️
 
-**Table of Contents** 
+#Table of Contents
 
-- [Demo](#demo)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
+- [Demo](#demo)
 - [Extensions](#extensions)
 - [Example Projects](#example-projects)
 - [Credits](#credits)
 - [Get in touch](#get-in-touch)
-- [Demo](#demo-1)
 
-#Demo
 
-Swift Flow is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift.
+#About Swift Flow
 
-Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
-
-![](Readme/Assets/timetravel.gif)
+![](Readme/Assets/swift_flow_concept.png)
 
 #Getting Started Guide
 
@@ -31,6 +27,14 @@ Using this library you can implement apps that have an explicit, reproducible st
 You can install SwiftFlow via [Carthage]() by adding the following line to your Cartfile:
 
 	github "Swift-Flow/Swift-Flow"
+	
+#Demo
+
+Swift Flow is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift.
+
+Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
+
+![](Readme/Assets/timetravel.gif)
 	
 #Extensions
 
@@ -51,8 +55,3 @@ This repository contains the core component for Swift Flow, the following extens
 #Get in touch
 
 If you have any questions, you can find me on twitter [@benjaminencz](https://twitter.com/benjaminencz).
-
-
-#Demo
-
-[Here's a brief video](https://vimeo.com/149151908) that demonstrates the time traveling capabilities provided by Swift Flow.
