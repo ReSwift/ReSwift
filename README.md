@@ -1,10 +1,10 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md)
 
-⚠️ **This library is a pre-release. Expect missing docs and breaking API changes** ⚠️
-
 #Table of Contents
 
+- [Table of Contents](#table-of-contents)
+- [About Swift Flow](#about-swift-flow)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
 - [Demo](#demo)
@@ -16,7 +16,93 @@
 
 #About Swift Flow
 
+Swift Flow is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift. 
+
+It relies on a few principles:
+- **The Store** stores your entire app state in the form of a single data structure. This state can only be modified by dispatching Actions to the store. Whenever the state in the store changes, the store will notify all observers.
+- **Actions** are a declarative way of describing a state change. Actions don't contain any code, they are consumed by the store and forwarded to reducers. Reducers will handle the actions by implementing a different state change for each action.
+- **Reducers** provide pure functions, that based on the current action and the current app state, create a new app state
+
 ![](Readme/Assets/swift_flow_concept.png)
+
+For a very simple app, that maintains a counter that can be increased and decreased, you can define the app state as following:
+
+```swift
+struct AppState: StateType, HasNavigationState {
+    var counter: Int = 0
+}
+```
+
+You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](Readme/GettingStarted.md) you can find out how to construct complex actions. For the simple actions in this example we can define string constants:
+
+```swift
+let CounterActionIncrease = "COUNTER_ACTION_INCREASE"
+let CounterActionDecrease = "COUNTER_ACTION_DECREASE"
+```
+
+Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
+
+```swift
+struct CounterReducer: Reducer {
+
+    func handleAction(var state: AppState, action: Action) -> AppState {
+        switch action.type {
+        case CounterActionIncrease:
+            state.counter += 1
+        case CounterActionDecrease:
+            state.counter -= 1
+        default:
+            break
+        }
+
+        return state
+    }
+
+}
+```
+In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
+
+Lastly, your view layer, in this case a view controller, needs to tie into this system by subscribing to store updates and emitting actions whenever the app state needs to be changed:
+
+```swift
+class CounterViewController: UIViewController, StoreSubscriber {
+
+    @IBOutlet var counterLabel: UILabel!
+
+    override func viewWillAppear(animated: Bool) {
+        mainStore.subscribe(self)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        mainStore.unsubscribe(self)
+    }
+
+    func newState(state: AppState) {
+        counterLabel.text = "\(state.counter)"
+    }
+
+    @IBAction func increaseButtonTapped(sender: UIButton) {
+        mainStore.dispatch(
+            Action(CounterActionIncrease)
+        )
+    }
+
+    @IBAction func decreaseButtonTapped(sender: UIButton) {
+        mainStore.dispatch(
+            Action(CounterActionDecrease)
+        )
+    }
+    
+}
+```
+
+The `newState` method will be called by the `Store` whenever a new app state is available, this is where we need to adjust our view to reflect the latest app state.
+
+Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.
+
+This is a very basic example that only shows a subset of Swift Flow's features, read the Getting Started Guide to see how you can build entire apps with this architecture.
+
+**This library is a pre-release. Expect missing docs and breaking API changes.**
 
 #Getting Started Guide
 
@@ -29,8 +115,6 @@ You can install SwiftFlow via [Carthage]() by adding the following line to your 
 	github "Swift-Flow/Swift-Flow"
 	
 #Demo
-
-Swift Flow is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift.
 
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
 
@@ -50,7 +134,7 @@ This repository contains the core component for Swift Flow, the following extens
 
 #Credits
 
-- Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building redux - all ideas in here and many implementation details were provided by his library.
+- Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building [Redux](https://github.com/rackt/redux) - all ideas in here and many implementation details were provided by his library.
 
 #Get in touch
 
