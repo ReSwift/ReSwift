@@ -47,7 +47,7 @@ extension Action: Coding {
             return ["type": type, "payload": "null"]
         }
     }
-    
+
 }
 
 public protocol PayloadConvertible {

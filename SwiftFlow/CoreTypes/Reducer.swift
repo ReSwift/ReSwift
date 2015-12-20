@@ -23,5 +23,5 @@ extension Reducer {
     public func _handleAction(state: StateType, action: Action) -> StateType {
         return withSpecificTypes(state, action: action, function: handleAction)
     }
-    
+
 }
