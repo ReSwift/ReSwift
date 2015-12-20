@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import Quick
+import Nimble
 @testable import SwiftFlow
 
 struct TestAppState: StateType {
@@ -56,65 +58,70 @@ class TestStoreSubscriber: StoreSubscriber {
     }
 }
 
-class StoreTests: XCTestCase {
+class StoreSpecs: QuickSpec {
 
-    var store: Store!
-    var reducer: TestReducer!
+    override func spec() {
 
-    override func setUp() {
-        super.setUp()
+        describe("#subscribe") {
 
-        reducer = TestReducer()
-        store = MainStore(reducer: reducer, appState: TestAppState())
-    }
+            var store: Store!
+            var reducer: TestReducer!
 
-    func testDispatchesInitialValueUponSubscription() {
-        let expectation = expectationWithDescription("Sends initial value")
-        store = MainStore(reducer: reducer, appState: TestAppState())
-        let subscriber = TestStoreSubscriber()
-
-        store.dispatch(SetValueAction(3)) { newState in
-            if (subscriber.receivedStates.last?.testValue == 3) {
-                expectation.fulfill()
+            beforeEach {
+                reducer = TestReducer()
+                store = MainStore(reducer: reducer, appState: TestAppState())
             }
+
+            it("dispatches initial value upon subscription") {
+                store = MainStore(reducer: reducer, appState: TestAppState())
+                let subscriber = TestStoreSubscriber()
+
+                store.subscribe(subscriber)
+
+                waitUntil(timeout: 2.0) { fulfill in
+                    store.dispatch(SetValueAction(3)) { newState in
+                        if (subscriber.receivedStates.last?.testValue == 3) {
+                            fulfill()
+                        }
+                    }
+                }
+            }
+
+            it("does not dispatch value after subscriber unsubscribes") {
+                store = MainStore(reducer: reducer, appState: TestAppState())
+                let subscriber = TestStoreSubscriber()
+
+                store.dispatch(SetValueAction(5))
+                store.subscribe(subscriber)
+                store.dispatch(SetValueAction(10))
+
+                // Let Run Loop Run so that dispatched actions can be performed
+                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+
+                store.unsubscribe(subscriber)
+                // Following value is missed due to not being subscribed:
+                store.dispatch(SetValueAction(15))
+                store.dispatch(SetValueAction(25))
+
+                // Let Run Loop Run so that dispatched actions can be performed
+                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+
+                store.subscribe(subscriber)
+
+                waitUntil(timeout: 2.0) { fulfill in
+                    store.dispatch(SetValueAction(20)) { newState in
+                        if (subscriber.receivedStates[subscriber.receivedStates.count - 1].testValue == 20
+                            && subscriber.receivedStates[subscriber.receivedStates.count - 2].testValue == 25
+                            && subscriber.receivedStates[subscriber.receivedStates.count - 3].testValue == 10) {
+                                fulfill()
+                        }
+                    }
+                }
+            }
+
         }
 
-        store.subscribe(subscriber)
-
-        waitForExpectationsWithTimeout(2.0, handler: nil)
-    }
-
-    func testDoesNotDispatchValuesWhenUnsubscribed() {
-        let expectation = expectationWithDescription("Sends subsequent values")
-        store = MainStore(reducer: reducer, appState: TestAppState())
-        let subscriber = TestStoreSubscriber()
-
-        store.dispatch(SetValueAction(5))
-        store.subscribe(subscriber)
-        store.dispatch(SetValueAction(10))
-
-        // Let Run Loop Run so that dispatched actions can be performed
-        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
-
-        store.unsubscribe(subscriber)
-        // Following value is missed due to not being subscribed:
-        store.dispatch(SetValueAction(15))
-        store.dispatch(SetValueAction(25))
-
-        // Let Run Loop Run so that dispatched actions can be performed
-        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
-
-        store.subscribe(subscriber)
-
-        store.dispatch(SetValueAction(20)) { newState in
-            if (subscriber.receivedStates[subscriber.receivedStates.count - 1].testValue == 20
-                && subscriber.receivedStates[subscriber.receivedStates.count - 2].testValue == 25
-                 && subscriber.receivedStates[subscriber.receivedStates.count - 3].testValue == 10) {
-                    expectation.fulfill()
-            }
-        }
-
-        waitForExpectationsWithTimeout(2.0, handler: nil)
     }
 
 }
+
