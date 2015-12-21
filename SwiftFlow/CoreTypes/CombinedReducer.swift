@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct MainReducer: AnyReducer {
+public struct CombinedReducer: AnyReducer {
 
-    var reducers: [AnyReducer]
+    let reducers: [AnyReducer]
 
     public init(_ reducers: [AnyReducer]) {
         self.reducers = reducers

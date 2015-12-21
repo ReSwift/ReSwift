@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		621C06501C276FF0008029AE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06271C276F58008029AE /* Nimble.framework */; };
 		621C06511C276FF0008029AE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06451C276F63008029AE /* Quick.framework */; };
+		621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C06851C277759008029AE /* CombinedReducerTests.swift */; };
 		625E66871C1FF97E0027C288 /* SwiftFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* SwiftFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* SwiftFlow.framework */; };
 		625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66A61C1FFA640027C288 /* StoreTests.swift */; };
@@ -20,7 +21,7 @@
 		625E66BF1C1FFC880027C288 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66B91C1FFC880027C288 /* State.swift */; };
 		625E66C01C1FFC880027C288 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66BA1C1FFC880027C288 /* Store.swift */; };
 		625E66C11C1FFC880027C288 /* StoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */; };
-		625E67061C20032E0027C288 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E67051C20032E0027C288 /* MainReducer.swift */; };
+		625E67061C20032E0027C288 /* CombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E67051C20032E0027C288 /* CombinedReducer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 /* Begin PBXFileReference section */
 		621C061D1C276F58008029AE /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		621C06321C276F63008029AE /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
+		621C06851C277759008029AE /* CombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducerTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* SwiftFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E66861C1FF97E0027C288 /* SwiftFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlow.h; sourceTree = "<group>"; };
 		625E66881C1FF97E0027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 		625E66B91C1FFC880027C288 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		625E66BA1C1FFC880027C288 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSubscriber.swift; sourceTree = "<group>"; };
-		625E67051C20032E0027C288 /* MainReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
+		625E67051C20032E0027C288 /* CombinedReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			children = (
 				621C06181C276A5A008029AE /* Frameworks */,
 				625E66A61C1FFA640027C288 /* StoreTests.swift */,
+				621C06851C277759008029AE /* CombinedReducerTests.swift */,
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
 			);
 			path = SwiftFlowTests;
@@ -269,7 +272,7 @@
 		625E66B51C1FFC880027C288 /* CoreTypes */ = {
 			isa = PBXGroup;
 			children = (
-				625E67051C20032E0027C288 /* MainReducer.swift */,
+				625E67051C20032E0027C288 /* CombinedReducer.swift */,
 				625E66B61C1FFC880027C288 /* Action.swift */,
 				625E66B71C1FFC880027C288 /* MainStore.swift */,
 				625E66B81C1FFC880027C288 /* Reducer.swift */,
@@ -530,7 +533,7 @@
 				625E66BC1C1FFC880027C288 /* Action.swift in Sources */,
 				625E66BE1C1FFC880027C288 /* Reducer.swift in Sources */,
 				625E66B41C1FFC830027C288 /* TypeHelper.swift in Sources */,
-				625E67061C20032E0027C288 /* MainReducer.swift in Sources */,
+				625E67061C20032E0027C288 /* CombinedReducer.swift in Sources */,
 				625E66BF1C1FFC880027C288 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
+				621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
