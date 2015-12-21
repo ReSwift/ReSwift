@@ -10,6 +10,7 @@
 		621C06501C276FF0008029AE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06271C276F58008029AE /* Nimble.framework */; };
 		621C06511C276FF0008029AE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06451C276F63008029AE /* Quick.framework */; };
 		621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C06851C277759008029AE /* CombinedReducerTests.swift */; };
+		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
 		625E66871C1FF97E0027C288 /* SwiftFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* SwiftFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* SwiftFlow.framework */; };
 		625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66A61C1FFA640027C288 /* StoreTests.swift */; };
@@ -143,6 +144,7 @@
 		621C061D1C276F58008029AE /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		621C06321C276F63008029AE /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		621C06851C277759008029AE /* CombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducerTests.swift; sourceTree = "<group>"; };
+		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* SwiftFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E66861C1FF97E0027C288 /* SwiftFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlow.h; sourceTree = "<group>"; };
 		625E66881C1FF97E0027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				621C06181C276A5A008029AE /* Frameworks */,
 				625E66A61C1FFA640027C288 /* StoreTests.swift */,
 				621C06851C277759008029AE /* CombinedReducerTests.swift */,
+				621C068B1C278BEF008029AE /* TypeHelperTests.swift */,
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
 			);
 			path = SwiftFlowTests;
@@ -543,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
+				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
