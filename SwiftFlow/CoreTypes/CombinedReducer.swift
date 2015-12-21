@@ -10,18 +10,16 @@ import Foundation
 
 public struct CombinedReducer: AnyReducer {
 
-    let reducers: [AnyReducer]
+    private let reducers: [AnyReducer]
 
     public init(_ reducers: [AnyReducer]) {
         self.reducers = reducers
     }
 
-    public func _handleAction(var state: StateType, action: Action) -> StateType {
-        reducers.forEach { reducer in
-            state = reducer._handleAction(state, action: action)
+    public func _handleAction(state: StateType, action: Action) -> StateType {
+        return reducers.reduce(state) { currentState, reducer in
+            reducer._handleAction(currentState, action: action)
         }
-
-        return state
     }
 
 }

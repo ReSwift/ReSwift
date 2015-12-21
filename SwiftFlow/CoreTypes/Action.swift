@@ -33,6 +33,8 @@ public struct Action: ActionType {
 
 }
 
+// MARK: Coding Extension
+
 extension Action: Coding {
 
     public init(dictionary: [String : AnyObject]) {
