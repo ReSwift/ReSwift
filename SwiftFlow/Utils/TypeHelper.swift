@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ Method is only used internally in Swift Flow to cast the generic `StateType` to a specific
+ type expected by reducers / store subscribers.
+*/
 func withSpecificTypes<SpecificStateType, Action>(state: StateType,
     action: Action, @noescape function: (state: SpecificStateType, action: Action)
     -> SpecificStateType) -> StateType {
