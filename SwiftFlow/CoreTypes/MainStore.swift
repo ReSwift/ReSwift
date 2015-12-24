@@ -25,12 +25,27 @@ public class MainStore: Store {
         }
     }
 
+    // FIXME: this is currently needed to satisfy initialization rules
+    public var dispatch: DispatchFunction = { $0 }
+
     private var reducer: AnyReducer
     private var subscribers: [AnyStoreSubscriber] = []
 
-    public init(reducer: AnyReducer, appState: StateType) {
+    public required init(reducer: AnyReducer, appState: StateType) {
         self.reducer = reducer
         self.appState = appState
+        self.dispatch = self._dispatch
+    }
+
+    public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
+        self.reducer = reducer
+        self.appState = appState
+        self.dispatch = self._dispatch
+
+        // Wrap the dispatch function with all middlewares
+        self.dispatch = middleware.reverse().reduce(self.dispatch) { dispatchFunction, middleware in
+            return middleware(self.dispatch, { self.appState })(dispatchFunction)
+        }
     }
 
     public func subscribe(subscriber: AnyStoreSubscriber) {
@@ -46,12 +61,12 @@ public class MainStore: Store {
         }
     }
 
-    public func dispatch(action: ActionConvertible) {
-        dispatch(action.toAction())
+    public func _dispatch(action: ActionType) {
+        self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
     }
 
-    public func dispatch(action: ActionType) {
-        dispatch(action.toAction(), callback: nil)
+    public func dispatch(action: ActionConvertible) {
+        dispatch(action.toAction())
     }
 
     public func dispatch(actionCreatorProvider: ActionCreator) {
@@ -66,7 +81,7 @@ public class MainStore: Store {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {
-            self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
+            self.dispatch(action)
             callback?(self.appState)
         }
     }

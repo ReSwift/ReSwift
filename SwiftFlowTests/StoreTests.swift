@@ -11,53 +11,6 @@ import Quick
 import Nimble
 @testable import SwiftFlow
 
-struct TestAppState: StateType {
-    var testValue: Int?
-
-    init() {
-        testValue = nil
-    }
-}
-
-struct SetValueAction: ActionConvertible {
-
-    let value: Int
-    static let type = "SetValueAction"
-
-    init (_ value: Int) {
-        self.value = value
-    }
-
-    init(_ action: Action) {
-        self.value = action.payload!["value"] as! Int
-    }
-
-    func toAction() -> Action {
-        return Action(type: SetValueAction.type, payload: ["value": value])
-    }
-
-}
-
-struct TestReducer: Reducer {
-    func handleAction(var state: TestAppState, action: Action) -> TestAppState {
-        switch action.type {
-        case SetValueAction.type:
-            state.testValue = SetValueAction(action).value
-            return state
-        default:
-            abort()
-        }
-    }
-}
-
-class TestStoreSubscriber: StoreSubscriber {
-    var receivedStates: [TestAppState] = []
-
-    func newState(state: TestAppState) {
-        receivedStates.append(state)
-    }
-}
-
 // swiftlint:disable function_body_length
 class StoreSpecs: QuickSpec {
 
@@ -76,7 +29,7 @@ class StoreSpecs: QuickSpec {
 
             it("dispatches initial value upon subscription") {
                 store = MainStore(reducer: reducer, appState: TestAppState())
-                let subscriber = TestStoreSubscriber()
+                let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
 
@@ -91,7 +44,7 @@ class StoreSpecs: QuickSpec {
 
             it("does not dispatch value after subscriber unsubscribes") {
                 store = MainStore(reducer: reducer, appState: TestAppState())
-                let subscriber = TestStoreSubscriber()
+                let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.dispatch(SetValueAction(5))
                 store.subscribe(subscriber)

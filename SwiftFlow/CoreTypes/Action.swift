@@ -57,6 +57,7 @@ public protocol PayloadConvertible {
 }
 
 public protocol ActionConvertible: ActionType {
+    // TODO: this likely should be a failable or throwing initializer
     init (_ action: Action)
 }
 

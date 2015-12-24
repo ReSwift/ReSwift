@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */; };
+		259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737FA1C2C618A00869B8F /* TestFakes.swift */; };
+		259737FD1C2C661100869B8F /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737FC1C2C661100869B8F /* Middleware.swift */; };
 		621C06501C276FF0008029AE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06271C276F58008029AE /* Nimble.framework */; };
 		621C06511C276FF0008029AE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621C06451C276F63008029AE /* Quick.framework */; };
 		621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C06851C277759008029AE /* CombinedReducerTests.swift */; };
@@ -141,6 +144,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreMiddlewareTests.swift; sourceTree = "<group>"; };
+		259737FA1C2C618A00869B8F /* TestFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFakes.swift; sourceTree = "<group>"; };
+		259737FC1C2C661100869B8F /* Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
 		621C061D1C276F58008029AE /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		621C06321C276F63008029AE /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		621C06851C277759008029AE /* CombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducerTests.swift; sourceTree = "<group>"; };
@@ -256,9 +262,11 @@
 			children = (
 				621C06181C276A5A008029AE /* Frameworks */,
 				625E66A61C1FFA640027C288 /* StoreTests.swift */,
+				259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */,
 				621C06851C277759008029AE /* CombinedReducerTests.swift */,
 				621C068B1C278BEF008029AE /* TypeHelperTests.swift */,
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
+				259737FA1C2C618A00869B8F /* TestFakes.swift */,
 			);
 			path = SwiftFlowTests;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				625E66B91C1FFC880027C288 /* State.swift */,
 				625E66BA1C1FFC880027C288 /* Store.swift */,
 				625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */,
+				259737FC1C2C661100869B8F /* Middleware.swift */,
 			);
 			path = CoreTypes;
 			sourceTree = "<group>";
@@ -534,6 +543,7 @@
 				625E66BD1C1FFC880027C288 /* MainStore.swift in Sources */,
 				625E66B31C1FFC830027C288 /* Coding.swift in Sources */,
 				625E66BC1C1FFC880027C288 /* Action.swift in Sources */,
+				259737FD1C2C661100869B8F /* Middleware.swift in Sources */,
 				625E66BE1C1FFC880027C288 /* Reducer.swift in Sources */,
 				625E66B41C1FFC830027C288 /* TypeHelper.swift in Sources */,
 				625E67061C20032E0027C288 /* CombinedReducer.swift in Sources */,
@@ -546,8 +556,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
+				259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */,
 				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */,
+				259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

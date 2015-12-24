@@ -10,6 +10,10 @@ import Foundation
 
 public protocol Store {
 
+    init(reducer: AnyReducer, appState: StateType)
+
+    init(reducer: AnyReducer, appState: StateType, middleware: [Middleware])
+
     /// The current state stored in the store
     var appState: StateType { get }
 
@@ -39,7 +43,7 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
     */
-    func dispatch(action: ActionType)
+    var dispatch: DispatchFunction { get }
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
