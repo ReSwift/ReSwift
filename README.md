@@ -1,6 +1,10 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md)
 
+#Related Projects
+
+If you landed here, you should also check out the great work over at [ReduxKit](https://github.com/ReduxKit/ReduxKit), which brings the original Redux API to Swift. We all agree that collaboration and sharing of idea's will be beneficial to both projects. Go check it out. Feedback on both projects would be appreciated.
+
 #Table of Contents
 
 - [About Swift Flow](#about-swift-flow)
