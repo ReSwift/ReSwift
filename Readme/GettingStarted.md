@@ -225,3 +225,31 @@ struct DataMutationReducer: Reducer {
 ```
 
 You typically switch over the types in `handleAction`, then instantiate typed actions from plain actions and finally call a method that implements the actual state mutation.
+
+#Middleware
+
+Swift Flow supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html).
+
+Let's take a look at a quick example that shows how Swift Flow supports Redux style middleware.
+
+The simplest example of a middleware, is one that prints all actions to the console. Here's how you can implement it:
+
+```
+let loggingMiddleware: Middleware = { dispatch, getState in
+    return { next in
+        return { action in
+			// perform middleware logic
+            print(action)
+            
+			// call next middleware
+            return next(action)
+        }
+    }
+}
+```
+You can define which middleware you would like to use when creating your store:
+
+```
+MainStore(reducer: reducer, appState: TestStringAppState(),
+                    middleware: [loggingMiddleware, secondMiddleware])
+``` 
