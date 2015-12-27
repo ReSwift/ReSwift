@@ -48,6 +48,8 @@ let dispatchingMiddleware: Middleware = { dispatch, getState in
             if action.type == SetValueAction.type {
                 let valueAction = SetValueAction(action)
                 dispatch(SetValueStringAction("\(valueAction.value)").toAction())
+
+                return "Converted Action Successfully"
             }
 
             return next(action)
@@ -63,7 +65,7 @@ class StoreMiddlewareSpecs: QuickSpec {
 
         describe("middleware") {
 
-            it("can be initialized with middleware which decorates dispatch function") {
+            it("can decorate dispatch function") {
                 let reducer = TestValueStringReducer()
                 let store = MainStore(reducer: reducer, appState: TestStringAppState(),
                     middleware: [firstMiddleware, secondMiddleware])
@@ -78,7 +80,7 @@ class StoreMiddlewareSpecs: QuickSpec {
                     equal("OK First Middleware Second Middleware"), timeout: 2.0)
             }
 
-            it("middleware can dispatch actions") {
+            it("can dispatch actions") {
                 let reducer = TestValueStringReducer()
                 let store = MainStore(reducer: reducer, appState: TestStringAppState(),
                     middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
@@ -91,6 +93,17 @@ class StoreMiddlewareSpecs: QuickSpec {
 
                 expect((store.appState as! TestStringAppState).testValue).toEventually(
                     equal("10 First Middleware Second Middleware"), timeout: 2.0)
+            }
+
+            it("can change the return value of the dispatch function") {
+                let reducer = TestValueStringReducer()
+                let store = MainStore(reducer: reducer, appState: TestStringAppState(),
+                    middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+
+                let action = SetValueAction(10)
+                let returnValue = store.dispatch(action) as? String
+
+                expect(returnValue).to(equal("Converted Action Successfully"))
             }
 
         }

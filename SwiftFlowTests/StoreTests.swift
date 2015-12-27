@@ -42,7 +42,7 @@ class StoreSpecs: QuickSpec {
                 }
             }
 
-            it("does not dispatch value after subscriber unsubscribes") {
+            xit("does not dispatch value after subscriber unsubscribes") {
                 store = MainStore(reducer: reducer, appState: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
@@ -77,6 +77,25 @@ class StoreSpecs: QuickSpec {
                         }
                     }
                 }
+            }
+
+        }
+
+        describe("#dispatch") {
+
+            var store: Store!
+            var reducer: TestReducer!
+
+            beforeEach {
+                reducer = TestReducer()
+                store = MainStore(reducer: reducer, appState: TestAppState())
+            }
+
+            it("returns the dispatched action") {
+                let action = SetValueAction(10)
+                let returnValue = SetValueAction(store.dispatch(action) as! Action)
+
+                expect(returnValue.value).to(equal(action.value))
             }
 
         }

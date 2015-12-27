@@ -61,40 +61,41 @@ public class MainStore: Store {
         }
     }
 
-    public func _defaultDispatch(action: ActionType) {
+    public func _defaultDispatch(action: ActionType) -> Any {
         self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
+        return action
     }
 
-    public func dispatch(action: ActionType) {
-        dispatch(action, callback: nil)
+    public func dispatch(action: ActionType) -> Any {
+        return dispatch(action, callback: nil)
     }
 
-    public func dispatch(action: ActionConvertible) {
-        dispatch(action.toAction(), callback: nil)
+    public func dispatch(action: ActionConvertible) -> Any {
+        return dispatch(action.toAction(), callback: nil)
     }
 
-    public func dispatch(actionCreatorProvider: ActionCreator) {
-        dispatch(actionCreatorProvider, callback: nil)
+    public func dispatch(actionCreatorProvider: ActionCreator) -> Any {
+        return dispatch(actionCreatorProvider, callback: nil)
     }
 
     public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: ActionType, callback: DispatchCallback?) {
-        // Dispatch Asynchronously so that each subscriber receives the latest state
-        // Without Async a receiver could immediately be called and emit a new state
-        dispatch_async(dispatch_get_main_queue()) {
-            self.dispatchFunction(action.toAction())
-            callback?(self.appState)
-        }
+    public func dispatch(action: ActionType, callback: DispatchCallback?) -> Any {
+        let returnValue = self.dispatchFunction(action.toAction())
+        callback?(self.appState)
+
+        return returnValue
     }
 
-    public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) {
+    public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) -> Any {
         let action = actionCreatorProvider(state: self.appState, store: self)
         if let action = action {
             dispatch(action, callback: callback)
         }
+
+        return action
     }
 
     public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
