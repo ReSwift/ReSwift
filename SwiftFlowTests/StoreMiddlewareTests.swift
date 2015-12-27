@@ -76,8 +76,8 @@ class StoreMiddlewareSpecs: QuickSpec {
                 let action = SetValueStringAction("OK")
                 store.dispatch(action)
 
-                expect((store.appState as! TestStringAppState).testValue).toEventually(
-                    equal("OK First Middleware Second Middleware"), timeout: 2.0)
+                expect((store.appState as! TestStringAppState).testValue).to(
+                    equal("OK First Middleware Second Middleware"))
             }
 
             it("can dispatch actions") {
@@ -91,8 +91,8 @@ class StoreMiddlewareSpecs: QuickSpec {
                 let action = SetValueAction(10)
                 store.dispatch(action)
 
-                expect((store.appState as! TestStringAppState).testValue).toEventually(
-                    equal("10 First Middleware Second Middleware"), timeout: 2.0)
+                expect((store.appState as! TestStringAppState).testValue).to(
+                    equal("10 First Middleware Second Middleware"))
             }
 
             it("can change the return value of the dispatch function") {

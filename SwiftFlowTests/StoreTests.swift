@@ -32,17 +32,12 @@ class StoreSpecs: QuickSpec {
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
+                store.dispatch(SetValueAction(3))
 
-                waitUntil(timeout: 2.0) { fulfill in
-                    store.dispatch(SetValueAction(3)) { newState in
-                        if subscriber.receivedStates.last?.testValue == 3 {
-                            fulfill()
-                        }
-                    }
-                }
+                expect(subscriber.receivedStates.last?.testValue).to(equal(3))
             }
 
-            xit("does not dispatch value after subscriber unsubscribes") {
+            it("does not dispatch value after subscriber unsubscribes") {
                 store = MainStore(reducer: reducer, appState: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
@@ -50,33 +45,28 @@ class StoreSpecs: QuickSpec {
                 store.subscribe(subscriber)
                 store.dispatch(SetValueAction(10))
 
-                // Let Run Loop Run so that dispatched actions can be performed
-                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode,
-                    beforeDate: NSDate.distantFuture())
-
                 store.unsubscribe(subscriber)
                 // Following value is missed due to not being subscribed:
                 store.dispatch(SetValueAction(15))
                 store.dispatch(SetValueAction(25))
 
-                // Let Run Loop Run so that dispatched actions can be performed
-                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode,
-                    beforeDate: NSDate.distantFuture())
-
                 store.subscribe(subscriber)
 
-                waitUntil(timeout: 2.0) { fulfill in
-                    store.dispatch(SetValueAction(20)) { newState in
-                        if subscriber.receivedStates[subscriber.receivedStates.count - 1]
-                            .testValue == 20
-                            && subscriber.receivedStates[subscriber.receivedStates.count - 2]
-                                .testValue == 25
-                            && subscriber.receivedStates[subscriber.receivedStates.count - 3]
-                                .testValue == 10 {
-                                    fulfill()
-                        }
-                    }
-                }
+                store.dispatch(SetValueAction(20))
+
+                expect(subscriber.receivedStates.count).to(equal(4))
+
+                expect(subscriber.receivedStates[subscriber.receivedStates.count - 4]
+                    .testValue).to(equal(5))
+
+                expect(subscriber.receivedStates[subscriber.receivedStates.count - 3]
+                    .testValue).to(equal(10))
+
+                expect(subscriber.receivedStates[subscriber.receivedStates.count - 2]
+                    .testValue).to(equal(25))
+
+                expect(subscriber.receivedStates[subscriber.receivedStates.count - 1]
+                    .testValue).to(equal(20))
             }
 
         }
