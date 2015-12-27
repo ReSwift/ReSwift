@@ -17,6 +17,12 @@ public protocol Store {
     /// The current state stored in the store
     var appState: StateType { get }
 
+    /** 
+     The main dispatch function that is used by all convenience `dispatch` methods.
+     This dispatch function can be extended by providing middlewares.
+    */
+    var dispatchFunction: DispatchFunction! { get }
+
     /**
      Subscribes the provided subscriber to this store.
      Subscribers will receive a call to `newState` whenever the
@@ -43,7 +49,7 @@ public protocol Store {
      ```
      - parameter action: The action that is being dispatched to the store
     */
-    var dispatch: DispatchFunction { get }
+    func dispatch(action: ActionType)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
