@@ -47,7 +47,7 @@ struct SetValueAction: ActionConvertible {
 struct SetValueStringAction: ActionConvertible {
 
     var value: String
-    static let type = "SetValueAction"
+    static let type = "SetValueStringAction"
 
     init (_ value: String) {
         self.value = value
@@ -70,7 +70,7 @@ struct TestReducer: Reducer {
             state.testValue = SetValueAction(action).value
             return state
         default:
-            abort()
+            return state
         }
     }
 }
@@ -82,7 +82,7 @@ struct TestValueStringReducer: Reducer {
             state.testValue = SetValueStringAction(action).value
             return state
         default:
-            abort()
+            return state
         }
     }
 }

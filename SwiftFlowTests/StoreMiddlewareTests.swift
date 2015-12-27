@@ -41,6 +41,20 @@ let secondMiddleware: Middleware = { dispatch, getState in
     }
 }
 
+let dispatchingMiddleware: Middleware = { dispatch, getState in
+    return { next in
+        return { action in
+
+            if action.type == SetValueAction.type {
+                let valueAction = SetValueAction(action)
+                dispatch(SetValueStringAction("\(valueAction.value)").toAction())
+            }
+
+            return next(action)
+        }
+    }
+}
+
 // swiftlint:disable function_body_length
 class StoreMiddlewareSpecs: QuickSpec {
 
@@ -58,16 +72,25 @@ class StoreMiddlewareSpecs: QuickSpec {
                 store.subscribe(subscriber)
 
                 let action = SetValueStringAction("OK")
+                store.dispatch(action)
 
-                waitUntil(timeout: 2.0) { fulfill in
-                    store.dispatch(action) { newState in
-                        if subscriber.receivedStates.last?.testValue
-                                == "OK First Middleware Second Middleware" {
-                                    fulfill()
-                        }
-                    }
-                }
+                expect((store.appState as! TestStringAppState).testValue).toEventually(
+                    equal("OK First Middleware Second Middleware"), timeout: 2.0)
+            }
 
+            it("middleware can dispatch actions") {
+                let reducer = TestValueStringReducer()
+                let store = MainStore(reducer: reducer, appState: TestStringAppState(),
+                    middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+
+                let subscriber = TestStoreSubscriber<TestStringAppState>()
+                store.subscribe(subscriber)
+
+                let action = SetValueAction(10)
+                store.dispatch(action)
+
+                expect((store.appState as! TestStringAppState).testValue).toEventually(
+                    equal("10 First Middleware Second Middleware"), timeout: 2.0)
             }
 
         }
