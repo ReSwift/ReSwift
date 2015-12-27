@@ -85,7 +85,7 @@ public class MainStore: Store {
         // Dispatch Asynchronously so that each subscriber receives the latest state
         // Without Async a receiver could immediately be called and emit a new state
         dispatch_async(dispatch_get_main_queue()) {
-            self.dispatchFunction(action)
+            self.dispatchFunction(action.toAction())
             callback?(self.appState)
         }
     }

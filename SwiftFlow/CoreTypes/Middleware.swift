@@ -8,6 +8,6 @@
 
 import Foundation
 
-public typealias DispatchFunction =  (ActionType) -> Any
+public typealias DispatchFunction =  (Action) -> Any
 public typealias Middleware = (DispatchFunction, () -> StateType)
                                 -> DispatchFunction -> DispatchFunction

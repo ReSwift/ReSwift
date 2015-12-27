@@ -15,9 +15,13 @@ let firstMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
 
-            var theAction = SetValueStringAction(action.toAction())
-            theAction.value = theAction.value + " First Middleware"
-            return next(theAction.toAction())
+            if action.type == SetValueStringAction.type {
+                var modifiedAction = SetValueStringAction(action)
+                modifiedAction.value = modifiedAction.value + " First Middleware"
+                return next(modifiedAction.toAction())
+            } else {
+                return next(action)
+            }
         }
     }
 }
@@ -26,9 +30,13 @@ let secondMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
 
-            var theAction = SetValueStringAction(action.toAction())
-            theAction.value = theAction.value + " Second Middleware"
-            return next(theAction.toAction())
+            if action.type == SetValueStringAction.type {
+                var modifiedAction = SetValueStringAction(action)
+                modifiedAction.value = modifiedAction.value + " Second Middleware"
+                return next(modifiedAction.toAction())
+            } else {
+                return next(action)
+            }
         }
     }
 }
