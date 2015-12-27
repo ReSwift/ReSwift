@@ -29,6 +29,7 @@ public class MainStore: Store {
 
     private var reducer: AnyReducer
     private var subscribers: [AnyStoreSubscriber] = []
+    private var isDispatching = false
 
     public required init(reducer: AnyReducer, appState: StateType) {
         self.reducer = reducer
@@ -62,7 +63,16 @@ public class MainStore: Store {
     }
 
     public func _defaultDispatch(action: ActionType) -> Any {
+        if isDispatching {
+            // Use Obj-C exception since throwing of exceptions can be verified through tests
+            NSException.raise("SwiftFlow:IllegalDispatchFromReducer", format: "Reducers are not " +
+                "allowed to dispatch actions!", arguments: getVaList(["nil"]))
+        }
+
+        isDispatching = true
         self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
+        isDispatching = false
+
         return action
     }
 

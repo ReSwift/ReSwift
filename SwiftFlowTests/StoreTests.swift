@@ -88,9 +88,29 @@ class StoreSpecs: QuickSpec {
                 expect(returnValue.value).to(equal(action.value))
             }
 
+            fit("throws an exception when a reducer dispatches an action") {
+                let reducer = DispatchingReducer()
+                store = MainStore(reducer: reducer, appState: TestAppState())
+                reducer.store = store
+                store.dispatch(SetValueAction(10))
+            }
+
         }
 
     }
 
 }
+
+
+// Needs to be class so that shared reference can be modified to inject store
+class DispatchingReducer: Reducer {
+    var store: Store? = nil
+
+    func handleAction(state: TestAppState, action: Action) -> TestAppState {
+        expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:
+            "SwiftFlow:IllegalDispatchFromReducer"))
+        return state
+    }
+}
+
 // swiftlint:enable function_body_length
