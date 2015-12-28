@@ -1,5 +1,4 @@
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
-[![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/travis/Swift-Flow/Swift-Flow.svg?style=flat-square)](https://travis-ci.org/Swift-Flow/Swift-Flow) [![Code coverage status](https://img.shields.io/codecov/c/github/Swift-Flow/Swift-Flow.svg?style=flat-square)](http://codecov.io/github/Swift-Flow/Swift-Flow) [![Carthage semver](https://img.shields.io/github/tag/Swift-Flow/Swift-Flow.svg?label=carthage&style=flat-square)](https://github.com/Carthage/Carthage) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md)
 
 #Related Projects
 
@@ -11,6 +10,7 @@ If you landed here, you should also check out the great work over at [ReduxKit](
 - [Why Swift Flow?](#why-swift-flow)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
+- [Testing](#testing)
 - [Demo](#demo)
 - [Extensions](#extensions)
 - [Example Projects](#example-projects)
@@ -128,8 +128,16 @@ Swift Flow attempts to solve these problem by placing strong constraints on the 
 
 You can install SwiftFlow via [Carthage]() by adding the following line to your Cartfile:
 
-	github "Swift-Flow/Swift-Flow"
-	
+    github "Swift-Flow/Swift-Flow"
+
+#Testing
+
+Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OSX & iOS only. After checkout, run the following from the terminal:
+
+```bash
+carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
+```
+
 #Demo
 
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:

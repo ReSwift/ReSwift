@@ -1,0 +1,69 @@
+language: objective-c
+osx_image: xcode7.2
+
+branches:
+  except:
+    - gh-pages
+
+before_install:
+  - brew update
+  - brew install carthage || brew outdated carthage || brew upgrade carthage
+  - carthage version
+
+install:
+  - gem install xcpretty
+  - carthage bootstrap
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+    - FRAMEWORK_NAME="SwiftFlow"
+    - IOS_SDK=iphonesimulator9.2
+    - OSX_SDK=macosx10.11
+    - TVOS_SDK=appletvsimulator9.1
+    - WATCHOS_SDK=watchsimulator2.1
+  matrix:
+    - DESTINATION="arch=x86_64"                    SCHEME="OSX"     SDK="$OSX_SDK"     ACTION="test"
+    - DESTINATION="OS=9.2,name=iPhone 6S Plus"     SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=9.1,name=Apple TV 1080p"     SCHEME="tvOS"    SDK="$TVOS_SDK"    ACTION="test"
+    - DESTINATION="OS=2.1,name=Apple Watch - 38mm" SCHEME="watchOS" SDK="$WATCHOS_SDK" ACTION="build"
+    - DESTINATION="OS=9.1,name=iPhone 6S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=9.0,name=iPhone 6 Plus"      SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=8.4,name=iPhone 6"           SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=8.3,name=iPhone 5S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=8.2,name=iPhone 5"           SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=8.1,name=iPhone 4S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild
+    -project "$FRAMEWORK_NAME.xcodeproj"
+    -scheme "$FRAMEWORK_NAME-$SCHEME"
+    -sdk "$SDK"
+    -destination "$DESTINATION"
+    -configuration Debug
+    ONLY_ACTIVE_ARCH=NO
+    GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+    GCC_GENERATE_TEST_COVERAGE_FILES=YES
+    "$ACTION"
+    | xcpretty -c
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
+  - carthage build --no-skip-current
+  - carthage archive $FRAMEWORK_NAME
+
+deploy:
+  provider: releases
+  api_key:
+    secure: S5BWCiwX80EWjF5043d1EVPw59qpuVTI1ytPejEE9bFomVDj0kCYIqodlUmKRorutNr+t2UD5CwTyqs5qHaAuseAm0P6SrOp1GaP9m6Jb/surII4nMICx+TzFP8xdCwC+C74CUDuCLeyM++kxIZEwJOp/QF9iP3iaF54ed+4IlycVEGxJ4LQQRBaQ3X+u6L/bSCgL/HuRzs0W1QXYovbFzCvEQmYlSQi00x5BGHtk3Rj4zU320pmcE1Ne0dGsmITN0oA2qSborVFPo1CnjRGKAJD8TJZRmxmKygFOQpsD4px/IRswDJRle5cGjvZ+MLnvDBis5siTGOf3W1z/HxTomqCIeAGt4O5CfJP9NP9HjaV9ATFb2NSpZPNaVle4IhfSl2O7NuQyhh19UKz9xgZ9QknkddZBPQ4yEINHAEzqVDKHjCvZZH4pxjN6AcbaKPYBoL042FmS87HAmq32AcOVBM0eXhMUzucahYTw1+XS77ZkOrXdx2jXX1hyjZ7tooYYm3SHJxHJKufnv5/rfShTM70+4vVhLePYGt/FnduacPdNtIehit7v6Dj+xsTs5igWMx/0Bb6ccaRr2ZQGs0dq536x0zrQVrvkrW9HcOY1uohFqujLGjJ/i6U1aMBf+iPRDTHlVmqiYjVSRC1mhatGOVHv+UuA1dSPkK9F91Lxbs=
+  file: "$FRAMEWORK_NAME.framework.zip"
+  skip_cleanup: true
+  on:
+    repo: Swift-Flow/Swift-Flow
+    tags: true
