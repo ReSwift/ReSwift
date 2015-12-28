@@ -88,7 +88,7 @@ class StoreSpecs: QuickSpec {
                 expect(returnValue.value).to(equal(action.value))
             }
 
-            fit("throws an exception when a reducer dispatches an action") {
+            it("throws an exception when a reducer dispatches an action") {
                 let reducer = DispatchingReducer()
                 store = MainStore(reducer: reducer, appState: TestAppState())
                 reducer.store = store

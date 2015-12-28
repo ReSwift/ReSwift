@@ -104,7 +104,7 @@ public protocol Store {
      }
      ```
      - parameter action: The action that is being dispatched to the store
-     - returns: By default returns the dispatched action, but middlewares can change the 
+     - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
     func dispatch(action: ActionType, callback: DispatchCallback?) -> Any
