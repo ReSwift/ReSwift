@@ -39,11 +39,11 @@ struct AppState: StateType {
 }
 ```
 
-You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](Readme/GettingStarted.md) you can find out how to construct complex actions. For the simple actions in this example we can define string constants:
+You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](Readme/GettingStarted.md) you can find out how to construct complex actions. For the simple actions in this example we can define empty structs that conform to action:
 
 ```swift
-let CounterActionIncrease = "COUNTER_ACTION_INCREASE"
-let CounterActionDecrease = "COUNTER_ACTION_DECREASE"
+struct CounterActionIncrease: Action {}
+struct CounterActionDecrease: Action {}
 ```
 
 Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
@@ -52,10 +52,10 @@ Your reducer needs to respond to these different action types, that can be done 
 struct CounterReducer: Reducer {
 
     func handleAction(var state: AppState, action: Action) -> AppState {
-        switch action.type {
-        case CounterActionIncrease:
+        switch action {
+        case _ as CounterActionIncrease:
             state.counter += 1
-        case CounterActionDecrease:
+        case _ as CounterActionDecrease:
             state.counter -= 1
         default:
             break
@@ -89,13 +89,13 @@ class CounterViewController: UIViewController, StoreSubscriber {
 
     @IBAction func increaseButtonTapped(sender: UIButton) {
         mainStore.dispatch(
-            Action(CounterActionIncrease)
+            CounterActionIncrease()
         )
     }
 
     @IBAction func decreaseButtonTapped(sender: UIButton) {
         mainStore.dispatch(
-            Action(CounterActionDecrease)
+            CounterActionDecrease()
         )
     }
     
@@ -130,7 +130,7 @@ You can install SwiftFlow via [Carthage]() by adding the following line to your 
 
     github "Swift-Flow/Swift-Flow"
 
-#Testing
+#Checking out Source Code and Running Tests
 
 Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OSX & iOS only. After checkout, run the following from the terminal:
 
