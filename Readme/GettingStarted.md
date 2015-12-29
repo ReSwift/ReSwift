@@ -41,7 +41,7 @@ struct AuthenticationState {
 *Additionally,* you would define a protocol that requires your app state to include the `AuthenticationState`:
 
 ```swift
-struct HasAuthenticationState {
+protocol HasAuthenticationState {
 	var authenticationState: AuthenticationState
 }
 ```
