@@ -28,7 +28,8 @@ class TypeHelper: QuickSpec {
                     return state
                 }
 
-                withSpecificTypes(AppState1(), action: Action(""), function: reducerFunction)
+                withSpecificTypes(AppState1(), action: StandardAction(""),
+                    function: reducerFunction)
 
                 expect(called).to(beTrue())
             }
@@ -41,7 +42,8 @@ class TypeHelper: QuickSpec {
                     return state
                 }
 
-                withSpecificTypes(AppState2(), action: Action(""), function: reducerFunction)
+                withSpecificTypes(AppState2(), action: StandardAction(""),
+                    function: reducerFunction)
 
                 expect(called).to(beFalse())
             }

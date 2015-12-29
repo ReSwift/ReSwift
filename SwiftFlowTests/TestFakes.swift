@@ -25,7 +25,7 @@ struct TestStringAppState: StateType {
     }
 }
 
-struct SetValueAction: ActionConvertible {
+struct SetValueAction: StandardActionConvertible {
 
     let value: Int
     static let type = "SetValueAction"
@@ -34,17 +34,17 @@ struct SetValueAction: ActionConvertible {
         self.value = value
     }
 
-    init(_ action: Action) {
-        self.value = action.payload!["value"] as! Int
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! Int
     }
 
-    func toAction() -> Action {
-        return Action(type: SetValueAction.type, payload: ["value": value])
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueAction.type, payload: ["value": value])
     }
 
 }
 
-struct SetValueStringAction: ActionConvertible {
+struct SetValueStringAction: StandardActionConvertible {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -53,21 +53,21 @@ struct SetValueStringAction: ActionConvertible {
         self.value = value
     }
 
-    init(_ action: Action) {
-        self.value = action.payload!["value"] as! String
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! String
     }
 
-    func toAction() -> Action {
-        return Action(type: SetValueStringAction.type, payload: ["value": value])
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueStringAction.type, payload: ["value": value])
     }
 
 }
 
 struct TestReducer: Reducer {
     func handleAction(var state: TestAppState, action: Action) -> TestAppState {
-        switch action.type {
-        case SetValueAction.type:
-            state.testValue = SetValueAction(action).value
+        switch action {
+        case let action as SetValueAction:
+            state.testValue = action.value
             return state
         default:
             return state
@@ -77,9 +77,9 @@ struct TestReducer: Reducer {
 
 struct TestValueStringReducer: Reducer {
     func handleAction(var state: TestStringAppState, action: Action) -> TestStringAppState {
-        switch action.type {
-        case SetValueStringAction.type:
-            state.testValue = SetValueStringAction(action).value
+        switch action {
+        case let action as SetValueStringAction:
+            state.testValue = action.value
             return state
         default:
             return state

@@ -59,12 +59,14 @@ class CombinedReducerSpecs: QuickSpec {
 
                 let combinedReducer = CombinedReducer([mockReducer1, mockReducer2])
 
-                combinedReducer._handleAction(CounterState(), action: Action(emptyAction))
+                combinedReducer._handleAction(CounterState(), action: StandardAction(emptyAction))
 
                 expect(mockReducer1.calledWithAction).to(haveCount(1))
                 expect(mockReducer2.calledWithAction).to(haveCount(1))
-                expect(mockReducer1.calledWithAction[0].type).to(equal(emptyAction))
-                expect(mockReducer2.calledWithAction[0].type).to(equal(emptyAction))
+                expect((mockReducer1.calledWithAction[0] as! StandardAction).type)
+                    .to(equal(emptyAction))
+                expect((mockReducer2.calledWithAction[0] as! StandardAction).type)
+                    .to(equal(emptyAction))
             }
 
             it("combines the results from each individual reducer correctly") {
@@ -73,7 +75,7 @@ class CombinedReducerSpecs: QuickSpec {
 
                 let combinedReducer = CombinedReducer([increaseByOneReducer, increaseByTwoReducer])
                 let newState = combinedReducer._handleAction(CounterState(),
-                    action: Action(emptyAction)) as? CounterState
+                    action: StandardAction(emptyAction)) as? CounterState
 
                 expect(newState?.count).to(equal(3))
             }

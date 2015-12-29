@@ -83,9 +83,9 @@ class StoreSpecs: QuickSpec {
 
             it("returns the dispatched action") {
                 let action = SetValueAction(10)
-                let returnValue = SetValueAction(store.dispatch(action) as! Action)
+                let returnValue = store.dispatch(action)
 
-                expect(returnValue.value).to(equal(action.value))
+                expect((returnValue as? SetValueAction)?.value).to(equal(action.value))
             }
 
             it("throws an exception when a reducer dispatches an action") {

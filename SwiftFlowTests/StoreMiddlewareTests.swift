@@ -15,10 +15,9 @@ let firstMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
 
-            if action.type == SetValueStringAction.type {
-                var modifiedAction = SetValueStringAction(action)
-                modifiedAction.value = modifiedAction.value + " First Middleware"
-                return next(modifiedAction.toAction())
+            if var action = action as? SetValueStringAction {
+                action.value = action.value + " First Middleware"
+                return next(action)
             } else {
                 return next(action)
             }
@@ -30,10 +29,9 @@ let secondMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
 
-            if action.type == SetValueStringAction.type {
-                var modifiedAction = SetValueStringAction(action)
-                modifiedAction.value = modifiedAction.value + " Second Middleware"
-                return next(modifiedAction.toAction())
+            if var action = action as? SetValueStringAction {
+                action.value = action.value + " Second Middleware"
+                return next(action)
             } else {
                 return next(action)
             }
@@ -45,9 +43,8 @@ let dispatchingMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
 
-            if action.type == SetValueAction.type {
-                let valueAction = SetValueAction(action)
-                dispatch(SetValueStringAction("\(valueAction.value)").toAction())
+            if var action = action as? SetValueAction {
+                dispatch(SetValueStringAction("\(action.value)"))
 
                 return "Converted Action Successfully"
             }
