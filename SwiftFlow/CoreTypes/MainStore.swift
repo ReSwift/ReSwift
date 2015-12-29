@@ -62,7 +62,7 @@ public class MainStore: Store {
         }
     }
 
-    public func _defaultDispatch(action: ActionType) -> Any {
+    public func _defaultDispatch(action: Action) -> Any {
         if isDispatching {
             // Use Obj-C exception since throwing of exceptions can be verified through tests
             NSException.raise("SwiftFlow:IllegalDispatchFromReducer", format: "Reducers may not " +
@@ -70,18 +70,14 @@ public class MainStore: Store {
         }
 
         isDispatching = true
-        self.appState = self.reducer._handleAction(self.appState, action: action.toAction())
+        self.appState = self.reducer._handleAction(self.appState, action: action)
         isDispatching = false
 
         return action
     }
 
-    public func dispatch(action: ActionType) -> Any {
+    public func dispatch(action: Action) -> Any {
         return dispatch(action, callback: nil)
-    }
-
-    public func dispatch(action: ActionConvertible) -> Any {
-        return dispatch(action.toAction(), callback: nil)
     }
 
     public func dispatch(actionCreatorProvider: ActionCreator) -> Any {
@@ -92,8 +88,8 @@ public class MainStore: Store {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: ActionType, callback: DispatchCallback?) -> Any {
-        let returnValue = self.dispatchFunction(action.toAction())
+    public func dispatch(action: Action, callback: DispatchCallback?) -> Any {
+        let returnValue = self.dispatchFunction(action)
         callback?(self.appState)
 
         return returnValue
