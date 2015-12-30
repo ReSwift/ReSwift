@@ -110,6 +110,40 @@ class StoreSpecs: QuickSpec {
                 expect((store.appState as? TestAppState)?.testValue).to(equal(10))
             }
 
+            it("accepts async action creators") {
+                let asyncActionCreator: AsyncActionCreator = { state, store, callback in
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                        // Provide the callback with an action creator
+                        callback { state, store in
+                            return SetValueAction(5)
+                        }
+                    }
+                }
+
+                store.dispatch(asyncActionCreator)
+
+                expect((store.appState as? TestAppState)?.testValue).toEventually(equal(5))
+            }
+
+            it("calls the callback once state update from async action is complete") {
+                let asyncActionCreator: AsyncActionCreator = { state, store, callback in
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                        // Provide the callback with an action creator
+                        callback { state, store in
+                            return SetValueAction(5)
+                        }
+                    }
+                }
+
+                waitUntil { fulfill in
+                    store.dispatch(asyncActionCreator) { newState in
+                        if (newState as? TestAppState)?.testValue == 5 {
+                            fulfill()
+                        }
+                    }
+                }
+            }
+
         }
 
     }
