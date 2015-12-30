@@ -28,7 +28,7 @@ There are multiple things to note:
 
 ##Viewing the State Through a Protocol
 
-Protocols are extremely useful for working with this framework. As you can see in the example above, `SwiftRouter` can work with any app state that you define, as long as it conforms to the `HasNavigationState` protocol. The router will only ever access your app state through this protocol - this also means it won't ever see and depend upon any other state that you store within your state struct.
+Protocols are extremely useful for working with this library. As you can see in the example above, `SwiftRouter` can work with any app state that you define, as long as it conforms to the `HasNavigationState` protocol. The router will only ever access your app state through this protocol - this also means it won't ever see and depend upon any other state that you store within your state struct.
 
 **You should use this approach as much as possible in your app.** Swift Flow provides some features that make this approach even easier to use. Let's say you want to expand the state above by a simple authentication state. You would do this by first defining a new struct for this sub-state:
 
@@ -75,115 +75,45 @@ Note that you don't need to store derived state inside of your app state. E.g. i
 
 #Actions
 
-Swift Flow provides the `Action` type to create actions that describe state changes. It has the following structure:
+Actions are used to express intented state changes. Actions don't contain functions, instead they provide information about the intended state change, e.g. which user should be deleted.
+
+In your Swift Flow app you will define actions for every possible state change that can happen.
+
+Reducers handle these actions and implement state changes based on the information they provide.
+
+All actions in Swift Flow conform to the `Action` protocol, which currently is just a marker procotol. 
+
+You can either provide custom types as actions, or you can use the built in `StandardAction`.
+
+The `StandardAction` has the following structure:
 
 ```swift
-struct Action : ActionType {
+struct StandardAction: Action {
+	// identifies the action
 	let type: String
+	// provides information that is relevant to processing this action
+	// e.g. details about which post should be favorited 
    	let payload: [String : AnyObject]?
+   	// this flag is used for serialization when working with Swift Flow Recorder
+   	let isTypedAction: Bool
 }
 ```
-This `Action` type is serializable, which is imported for storing past actions to disk and enabling time traveling and hot reloading. 
+**For most applications it is recommended to create your own types for actions instead of using `StandardAction`, as this allows you to take advantage of Swift's type system**. 
 
-For simple actions you can use this type directly; for actions with a complex payload you should make use of Swift's rich type system and create separate type. This type needs to be convertible into plain `Action`s.
-
-##Using Plain Actions
-
-The [Counter Example App](https://github.com/Swift-Flow/CounterExample) makes use of plain actions that don't carry any payload. They are simply initialized with a string constant:
+To provide your own action, simply create a type that conforms to the `Action` protocol:
 
 ```swift
-    @IBAction func increaseButtonTapped(sender: UIButton) {
-        mainStore.dispatch(
-            Action(CounterActionIncrease)
-        )
-    }
-```
-
-Within your reducer you switch over the `type` string of this plain action to identify the type and perform a state change:
-
-```swift
-struct CounterReducer: Reducer {
-
-    func handleAction(var state: AppState, action: Action) -> AppState {
-        switch action.type {
-        case CounterActionIncrease:
-            state.counter += 1
-        case CounterActionDecrease:
-            state.counter -= 1
-        default:
-            break
-        }
-
-        return state
-    }
-
+struct LikePostAction: Action {
+	let post: Post
+	let userLikingPost: User
 }
 ```
-This approach works best with simple actions, with no or very simple payloads. For more complex actions you should use a typed action.
 
-##Using Typed Actions
+The advantage of using a `StandardAction` is that it can be serialized; this is required for using the features provided by [Swift Flow Recorder](https://github.com/Swift-Flow/Swift-Flow-Recorder); such as persisting the application state between app launches.
 
-Here's an example from the Meet App that shows you how to define a custom, typed action:
+If you want to use custom types for actions, but still want to be able to make use of the features provided by Swift Flow Recorder, you can implement the `StandardActionConvertible` protocol. This will allow Swift Flow to convert your typed actions to standard actions that can then be serialized. 
 
-```swift 
-struct CreateContactFromEmail {
-    static let type = "CreateContactFromEmail"
-    let email: String
-
-    init(_ email: String) {
-        self.email = email
-    }
-}
-
-extension CreateContactFromEmail: ActionConvertible, ActionType {
-
-    init(_ action: Action) {
-    	if (action.type != CreateContactFromEmail.type) {
-    		fatalError("Typed Action cannot be initialized with plain Action of wrong type!")
-    	}
-        self.email = action.payload!["email"] as! String
-    }
-
-    func toAction() -> Action {
-        return Action(type: CreateContactFromEmail.type, payload: ["email": email])
-    }
-}
-```
-The `CreateContactFromEmail` struct contains a type string that identifies this action (this preserves the type upon serialization and deserialization) and a payload, in this case an email address. 
-
-In the extension you can see boilerplate code that allows this typed action to be initialized with a plain action and that allows us to convert it into a plain action. [This code will mostly be auto-generated in future, since it is one of the painpoints of working with this framework right now.](https://github.com/Swift-Flow/Swift-Flow/issues/2)
-
-###Dispatching a Typed Action
-
-The `Store` will accept your typed action directly, as soon as it conforms to the `ActionType` protocol. You can dispatch a typed action the same way as dispatching a plain action:
-
-```swift
-store.dispatch(CreateContactFromEmail("Benjamin.Encz@gmail.com"))
-```
-
-###Using Typed Actions in a Reducer
-
-In the `handleAction` method of your reducers you will always receive plain `Action`s. This ensure that your reducer works with serialized actions and therefore supports time-traveling and hot-reloading. If your typed action conforms to `ActionConvertible` then it provides a convenience initializer that allows you to easily create a typed action from an untyped one. You should do this as part of your type checking code in the reducers, e.g.:
-
-```swift
-    func handleAction(state: HasDataState, action: Action) -> HasDataState {
-        switch action.type {
-        case CreateContactFromEmail.type:
-            return createContact(state, email: CreateContactFromEmail(action).email)
-			...
-        }
-    }
-    
-    func createContact(var state: HasDataState, email: String) -> HasDataState {
-        let newContactID = state.dataState.contacts.count + 1
-        let newContact = Contact(identifier: newContactID, emailAddress: email)
-        state.dataState.contacts.append(newContact)
-
-        return state
-    }
-```
-
-We create a typed action from the plain action and pass it on to a method of the reducer. This way the method has access to the types defined as part of our `CreateContactFromEmail` method.
+Once Swift Flow Recorder's implementation is further along, you will find detailed information  on all of this in its documentation.
 
 #Reducers
 
@@ -193,15 +123,15 @@ This is the only place where you should modify application state! Reducers, just
 struct DataMutationReducer: Reducer {
 
     func handleAction(state: HasDataState, action: Action) -> HasDataState {
-        switch action.type {
-        case CreateContactFromEmail.type:
-            return createContact(state, email: CreateContactFromEmail(action).email)
-        case CreateContactWithTwitterUser.type:
-            return createContact(state, twitterUser: CreateContactWithTwitterUser(action).twitterUser)
-        case DeleteContact.type:
-            return deleteContact(state, identifier: DeleteContact(action).contactID)
-        case SetContacts.type:
-            return setContacts(state, contacts: SetContacts(action).contacts)
+        switch action {
+        case let action as IncrementAction:
+            return createContact(state, email: action.email)
+        case let action as CreateContactWithTwitterUser:
+            return createContact(state, twitterUser: action.twitterUser)
+        case let action as DeleteContact:
+            return deleteContact(state, identifier: action.contactID)
+        case let action as SetContacts:
+            return setContacts(state, contacts: action.contacts)
         default:
             return state
         }
@@ -224,17 +154,29 @@ struct DataMutationReducer: Reducer {
     }
 ```
 
-You typically switch over the types in `handleAction`, then instantiate typed actions from plain actions and finally call a method that implements the actual state mutation.
+You typically switch over the types in `handleAction`, then call a method that implements the actual state mutation.
+
+#Store Subscribers
+
+Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the `newState` method on them. Subscribers need to conform to the `StoreSubscriber` protocol:
+
+```swift
+protocol StoreSubscriber {
+    func newState(state: StoreSubscriberStateType)
+}
+```
+
+Most of your `StoreSubscriber`s will be in the view layer and update their representation whenever they receive a new state.
 
 #Middleware
 
-Swift Flow supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html).
+Swift Flow supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function. 
 
 Let's take a look at a quick example that shows how Swift Flow supports Redux style middleware.
 
 The simplest example of a middleware, is one that prints all actions to the console. Here's how you can implement it:
 
-```
+```swift
 let loggingMiddleware: Middleware = { dispatch, getState in
     return { next in
         return { action in
@@ -249,7 +191,8 @@ let loggingMiddleware: Middleware = { dispatch, getState in
 ```
 You can define which middleware you would like to use when creating your store:
 
-```
+```swift
 MainStore(reducer: reducer, appState: TestStringAppState(),
                     middleware: [loggingMiddleware, secondMiddleware])
 ``` 
+The actions will pass through the middleware in the order in which they are arranged in the array passed to the store initializer, however ideally middleware should not make any assumptions about when exactly it is called. 
