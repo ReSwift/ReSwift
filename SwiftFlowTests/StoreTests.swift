@@ -89,10 +89,25 @@ class StoreSpecs: QuickSpec {
             }
 
             it("throws an exception when a reducer dispatches an action") {
+                // Expectation lives in the `DispatchingReducer` class
                 let reducer = DispatchingReducer()
                 store = MainStore(reducer: reducer, appState: TestAppState())
                 reducer.store = store
                 store.dispatch(SetValueAction(10))
+            }
+
+            it("accepts action creators") {
+                store.dispatch(SetValueAction(5))
+
+                let doubleStateValueActionCreator: ActionCreator = { state, store in
+                    guard let appState = state as? TestAppState else { return nil }
+
+                    return SetValueAction(appState.testValue! * 2)
+                }
+
+                store.dispatch(doubleStateValueActionCreator)
+
+                expect((store.appState as? TestAppState)?.testValue).to(equal(10))
             }
 
         }
