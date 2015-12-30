@@ -39,11 +39,9 @@ extension StandardAction: Coding {
     }
 
     public func dictionaryRepresentation() -> [String : AnyObject] {
-        if let payload = payload {
-            return ["type": type, "payload": payload, "isTypedAction": isTypedAction ? 1 : 0]
-        } else {
-            return ["type": type, "payload": "null", "isTypedAction": isTypedAction ? 1 : 0]
-        }
+        let payload: AnyObject = self.payload ?? "null"
+
+        return ["type": type, "payload": payload, "isTypedAction": isTypedAction ? 1 : 0]
     }
 }
 
