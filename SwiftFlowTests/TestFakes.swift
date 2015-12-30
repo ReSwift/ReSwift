@@ -39,7 +39,8 @@ struct SetValueAction: StandardActionConvertible {
     }
 
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueAction.type, payload: ["value": value])
+        return StandardAction(type: SetValueAction.type, payload: ["value": value],
+                                isTypedAction: true)
     }
 
 }
@@ -58,7 +59,8 @@ struct SetValueStringAction: StandardActionConvertible {
     }
 
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type, payload: ["value": value])
+        return StandardAction(type: SetValueStringAction.type, payload: ["value": value],
+                                isTypedAction: true)
     }
 
 }

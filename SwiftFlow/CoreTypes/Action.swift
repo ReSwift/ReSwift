@@ -20,18 +20,12 @@ public struct StandardAction: Action {
         self.isTypedAction = false
     }
 
-    public init(type: String, payload: [String: AnyObject], isTypedAction: Bool = false) {
+    public init(type: String, payload: [String: AnyObject]?, isTypedAction: Bool = false) {
         self.type = type
         self.payload = payload
         self.isTypedAction = isTypedAction
     }
 
-    public init(type: String, payload payloadConvertible: PayloadConvertible,
-        isTypedAction: Bool = false) {
-            self.type = type
-            self.payload = payloadConvertible.toPayload()
-            self.isTypedAction = isTypedAction
-    }
 }
 
 // MARK: Coding Extension
@@ -51,11 +45,6 @@ extension StandardAction: Coding {
             return ["type": type, "payload": "null", "isTypedAction": isTypedAction ? 1 : 0]
         }
     }
-
-}
-
-public protocol PayloadConvertible {
-    func toPayload() -> [String: AnyObject]
 }
 
 public protocol StandardActionConvertible: Action {

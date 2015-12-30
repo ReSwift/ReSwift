@@ -54,6 +54,9 @@
 		25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737FA1C2C618A00869B8F /* TestFakes.swift */; };
 		621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C06851C277759008029AE /* CombinedReducerTests.swift */; };
 		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
+		625AA6331C33AFB600FEB431 /* ActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* ActionSpec.swift */; };
+		625AA6341C33AFB700FEB431 /* ActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* ActionSpec.swift */; };
+		625AA6351C33AFB800FEB431 /* ActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* ActionSpec.swift */; };
 		625E66871C1FF97E0027C288 /* SwiftFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* SwiftFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* SwiftFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* SwiftFlow.framework */; };
 		625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66A61C1FFA640027C288 /* StoreTests.swift */; };
@@ -109,6 +112,7 @@
 		25DBCF871C30C4DB00D63A58 /* SwiftFlow-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftFlow-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		621C06851C277759008029AE /* CombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducerTests.swift; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
+		625AA6311C33AFA600FEB431 /* ActionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpec.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* SwiftFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E66861C1FF97E0027C288 /* SwiftFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFlow.h; sourceTree = "<group>"; };
 		625E66881C1FF97E0027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				625E66A61C1FFA640027C288 /* StoreTests.swift */,
 				259737FA1C2C618A00869B8F /* TestFakes.swift */,
 				621C068B1C278BEF008029AE /* TypeHelperTests.swift */,
+				625AA6311C33AFA600FEB431 /* ActionSpec.swift */,
 				621C06181C276A5A008029AE /* Frameworks iOS */,
 				73C85BC41C30E5D600EABD08 /* Frameworks OSX */,
 				73C85BC91C30E5ED00EABD08 /* Frameworks tvOS */,
@@ -671,6 +676,7 @@
 			files = (
 				25DBCF711C30C34000D63A58 /* StoreTests.swift in Sources */,
 				25DBCF721C30C34000D63A58 /* StoreMiddlewareTests.swift in Sources */,
+				625AA6351C33AFB800FEB431 /* ActionSpec.swift in Sources */,
 				25DBCF731C30C34000D63A58 /* CombinedReducerTests.swift in Sources */,
 				25DBCF741C30C34000D63A58 /* TypeHelperTests.swift in Sources */,
 				25DBCF751C30C34000D63A58 /* TestFakes.swift in Sources */,
@@ -700,6 +706,7 @@
 			files = (
 				25DBCF9C1C30C50000D63A58 /* StoreTests.swift in Sources */,
 				25DBCF9D1C30C50000D63A58 /* StoreMiddlewareTests.swift in Sources */,
+				625AA6341C33AFB700FEB431 /* ActionSpec.swift in Sources */,
 				25DBCF9E1C30C50000D63A58 /* CombinedReducerTests.swift in Sources */,
 				25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */,
 				25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */,
@@ -729,6 +736,7 @@
 			files = (
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
 				259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */,
+				625AA6331C33AFB600FEB431 /* ActionSpec.swift in Sources */,
 				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */,
 				259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */,
