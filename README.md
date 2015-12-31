@@ -6,8 +6,8 @@ If you landed here, you should also check out the great work over at [ReduxKit](
 
 #Table of Contents
 
-- [Why Swift Flow?](#why-swift-flow)
 - [About Swift Flow](#about-swift-flow)
+- [Why Swift Flow?](#why-swift-flow)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
 - [Testing](#testing)
@@ -17,17 +17,6 @@ If you landed here, you should also check out the great work over at [ReduxKit](
 - [Credits](#credits)
 - [Get in touch](#get-in-touch)
 
-#Why Swift Flow?
-
-Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development. 
-
-Apps built upon MVC often end up with a lot of complexity around state management and propagation. We need to use callbacks, delegations, Key-Value-Observation and notifications to pass information around in our apps and to ensure that all the relevant views have the latest state.
-
-This approach involves a lot of manual steps and is thus error prone and doesn't scale well in complex code bases.
-
-It also leads to code that is difficult to understand at a glance, since dependencies can be hidden deep inside of view controllers. Lastly, you mostly end up with inconsistent code, where each developer uses the state propagation procedure they personally prefer. You can circumvent this issue by style guides and code reviews but you cannot automatically verify the adherence to these guidelines.
-
-Swift Flow attempts to solve these problem by placing strong constraints on the way applications can be written. This reduces the room for programmer error and leads to applications that can be easily understood - by inspecting the application state data structure, the actions and the reducers.
 
 #About Swift Flow
 
@@ -118,6 +107,18 @@ The `newState` method will be called by the `Store` whenever a new app state is 
 Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.
 
 This is a very basic example that only shows a subset of Swift Flow's features, read the Getting Started Guide to see how you can build entire apps with this architecture.
+
+#Why Swift Flow?
+
+Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development. 
+
+Apps built upon MVC often end up with a lot of complexity around state management and propagation. We need to use callbacks, delegations, Key-Value-Observation and notifications to pass information around in our apps and to ensure that all the relevant views have the latest state.
+
+This approach involves a lot of manual steps and is thus error prone and doesn't scale well in complex code bases.
+
+It also leads to code that is difficult to understand at a glance, since dependencies can be hidden deep inside of view controllers. Lastly, you mostly end up with inconsistent code, where each developer uses the state propagation procedure they personally prefer. You can circumvent this issue by style guides and code reviews but you cannot automatically verify the adherence to these guidelines.
+
+Swift Flow attempts to solve these problem by placing strong constraints on the way applications can be written. This reduces the room for programmer error and leads to applications that can be easily understood - by inspecting the application state data structure, the actions and the reducers.
 
 #Getting Started Guide
 
