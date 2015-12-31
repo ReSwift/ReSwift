@@ -37,6 +37,15 @@ class StoreSpecs: QuickSpec {
                 expect(subscriber.receivedStates.last?.testValue).to(equal(3))
             }
 
+            it("allows dispatching from within an observer") {
+                store = MainStore(reducer: reducer, appState: TestAppState())
+                store.subscribe(DispatchingSubscriber(store: store))
+
+                store.dispatch(SetValueAction(2))
+
+                expect((store.appState as? TestAppState)?.testValue).to(equal(5))
+            }
+
             it("does not dispatch value after subscriber unsubscribes") {
                 store = MainStore(reducer: reducer, appState: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()

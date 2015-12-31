@@ -70,8 +70,10 @@ public class MainStore: Store {
         }
 
         isDispatching = true
-        self.appState = self.reducer._handleAction(self.appState, action: action)
+        let newState = self.reducer._handleAction(self.appState, action: action)
         isDispatching = false
+
+        self.appState = newState
 
         return action
     }

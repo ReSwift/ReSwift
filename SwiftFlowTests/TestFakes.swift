@@ -96,3 +96,19 @@ class TestStoreSubscriber<T>: StoreSubscriber {
         receivedStates.append(state)
     }
 }
+
+class DispatchingSubscriber: StoreSubscriber {
+    var store: Store
+
+    init(store: Store) {
+        self.store = store
+    }
+
+    func newState(state: TestAppState) {
+        // Test if we've already dispatched this action to
+        // avoid endless recursion
+        if state.testValue != 5 {
+            self.store.dispatch(SetValueAction(5))
+        }
+    }
+}
