@@ -120,6 +120,14 @@ It also leads to code that is difficult to understand at a glance, since depende
 
 Swift Flow attempts to solve these problem by placing strong constraints on the way applications can be written. This reduces the room for programmer error and leads to applications that can be easily understood - by inspecting the application state data structure, the actions and the reducers.
 
+This architecture provides further benefits beyond improving your code base:
+
+- Stores, Reducers, Actions and extensions such as Swift Flow Router are entirely platform independent - you can easily use the same business logic and share it between apps for multiple platforms (iOS, tvOS, etc.)
+- Want to collaborate with a co-worker on fixing an app crash? Use [Swift Flow Recorder](https://github.com/Swift-Flow/Swift-Flow-Recorder) to record the actions that lead up to the crash and send them the JSON file so that they can replay the actions and reproduce the issue right away.
+- Maybe recorded actions can be used to build UI and integration tests?
+
+The Swift Flow tooling is still in a very early stage, but aforementioned prospects excite me and hopefully others in the community as well!
+
 #Getting Started Guide
 
 [A Getting Started Guide that describes the core components of apps built with Swift Flow lives here](Readme/GettingStarted.md). It will be expanded in the next few weeks. To get an understanding of the core principles I recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
@@ -155,6 +163,12 @@ This repository contains the core component for Swift Flow, the following extens
 
 - [CounterExample](https://github.com/Swift-Flow/CounterExample): A very simple counter app implemented with Swift Flow. This app also demonstrates the basics of routing with SwiftFlowRouter.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with Swift Flow - currently still very early on.
+
+#Contributing
+
+There's still a lot of work to do here! I would love to see you involved! Some design decisions for the core of Swift Flow are still up in the air (see issues), there's lots of useful documentation that can be written and a ton of extensions and tools are waiting to be built on top of Swift Flow.
+
+I personally think the best way to get started contributing to this library is by using it in one of your projects!
 
 #Credits
 
