@@ -10,8 +10,6 @@ import Foundation
 
 public protocol Store {
 
-    init(reducer: AnyReducer, appState: StateType)
-
     init(reducer: AnyReducer, appState: StateType, middleware: [Middleware])
 
     /// The current state stored in the store
