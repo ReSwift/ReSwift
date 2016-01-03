@@ -31,10 +31,8 @@ public class MainStore: Store {
     private var subscribers: [AnyStoreSubscriber] = []
     private var isDispatching = false
 
-    public required init(reducer: AnyReducer, appState: StateType) {
-        self.reducer = reducer
-        self.appState = appState
-        self.dispatchFunction = self._defaultDispatch
+    public required convenience init(reducer: AnyReducer, appState: StateType) {
+        self.init(reducer: reducer, appState: appState, middleware: [])
     }
 
     public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
