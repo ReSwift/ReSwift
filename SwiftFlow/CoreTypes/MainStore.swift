@@ -31,19 +31,11 @@ public class MainStore: Store {
     private var subscribers: [AnyStoreSubscriber] = []
     private var isDispatching = false
 
-    public required init(reducer: AnyReducer, appState: StateType) {
+    public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware] = []) {
         self.reducer = reducer
         self.appState = appState
-        self.dispatchFunction = self._defaultDispatch
-    }
-
-    public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
-        self.reducer = reducer
-        self.appState = appState
-        self.dispatchFunction = self._defaultDispatch
-
         // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware.reverse().reduce(self.dispatchFunction) {
+        self.dispatchFunction = middleware.reverse().reduce(self._defaultDispatch) {
             dispatchFunction, middleware in
                 return middleware(self.dispatch, { self.appState })(dispatchFunction)
         }
