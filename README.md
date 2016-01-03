@@ -76,12 +76,10 @@ class CounterViewController: UIViewController, StoreSubscriber {
     @IBOutlet var counterLabel: UILabel!
 
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         mainStore.subscribe(self)
     }
 
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
         mainStore.unsubscribe(self)
     }
 
@@ -100,7 +98,7 @@ class CounterViewController: UIViewController, StoreSubscriber {
             CounterActionDecrease()
         )
     }
-
+    
 }
 ```
 
@@ -112,7 +110,7 @@ This is a very basic example that only shows a subset of Swift Flow's features, 
 
 #Why Swift Flow?
 
-Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development.
+Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development. 
 
 Apps built upon MVC often end up with a lot of complexity around state management and propagation. We need to use callbacks, delegations, Key-Value-Observation and notifications to pass information around in our apps and to ensure that all the relevant views have the latest state.
 
@@ -136,7 +134,22 @@ The Swift Flow tooling is still in a very early stage, but aforementioned prospe
 
 #Installation
 
-You can install SwiftFlow via [Carthage]() by adding the following line to your Cartfile:
+##Cocoapods
+
+You can install Swift Flow via CocoaPods by adding it to your `Podfile`:
+
+	use_frameworks!
+
+	source 'https://github.com/CocoaPods/Specs.git'
+	platform :ios, '8.0'
+
+	pod 'SwiftFlow'
+	
+And run `pod install`.
+
+##Carthage
+
+You can install Swift Flow via [Carthage]() by adding the following line to your Cartfile:
 
     github "Swift-Flow/Swift-Flow"
 
@@ -153,7 +166,7 @@ carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
 
 ![](Readme/Assets/timetravel.gif)
-
+	
 #Extensions
 
 This repository contains the core component for Swift Flow, the following extensions are available:
