@@ -19,7 +19,7 @@ class StoreSpecs: QuickSpec {
 
         describe("#subscribe") {
 
-            var store: Store!
+            var store: MainStore!
             var reducer: TestReducer!
 
             beforeEach {
@@ -76,6 +76,16 @@ class StoreSpecs: QuickSpec {
 
                 expect(subscriber.receivedStates[subscriber.receivedStates.count - 1]
                     .testValue).to(equal(20))
+            }
+
+            it("ignores identical subscribers") {
+                store = MainStore(reducer: reducer, appState: TestAppState())
+                let subscriber = TestStoreSubscriber<TestAppState>()
+
+                store.subscribe(subscriber)
+                store.subscribe(subscriber)
+
+                expect(store.subscribers.count).to(equal(1))
             }
 
         }
