@@ -38,10 +38,9 @@ public class MainStore: Store {
     public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
         self.reducer = reducer
         self.appState = appState
-        self.dispatchFunction = self._defaultDispatch
 
         // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware.reverse().reduce(self.dispatchFunction) {
+        self.dispatchFunction = middleware.reverse().reduce(self._defaultDispatch) {
             dispatchFunction, middleware in
                 return middleware(self.dispatch, { self.appState })(dispatchFunction)
         }
