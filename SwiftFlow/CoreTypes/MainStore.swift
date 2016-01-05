@@ -28,7 +28,7 @@ public class MainStore: Store {
     public var dispatchFunction: DispatchFunction!
 
     private var reducer: AnyReducer
-    private var subscribers: [AnyStoreSubscriber] = []
+    var subscribers: [AnyStoreSubscriber] = []
     private var isDispatching = false
 
     public required convenience init(reducer: AnyReducer, appState: StateType) {
@@ -38,16 +38,20 @@ public class MainStore: Store {
     public required init(reducer: AnyReducer, appState: StateType, middleware: [Middleware]) {
         self.reducer = reducer
         self.appState = appState
-        self.dispatchFunction = self._defaultDispatch
 
         // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware.reverse().reduce(self.dispatchFunction) {
+        self.dispatchFunction = middleware.reverse().reduce(self._defaultDispatch) {
             dispatchFunction, middleware in
                 return middleware(self.dispatch, { self.appState })(dispatchFunction)
         }
     }
 
     public func subscribe(subscriber: AnyStoreSubscriber) {
+        guard subscribers.indexOf({ $0 === subscriber }) == nil else {
+            print("Store subscriber is already added, ignoring.")
+            return
+        }
+
         subscribers.append(subscriber)
         subscriber._newState(appState)
     }
