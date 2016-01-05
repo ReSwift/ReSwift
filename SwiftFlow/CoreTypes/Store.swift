@@ -16,15 +16,17 @@ Upon every state update a store informs all of its subscribers.
 */
 public protocol Store {
 
+    typealias State: StateType
+
     /// Initializes the store with a reducer and an intial state.
-    init(reducer: AnyReducer, appState: StateType)
+    init(reducer: AnyReducer, state: State)
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
-    init(reducer: AnyReducer, appState: StateType, middleware: [Middleware])
+    init(reducer: AnyReducer, state: State, middleware: [Middleware])
 
     /// The current state stored in the store.
-    var appState: StateType { get }
+    var state: State { get }
 
     /**
      The main dispatch function that is used by all convenience `dispatch` methods.
