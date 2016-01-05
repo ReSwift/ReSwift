@@ -12,7 +12,7 @@
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftFlow Docs</a> (15% documented)</p>
+        <p><a href="index.html">SwiftFlow Docs</a> (59% documented)</p>
         <p class="header-right"><a href="https://github.com/Swift-Flow/Swift-Flow"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fgithub%2Ecom%2FSwift%2DFlow%2Fdocsets%2FSwiftFlow%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -28,21 +28,10 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Classes/MainStore.html">MainStore</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/ActionConvertible.html">ActionConvertible</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ActionType.html">ActionType</a>
+                <a href="Protocols.html#/s:P9SwiftFlow6Action">Action</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/AnyReducer.html">AnyReducer</a>
@@ -54,10 +43,10 @@
                 <a href="Protocols/Coding.html">Coding</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/PayloadConvertible.html">PayloadConvertible</a>
+                <a href="Protocols/Reducer.html">Reducer</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/Reducer.html">Reducer</a>
+                <a href="Protocols/StandardActionConvertible.html">StandardActionConvertible</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/StateType.html">StateType</a>
@@ -74,10 +63,10 @@
             <a href="Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/Action.html">Action</a>
+                <a href="Structs/CombinedReducer.html">CombinedReducer</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/MainReducer.html">MainReducer</a>
+                <a href="Structs/StandardAction.html">StandardAction</a>
               </li>
             </ul>
           </li>
@@ -85,7 +74,13 @@
             <a href="Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:9SwiftFlow13ActionCreator">ActionCreator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:9SwiftFlow18AsyncActionCreator">AsyncActionCreator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:9SwiftFlow16DispatchCallback">DispatchCallback</a>
               </li>
             </ul>
           </li>
@@ -114,12 +109,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Defines the interface of Stores in Swift Flow. <code>MainStore</code> is the default implementation of this
+interaface. Applications have a single store that stores the entire application state. 
+Stores receive actions and use reducers combined with these actions, to calculate state changes. 
+Upon every state update a store informs all of its subscribers.</p>
 
                         <a href="Protocols/Store.html" class="slightly-smaller">See more</a>
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Store</span></code></pre>
+
+                        </div>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L11-L96">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L17-L179">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -204,13 +210,20 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Coding%20Extension"></a>
+                <a name="//apple_ref/swift/Section/Coding Extension" class="dashAnchor"></a>
+                <a href="#/Coding%20Extension">
+                  <h3 class="section-name">Coding Extension</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:P9SwiftFlow18PayloadConvertible"></a>
-                    <a name="//apple_ref/swift/Protocol/PayloadConvertible" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9SwiftFlow18PayloadConvertible">PayloadConvertible</a>
+                    <a name="/s:P9SwiftFlow25StandardActionConvertible"></a>
+                    <a name="//apple_ref/swift/Protocol/StandardActionConvertible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P9SwiftFlow25StandardActionConvertible">StandardActionConvertible</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -218,12 +231,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Implement this protocol on your custom <code><a href="Protocols.html#/s:P9SwiftFlow6Action">Action</a></code> type if you want to make the action 
+serializable.
+- Note: We are working on a tool to automatically generate the implementation of this protocol
+    for your custom action types.</p>
 
-                        <a href="Protocols/PayloadConvertible.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/StandardActionConvertible.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StandardActionConvertible</span><span class="p">:</span> <span class="kt">Action</span></code></pre>
+
+                        </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L53-L55">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L69-L106">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -231,9 +255,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:P9SwiftFlow17ActionConvertible"></a>
-                    <a name="//apple_ref/swift/Protocol/ActionConvertible" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9SwiftFlow17ActionConvertible">ActionConvertible</a>
+                    <a name="/s:P9SwiftFlow6Action"></a>
+                    <a name="//apple_ref/swift/Protocol/Action" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P9SwiftFlow6Action">Action</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -241,35 +265,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>All actions that want to be able to be dispatched to a store need to conform to this protocol
+Currently it is just a marker protocol with no requirements.</p>
 
-                        <a href="Protocols/ActionConvertible.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Action</span> <span class="p">{</span> <span class="p">}</span></code></pre>
+
+                        </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L57-L59">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P9SwiftFlow10ActionType"></a>
-                    <a name="//apple_ref/swift/Protocol/ActionType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P9SwiftFlow10ActionType">ActionType</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Protocols/ActionType.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L61-L63">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L110">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -356,7 +365,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="https://github.com/Swift-Flow/Swift-Flow" target="_blank" rel="external">Benjamin</a>. All rights reserved. (Last updated: 2015-12-15)</p>
+          <p>&copy; 2016 <a class="link" href="https://github.com/Swift-Flow/Swift-Flow" target="_blank" rel="external">Benjamin</a>. All rights reserved. (Last updated: 2016-01-04)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

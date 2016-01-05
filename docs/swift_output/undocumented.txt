@@ -1,7 +1,3 @@
-Store.swift
-	public protocol Store
-	func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?)
-	func dispatch(asyncActionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
 StoreSubscriber.swift
 	public protocol AnyStoreSubscriber: class
 	func _newState(state: StateType)
@@ -9,39 +5,13 @@ StoreSubscriber.swift
 	func newState(state: StoreSubscriberStateType)
 	public protocol StoreSubscriber : AnyStoreSubscriber
 	public func _newState(state: StateType)
-MainStore.swift
-	/*private (set)*/ public var appState: StateType
-	public init(reducer: AnyReducer, appState: StateType)
-	public func subscribe(subscriber: AnyStoreSubscriber)
-	public func unsubscribe(subscriber: AnyStoreSubscriber)
-	public func dispatch(action: ActionConvertible)
-	public func dispatch(action: ActionType)
-	public func dispatch(actionCreatorProvider: ActionCreator)
-	public func dispatch(asyncActionCreatorProvider: AsyncActionCreator)
-	public func dispatch(action: ActionType, callback: DispatchCallback?)
-	public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?)
-	public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
 Coding.swift
 	public protocol Coding
 	init(dictionary: [String : AnyObject])
 	func dictionaryRepresentation() -> [String : AnyObject]
 Action.swift
-	public struct Action: ActionType
-	public let type: String
-	public let payload: [String: AnyObject]?
-	public init(_ type: String)
-	public init(type: String, payload: [String: AnyObject])
-	public init(type: String, payload payloadConvertible: PayloadConvertible)
-	public func toAction() -> Action
-	public struct Action : ActionType
 	public init(dictionary: [String : AnyObject])
 	public func dictionaryRepresentation() -> [String : AnyObject]
-	public protocol PayloadConvertible
-	func toPayload() -> [String: AnyObject]
-	public protocol ActionConvertible: ActionType
-	init (_ action: Action)
-	public protocol ActionType
-	func toAction() -> Action
 Reducer.swift
 	public protocol AnyReducer
 	func _handleAction(state: StateType, action: Action) -> StateType
@@ -49,10 +19,8 @@ Reducer.swift
 	func handleAction(state: ReducerStateType, action: Action) -> ReducerStateType
 	public protocol Reducer : AnyReducer
 	public func _handleAction(state: StateType, action: Action) -> StateType
-MainReducer.swift
-	public struct MainReducer: AnyReducer
-	public init(_ reducers: [AnyReducer])
-	public func _handleAction(var state: StateType, action: Action) -> StateType
+CombinedReducer.swift
+	public func _handleAction(state: StateType, action: Action) -> StateType
 State.swift
 	public protocol StateType
 	init()

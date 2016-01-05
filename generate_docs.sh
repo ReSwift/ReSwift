@@ -5,8 +5,9 @@ jazzy \
   --github_url https://github.com/Swift-Flow/Swift-Flow \
   --github-file-prefix https://github.com/Swift-Flow/Swift-Flow/tree/master \
   --module-version 0.0.1 \
-  --xcodebuild-arguments -scheme,SwiftFlow \
+  --xcodebuild-arguments -scheme,SwiftFlow-iOS \
   --module SwiftFlow \
   --root-url https://github.com/Swift-Flow/Swift-Flow \
   --output docs/swift_output \
-  --template-directory docs/templates
+  --template-directory docs/templates \
+  --exclude SwiftFlow/CoreTypes/MainStore.swift
