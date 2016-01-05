@@ -12,7 +12,7 @@
     <a title="Typealiases  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftFlow Docs</a> (15% documented)</p>
+        <p><a href="index.html">SwiftFlow Docs</a> (59% documented)</p>
         <p class="header-right"><a href="https://github.com/Swift-Flow/Swift-Flow"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fgithub%2Ecom%2FSwift%2DFlow%2Fdocsets%2FSwiftFlow%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -28,21 +28,10 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Classes/MainStore.html">MainStore</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/ActionConvertible.html">ActionConvertible</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ActionType.html">ActionType</a>
+                <a href="Protocols.html#/s:P9SwiftFlow6Action">Action</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/AnyReducer.html">AnyReducer</a>
@@ -54,10 +43,10 @@
                 <a href="Protocols/Coding.html">Coding</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/PayloadConvertible.html">PayloadConvertible</a>
+                <a href="Protocols/Reducer.html">Reducer</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/Reducer.html">Reducer</a>
+                <a href="Protocols/StandardActionConvertible.html">StandardActionConvertible</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/StateType.html">StateType</a>
@@ -74,10 +63,10 @@
             <a href="Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/Action.html">Action</a>
+                <a href="Structs/CombinedReducer.html">CombinedReducer</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/MainReducer.html">MainReducer</a>
+                <a href="Structs/StandardAction.html">StandardAction</a>
               </li>
             </ul>
           </li>
@@ -85,7 +74,13 @@
             <a href="Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:9SwiftFlow13ActionCreator">ActionCreator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:9SwiftFlow18AsyncActionCreator">AsyncActionCreator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:9SwiftFlow16DispatchCallback">DispatchCallback</a>
               </li>
             </ul>
           </li>
@@ -104,6 +99,85 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9SwiftFlow13ActionCreator"></a>
+                    <a name="//apple_ref/swift/Alias/ActionCreator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9SwiftFlow13ActionCreator">ActionCreator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An ActionCreator is a function that, based on the received state argument, might or might not
+create an action.</p>
+
+<p>Example:</p>
+
+<pre class="highlight plaintext"><code>func deleteNote(noteID: Int) -&gt; ActionCreator {
+ return { state, store in
+    // only delete note if editing is enabled
+    if (state.editingEnabled == true) {
+        return NoteDataAction.DeleteNote(noteID)
+    } else {
+        return nil
+    }
+ }
+}
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L210">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9SwiftFlow16DispatchCallback"></a>
+                    <a name="//apple_ref/swift/Alias/DispatchCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9SwiftFlow16DispatchCallback">DispatchCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An optional callback that can be passed to the <code>dispatch</code> method.
+This callback will be called when the dispatched action triggers a new state calculation.
+This is useful when you need to wait on a state change, triggered by an action (e.g. wait on
+a successful login). However, you should try to use this callback very seldom as it
+deviates slighlty from the unidirectional data flow principal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">DispatchCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L188">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9SwiftFlow18AsyncActionCreator"></a>
                     <a name="//apple_ref/swift/Alias/AsyncActionCreator" class="dashAnchor"></a>
                     <a class="token" href="#/s:9SwiftFlow18AsyncActionCreator">AsyncActionCreator</a>
@@ -114,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>AsyncActionCreators allow the developer to wait for the completion of an async action</p>
+                        <p>AsyncActionCreators allow the developer to wait for the completion of an async action.</p>
 
                       </div>
                       <div class="declaration">
@@ -126,7 +200,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L102">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Store.swift#L213">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -136,7 +210,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="https://github.com/Swift-Flow/Swift-Flow" target="_blank" rel="external">Benjamin</a>. All rights reserved. (Last updated: 2015-12-15)</p>
+          <p>&copy; 2016 <a class="link" href="https://github.com/Swift-Flow/Swift-Flow" target="_blank" rel="external">Benjamin</a>. All rights reserved. (Last updated: 2016-01-04)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

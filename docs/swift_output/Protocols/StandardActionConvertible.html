@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Coding Protocol Reference</title>
+    <title>StandardActionConvertible Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,8 +9,8 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/Coding" class="dashAnchor"></a>
-    <a title="Coding Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/StandardActionConvertible" class="dashAnchor"></a>
+    <a title="StandardActionConvertible Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftFlow Docs</a> (59% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftFlow Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Coding Protocol Reference
+        StandardActionConvertible Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -90,8 +90,17 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Coding</h1>
-            <p>Undocumented</p>
+            <h1>StandardActionConvertible</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StandardActionConvertible</span><span class="p">:</span> <span class="kt">Action</span></code></pre>
+
+                </div>
+              </div>
+            <p>Implement this protocol on your custom <code><a href="../Protocols.html#/s:P9SwiftFlow6Action">Action</a></code> type if you want to make the action 
+serializable.
+- Note: We are working on a tool to automatically generate the implementation of this protocol
+    for your custom action types.</p>
 
           </section>
           <section class="section task-group-section">
@@ -100,9 +109,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9SwiftFlow6CodingcuRq_S0__FMq_FT10dictionaryGVSs10DictionarySSPSs9AnyObject___q_"></a>
-                    <a name="//apple_ref/swift/Method/init(dictionary:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9SwiftFlow6CodingcuRq_S0__FMq_FT10dictionaryGVSs10DictionarySSPSs9AnyObject___q_">init(dictionary:)</a>
+                    <a name="/s:FP9SwiftFlow25StandardActionConvertiblecuRq_S0__FMq_FVS_14StandardActionq_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow25StandardActionConvertiblecuRq_S0__FMq_FVS_14StandardActionq_">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -110,11 +119,34 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Within this initializer you need to use the payload from the <code><a href="../Structs/StandardAction.html">StandardAction</a></code> to configure the
+ state of your custom action type.</p>
+
+<p>Example:</p>
+
+<pre class="highlight plaintext"><code> init(_ standardAction: StandardAction) {
+    self.twitterUser = decode(standardAction.payload!["twitterUser"]!)
+ }
+</code></pre>
+
+<div class="aside aside-note">
+          <p class="aside-title">Note</p>
+          If you, as most developers, only use action serialization/deserialization during 
+development, you can feel free to use the unsafe <code>!</code> operator.
+
+        </div>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">standardAction</span><span class="p">:</span> <span class="kt">StandardAction</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/Utils/Coding.swift#L0">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L85">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -122,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9SwiftFlow6Coding24dictionaryRepresentationuRq_S0__Fq_FT_GVSs10DictionarySSPSs9AnyObject__"></a>
-                    <a name="//apple_ref/swift/Method/dictionaryRepresentation()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9SwiftFlow6Coding24dictionaryRepresentationuRq_S0__Fq_FT_GVSs10DictionarySSPSs9AnyObject__">dictionaryRepresentation()</a>
+                    <a name="/s:FP9SwiftFlow25StandardActionConvertible16toStandardActionuRq_S0__Fq_FT_VS_14StandardAction"></a>
+                    <a name="//apple_ref/swift/Method/toStandardAction()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9SwiftFlow25StandardActionConvertible16toStandardActionuRq_S0__Fq_FT_VS_14StandardAction">toStandardAction()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -132,11 +164,32 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use the information from your custom action to generate a <code><a href="../Structs/StandardAction.html">StandardAction</a></code>. The <code>type</code> of the
+StandardAction should typically match the type name of your custom action type. You also need
+to set <code>isTypedAction</code> to <code>true</code>. Use the information from your action&rsquo;s properties to 
+configure the payload of the <code><a href="../Structs/StandardAction.html">StandardAction</a></code>.</p>
+
+<p>Example:</p>
+
+<pre class="highlight plaintext"><code>func toStandardAction() -&gt; StandardAction {
+   let payload = ["twitterUser": encode(self.twitterUser)]
+
+   return StandardAction(type: SearchTwitterScene.SetSelectedTwitterUser.type, 
+       payload: payload, isTypedAction: true)
+}
+</code></pre>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">toStandardAction</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">StandardAction</span></code></pre>
+
+                        </div>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/Utils/Coding.swift#L0">Show on GitHub</a>
+                        <a href="https://github.com/Swift-Flow/Swift-Flow/tree/master/SwiftFlow/CoreTypes/Action.swift#L105">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
