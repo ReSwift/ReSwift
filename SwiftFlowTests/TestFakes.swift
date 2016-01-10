@@ -98,9 +98,9 @@ class TestStoreSubscriber<T>: StoreSubscriber {
 }
 
 class DispatchingSubscriber: StoreSubscriber {
-    var store: Store
+    var store: MainStore<TestAppState>
 
-    init(store: Store) {
+    init(store: MainStore<TestAppState>) {
         self.store = store
     }
 

@@ -19,16 +19,16 @@ class StoreSpecs: QuickSpec {
 
         describe("#subscribe") {
 
-            var store: MainStore!
+            var store: MainStore<TestAppState>!
             var reducer: TestReducer!
 
             beforeEach {
                 reducer = TestReducer()
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
             }
 
             it("dispatches initial value upon subscription") {
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
@@ -38,16 +38,16 @@ class StoreSpecs: QuickSpec {
             }
 
             it("allows dispatching from within an observer") {
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
                 store.subscribe(DispatchingSubscriber(store: store))
 
                 store.dispatch(SetValueAction(2))
 
-                expect((store.appState as? TestAppState)?.testValue).to(equal(5))
+                expect(store.state.testValue).to(equal(5))
             }
 
             it("does not dispatch value after subscriber unsubscribes") {
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.dispatch(SetValueAction(5))
@@ -79,7 +79,7 @@ class StoreSpecs: QuickSpec {
             }
 
             it("ignores identical subscribers") {
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
@@ -92,12 +92,12 @@ class StoreSpecs: QuickSpec {
 
         describe("#dispatch") {
 
-            var store: Store!
+            var store: MainStore<TestAppState>!
             var reducer: TestReducer!
 
             beforeEach {
                 reducer = TestReducer()
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
             }
 
             it("returns the dispatched action") {
@@ -110,7 +110,7 @@ class StoreSpecs: QuickSpec {
             it("throws an exception when a reducer dispatches an action") {
                 // Expectation lives in the `DispatchingReducer` class
                 let reducer = DispatchingReducer()
-                store = MainStore(reducer: reducer, appState: TestAppState())
+                store = MainStore(reducer: reducer, state: TestAppState())
                 reducer.store = store
                 store.dispatch(SetValueAction(10))
             }
@@ -126,7 +126,7 @@ class StoreSpecs: QuickSpec {
 
                 store.dispatch(doubleStateValueActionCreator)
 
-                expect((store.appState as? TestAppState)?.testValue).to(equal(10))
+                expect(store.state.testValue).to(equal(10))
             }
 
             it("accepts async action creators") {
@@ -141,7 +141,7 @@ class StoreSpecs: QuickSpec {
 
                 store.dispatch(asyncActionCreator)
 
-                expect((store.appState as? TestAppState)?.testValue).toEventually(equal(5))
+                expect(store.state.testValue).toEventually(equal(5))
             }
 
             it("calls the callback once state update from async action is complete") {
@@ -172,7 +172,7 @@ class StoreSpecs: QuickSpec {
 
 // Needs to be class so that shared reference can be modified to inject store
 class DispatchingReducer: Reducer {
-    var store: Store? = nil
+    var store: MainStore<TestAppState>? = nil
 
     func handleAction(state: TestAppState, action: Action) -> TestAppState {
         expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:

@@ -85,7 +85,8 @@ class StoreMiddlewareSpecs: QuickSpec {
 
             it("can decorate dispatch function") {
                 let reducer = TestValueStringReducer()
-                let store = MainStore(reducer: reducer, appState: TestStringAppState(),
+                let store = MainStore<TestStringAppState>(reducer: reducer,
+                    state: TestStringAppState(),
                     middleware: [firstMiddleware, secondMiddleware])
 
                 let subscriber = TestStoreSubscriber<TestStringAppState>()
@@ -94,13 +95,14 @@ class StoreMiddlewareSpecs: QuickSpec {
                 let action = SetValueStringAction("OK")
                 store.dispatch(action)
 
-                expect((store.appState as! TestStringAppState).testValue).to(
+                expect(store.state.testValue).to(
                     equal("OK First Middleware Second Middleware"))
             }
 
             it("can dispatch actions") {
                 let reducer = TestValueStringReducer()
-                let store = MainStore(reducer: reducer, appState: TestStringAppState(),
+                let store = MainStore<TestStringAppState>(reducer: reducer,
+                    state: TestStringAppState(),
                     middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
 
                 let subscriber = TestStoreSubscriber<TestStringAppState>()
@@ -109,13 +111,14 @@ class StoreMiddlewareSpecs: QuickSpec {
                 let action = SetValueAction(10)
                 store.dispatch(action)
 
-                expect((store.appState as! TestStringAppState).testValue).to(
+                expect(store.state.testValue).to(
                     equal("10 First Middleware Second Middleware"))
             }
 
             it("can change the return value of the dispatch function") {
                 let reducer = TestValueStringReducer()
-                let store = MainStore(reducer: reducer, appState: TestStringAppState(),
+                let store = MainStore<TestStringAppState>(reducer: reducer,
+                    state: TestStringAppState(),
                     middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
 
                 let action = SetValueAction(10)
@@ -129,12 +132,12 @@ class StoreMiddlewareSpecs: QuickSpec {
                 var state = TestStringAppState()
                 state.testValue = "OK"
 
-                let store = MainStore(reducer: reducer, appState: state,
+                let store = MainStore<TestStringAppState>(reducer: reducer, state: state,
                     middleware: [stateAccessingMiddleware])
 
                 store.dispatch(SetValueStringAction("Action That Won't Go Through"))
 
-                expect((store.appState as? TestStringAppState)?.testValue).to(equal("Not OK"))
+                expect(store.state.testValue).to(equal("Not OK"))
             }
 
         }
