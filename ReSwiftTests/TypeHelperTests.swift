@@ -22,10 +22,10 @@ class TypeHelper: QuickSpec {
 
             it("calls methods if the source type can be casted into the function signature type") {
                 var called = false
-                let reducerFunction: (AppState1, Action) -> AppState1 = { state, action in
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
                     called = true
 
-                    return state
+                    return state ?? AppState1()
                 }
 
                 withSpecificTypes(AppState1(), action: StandardAction(""),
@@ -36,10 +36,10 @@ class TypeHelper: QuickSpec {
 
             it ("doesn't call if source type can't be casted to function signature type") {
                 var called = false
-                let reducerFunction: (AppState1, Action) -> AppState1 = { state, action in
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
                     called = true
 
-                    return state
+                    return state ?? AppState1()
                 }
 
                 withSpecificTypes(AppState2(), action: StandardAction(""),

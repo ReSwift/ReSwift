@@ -15,29 +15,31 @@ class MockReducer: Reducer {
 
     var calledWithAction: [Action] = []
 
-    func handleAction(state: StateType, action: Action) -> StateType {
+    func handleAction(state: CounterState?, action: Action) -> CounterState {
         calledWithAction.append(action)
 
-        return state
+        return state ?? CounterState()
     }
 
 }
 
 class IncreaseByOneReducer: Reducer {
-    func handleAction(state: CounterState, action: Action) -> CounterState {
-        var newState = state
-        newState.count = state.count + 1
+    func handleAction(state: CounterState?, action: Action) -> CounterState {
+        var state = state ?? CounterState()
 
-        return newState
+        state.count = state.count + 1
+
+        return state
     }
 }
 
 class IncreaseByTwoReducer: Reducer {
-    func handleAction(state: CounterState, action: Action) -> CounterState {
-        var newState = state
-        newState.count = state.count + 2
+    func handleAction(state: CounterState?, action: Action) -> CounterState {
+        var state = state ?? CounterState()
 
-        return newState
+        state.count = state.count + 2
+
+        return state
     }
 }
 
