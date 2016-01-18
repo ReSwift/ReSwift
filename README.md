@@ -108,6 +108,8 @@ Button taps result in dispatched actions that will be handled by the store and i
 
 This is a very basic example that only shows a subset of Swift Flow's features, read the Getting Started Guide to see how you can build entire apps with this architecture.
 
+[You can also watch this talk on the motivation behind Swift Flow](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
+
 #Why Swift Flow?
 
 Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development. 
