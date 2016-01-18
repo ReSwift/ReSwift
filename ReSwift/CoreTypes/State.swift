@@ -8,6 +8,4 @@
 
 import Foundation
 
-public protocol StateType {
-    init()
-}
+public protocol StateType { }
