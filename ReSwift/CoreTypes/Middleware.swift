@@ -9,5 +9,6 @@
 import Foundation
 
 public typealias DispatchFunction =  (Action) -> Any
-public typealias Middleware = (DispatchFunction, () -> StateType)
+public typealias GetState = () -> StateType
+public typealias Middleware = (DispatchFunction, GetState)
                                 -> DispatchFunction -> DispatchFunction
