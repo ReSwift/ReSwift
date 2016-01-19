@@ -17,7 +17,7 @@ import Foundation
 
  It is recommended that you define your own types that conform to `Action` - if you want to be able
  to serialize your custom action types, you can implement `StandardActionConvertible` which will
- make it possible to generate a `StanardAction` from your typed action - the best of both worlds!
+ make it possible to generate a `StandardAction` from your typed action - the best of both worlds!
 */
 public struct StandardAction: Action {
     /// A String that identifies the type of this `StandardAction`
