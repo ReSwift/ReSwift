@@ -16,6 +16,17 @@ class StoreSpecs: QuickSpec {
 
     override func spec() {
 
+        describe("#init") {
+
+            it("Dispatches an Init action when it doesn't receive an initial state") {
+                let reducer = MockReducer()
+                let _ = Store<CounterState>(reducer: reducer, state: nil)
+
+                expect(reducer.calledWithAction[0] is SwiftFlowInit).to(beTrue())
+            }
+
+        }
+
         describe("#subscribe") {
 
             var store: Store<TestAppState>!
