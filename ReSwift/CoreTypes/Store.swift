@@ -41,7 +41,7 @@ public class Store<State: StateType>: StoreType {
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware.reverse().reduce(self._defaultDispatch) {
             dispatchFunction, middleware in
-            return middleware(self.dispatch, { self.state })(dispatchFunction)
+            return middleware(self.dispatch, self.getState)(dispatchFunction)
         }
 
         if let state = state {
@@ -132,4 +132,7 @@ public class Store<State: StateType>: StoreType {
     public typealias AsyncActionCreator = (state: State, store: Store,
         actionCreatorCallback: ActionCreator -> Void) -> Void
 
+    private func getState() -> State {
+        return state
+    }
 }
