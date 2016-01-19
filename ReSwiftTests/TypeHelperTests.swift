@@ -14,6 +14,7 @@ import Nimble
 struct AppState1: StateType {}
 struct AppState2: StateType {}
 
+// swiftlint:disable function_body_length
 class TypeHelper: QuickSpec {
 
     override func spec() {
@@ -29,6 +30,20 @@ class TypeHelper: QuickSpec {
                 }
 
                 withSpecificTypes(AppState1(), action: StandardAction(""),
+                    function: reducerFunction)
+
+                expect(called).to(beTrue())
+            }
+
+            it("calls the method if the source type is nil") {
+                var called = false
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
+                    called = true
+
+                    return state ?? AppState1()
+                }
+
+                withSpecificTypes(nil, action: StandardAction(""),
                     function: reducerFunction)
 
                 expect(called).to(beTrue())
@@ -53,3 +68,4 @@ class TypeHelper: QuickSpec {
     }
 
 }
+// swiftlint:enable function_body_length

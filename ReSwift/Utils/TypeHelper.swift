@@ -18,9 +18,8 @@ func withSpecificTypes<SpecificStateType, Action>(state: StateType?,
 
     if let state = state {
         guard let specificStateType = state as? SpecificStateType else { return state }
-
         return function(state: specificStateType, action: action) as! StateType
-    } else {
-        return function(state: nil, action: action) as! StateType
     }
+
+    return function(state: nil, action: action) as! StateType
 }
