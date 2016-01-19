@@ -25,3 +25,23 @@ extension Reducer {
     }
 
 }
+
+protocol PartialReducer: Reducer {
+    
+    typealias PartialStateType: StateType
+    typealias HandledActionType: Action
+    
+    func get(state: StateType) -> PartialStateType
+    func set(partialState: PartialStateType, originalState: StateType) -> StateType
+    func handleSupportedAction(partialState: PartialStateType, supportedAction: HandledActionType) -> PartialStateType
+}
+
+extension PartialReducer {
+    func handleAction(state: StateType, action: Action) -> StateType {
+        guard let supportedAction = action as? HandledActionType else {
+            return state
+        }
+        let newState = handleSupportedAction(self.get(state), supportedAction: supportedAction)
+        return self.set(newState, originalState: state)
+    }
+}
