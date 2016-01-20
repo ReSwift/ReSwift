@@ -1,6 +1,6 @@
 //
-//  ReSwiftTests.swift
-//  ReSwiftTests
+//  SwiftFlowTests.swift
+//  SwiftFlowTests
 //
 //  Created by Benjamin Encz on 11/27/15.
 //  Copyright © 2015 DigiTales. All rights reserved.
@@ -14,21 +14,31 @@ import Nimble
 // swiftlint:disable function_body_length
 class StoreSpecs: QuickSpec {
 
-
     override func spec() {
+
+        describe("#init") {
+
+            it("Dispatches an Init action when it doesn't receive an initial state") {
+                let reducer = MockReducer()
+                let _ = Store<CounterState>(reducer: reducer, state: nil)
+
+                expect(reducer.calledWithAction[0] is SwiftFlowInit).to(beTrue())
+            }
+
+        }
 
         describe("#subscribe") {
 
-            var store: MainStore<TestAppState>!
+            var store: Store<TestAppState>!
             var reducer: TestReducer!
 
             beforeEach {
                 reducer = TestReducer()
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
             }
 
             it("dispatches initial value upon subscription") {
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
@@ -38,7 +48,7 @@ class StoreSpecs: QuickSpec {
             }
 
             it("allows dispatching from within an observer") {
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
                 store.subscribe(DispatchingSubscriber(store: store))
 
                 store.dispatch(SetValueAction(2))
@@ -47,7 +57,7 @@ class StoreSpecs: QuickSpec {
             }
 
             it("does not dispatch value after subscriber unsubscribes") {
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.dispatch(SetValueAction(5))
@@ -79,7 +89,7 @@ class StoreSpecs: QuickSpec {
             }
 
             it("ignores identical subscribers") {
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
 
                 store.subscribe(subscriber)
@@ -92,12 +102,12 @@ class StoreSpecs: QuickSpec {
 
         describe("#dispatch") {
 
-            var store: MainStore<TestAppState>!
+            var store: Store<TestAppState>!
             var reducer: TestReducer!
 
             beforeEach {
                 reducer = TestReducer()
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
             }
 
             it("returns the dispatched action") {
@@ -110,7 +120,7 @@ class StoreSpecs: QuickSpec {
             it("throws an exception when a reducer dispatches an action") {
                 // Expectation lives in the `DispatchingReducer` class
                 let reducer = DispatchingReducer()
-                store = MainStore(reducer: reducer, state: TestAppState())
+                store = Store(reducer: reducer, state: TestAppState())
                 reducer.store = store
                 store.dispatch(SetValueAction(10))
             }
@@ -118,19 +128,17 @@ class StoreSpecs: QuickSpec {
             it("accepts action creators") {
                 store.dispatch(SetValueAction(5))
 
-                let doubleStateValueActionCreator: ActionCreator = { state, store in
-                    guard let appState = state as? TestAppState else { return nil }
-
-                    return SetValueAction(appState.testValue! * 2)
+                let doubleValueActionCreator: Store<TestAppState>.ActionCreator = { state, store in
+                    return SetValueAction(state.testValue! * 2)
                 }
 
-                store.dispatch(doubleStateValueActionCreator)
+                store.dispatch(doubleValueActionCreator)
 
                 expect(store.state.testValue).to(equal(10))
             }
 
             it("accepts async action creators") {
-                let asyncActionCreator: AsyncActionCreator = { state, store, callback in
+                let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                         // Provide the callback with an action creator
                         callback { state, store in
@@ -145,7 +153,7 @@ class StoreSpecs: QuickSpec {
             }
 
             it("calls the callback once state update from async action is complete") {
-                let asyncActionCreator: AsyncActionCreator = { state, store, callback in
+                let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                         // Provide the callback with an action creator
                         callback { state, store in
@@ -156,7 +164,7 @@ class StoreSpecs: QuickSpec {
 
                 waitUntil { fulfill in
                     store.dispatch(asyncActionCreator) { newState in
-                        if (newState as? TestAppState)?.testValue == 5 {
+                        if newState.testValue == 5 {
                             fulfill()
                         }
                     }
@@ -172,12 +180,12 @@ class StoreSpecs: QuickSpec {
 
 // Needs to be class so that shared reference can be modified to inject store
 class DispatchingReducer: Reducer {
-    var store: MainStore<TestAppState>? = nil
+    var store: Store<TestAppState>? = nil
 
-    func handleAction(state: TestAppState, action: Action) -> TestAppState {
+    func handleAction(state: TestAppState?, action: Action) -> TestAppState {
         expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:
-            "ReSwift:IllegalDispatchFromReducer"))
-        return state
+            "SwiftFlow:IllegalDispatchFromReducer"))
+        return state ?? TestAppState()
     }
 }
 

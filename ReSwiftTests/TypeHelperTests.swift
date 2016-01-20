@@ -14,6 +14,7 @@ import Nimble
 struct AppState1: StateType {}
 struct AppState2: StateType {}
 
+// swiftlint:disable function_body_length
 class TypeHelper: QuickSpec {
 
     override func spec() {
@@ -22,10 +23,10 @@ class TypeHelper: QuickSpec {
 
             it("calls methods if the source type can be casted into the function signature type") {
                 var called = false
-                let reducerFunction: (AppState1, Action) -> AppState1 = { state, action in
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
                     called = true
 
-                    return state
+                    return state ?? AppState1()
                 }
 
                 withSpecificTypes(AppState1(), action: StandardAction(""),
@@ -34,12 +35,26 @@ class TypeHelper: QuickSpec {
                 expect(called).to(beTrue())
             }
 
-            it ("doesn't call if source type can't be casted to function signature type") {
+            it("calls the method if the source type is nil") {
                 var called = false
-                let reducerFunction: (AppState1, Action) -> AppState1 = { state, action in
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
                     called = true
 
-                    return state
+                    return state ?? AppState1()
+                }
+
+                withSpecificTypes(nil, action: StandardAction(""),
+                    function: reducerFunction)
+
+                expect(called).to(beTrue())
+            }
+
+            it ("doesn't call if source type can't be casted to function signature type") {
+                var called = false
+                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
+                    called = true
+
+                    return state ?? AppState1()
                 }
 
                 withSpecificTypes(AppState2(), action: StandardAction(""),
@@ -53,3 +68,4 @@ class TypeHelper: QuickSpec {
     }
 
 }
+// swiftlint:enable function_body_length
