@@ -11,15 +11,15 @@ import Foundation
 /**
  Method is only used internally in Swift Flow to cast the generic `StateType` to a specific
  type expected by reducers / store subscribers.
-*/
-func withSpecificTypes<SpecificStateType, Action>(state: StateType?,
-    action: Action, @noescape function: (state: SpecificStateType?, action: Action)
+ */
+func withSpecificTypes<SpecificStateType, Action>(action: Action,
+    state: StateType?, @noescape function: (action: Action, state: SpecificStateType?)
     -> SpecificStateType) -> StateType {
 
-    if let state = state {
-        guard let specificStateType = state as? SpecificStateType else { return state }
-        return function(state: specificStateType, action: action) as! StateType
-    }
+        if let state = state {
+            guard let specificStateType = state as? SpecificStateType else { return state }
+            return function(action: action, state: specificStateType) as! StateType
+        }
 
-    return function(state: nil, action: action) as! StateType
+        return function(action: action, state: nil) as! StateType
 }
