@@ -38,14 +38,14 @@ public class MainStore<State: StateType>: Store {
         self.state = state
 
         // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware.reverse().reduce(self._defaultDispatch) {
-            dispatchFunction, middleware in
-                return middleware(self.dispatch, { self.state })(dispatchFunction)
+        self.dispatchFunction = middleware.reverse().reduce(_defaultDispatch) {
+            function, middleware in
+                return middleware(self.dispatch, { self.state })(function)
         }
     }
 
     public func subscribe(subscriber: AnyStoreSubscriber) {
-        guard subscribers.indexOf({ $0 === subscriber }) == nil else {
+        if subscribers.contains({ $0 === subscriber }) {
             print("Store subscriber is already added, ignoring.")
             return
         }
@@ -55,9 +55,7 @@ public class MainStore<State: StateType>: Store {
     }
 
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        let index = subscribers.indexOf { return $0 === subscriber }
-
-        if let index = index {
+        if let index = subscribers.indexOf({ return $0 === subscriber }) {
             subscribers.removeAtIndex(index)
         }
     }
@@ -70,11 +68,10 @@ public class MainStore<State: StateType>: Store {
         }
 
         isDispatching = true
-        let newState = self.reducer._handleAction(self.state, action: action)
+        let newState = reducer._handleAction(action, state: state)
         isDispatching = false
 
-        self.state = newState as! State
-
+        state = newState as! State
         return action
     }
 
@@ -91,28 +88,23 @@ public class MainStore<State: StateType>: Store {
     }
 
     public func dispatch(action: Action, callback: DispatchCallback?) -> Any {
-        let returnValue = self.dispatchFunction(action)
-        callback?(self.state)
+        let returnValue = dispatchFunction(action)
+        callback?(state)
 
         return returnValue
     }
 
     public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) -> Any {
-        let action = actionCreatorProvider(state: self.state, store: self)
-        if let action = action {
-            dispatch(action, callback: callback)
-        }
+        let action = actionCreatorProvider(state: state, store: self)
+        _ = action.map { dispatch($0, callback: callback) }
 
         return action
     }
 
     public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
-        actionCreatorProvider(state: self.state, store: self) { actionProvider in
+        actionCreatorProvider(state: state, store: self) { actionProvider in
             let action = actionProvider(state: self.state, store: self)
-            if let action = action {
-                self.dispatch(action, callback: callback)
-            }
+            _ = action.map { self.dispatch($0, callback: callback) }
         }
     }
-
 }

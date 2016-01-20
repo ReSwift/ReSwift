@@ -66,7 +66,7 @@ struct SetValueStringAction: StandardActionConvertible {
 }
 
 struct TestReducer: Reducer {
-    func handleAction(var state: TestAppState, action: Action) -> TestAppState {
+    func handleAction(action: Action, var state: TestAppState) -> TestAppState {
         switch action {
         case let action as SetValueAction:
             state.testValue = action.value
@@ -78,7 +78,7 @@ struct TestReducer: Reducer {
 }
 
 struct TestValueStringReducer: Reducer {
-    func handleAction(var state: TestStringAppState, action: Action) -> TestStringAppState {
+    func handleAction(action: Action, var state: TestStringAppState) -> TestStringAppState {
         switch action {
         case let action as SetValueStringAction:
             state.testValue = action.value
