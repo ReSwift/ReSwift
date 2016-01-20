@@ -21,37 +21,48 @@ class TypeHelper: QuickSpec {
 
         describe("f_withSpecificTypes") {
 
-            it("sets `didCast = true` if the source type can be cast to function signature type") {
-                var didCast = false
-                let reducerFunction: (Action, AppState1) -> AppState1 = { action, state in
-                    return state
+            it("calls methods if the source type can be casted into the function signature type") {
+                var called = false
+                let reducerFunction: (Action, AppState1?) -> AppState1 = { action, state in
+                    called = true
+
+                    return state ?? AppState1()
                 }
 
-                if let _ = castToExpectedType(StandardAction(""), state: AppState1(),
-                    function: reducerFunction) {
-                        didCast = true
-                }
+                withSpecificTypes(StandardAction(""), state: AppState1(),
+                    function: reducerFunction)
 
-                expect(didCast).to(beTrue())
+                expect(called).to(beTrue())
             }
 
-            it ("sets `didCast = false` if source type can't be cast to function signature type") {
-                var didCast = false
-                let reducerFunction: (Action, AppState1) -> AppState1 = { action, state in
-                    return state
+            it("calls the method if the source type is nil") {
+                var called = false
+                let reducerFunction: (Action, AppState1?) -> AppState1 = { action, state in
+                    called = true
+
+                    return state ?? AppState1()
                 }
 
-                if let _ = castToExpectedType(StandardAction(""), state: AppState2(),
-                    function: reducerFunction) {
-                        didCast = true
-                }
+                withSpecificTypes(StandardAction(""), state: nil,
+                    function: reducerFunction)
 
-                expect(didCast).to(beFalse())
+                expect(called).to(beTrue())
             }
 
+            it ("doesn't call if source type can't be casted to function signature type") {
+                var called = false
+                let reducerFunction: (Action, AppState1?) -> AppState1 = { action, state in
+                    called = true
+
+                    return state ?? AppState1()
+                }
+
+                withSpecificTypes(StandardAction(""), state: AppState2(),
+                    function: reducerFunction)
+
+                expect(called).to(beFalse())
+            }
         }
-
     }
-
 }
 // swiftlint:enable function_body_length

@@ -40,8 +40,9 @@ public class Store<State: StateType>: StoreType {
 
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware.reverse().reduce(_defaultDispatch) {
-            dispatchFunction, middleware in
-            return middleware(self.dispatch, { self.state })(dispatchFunction)
+            [weak self] dispatchFunction, middleware in
+                let getState = { self?.state }
+                return middleware(self?.dispatch, getState)(dispatchFunction)
         }
 
         if let state = state {

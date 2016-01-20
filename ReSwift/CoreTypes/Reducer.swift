@@ -20,13 +20,6 @@ public protocol Reducer: AnyReducer {
 
 extension Reducer {
     public func _handleAction(action: Action, state: StateType?) -> StateType {
-    	if let state = state {
-            guard let specificStateType = castToExpectedType(action, state: state,
-    		function: handleAction) else { return state }
-
-    		return handleAction(action, state: specificStateType) as! StateType
-    	}
-
-    	return handleAction(action, state: nil) as! StateType
+        return withSpecificTypes(action, state: state, function: handleAction)
     }
 }
