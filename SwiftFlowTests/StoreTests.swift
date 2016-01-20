@@ -174,7 +174,7 @@ class StoreSpecs: QuickSpec {
 class DispatchingReducer: Reducer {
     var store: MainStore<TestAppState>? = nil
 
-    func handleAction(state: TestAppState, action: Action) -> TestAppState {
+    func handleAction(action: Action, state: TestAppState) -> TestAppState {
         expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:
             "SwiftFlow:IllegalDispatchFromReducer"))
         return state
