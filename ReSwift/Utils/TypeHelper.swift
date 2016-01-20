@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- Method is only used internally in Swift Flow to cast the generic `StateType` to a specific
+ Method is only used internally in ReSwift to cast the generic `StateType` to a specific
  type expected by reducers / store subscribers.
  */
 func withSpecificTypes<SpecificStateType, Action>(action: Action,
