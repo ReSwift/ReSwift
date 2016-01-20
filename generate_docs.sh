@@ -1,13 +1,13 @@
 jazzy \
   --clean \
   --author Benjamin Encz \
-  --author_url https://github.com/Swift-Flow/Swift-Flow \
-  --github_url https://github.com/Swift-Flow/Swift-Flow \
-  --github-file-prefix https://github.com/Swift-Flow/Swift-Flow/tree/master \
+  --author_url https://github.com/ReSwift/ReSwift \
+  --github_url https://github.com/ReSwift/ReSwift \
+  --github-file-prefix https://github.com/ReSwift/ReSwift/tree/master \
   --module-version 0.0.1 \
-  --xcodebuild-arguments -scheme,SwiftFlow-iOS \
-  --module SwiftFlow \
-  --root-url https://github.com/Swift-Flow/Swift-Flow \
+  --xcodebuild-arguments -scheme,ReSwift-iOS \
+  --module ReSwift \
+  --root-url https://github.com/ReSwift/ReSwift \
   --output docs/swift_output \
   --template-directory docs/templates \
-  --exclude SwiftFlow/CoreTypes/MainStore.swift
+  --exclude ReSwift/CoreTypes/MainStore.swift

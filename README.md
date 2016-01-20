@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/Swift-Flow/Swift-Flow.svg?style=flat-square)](https://travis-ci.org/Swift-Flow/Swift-Flow) [![Code coverage status](https://img.shields.io/codecov/c/github/Swift-Flow/Swift-Flow.svg?style=flat-square)](http://codecov.io/github/Swift-Flow/Swift-Flow) [![Carthage semver](https://img.shields.io/github/tag/Swift-Flow/Swift-Flow.svg?label=carthage&style=flat-square)](https://github.com/Carthage/Carthage) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Swift-Flow/Swift-Flow/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/travis/ReSwift/ReSwift.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![Carthage semver](https://img.shields.io/github/tag/ReSwift/ReSwift.svg?label=carthage&style=flat-square)](https://github.com/Carthage/Carthage) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md)
 
 #Related Projects
 
@@ -6,8 +6,8 @@ If you landed here, you should also check out the great work over at [ReduxKit](
 
 #Table of Contents
 
-- [About Swift Flow](#about-swift-flow)
-- [Why Swift Flow?](#why-swift-flow)
+- [About Swift Flow](#about-reswift)
+- [Why Swift Flow?](#why-reswift)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
 - [Testing](#testing)
@@ -98,7 +98,7 @@ class CounterViewController: UIViewController, StoreSubscriber {
             CounterActionDecrease()
         )
     }
-    
+
 }
 ```
 
@@ -112,7 +112,7 @@ This is a very basic example that only shows a subset of Swift Flow's features, 
 
 #Why Swift Flow?
 
-Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development. 
+Model-View-Controller (MVC) is not a holistic application architecture. Typical Cocoa apps defer a lot of complexity to controllers since MVC doesn't offer other solutions for state management, one of the most complex issues in app development.
 
 Apps built upon MVC often end up with a lot of complexity around state management and propagation. We need to use callbacks, delegations, Key-Value-Observation and notifications to pass information around in our apps and to ensure that all the relevant views have the latest state.
 
@@ -125,7 +125,7 @@ Swift Flow attempts to solve these problem by placing strong constraints on the 
 This architecture provides further benefits beyond improving your code base:
 
 - Stores, Reducers, Actions and extensions such as Swift Flow Router are entirely platform independent - you can easily use the same business logic and share it between apps for multiple platforms (iOS, tvOS, etc.)
-- Want to collaborate with a co-worker on fixing an app crash? Use [Swift Flow Recorder](https://github.com/Swift-Flow/Swift-Flow-Recorder) to record the actions that lead up to the crash and send them the JSON file so that they can replay the actions and reproduce the issue right away.
+- Want to collaborate with a co-worker on fixing an app crash? Use [Swift Flow Recorder](https://github.com/ReSwift/ReSwift-Recorder) to record the actions that lead up to the crash and send them the JSON file so that they can replay the actions and reproduce the issue right away.
 - Maybe recorded actions can be used to build UI and integration tests?
 
 The Swift Flow tooling is still in a very early stage, but aforementioned prospects excite me and hopefully others in the community as well!
@@ -145,15 +145,15 @@ You can install Swift Flow via CocoaPods by adding it to your `Podfile`:
 	source 'https://github.com/CocoaPods/Specs.git'
 	platform :ios, '8.0'
 
-	pod 'SwiftFlow'
-	
+	pod 'ReSwift'
+
 And run `pod install`.
 
 ##Carthage
 
 You can install Swift Flow via [Carthage]() by adding the following line to your Cartfile:
 
-    github "Swift-Flow/Swift-Flow"
+    github "ReSwift/ReSwift"
 
 #Checking out Source Code and Running Tests
 
@@ -168,17 +168,17 @@ carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
 
 ![](Readme/Assets/timetravel.gif)
-	
+
 #Extensions
 
 This repository contains the core component for Swift Flow, the following extensions are available:
 
-- [Swift-Flow-Router](https://github.com/Swift-Flow/Swift-Flow-Router): Provides a SwiftFlow compatible Router that allows declarative routing in iOS applications
-- [Swift-Flow-Recorder](https://github.com/Swift-Flow/Swift-Flow-Recorder): Provides a `Store` implementation that records all `Action`s and allows for hot-reloading and time travel
+- [ReSwift-Router](https://github.com/ReSwift/ReSwift-Router): Provides a ReSwift compatible Router that allows declarative routing in iOS applications
+- [ReSwift-Recorder](https://github.com/ReSwift/ReSwift-Recorder): Provides a `Store` implementation that records all `Action`s and allows for hot-reloading and time travel
 
 #Example Projects
 
-- [CounterExample](https://github.com/Swift-Flow/CounterExample): A very simple counter app implemented with Swift Flow. This app also demonstrates the basics of routing with SwiftFlowRouter.
+- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with Swift Flow. This app also demonstrates the basics of routing with ReSwiftRouter.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with Swift Flow - currently still very early on.
 
 #Contributing
