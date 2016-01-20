@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-Defines the interface of Stores in Swift Flow. `MainStore` is the default implementation of this
+Defines the interface of Stores in ReSwift. `MainStore` is the default implementation of this
 interaface. Applications have a single store that stores the entire application state.
 Stores receive actions and use reducers combined with these actions, to calculate state changes.
 Upon every state update a store informs all of its subscribers.
