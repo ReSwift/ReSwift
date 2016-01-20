@@ -9,7 +9,7 @@
 import XCTest
 import Quick
 import Nimble
-@testable import SwiftFlow
+@testable import ReSwift
 
 // swiftlint:disable function_body_length
 class StoreSpecs: QuickSpec {
