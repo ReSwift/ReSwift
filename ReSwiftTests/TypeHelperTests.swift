@@ -21,46 +21,32 @@ class TypeHelper: QuickSpec {
 
         describe("f_withSpecificTypes") {
 
-            it("calls methods if the source type can be casted into the function signature type") {
-                var called = false
-                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
-                    called = true
-
-                    return state ?? AppState1()
+            it("sets `didCast = true` if the source type can be cast to function signature type") {
+                var didCast = false
+                let reducerFunction: (Action, AppState1) -> AppState1 = { action, state in
+                    return state
                 }
 
-                withSpecificTypes(AppState1(), action: StandardAction(""),
-                    function: reducerFunction)
+                if let _ = castToExpectedType(StandardAction(""), state: AppState1(),
+                    function: reducerFunction) {
+                        didCast = true
+                }
 
-                expect(called).to(beTrue())
+                expect(didCast).to(beTrue())
             }
 
-            it("calls the method if the source type is nil") {
-                var called = false
-                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
-                    called = true
-
-                    return state ?? AppState1()
+            it ("sets `didCast = false` if source type can't be cast to function signature type") {
+                var didCast = false
+                let reducerFunction: (Action, AppState1) -> AppState1 = { action, state in
+                    return state
                 }
 
-                withSpecificTypes(nil, action: StandardAction(""),
-                    function: reducerFunction)
-
-                expect(called).to(beTrue())
-            }
-
-            it ("doesn't call if source type can't be casted to function signature type") {
-                var called = false
-                let reducerFunction: (AppState1?, Action) -> AppState1 = { state, action in
-                    called = true
-
-                    return state ?? AppState1()
+                if let _ = castToExpectedType(StandardAction(""), state: AppState2(),
+                    function: reducerFunction) {
+                        didCast = true
                 }
 
-                withSpecificTypes(AppState2(), action: StandardAction(""),
-                    function: reducerFunction)
-
-                expect(called).to(beFalse())
+                expect(didCast).to(beFalse())
             }
 
         }

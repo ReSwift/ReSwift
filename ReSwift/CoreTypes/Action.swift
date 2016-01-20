@@ -42,7 +42,6 @@ public struct StandardAction: Action {
         self.payload = payload
         self.isTypedAction = isTypedAction
     }
-
 }
 
 // MARK: Coding Extension

@@ -16,7 +16,6 @@ public protocol StoreSubscriber: AnyStoreSubscriber {
     typealias StoreSubscriberStateType
 
     func newState(state: StoreSubscriberStateType)
-
 }
 
 extension StoreSubscriber {

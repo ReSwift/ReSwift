@@ -29,10 +29,9 @@ public struct CombinedReducer: AnyReducer {
         self.reducers = reducers
     }
 
-    public func _handleAction(state: StateType?, action: Action) -> StateType {
+    public func _handleAction(action: Action, state: StateType?) -> StateType {
         return reducers.reduce(state) { (currentState, reducer) -> StateType in
-            reducer._handleAction(currentState, action: action)
+            reducer._handleAction(action, state: currentState)
         }!
     }
-
 }

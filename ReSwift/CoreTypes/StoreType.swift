@@ -214,5 +214,4 @@ public protocol StoreType {
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
     typealias AsyncActionCreator = (state: State, store: StoreType,
     actionCreatorCallback: ActionCreator -> Void) -> Void
-
 }
