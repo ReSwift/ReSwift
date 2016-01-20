@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ReSwift"
-  s.version          = "0.2.2"
+  s.version          = "0.2.3"
   s.summary          = "Unidirectional Data Flow in Swift"
   s.description      = <<-DESC
                         Swift Flow is a Redux-like implementation of the unidirectional data flow architecture in Swift.
