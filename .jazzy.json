@@ -1,0 +1,72 @@
+{
+    "xcodebuild_arguments": ["-project", "ReSwift/ReSwift.xcodeproj", "-scheme", "ReSwift-OSX"],
+    "swift_version": "2.1.1",
+    "author_name": "ReSwift",
+    "author_url": "https://github.com/ReSwift/ReSwift",
+    "module_name": "ReSwift",
+    "readme_path": "ReSwift/Readme/api/Documentation.md",
+    "dash_url": "http://ReSwift.github.io/ReSwift/api/docsets/ReSwift.xml",
+    "root_url": "http://ReSwift.github.io/ReSwift/",
+    "github_url": "https://github.com/ReSwift/ReSwift",
+    "github_file_prefix": "https://github.com/ReSwift/ReSwift/tree/master",
+    "assets_directory": "jazzy-theme/assets",
+    "template_directory": "jazzy-theme/templates",
+
+    "documentation_glob": "ReSwift/Readme/*.md",
+    "abstract_glob": "ReSwift/Readme/api/*.md",
+
+    "custom_categories": [{
+        "name": "Documentation",
+        "children": [
+            "About ReSwift",
+            "Why ReSwift",
+            "Getting Started Guide",
+            "Installation",
+            "Testing",
+            "Demo",
+            "Extensions",
+            "Example Projects",
+            "Contributing",
+            "Credits",
+            "Get in touch",
+            "License"
+        ]
+    }, {
+        "name": "Stores",
+        "children": [
+            "Store",
+            "StoreType",
+            "StoreSubscriber",
+            "AnyStoreSubscriber"
+        ]
+    }, {
+        "name": "State",
+        "children": [
+            "StateType"
+        ]
+    }, {
+        "name": "Actions",
+        "children": [
+            "Action",
+            "StandardAction",
+            "StandardActionConvertible",
+            "SwiftFlowInit"
+        ]
+    }, {
+        "name": "Reducers",
+        "children": [
+            "Reducer",
+            "AnyReducer",
+            "CombinedReducer"
+        ]
+    }, {
+        "name": "Utilities",
+        "children": [
+            "Coding"
+        ]
+    }]
+}
+
+
+
+

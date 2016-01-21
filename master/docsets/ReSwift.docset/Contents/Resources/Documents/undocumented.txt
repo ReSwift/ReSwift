@@ -1,0 +1,39 @@
+CombinedReducer.swift
+	public func _handleAction(action: Action, state: StateType?) -> StateType
+Action.swift
+	public init(dictionary: [String : AnyObject])
+	public func dictionaryRepresentation() -> [String : AnyObject]
+Store.swift
+	/*private (set)*/ public var state: State!
+	public var dispatchFunction: DispatchFunction!
+	public required convenience init(reducer: AnyReducer, state: State?)
+	public required init(reducer: AnyReducer, state: State?, middleware: [Middleware])
+	public func subscribe(subscriber: AnyStoreSubscriber)
+	public func unsubscribe(subscriber: AnyStoreSubscriber)
+	public func _defaultDispatch(action: Action) -> Any
+	public func dispatch(action: Action) -> Any
+	public func dispatch(actionCreatorProvider: ActionCreator) -> Any
+	public func dispatch(asyncActionCreatorProvider: AsyncActionCreator)
+	public func dispatch(action: Action, callback: DispatchCallback?) -> Any
+	public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) -> Any
+	public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?)
+Reducer.swift
+	public protocol AnyReducer
+	func _handleAction(action: Action, state: StateType?) -> StateType
+	public protocol Reducer: AnyReducer
+	func handleAction(action: Action, state: ReducerStateType?) -> ReducerStateType
+	public protocol Reducer : AnyReducer
+	public func _handleAction(action: Action, state: StateType?) -> StateType
+State.swift
+	public protocol StateType { }
+StoreSubscriber.swift
+	public protocol AnyStoreSubscriber: class
+	func _newState(state: StateType)
+	public protocol StoreSubscriber: AnyStoreSubscriber
+	func newState(state: StoreSubscriberStateType)
+	public protocol StoreSubscriber : AnyStoreSubscriber
+	public func _newState(state: StateType)
+Coding.swift
+	public protocol Coding
+	init(dictionary: [String : AnyObject])
+	func dictionaryRepresentation() -> [String : AnyObject]

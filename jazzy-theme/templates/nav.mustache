@@ -1,0 +1,16 @@
+<nav class='navigation'>
+  <ul class='nav-groups'>
+    {{#structure}}
+    <li class='nav-group-name'>
+      <a class='nav-group-name-link' href='{{path_to_root}}{{section}}.html'>{{section}}</a>
+      <ul class='nav-group-tasks'>
+        {{#children}}
+        <li class='nav-group-task'>
+          <a class='nav-group-task-link' href='{{path_to_root}}{{url}}'>{{name}}</a>
+        </li>
+        {{/children}}
+      </ul>
+    </li>
+    {{/structure}}
+  </ul>
+</nav>

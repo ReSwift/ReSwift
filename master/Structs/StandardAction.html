@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>StandardAction Struct Reference</title>
+    <link rel='stylesheet' type='text/css' href='../css/jazzy.css' />
+    <link rel='stylesheet' type='text/css' href='../css/highlight.css' />
+    <meta charset='utf-8'>
+    <script src='../js/jquery.min.js' defer></script>
+    <script src='../js/jazzy.js' defer></script>
+  </head>
+  <body>
+
+    <a name='//apple_ref/swift/Struct/StandardAction' class='dashAnchor'></a>
+
+    <a title='StandardAction Struct Reference'></a>
+
+    <header class='header'>
+      <p class='header-col header-col--primary'>
+        <a class='header-link' href='../index.html'>
+          ReSwift Docs
+        </a>
+         (49% documented)
+      </p>
+    
+        <p class='header-col header-col--secondary'>
+          <a class='header-link' href='https://github.com/ReSwift/ReSwift'>
+            <img class='header-icon' src='../img/gh.png'/>
+            View on GitHub
+          </a>
+        </p>
+    
+        <p class='header-col header-col--secondary'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fapi%2Fdocsets%2FReSwift%2Exml'>
+            <img class='header-icon' src='../img/dash.png'/>
+            Install in Dash
+          </a>
+        </p>
+    </header>
+
+    <p class='breadcrumbs'>
+      <a class='breadcrumb' href='../index.html'>ReSwift Reference</a>
+      <img class='carat' src='../img/carat.png' />
+      StandardAction Struct Reference
+    </p>
+
+    <div class='content-wrapper'>
+      <nav class='navigation'>
+        <ul class='nav-groups'>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Documentation.html'>Documentation</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../about-reswift.html'>About ReSwift</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../why-reswift.html'>Why ReSwift</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../getting-started-guide.html'>Getting Started Guide</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../installation.html'>Installation</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../testing.html'>Testing</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../demo.html'>Demo</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../extensions.html'>Extensions</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../example-projects.html'>Example Projects</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../contributing.html'>Contributing</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../credits.html'>Credits</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../get-in-touch.html'>Get in touch</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../license.html'>License</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Stores.html'>Stores</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/Store.html'>Store</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/StoreType.html'>StoreType</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/StoreSubscriber.html'>StoreSubscriber</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/AnyStoreSubscriber.html'>AnyStoreSubscriber</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../State.html'>State</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../State.html#/s:P7ReSwift9StateType'>StateType</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Actions.html'>Actions</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Actions.html#/s:P7ReSwift6Action'>Action</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Structs/StandardAction.html'>StandardAction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/StandardActionConvertible.html'>StandardActionConvertible</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Actions.html#/s:V7ReSwift13SwiftFlowInit'>SwiftFlowInit</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Reducers.html'>Reducers</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/Reducer.html'>Reducer</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/AnyReducer.html'>AnyReducer</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Structs/CombinedReducer.html'>CombinedReducer</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Utilities.html'>Utilities</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class='main-content'>
+
+        <section class='section'>
+          <div class='section-content'>
+            <h1>StandardAction</h1>
+              <div class='declaration'>
+                <div class='language'>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt">Action</span></code></pre>
+
+                </div>
+              </div>
+            <p>This is ReSwift&rsquo;s built in action type, it is the only built in type that conforms to the
+<code><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></code> protocol. <code>StandardAction</code> can be serialized and can therefore be used with developer
+tools that restore state between app launches.</p>
+
+<p>The downside of <code>StandardAction</code> is that it carries its payload as an untyped dictionary which does
+not play well with Swift&rsquo;s type system.</p>
+
+<p>It is recommended that you define your own types that conform to <code><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></code> - if you want to be able
+to serialize your custom action types, you can implement <code><a href="../Protocols/StandardActionConvertible.html">StandardActionConvertible</a></code> which will
+make it possible to generate a <code>StandardAction</code> from your typed action - the best of both worlds!</p>
+
+          </div>
+        </section>
+
+        <section class='section'>
+          <div class='section-content'>
+            <div class="task-group">
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:vV7ReSwift14StandardAction4typeSS"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV7ReSwift14StandardAction4typeSS">type</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A String that identifies the type of this <code><a href="../Structs/StandardAction.html">StandardAction</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L24" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:vV7ReSwift14StandardAction7payloadGSqGVSs10DictionarySSPSs9AnyObject___"></a>
+                    <a name="//apple_ref/swift/Property/payload" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV7ReSwift14StandardAction7payloadGSqGVSs10DictionarySSPSs9AnyObject___">payload</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An untyped, JSON-compatible payload</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">payload</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L26" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:vV7ReSwift14StandardAction13isTypedActionSb"></a>
+                    <a name="//apple_ref/swift/Property/isTypedAction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV7ReSwift14StandardAction13isTypedActionSb">isTypedAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether this action will be deserialized as a typed action or as a standard action</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isTypedAction</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L28" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FV7ReSwift14StandardActioncFMS0_FSSS0_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7ReSwift14StandardActioncFMS0_FSSS0_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes this <code><a href="../Structs/StandardAction.html">StandardAction</a></code> with only a type. The payload will be nil and
+<code><a href="../Structs/StandardAction.html#/s:vV7ReSwift14StandardAction13isTypedActionSb">isTypedAction</a></code> will be set to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L32-L36" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FV7ReSwift14StandardActioncFMS0_FT4typeSS7payloadGSqGVSs10DictionarySSPSs9AnyObject___13isTypedActionSb_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(type:payload:isTypedAction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7ReSwift14StandardActioncFMS0_FT4typeSS7payloadGSqGVSs10DictionarySSPSs9AnyObject___13isTypedActionSb_S0_">init(type:payload:isTypedAction:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes this <code><a href="../Structs/StandardAction.html">StandardAction</a></code> with a type, a payload and information about whether this
+is a typed action or not.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">payload</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?,</span> <span class="nv">isTypedAction</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L40-L44" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FV7ReSwift14StandardActioncFMS0_FT10dictionaryGVSs10DictionarySSPSs9AnyObject___S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(dictionary:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7ReSwift14StandardActioncFMS0_FT10dictionaryGVSs10DictionarySSPSs9AnyObject___S0_">init(dictionary:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt">Action</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L51-L55" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FV7ReSwift14StandardAction24dictionaryRepresentationFS0_FT_GVSs10DictionarySSPSs9AnyObject__"></a>
+                    <a name="//apple_ref/swift/Method/dictionaryRepresentation()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7ReSwift14StandardAction24dictionaryRepresentationFS0_FT_GVSs10DictionarySSPSs9AnyObject__">dictionaryRepresentation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt">Action</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/ReSwift/CoreTypes/Action.swift#L57-L61" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class='footer'>
+      <p>&copy; 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved. (Last updated: 2016-01-22)</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.4.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
