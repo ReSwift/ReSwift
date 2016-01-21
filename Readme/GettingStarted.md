@@ -1,10 +1,10 @@
-#Getting Started with Swift Flow
+#Getting Started with ReSwift
 
-Swift Flow provides the infrastructure for `Store`s, `Action`s and `Reducer`s to enable a unidirectional data flow as shown below.
+ReSwift provides the infrastructure for `Store`s, `Action`s and `Reducer`s to enable a unidirectional data flow as shown below.
 
-![](Assets/swift_flow_detail.png)
+![](Assets/reswift_detail.png)
 
-The following steps will describe how to set up the individual components for your Swift Flow app.
+The following steps will describe how to set up the individual components for your ReSwift app.
 
 #State
 
@@ -30,7 +30,7 @@ There are multiple things to note:
 
 Protocols are extremely useful for working with this library. As you can see in the example above, `SwiftRouter` can work with any app state that you define, as long as it conforms to the `HasNavigationState` protocol. The router will only ever access your app state through this protocol - this also means it won't ever see and depend upon any other state that you store within your state struct.
 
-**You should use this approach as much as possible in your app.** Swift Flow provides some features that make this approach even easier to use. Let's say you want to expand the state above by a simple authentication state. You would do this by first defining a new struct for this sub-state:
+**You should use this approach as much as possible in your app.** ReSwift provides some features that make this approach even easier to use. Let's say you want to expand the state above by a simple authentication state. You would do this by first defining a new struct for this sub-state:
 
 ```swift
 struct AuthenticationState {
@@ -55,7 +55,7 @@ struct AppState: StateType, HasNavigationState, HasAuthenticationState {
 }
 ```
 
-If you now add a view (or any other subscriber) that is only interested in this particular substate, you should express this within your `newState` method (that is the callback for all subscribers in Swift Flow).
+If you now add a view (or any other subscriber) that is only interested in this particular substate, you should express this within your `newState` method (that is the callback for all subscribers in ReSwift).
 
 You would implement the `newState` method as following:
 
@@ -64,7 +64,7 @@ You would implement the `newState` method as following:
         loggedInLabel.text = "\(state.authenticationState.userAuthenticated)"
     }
 ```
-Swift Flow will infer the type that you have required and will automatically cast your app state to that type - this means the particular subscriber will only see the required substate, not any other state in your app. **This approach will help you reduce dependencies on state that should be irrelevant to your component**.
+ReSwift will infer the type that you have required and will automatically cast your app state to that type - this means the particular subscriber will only see the required substate, not any other state in your app. **This approach will help you reduce dependencies on state that should be irrelevant to your component**.
 
 Currently your method is not called if the state cannot be casted into the required type - [we're considering changing this into a `fatalError` as it will make debugging easier]().
 
@@ -77,11 +77,11 @@ Note that you don't need to store derived state inside of your app state. E.g. i
 
 Actions are used to express intented state changes. Actions don't contain functions, instead they provide information about the intended state change, e.g. which user should be deleted.
 
-In your Swift Flow app you will define actions for every possible state change that can happen.
+In your ReSwift app you will define actions for every possible state change that can happen.
 
 Reducers handle these actions and implement state changes based on the information they provide.
 
-All actions in Swift Flow conform to the `Action` protocol, which currently is just a marker procotol.
+All actions in ReSwift conform to the `Action` protocol, which currently is just a marker procotol.
 
 You can either provide custom types as actions, or you can use the built in `StandardAction`.
 
@@ -94,7 +94,7 @@ struct StandardAction: Action {
 	// provides information that is relevant to processing this action
 	// e.g. details about which post should be favorited
    	let payload: [String : AnyObject]?
-   	// this flag is used for serialization when working with Swift Flow Recorder
+   	// this flag is used for serialization when working with ReSwift Recorder
    	let isTypedAction: Bool
 }
 ```
@@ -109,15 +109,15 @@ struct LikePostAction: Action {
 }
 ```
 
-The advantage of using a `StandardAction` is that it can be serialized; this is required for using the features provided by [Swift Flow Recorder](https://github.com/ReSwift/ReSwift-Recorder); such as persisting the application state between app launches.
+The advantage of using a `StandardAction` is that it can be serialized; this is required for using the features provided by [ReSwift Recorder](https://github.com/ReSwift/ReSwift-Recorder); such as persisting the application state between app launches.
 
-If you want to use custom types for actions, but still want to be able to make use of the features provided by Swift Flow Recorder, you can implement the `StandardActionConvertible` protocol. This will allow Swift Flow to convert your typed actions to standard actions that can then be serialized.
+If you want to use custom types for actions, but still want to be able to make use of the features provided by ReSwift Recorder, you can implement the `StandardActionConvertible` protocol. This will allow ReSwift to convert your typed actions to standard actions that can then be serialized.
 
-Once Swift Flow Recorder's implementation is further along, you will find detailed information  on all of this in its documentation.
+Once ReSwift Recorder's implementation is further along, you will find detailed information  on all of this in its documentation.
 
 #Reducers
 
-This is the only place where you should modify application state! Reducers, just as `StoreSubscribers` can define the particular slice of the app state that they are interested in by changing the type in their `handleAction` method. Here's an example of a part of a reducer in an app built with Swift Flow:
+This is the only place where you should modify application state! Reducers, just as `StoreSubscribers` can define the particular slice of the app state that they are interested in by changing the type in their `handleAction` method. Here's an example of a part of a reducer in an app built with ReSwift:
 
 ```swift
 struct DataMutationReducer: Reducer {
@@ -170,9 +170,9 @@ Most of your `StoreSubscriber`s will be in the view layer and update their repre
 
 #Middleware
 
-Swift Flow supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
+ReSwift supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
 
-Let's take a look at a quick example that shows how Swift Flow supports Redux style middleware.
+Let's take a look at a quick example that shows how ReSwift supports Redux style middleware.
 
 The simplest example of a middleware, is one that prints all actions to the console. Here's how you can implement it:
 

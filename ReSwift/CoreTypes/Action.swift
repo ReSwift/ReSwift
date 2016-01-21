@@ -8,7 +8,7 @@
 
 import Foundation
 /**
- This is Swift Flow's built in action type, it is the only built in type that conforms to the
+ This is ReSwift's built in action type, it is the only built in type that conforms to the
  `Action` protocol. `StandardAction` can be serialized and can therefore be used with developer
  tools that restore state between app launches.
 
