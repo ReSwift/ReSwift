@@ -11,15 +11,25 @@ import Foundation
 /**
  Method is only used internally in ReSwift to cast the generic `StateType` to a specific
  type expected by reducers / store subscribers.
- */
-func withSpecificTypes<SpecificStateType, Action>(action: Action,
-    state: StateType?, @noescape function: (action: Action, state: SpecificStateType?)
-    -> SpecificStateType) -> StateType {
 
-        if let state = state {
-            guard let specificStateType = state as? SpecificStateType else { return state }
-            return function(action: action, state: specificStateType) as! StateType
+ - parameter action: An action that will be passed to `handleAction`.
+ - parameter state: A generic state type that will be casted to `SpecificStateType`.
+ - parameter function: The `handleAction` method.
+ - returns: A `StateType` from `handleAction` or the original `StateType` if it cannot be
+            casted to `SpecificStateType`.
+ */
+func withSpecificTypes<SpecificStateType, Action>(
+        action: Action,
+        state genericStateType: StateType?,
+        @noescape function: (action: Action, state: SpecificStateType?) -> SpecificStateType
+    ) -> StateType {
+        guard let genericStateType = genericStateType else {
+            return function(action: action, state: nil) as! StateType
         }
 
-        return function(action: action, state: nil) as! StateType
+        guard let specificStateType = genericStateType as? SpecificStateType else {
+            return genericStateType
+        }
+
+        return function(action: action, state: specificStateType) as! StateType
 }
