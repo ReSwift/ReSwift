@@ -28,7 +28,9 @@ public class Store<State: StateType>: StoreType {
     public var dispatchFunction: DispatchFunction!
 
     private var reducer: AnyReducer
+
     var subscribers: [AnyStoreSubscriber] = []
+
     private var isDispatching = false
 
     public required convenience init(reducer: AnyReducer, state: State?) {
@@ -108,6 +110,7 @@ public class Store<State: StateType>: StoreType {
 
     public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) -> Any {
         let action = actionCreatorProvider(state: state, store: self)
+
         if let action = action {
             dispatch(action, callback: callback)
         }
@@ -117,10 +120,7 @@ public class Store<State: StateType>: StoreType {
 
     public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
         actionCreatorProvider(state: state, store: self) { actionProvider in
-            let action = actionProvider(state: self.state, store: self)
-            if let action = action {
-                self.dispatch(action, callback: callback)
-            }
+            self.dispatch(actionProvider, callback: callback)
         }
     }
 
@@ -128,6 +128,9 @@ public class Store<State: StateType>: StoreType {
 
     public typealias ActionCreator = (state: State, store: Store) -> Action?
 
-    public typealias AsyncActionCreator = (state: State, store: Store,
-        actionCreatorCallback: ActionCreator -> Void) -> Void
+    public typealias AsyncActionCreator = (
+        state: State,
+        store: Store,
+        actionCreatorCallback: ActionCreator -> Void
+    ) -> Void
 }
