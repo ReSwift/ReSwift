@@ -41,7 +41,7 @@ public protocol StoreType {
 
      - parameter subscriber: Subscriber that will receive store updates
      */
-    func subscribe(subscriber: AnyStoreSubscriber)
+    func subscribe<S: StoreSubscriber where S.StoreSubscriberStateType == State>(subscriber: S)
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer

@@ -21,7 +21,11 @@ public class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
-            subscribers.forEach { $0._newState(state) }
+            subscribers.forEach {
+                // if a selector is available, subselect the relevant state
+                // otherwise pass the entire state to the subscriber
+                $0.subscriber._newState($0.selector?(state) ?? state)
+            }
         }
     }
 
@@ -29,7 +33,7 @@ public class Store<State: StateType>: StoreType {
 
     private var reducer: AnyReducer
 
-    var subscribers: [AnyStoreSubscriber] = []
+    var subscribers: [(subscriber: AnyStoreSubscriber, selector: (State -> Any)?)] = []
 
     private var isDispatching = false
 
@@ -54,21 +58,40 @@ public class Store<State: StateType>: StoreType {
         }
     }
 
-    public func subscribe(subscriber: AnyStoreSubscriber) {
-        if subscribers.contains({ $0 === subscriber }) {
+    private func _isNewSubscriber(subscriber: AnyStoreSubscriber) -> Bool {
+        if subscribers.contains({ $0.subscriber === subscriber }) {
             print("Store subscriber is already added, ignoring.")
-            return
+            return false
         }
 
-        subscribers.append(subscriber)
+        return true
+    }
 
-        if let state = self.state {
-            subscriber._newState(state)
-        }
+    public func subscribe<S: StoreSubscriber
+        where S.StoreSubscriberStateType == State>(subscriber: S) {
+            if !_isNewSubscriber(subscriber) { return }
+
+            subscribers.append((subscriber, nil))
+
+            if let state = self.state {
+                subscriber._newState(state)
+            }
+    }
+
+    public func subscribe<SelectedState, S: StoreSubscriber
+        where S.StoreSubscriberStateType == SelectedState>
+        (subscriber: S, selector: (State -> SelectedState)) {
+            if !_isNewSubscriber(subscriber) { return }
+
+            subscribers.append((subscriber, selector))
+
+            if let state = self.state {
+                subscriber._newState(selector(state))
+            }
     }
 
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        if let index = subscribers.indexOf({ return $0 === subscriber }) {
+        if let index = subscribers.indexOf({ return $0.subscriber === subscriber }) {
             subscribers.removeAtIndex(index)
         }
     }
