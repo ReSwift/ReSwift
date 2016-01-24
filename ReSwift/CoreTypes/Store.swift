@@ -21,7 +21,9 @@ public class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
-            subscribers.forEach { $0._newState(state) }
+            subscribers.forEach {
+                $0.0._newState($0.1?(state) ?? state)
+            }
         }
     }
 
@@ -29,7 +31,7 @@ public class Store<State: StateType>: StoreType {
 
     private var reducer: AnyReducer
 
-    var subscribers: [AnyStoreSubscriber] = []
+    var subscribers: [(AnyStoreSubscriber, (State -> Any)?)] = []
 
     private var isDispatching = false
 
@@ -54,21 +56,32 @@ public class Store<State: StateType>: StoreType {
         }
     }
 
-    public func subscribe(subscriber: AnyStoreSubscriber) {
-        if subscribers.contains({ $0 === subscriber }) {
-            print("Store subscriber is already added, ignoring.")
-            return
-        }
+    public func subscribe<S: StoreSubscriber
+        where S.StoreSubscriberStateType == State>(subscriber: S) {
+            if subscribers.contains({ $0.0 === subscriber }) {
+                print("Store subscriber is already added, ignoring.")
+                return
+            }
 
-        subscribers.append(subscriber)
+            subscribers.append((subscriber, nil))
 
-        if let state = self.state {
-            subscriber._newState(state)
-        }
+            if let state = self.state {
+                subscriber._newState(state)
+            }
+    }
+
+    public func subscribe<SelectedState, S: StoreSubscriber
+        where S.StoreSubscriberStateType == SelectedState>
+        (subscriber: S, selector: (State -> SelectedState)) {
+            subscribers.append((subscriber, selector))
+
+            if let state = self.state {
+                subscriber._newState(selector(state))
+            }
     }
 
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        if let index = subscribers.indexOf({ return $0 === subscriber }) {
+        if let index = subscribers.indexOf({ return $0.0 === subscriber }) {
             subscribers.removeAtIndex(index)
         }
     }
