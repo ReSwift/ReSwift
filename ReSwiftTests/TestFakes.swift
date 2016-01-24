@@ -93,7 +93,7 @@ struct TestValueStringReducer: Reducer {
     }
 }
 
-class TestStoreSubscriber<T>: StoreSubscriber {
+class TestStoreSubscriber<T: StateType>: StoreSubscriber {
     var receivedStates: [T] = []
 
     func newState(state: T) {
@@ -114,5 +114,9 @@ class DispatchingSubscriber: StoreSubscriber {
         if state.testValue != 5 {
             self.store.dispatch(SetValueAction(5))
         }
+    }
+
+    func selectSubstate(state: TestAppState) -> TestAppState {
+        return state
     }
 }

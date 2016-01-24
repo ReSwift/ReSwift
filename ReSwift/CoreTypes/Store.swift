@@ -21,7 +21,10 @@ public class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
-            subscribers.forEach { $0._newState(state) }
+            subscribers.forEach {
+                let newState = $0._selectSubstate(state)
+                $0._newState(newState)
+            }
         }
     }
 
