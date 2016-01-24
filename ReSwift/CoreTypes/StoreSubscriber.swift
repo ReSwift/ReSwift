@@ -31,9 +31,9 @@ extension StoreSubscriber {
     public func _selectSubstate(state: StateType) -> Any {
         if let typedState = state as? AppSpecificState {
             return selectSubstate(typedState)
-        } else {
-            return state
         }
+
+        return state
     }
 
     public func selectSubstate(state: StoreSubscriberStateType) -> StoreSubscriberStateType {

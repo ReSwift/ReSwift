@@ -16,14 +16,14 @@ class StoreSubsriberSpec: QuickSpec {
 
     override func spec() {
 
-        var store: Store<TestAppState>!
-        var reducer: TestReducer!
+        var store: Store<TestComplexAppState>!
+        var reducer: TestComplexAppStateReducer!
 
         describe("Substate Selection") {
 
             beforeEach {
-                reducer = TestReducer()
-                store = Store(reducer: reducer, state: TestAppState())
+                reducer = TestComplexAppStateReducer()
+                store = Store(reducer: reducer, state: TestComplexAppState())
             }
 
             it("it allows subscribers to subselect a state") {
@@ -31,8 +31,24 @@ class StoreSubsriberSpec: QuickSpec {
 
                 store.subscribe(subscriber)
                 store.dispatch(SetValueAction(5))
+                store.dispatch(SetOtherStateAction(
+                    otherState: OtherState(name: "TestName", age: 99)
+                ))
 
-                expect(subscriber.receivedValue).to(equal(5))
+                expect(subscriber.receivedValue.0).to(equal(5))
+                expect(subscriber.receivedValue.1).to(equal("TestName"))
+            }
+
+            it("is possible to select a state via protocols") {
+                let subscriber = TestSelectiveSubscriberProtocol()
+
+                store.subscribe(subscriber)
+                store.dispatch(SetOtherStateAction(
+                    otherState: OtherState(name: "TestName", age: 99)
+                ))
+
+                expect(subscriber.receivedValue?.name).to(equal("TestName"))
+                expect(subscriber.receivedValue?.age).to(equal(99))
             }
 
         }
@@ -41,15 +57,71 @@ class StoreSubsriberSpec: QuickSpec {
 
 }
 
-class TestSelectiveSubscriber: StoreSubscriber {
-    var receivedValue: Int?
+// MARK: Test Types for Substate Selection via Selector
 
-    func newState(state: Int?) {
+/**
+    Example of how you can select a substate. The return value from
+    `selectSubstate` and the argument for `newState` need to match up.
+*/
+class TestSelectiveSubscriber: StoreSubscriber {
+    var receivedValue: (Int?, String?)
+
+    func selectSubstate(state: TestComplexAppState) -> (Int?, String?) {
+        return (
+            state.testValue,
+            state.otherState?.name
+        )
+    }
+
+    func newState(state: (Int?, String?)) {
         receivedValue = state
     }
 
-    func selectSubstate(state: TestAppState) -> Int? {
-        return state.testValue
+}
+
+struct TestComplexAppState: StateType, ContainsOtherState {
+    var testValue: Int?
+    var otherState: OtherState?
+}
+
+struct OtherState {
+    var name: String?
+    var age: Int?
+}
+
+struct TestComplexAppStateReducer: Reducer {
+    func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState {
+        var state = state ?? TestComplexAppState()
+
+        switch action {
+        case let action as SetValueAction:
+            state.testValue = action.value
+            return state
+        case let action as SetOtherStateAction:
+            state.otherState = action.otherState
+        default:
+            break
+        }
+
+        return state
+    }
+}
+
+struct SetOtherStateAction: Action {
+    var otherState: OtherState
+}
+
+// MARK: Test Types for Substate Selection via Protocol
+
+protocol ContainsOtherState {
+    var otherState: OtherState? { get }
+}
+
+class TestSelectiveSubscriberProtocol: StoreSubscriber {
+    var receivedValue: OtherState?
+
+    func newState(state: ContainsOtherState) {
+        receivedValue = state.otherState
     }
 
 }
