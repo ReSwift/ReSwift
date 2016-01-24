@@ -51,6 +51,17 @@ class StoreSubsriberSpec: QuickSpec {
                 expect(subscriber.receivedValue?.age).to(equal(99))
             }
 
+            it("doesn't use the subselect if it's incorrect") {
+                let subscriber = TestIncorrectSelectiveSubscriber()
+
+                store.subscribe(subscriber)
+                store.dispatch(SetOtherStateAction(
+                    otherState: OtherState(name: "TestName", age: 99)
+                ))
+
+                expect(subscriber.receivedValue.0).to(beNil())
+                expect(subscriber.receivedValue.1).to(beNil())
+            }
         }
 
     }
@@ -122,6 +133,25 @@ class TestSelectiveSubscriberProtocol: StoreSubscriber {
 
     func newState(state: ContainsOtherState) {
         receivedValue = state.otherState
+    }
+
+}
+
+// MARK: Test Types for Incorrect type in Select Substate
+
+class TestIncorrectSelectiveSubscriber: StoreSubscriber {
+    var receivedValue: (Int?, String?)
+
+    // NOTE: the state argument is purposefully false here
+    func selectSubstate(state: String) -> (Int?, String?) {
+        return (
+            0,
+            ""
+        )
+    }
+
+    func newState(state: (Int?, String?)) {
+        receivedValue = state
     }
 
 }
