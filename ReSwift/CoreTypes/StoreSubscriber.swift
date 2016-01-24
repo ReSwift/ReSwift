@@ -9,19 +9,34 @@
 import Foundation
 
 public protocol AnyStoreSubscriber: class {
-    func _newState(state: StateType)
+    func _newState(state: Any)
+    func _selectSubstate(state: StateType) -> Any
 }
 
 public protocol StoreSubscriber: AnyStoreSubscriber {
     typealias StoreSubscriberStateType
+    typealias AppSpecificState
 
     func newState(state: StoreSubscriberStateType)
+    func selectSubstate(state: AppSpecificState) -> StoreSubscriberStateType
 }
 
 extension StoreSubscriber {
-    public func _newState(state: StateType) {
+    public func _newState(state: Any) {
         if let typedState = state as? StoreSubscriberStateType {
             newState(typedState)
         }
+    }
+
+    public func _selectSubstate(state: StateType) -> Any {
+        if let typedState = state as? AppSpecificState {
+            return selectSubstate(typedState)
+        } else {
+            return state
+        }
+    }
+
+    public func selectSubstate(state: StoreSubscriberStateType) -> StoreSubscriberStateType {
+        return state
     }
 }
