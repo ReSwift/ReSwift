@@ -33,7 +33,7 @@ public class Store<State: StateType>: StoreType {
 
     private var reducer: AnyReducer
 
-    var subscribers: [(subscriber: AnyStoreSubscriber, selector:(State -> Any)?)] = []
+    var subscribers: [(subscriber: AnyStoreSubscriber, selector: (State -> Any)?)] = []
 
     private var isDispatching = false
 
@@ -58,12 +58,18 @@ public class Store<State: StateType>: StoreType {
         }
     }
 
+    private func _isNewSubscriber(subscriber: AnyStoreSubscriber) -> Bool {
+        if subscribers.contains({ $0.subscriber === subscriber }) {
+            print("Store subscriber is already added, ignoring.")
+            return false
+        }
+
+        return true
+    }
+
     public func subscribe<S: StoreSubscriber
         where S.StoreSubscriberStateType == State>(subscriber: S) {
-            if subscribers.contains({ $0.0 === subscriber }) {
-                print("Store subscriber is already added, ignoring.")
-                return
-            }
+            if !_isNewSubscriber(subscriber) { return }
 
             subscribers.append((subscriber, nil))
 
@@ -75,6 +81,8 @@ public class Store<State: StateType>: StoreType {
     public func subscribe<SelectedState, S: StoreSubscriber
         where S.StoreSubscriberStateType == SelectedState>
         (subscriber: S, selector: (State -> SelectedState)) {
+            if !_isNewSubscriber(subscriber) { return }
+
             subscribers.append((subscriber, selector))
 
             if let state = self.state {
@@ -83,7 +91,7 @@ public class Store<State: StateType>: StoreType {
     }
 
     public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        if let index = subscribers.indexOf({ return $0.0 === subscriber }) {
+        if let index = subscribers.indexOf({ return $0.subscriber === subscriber }) {
             subscribers.removeAtIndex(index)
         }
     }

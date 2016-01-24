@@ -98,6 +98,16 @@ class StoreSpecs: QuickSpec {
                 expect(store.subscribers.count).to(equal(1))
             }
 
+            it("ignores identical subscribers that provide substate selectors") {
+                store = Store(reducer: reducer, state: TestAppState())
+                let subscriber = TestStoreSubscriber<TestAppState>()
+
+                store.subscribe(subscriber) { $0 }
+                store.subscribe(subscriber) { $0 }
+
+                expect(store.subscribers.count).to(equal(1))
+            }
+
         }
 
         describe("#dispatch") {
