@@ -22,7 +22,9 @@ public class Store<State: StateType>: StoreType {
     /*private (set)*/ public var state: State! {
         didSet {
             subscribers.forEach {
-                $0.0._newState($0.1?(state) ?? state)
+                // if a selector is available, subselect the relevant state
+                // otherwise pass the entire state to the subscriber
+                $0.subscriber._newState($0.selector?(state) ?? state)
             }
         }
     }
@@ -31,7 +33,7 @@ public class Store<State: StateType>: StoreType {
 
     private var reducer: AnyReducer
 
-    var subscribers: [(AnyStoreSubscriber, (State -> Any)?)] = []
+    var subscribers: [(subscriber: AnyStoreSubscriber, selector:(State -> Any)?)] = []
 
     private var isDispatching = false
 
