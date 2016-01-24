@@ -15,9 +15,11 @@ update_jazzy() {
 }
 
 generate_docs_for_branch() {
-  REPO=$1
+  GITHUB=$1
+  REPO="$GITHUB.git"
   BRANCH=$2
-  NAME=$3
+  URL=$3
+  NAME=$4
   JAZZY=./vendor/jazzy/bin/jazzy
 
   # if [ -d "$NAME" ]; then
@@ -26,5 +28,13 @@ generate_docs_for_branch() {
   #   git clone --depth 1 --branch "$BRANCH" "$REPO" "$NAME"
   # fi
 
-  $JAZZY --config .jazzy.json --clean --output "$BRANCH" --module-version "$BRANCH"
+  $JAZZY \
+    --config .jazzy.json \
+    --clean \
+    --output "$BRANCH" \
+    --module-version "$BRANCH" \
+    --dash_url "$URL/$BRANCH/docsets/$NAME.xml" \
+    --root-url "$URL/$BRANCH/" \
+    --github-file-prefix "$GITHUB/tree/$BRANCH" \
+    --github_url "$GITHUB"
 }

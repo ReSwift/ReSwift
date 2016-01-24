@@ -5,10 +5,7 @@
     "author_url": "https://github.com/ReSwift/ReSwift",
     "module_name": "ReSwift",
     "readme_path": "ReSwift/Readme/api/Documentation.md",
-    "dash_url": "http://ReSwift.github.io/ReSwift/api/docsets/ReSwift.xml",
-    "root_url": "http://ReSwift.github.io/ReSwift/",
-    "github_url": "https://github.com/ReSwift/ReSwift",
-    "github_file_prefix": "https://github.com/ReSwift/ReSwift/tree/master",
+    "docset_platform": "reswift",
     "assets_directory": "jazzy-theme/assets",
     "template_directory": "jazzy-theme/templates",
 
@@ -27,6 +24,7 @@
             "Extensions",
             "Example Projects",
             "Contributing",
+            "Changelog",
             "Credits",
             "Get in touch",
             "License"
