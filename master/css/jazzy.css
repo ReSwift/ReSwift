@@ -331,7 +331,7 @@ pre code {
   .footer a {
     color: #FB9C44; }
 
-html.dash .header, html.dash .breadcrumbs, html.dash .navigation {
+html.dash .header, html.dash .breadcrumbs, html.dash .navigation, html.dash .footer {
   display: none; }
 html.dash .height-container {
   display: block; }
