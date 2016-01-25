@@ -95,7 +95,7 @@ class StoreSpecs: QuickSpec {
                 store.subscribe(subscriber)
                 store.subscribe(subscriber)
 
-                expect(store.subscribers.count).to(equal(1))
+                expect(store.subscriptions.count).to(equal(1))
             }
 
             it("ignores identical subscribers that provide substate selectors") {
@@ -105,7 +105,7 @@ class StoreSpecs: QuickSpec {
                 store.subscribe(subscriber) { $0 }
                 store.subscribe(subscriber) { $0 }
 
-                expect(store.subscribers.count).to(equal(1))
+                expect(store.subscriptions.count).to(equal(1))
             }
 
         }
