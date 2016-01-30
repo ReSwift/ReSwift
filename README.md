@@ -34,7 +34,7 @@ ReSwift relies on a few principles:
 - **Actions** are a declarative way of describing a state change. Actions don't contain any code, they are consumed by the store and forwarded to reducers. Reducers will handle the actions by implementing a different state change for each action.
 - **Reducers** provide pure functions, that based on the current action and the current app state, create a new app state
 
-![](Readme/Assets/reswift_concept.png)
+![](Readme/img/reswift_concept.png)
 
 For a very simple app, that maintains a counter that can be increased and decreased, you can define the app state as following:
 
@@ -44,7 +44,7 @@ struct AppState: StateType {
 }
 ```
 
-You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](Readme/GettingStarted.md) you can find out how to construct complex actions. For the simple actions in this example we can define empty structs that conform to action:
+You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](http://reswift.github.io/ReSwift/master/getting-started-guide.html) you can find out how to construct complex actions. For the simple actions in this example we can define empty structs that conform to action:
 
 ```swift
 struct CounterActionIncrease: Action {}
@@ -137,7 +137,7 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 
 # Getting Started Guide
 
-[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](Readme/GettingStarted.md). It will be expanded in the next few weeks. To get an understanding of the core principles I recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
+[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles I recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
 
 # Installation
 
@@ -172,7 +172,7 @@ carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
 
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
 
-![](Readme/Assets/timetravel.gif)
+![](Readme/img/timetravel.gif)
 
 # Extensions
 

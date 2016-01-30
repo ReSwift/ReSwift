@@ -1,0 +1,1 @@
+This is the only place where you should modify application state! Reducers, just as `StoreSubscribers` can define the particular slice of the app state that they are interested in by changing the type in their `handleAction` method. Here's an example of a part of a reducer in an app built with ReSwift:
