@@ -66,7 +66,7 @@ You would implement the `newState` method as following:
 ```
 ReSwift will infer the type that you have required and will automatically cast your app state to that type - this means the particular subscriber will only see the required substate, not any other state in your app. **This approach will help you reduce dependencies on state that should be irrelevant to your component**.
 
-Currently your method is not called if the state cannot be casted into the required type - [we're considering changing this into a `fatalError` as it will make debugging easier]().
+Currently your method is not called if the state cannot be casted into the required type - [we're considering changing this into a `fatalError` as it will make debugging easier](https://github.com/ReSwift/ReSwift/issues/4).
 
 ##Derived State
 
