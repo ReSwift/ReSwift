@@ -8,7 +8,11 @@ Store.swift
 	public var dispatchFunction: DispatchFunction!
 	public required convenience init(reducer: AnyReducer, state: State?)
 	public required init(reducer: AnyReducer, state: State?, middleware: [Middleware])
-	public func subscribe(subscriber: AnyStoreSubscriber)
+	public func subscribe<S: StoreSubscriber
+        where S.StoreSubscriberStateType == State>(subscriber: S)
+	public func subscribe<SelectedState, S: StoreSubscriber
+        where S.StoreSubscriberStateType == SelectedState>
+        (subscriber: S, selector: (State -> SelectedState))
 	public func unsubscribe(subscriber: AnyStoreSubscriber)
 	public func _defaultDispatch(action: Action) -> Any
 	public func dispatch(action: Action) -> Any
@@ -28,11 +32,11 @@ State.swift
 	public protocol StateType { }
 StoreSubscriber.swift
 	public protocol AnyStoreSubscriber: class
-	func _newState(state: StateType)
+	func _newState(state: Any)
 	public protocol StoreSubscriber: AnyStoreSubscriber
 	func newState(state: StoreSubscriberStateType)
 	public protocol StoreSubscriber : AnyStoreSubscriber
-	public func _newState(state: StateType)
+	public func _newState(state: Any)
 Coding.swift
 	public protocol Coding
 	init(dictionary: [String : AnyObject])
