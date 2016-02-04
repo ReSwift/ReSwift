@@ -32,9 +32,22 @@ class StoreSpecs: QuickSpec {
             var store: Store<TestAppState>!
             var reducer: TestReducer!
 
+            typealias TestSubscriber = TestStoreSubscriber<TestAppState>
+
             beforeEach {
                 reducer = TestReducer()
                 store = Store(reducer: reducer, state: TestAppState())
+            }
+
+            it("does not strongly capture an observer") {
+                store = Store(reducer: reducer, state: TestAppState())
+                var subscriber: TestSubscriber? = TestSubscriber()
+
+                store.subscribe(subscriber!)
+                expect(store.subscriptions.flatMap({ $0.subscriber }).count).to(equal(1))
+
+                subscriber = nil
+                expect(store.subscriptions.flatMap({ $0.subscriber })).to(beEmpty())
             }
 
             it("dispatches initial value upon subscription") {
@@ -49,8 +62,9 @@ class StoreSpecs: QuickSpec {
 
             it("allows dispatching from within an observer") {
                 store = Store(reducer: reducer, state: TestAppState())
-                store.subscribe(DispatchingSubscriber(store: store))
+                let subscriber = DispatchingSubscriber(store: store)
 
+                store.subscribe(subscriber)
                 store.dispatch(SetValueAction(2))
 
                 expect(store.state.testValue).to(equal(5))

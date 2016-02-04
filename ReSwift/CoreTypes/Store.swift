@@ -17,6 +17,8 @@ import Foundation
  */
 public class Store<State: StateType>: StoreType {
 
+    typealias SubscriptionType = Subscription<State>
+
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
 
     /*private (set)*/ public var state: State! {
@@ -24,7 +26,7 @@ public class Store<State: StateType>: StoreType {
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
-                $0.subscriber._newState($0.selector?(state) ?? state)
+                $0.subscriber?._newState($0.selector?(state) ?? state)
             }
         }
     }
@@ -33,9 +35,7 @@ public class Store<State: StateType>: StoreType {
 
     private var reducer: AnyReducer
 
-    typealias Subscription = (subscriber: AnyStoreSubscriber, selector: (State -> Any)?)
-
-    var subscriptions: [Subscription] = []
+    var subscriptions: [SubscriptionType] = []
 
     private var isDispatching = false
 
@@ -49,8 +49,8 @@ public class Store<State: StateType>: StoreType {
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware.reverse().reduce(_defaultDispatch) {
             [weak self] dispatchFunction, middleware in
-                let getState = { self?.state }
-                return middleware(self?.dispatch, getState)(dispatchFunction)
+            let getState = { self?.state }
+            return middleware(self?.dispatch, getState)(dispatchFunction)
         }
 
         if let state = state {
@@ -73,7 +73,7 @@ public class Store<State: StateType>: StoreType {
         where S.StoreSubscriberStateType == State>(subscriber: S) {
             if !_isNewSubscriber(subscriber) { return }
 
-            subscriptions.append((subscriber, nil))
+            subscriptions.append(Subscription(subscriber: subscriber, selector: nil))
 
             if let state = self.state {
                 subscriber._newState(state)
@@ -85,7 +85,7 @@ public class Store<State: StateType>: StoreType {
         (subscriber: S, selector: (State -> SelectedState)) {
             if !_isNewSubscriber(subscriber) { return }
 
-            subscriptions.append((subscriber, selector))
+            subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
 
             if let state = self.state {
                 subscriber._newState(selector(state))
