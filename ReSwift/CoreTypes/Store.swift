@@ -23,6 +23,7 @@ public class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
+            subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber

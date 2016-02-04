@@ -50,6 +50,28 @@ class StoreSpecs: QuickSpec {
                 expect(store.subscriptions.flatMap({ $0.subscriber })).to(beEmpty())
             }
 
+            it("removes deferenced subscribers before notifying state changes") {
+                store = Store(reducer: reducer, state: TestAppState())
+                var subscriber1: TestSubscriber? = TestSubscriber()
+                var subscriber2: TestSubscriber? = TestSubscriber()
+
+                store.subscribe(subscriber1!)
+                store.subscribe(subscriber2!)
+                store.dispatch(SetValueAction(3))
+                expect(store.subscriptions.count).to(equal(2))
+                expect(subscriber1?.receivedStates.last?.testValue).to(equal(3))
+                expect(subscriber2?.receivedStates.last?.testValue).to(equal(3))
+
+                subscriber1 = nil
+                store.dispatch(SetValueAction(5))
+                expect(store.subscriptions.count).to(equal(1))
+                expect(subscriber2?.receivedStates.last?.testValue).to(equal(5))
+
+                subscriber2 = nil
+                store.dispatch(SetValueAction(8))
+                expect(store.subscriptions).to(beEmpty())
+            }
+
             it("dispatches initial value upon subscription") {
                 store = Store(reducer: reducer, state: TestAppState())
                 let subscriber = TestStoreSubscriber<TestAppState>()
