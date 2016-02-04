@@ -72,24 +72,18 @@ public class Store<State: StateType>: StoreType {
 
     public func subscribe<S: StoreSubscriber
         where S.StoreSubscriberStateType == State>(subscriber: S) {
-            if !_isNewSubscriber(subscriber) { return }
-
-            subscriptions.append(Subscription(subscriber: subscriber, selector: nil))
-
-            if let state = self.state {
-                subscriber._newState(state)
-            }
+            subscribe(subscriber, selector: nil)
     }
 
     public func subscribe<SelectedState, S: StoreSubscriber
         where S.StoreSubscriberStateType == SelectedState>
-        (subscriber: S, selector: (State -> SelectedState)) {
+        (subscriber: S, selector: (State -> SelectedState)?) {
             if !_isNewSubscriber(subscriber) { return }
 
             subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
 
             if let state = self.state {
-                subscriber._newState(selector(state))
+                subscriber._newState(selector?(state) ?? state)
             }
     }
 
