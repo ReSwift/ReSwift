@@ -12,6 +12,7 @@ import Nimble
 @testable import ReSwift
 
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 class StoreSpecs: QuickSpec {
 
     override func spec() {
@@ -23,6 +24,25 @@ class StoreSpecs: QuickSpec {
                 let _ = Store<CounterState>(reducer: reducer, state: nil)
 
                 expect(reducer.calledWithAction[0] is SwiftFlowInit).to(beTrue())
+            }
+
+        }
+
+        describe("#deinit") {
+
+            it("Deinitializes when no reference is held") {
+                var deInitCount = 0
+
+                autoreleasepool {
+                    let reducer = TestReducer()
+                    let _ = DeInitStore(
+                        reducer: reducer,
+                        state: TestAppState(),
+                        deInitAction: { deInitCount++ }
+                    )
+                }
+
+                expect(deInitCount).to(equal(1))
             }
 
         }
@@ -223,6 +243,26 @@ class StoreSpecs: QuickSpec {
 
 }
 
+// Used for deinitialization test
+class DeInitStore<State: StateType>: Store<State> {
+    var deInitAction: (() -> Void)?
+
+    deinit {
+        deInitAction?()
+    }
+
+    required convenience init(
+        reducer: AnyReducer,
+        state: State?,
+        deInitAction: () -> Void) {
+            self.init(reducer: reducer, state: state, middleware: [])
+            self.deInitAction = deInitAction
+    }
+
+    required init(reducer: AnyReducer, state: State?, middleware: [Middleware]) {
+        super.init(reducer: reducer, state: state, middleware: middleware)
+    }
+}
 
 // Needs to be class so that shared reference can be modified to inject store
 class DispatchingReducer: Reducer {
@@ -235,4 +275,5 @@ class DispatchingReducer: Reducer {
     }
 }
 
+// swiftlint:enable type_body_length
 // swiftlint:enable function_body_length
