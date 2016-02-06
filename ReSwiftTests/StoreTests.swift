@@ -32,9 +32,44 @@ class StoreSpecs: QuickSpec {
             var store: Store<TestAppState>!
             var reducer: TestReducer!
 
+            typealias TestSubscriber = TestStoreSubscriber<TestAppState>
+
             beforeEach {
                 reducer = TestReducer()
                 store = Store(reducer: reducer, state: TestAppState())
+            }
+
+            it("does not strongly capture an observer") {
+                store = Store(reducer: reducer, state: TestAppState())
+                var subscriber: TestSubscriber? = TestSubscriber()
+
+                store.subscribe(subscriber!)
+                expect(store.subscriptions.flatMap({ $0.subscriber }).count).to(equal(1))
+
+                subscriber = nil
+                expect(store.subscriptions.flatMap({ $0.subscriber })).to(beEmpty())
+            }
+
+            it("removes deferenced subscribers before notifying state changes") {
+                store = Store(reducer: reducer, state: TestAppState())
+                var subscriber1: TestSubscriber? = TestSubscriber()
+                var subscriber2: TestSubscriber? = TestSubscriber()
+
+                store.subscribe(subscriber1!)
+                store.subscribe(subscriber2!)
+                store.dispatch(SetValueAction(3))
+                expect(store.subscriptions.count).to(equal(2))
+                expect(subscriber1?.receivedStates.last?.testValue).to(equal(3))
+                expect(subscriber2?.receivedStates.last?.testValue).to(equal(3))
+
+                subscriber1 = nil
+                store.dispatch(SetValueAction(5))
+                expect(store.subscriptions.count).to(equal(1))
+                expect(subscriber2?.receivedStates.last?.testValue).to(equal(5))
+
+                subscriber2 = nil
+                store.dispatch(SetValueAction(8))
+                expect(store.subscriptions).to(beEmpty())
             }
 
             it("dispatches initial value upon subscription") {
@@ -49,8 +84,9 @@ class StoreSpecs: QuickSpec {
 
             it("allows dispatching from within an observer") {
                 store = Store(reducer: reducer, state: TestAppState())
-                store.subscribe(DispatchingSubscriber(store: store))
+                let subscriber = DispatchingSubscriber(store: store)
 
+                store.subscribe(subscriber)
                 store.dispatch(SetValueAction(2))
 
                 expect(store.state.testValue).to(equal(5))
