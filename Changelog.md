@@ -1,3 +1,11 @@
+#Upcoming Release
+
+**Other:**
+
+- Move all documentation source into `Docs`, except `Readme`, `Changelog` and `License`.
+- Replace duplicated documentation with an enhanced `generate_docs.sh` build script.
+- Set CocoaPods documentation URL - (#56) @agentk
+
 #0.2.5
 
 *Released: 02/20/2015*
@@ -18,7 +26,6 @@
 - We now have a [hosted documentation for ReSwift](http://reswift.github.io/ReSwift/master/) - @agentk
 - Refactored subscribers into a explicit `Subscription` typealias - @DivineDominion
 - Refactored `dispatch` for `AsyncActionCreator` to avoid duplicate code - @sendyhalim
-
 
 #0.2.4
 
