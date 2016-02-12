@@ -110,4 +110,4 @@ public protocol Action { }
 
 /// Initial Action that is dispatched as soon as the store is created.
 /// Reducers respond to this action by configuring their intial state.
-public struct SwiftFlowInit: Action {}
+public struct ReSwiftInit: Action {}

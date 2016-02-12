@@ -23,7 +23,7 @@ class StoreSpecs: QuickSpec {
                 let reducer = MockReducer()
                 let _ = Store<CounterState>(reducer: reducer, state: nil)
 
-                expect(reducer.calledWithAction[0] is SwiftFlowInit).to(beTrue())
+                expect(reducer.calledWithAction[0] is ReSwiftInit).to(beTrue())
             }
 
         }
