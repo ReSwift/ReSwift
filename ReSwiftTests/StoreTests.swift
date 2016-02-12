@@ -38,8 +38,7 @@ class StoreSpecs: QuickSpec {
                     let _ = DeInitStore(
                         reducer: reducer,
                         state: TestAppState(),
-                        deInitAction: { deInitCount++ }
-                    )
+                        deInitAction: { deInitCount++ })
                 }
 
                 expect(deInitCount).to(equal(1))
