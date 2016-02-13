@@ -56,7 +56,9 @@ Your reducer needs to respond to these different action types, that can be done 
 ```swift
 struct CounterReducer: Reducer {
 
-    func handleAction(var state: AppState, action: Action) -> AppState {
+    func handleAction(action: Action, state: AppState?) -> AppState {
+        var state = state ?? AppState()
+
         switch action {
         case _ as CounterActionIncrease:
             state.counter += 1

@@ -23,7 +23,7 @@ class StoreSpecs: QuickSpec {
                 let reducer = MockReducer()
                 let _ = Store<CounterState>(reducer: reducer, state: nil)
 
-                expect(reducer.calledWithAction[0] is SwiftFlowInit).to(beTrue())
+                expect(reducer.calledWithAction[0] is ReSwiftInit).to(beTrue())
             }
 
         }
@@ -38,8 +38,7 @@ class StoreSpecs: QuickSpec {
                     let _ = DeInitStore(
                         reducer: reducer,
                         state: TestAppState(),
-                        deInitAction: { deInitCount++ }
-                    )
+                        deInitAction: { deInitCount++ })
                 }
 
                 expect(deInitCount).to(equal(1))

@@ -59,7 +59,7 @@ public class Store<State: StateType>: StoreType {
         if let state = state {
             self.state = state
         } else {
-            dispatch(SwiftFlowInit())
+            dispatch(ReSwiftInit())
         }
     }
 
