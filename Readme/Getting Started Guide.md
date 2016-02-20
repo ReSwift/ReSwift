@@ -124,7 +124,7 @@ struct DataMutationReducer: Reducer {
 
     func handleAction(state: HasDataState, action: Action) -> HasDataState {
         switch action {
-        case let action as IncrementAction:
+        case let action as CreateContactWithEmail:
             return createContact(state, email: action.email)
         case let action as CreateContactWithTwitterUser:
             return createContact(state, twitterUser: action.twitterUser)
