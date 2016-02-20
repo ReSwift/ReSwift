@@ -1,4 +1,24 @@
-#Upcoming Release
+#0.2.5
+
+*Released: 02/20/2015*
+
+**API Changes:**
+
+- Subscribers can now sub-select a state when they subscribe to the store (#61) - @Ben-G
+- Rename initially dispatched Action to `ReSwiftInit` - @vfn
+
+**Fixes:**
+
+- Fix retain cycle caused by middleware (issue: #66) - @Ben-G
+- Store now holds weak references to subscribers to avoid unexpected memory managegement behavior (issue: #62) - @vfn
+- Documentation Fixes - @victorpimentel, @vfn, @juggernate, @raheelahmad
+
+**Other:**
+
+- We now have a [hosted documentation for ReSwift](http://reswift.github.io/ReSwift/master/) - @agentk
+- Refactored subscribers into a explicit `Subscription` typealias - @DivineDominion
+- Refactored `dispatch` for `AsyncActionCreator` to avoid duplicate code - @sendyhalim
+
 
 #0.2.4
 
