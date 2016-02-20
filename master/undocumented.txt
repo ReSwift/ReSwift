@@ -12,7 +12,7 @@ Store.swift
         where S.StoreSubscriberStateType == State>(subscriber: S)
 	public func subscribe<SelectedState, S: StoreSubscriber
         where S.StoreSubscriberStateType == SelectedState>
-        (subscriber: S, selector: (State -> SelectedState))
+        (subscriber: S, selector: (State -> SelectedState)?)
 	public func unsubscribe(subscriber: AnyStoreSubscriber)
 	public func _defaultDispatch(action: Action) -> Any
 	public func dispatch(action: Action) -> Any

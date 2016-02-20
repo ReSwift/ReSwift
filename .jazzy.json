@@ -48,7 +48,7 @@
             "Action",
             "StandardAction",
             "StandardActionConvertible",
-            "SwiftFlowInit"
+            "ReSwiftInit"
         ]
     }, {
         "name": "Reducers",
