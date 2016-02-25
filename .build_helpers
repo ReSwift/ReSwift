@@ -14,13 +14,13 @@ update_jazzy() {
   bundle install --gemfile="$DEST/Gemfile"
 }
 
-generate_docs_for_branch() {
-  GITHUB=$1
+generate_docs__org_name_branch() {
+  ORGANISATION=$1
+  NAME=$2
+  BRANCH=$3
+
+  GITHUB=https://github.com/$ORGANISATION/$NAME
   REPO="$GITHUB.git"
-  BRANCH=$2
-  URL=$3
-  NAME=$4
-  JAZZY=./vendor/jazzy/bin/jazzy
 
   if [ -d "$NAME" ]; then
     git -C "$NAME" pull origin "$BRANCH"
@@ -28,13 +28,7 @@ generate_docs_for_branch() {
     git clone --depth 1 --branch "$BRANCH" "$REPO" "$NAME"
   fi
 
-  $JAZZY \
-    --config .jazzy.json \
-    --clean \
-    --output "$BRANCH" \
-    --module-version "$BRANCH" \
-    --dash_url "$URL/$BRANCH/docsets/$NAME.xml" \
-    --root-url "$URL/$BRANCH/" \
-    --github-file-prefix "$GITHUB/tree/$BRANCH" \
-    --github_url "$GITHUB"
+  pushd "$NAME"
+  PATH=../vendor/jazzy/bin:$PATH OUTPUT_PATH="../$BRANCH" ./generate_docs.sh
+  popd
 }
