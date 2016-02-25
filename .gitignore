@@ -60,3 +60,6 @@ Carthage/Build
 fastlane/report.xml
 fastlane/screenshots
 Carthage
+
+# Generated documentation
+Docs/tmp

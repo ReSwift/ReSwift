@@ -1,0 +1,71 @@
+{
+    "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-OSX"],
+    "swift_version": "2.1.1",
+    "author_name": "ReSwift",
+    "author_url": "https://github.com/ReSwift/ReSwift",
+    "module_name": "ReSwift",
+    "readme_path": "Docs/tmp/compile/README.md",
+    "docset_platform": "reswift",
+    "assets_directory": "Docs/jazzy-theme/assets",
+    "template_directory": "Docs/jazzy-theme/templates",
+
+    "documentation_glob": "Docs/tmp/docs/*.md",
+    "abstract_glob": "Docs/tmp/api/*.md",
+
+    "custom_categories": [{
+        "name": "Documentation",
+        "children": [
+            "About ReSwift",
+            "Why ReSwift",
+            "Getting Started Guide",
+            "Installation",
+            "Testing",
+            "Demo",
+            "Extensions",
+            "Example Projects",
+            "Contributing",
+            "Changelog",
+            "Credits",
+            "Get in touch",
+            "License"
+        ]
+    }, {
+        "name": "Stores",
+        "children": [
+            "Store",
+            "StoreType",
+            "StoreSubscriber",
+            "AnyStoreSubscriber"
+        ]
+    }, {
+        "name": "State",
+        "children": [
+            "StateType"
+        ]
+    }, {
+        "name": "Actions",
+        "children": [
+            "Action",
+            "StandardAction",
+            "StandardActionConvertible",
+            "ReSwiftInit"
+        ]
+    }, {
+        "name": "Reducers",
+        "children": [
+            "Reducer",
+            "AnyReducer",
+            "CombinedReducer"
+        ]
+    }, {
+        "name": "Utilities",
+        "children": [
+            "Coding"
+        ]
+    }],
+
+    "string-replacements": {
+        "Docs/img": "img",
+        "http://reswift.github.io/ReSwift/master/getting-started-guide.html": "getting-started-guide.html"
+    }
+}
