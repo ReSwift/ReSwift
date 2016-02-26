@@ -1,0 +1,26 @@
+<header class='header'>
+  <p class='header-col header-col--primary'>
+    <a class='header-link' href='{{path_to_root}}index.html'>
+      {{module_name}} Docs
+    </a>
+    {{#doc_coverage}} ({{doc_coverage}}% documented){{/doc_coverage}}
+  </p>
+
+  {{#github_url}}
+    <p class='header-col header-col--secondary'>
+      <a class='header-link' href='{{github_url}}'>
+        <img class='header-icon' src='{{path_to_root}}img/gh.png'/>
+        View on GitHub
+      </a>
+    </p>
+  {{/github_url}}
+
+  {{#dash_url}}
+    <p class='header-col header-col--secondary'>
+      <a class='header-link' href='{{dash_url}}'>
+        <img class='header-icon' src='{{path_to_root}}img/dash.png'/>
+        Install in Dash
+      </a>
+    </p>
+  {{/dash_url}}
+</header>

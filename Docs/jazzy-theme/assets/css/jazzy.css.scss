@@ -1,0 +1,576 @@
+// ===========================================================================
+//
+//  Variables
+//
+// ===========================================================================
+
+$body_background: #fff;
+$body_font: 16px/1.7 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$text_color: #333;
+$gray_border: 1px solid #ddd;
+
+$heading_weight: 700;
+$light_heading_color: #777;
+
+$quote_color: #858585;
+$quote_border: 4px solid #e5e5e5;
+
+$link_color: #4183c4;
+
+$table_alt_row_color: #fbfbfb;
+$table_border_color: #ddd;
+
+$code_bg_color: #f7f7f7;
+$code_font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+
+// ----- Layout
+
+$gutter: 16px;
+$navigation_max_width: 300px;
+
+
+// ----- Header
+
+$header_bg_color: #444;
+$header_link_color: #fff;
+$doc_coverage_color: #999;
+
+
+// ----- Breadcrumbs
+
+$breadcrumbs_bg_color: #fbfbfb;
+$breadcrumbs_border_color: #ddd;
+
+
+// ----- Navigation
+
+$navigation_max_width: 300px;
+$navigation_bg_color: #fbfbfb;
+$navigation_border_color: #ddd;
+$navigation_title_color: #333;
+$navigation_task_color: #808080;
+
+// ----- Content
+
+$declaration_title_language_color: #4183c4;
+$declaration_language_border: 4px solid #cde9f4;
+$declaration_bg_color: #fff;
+$declaration_border_color: #ddd;
+
+$aside_color: #aaa;
+$aside_border: 4px solid lighten($aside_color, 20%);
+$aside_warning_color: #ff0000;
+$aside_warning_border: 4px solid lighten($aside_warning_color, 20%);
+
+// ----- Footer
+
+$footer_bg_color: #444;
+$footer_text_color: #ddd;
+$footer_link_color: #fff;
+
+// ----- Theme customisation
+
+$link_color: #CA3522;
+$doc_coverage_color: #ccc;
+$declaration_title_language_color: #CA3522;
+$declaration_language_border: 4px solid #CA3522;
+
+$footer_link_color: #FB9C44;
+$declaration_border: 4px solid $declaration_border_color;
+
+
+// ===========================================================================
+//
+//  Base
+//
+// ===========================================================================
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: $body_background;
+  color: $text_color;
+  font: $body_font;
+  letter-spacing: .2px;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+// ----- Block elements
+
+@mixin heading($font-size: 1rem, $margin: 1.275em 0 0.85em) {
+  font-size: $font-size;
+  font-weight: $heading_weight;
+  margin: $margin;
+}
+
+h1 {
+  @include heading(2rem, 1.275em 0 0.6em);
+}
+
+h2 {
+  @include heading(1.75rem, 1.275em 0 0.3em);
+}
+
+h3 {
+  @include heading(1.5rem, 1em 0 0.3em);
+}
+
+h4 {
+  @include heading(1.25rem);
+}
+
+h5 {
+  @include heading;
+}
+
+h6 {
+  @include heading;
+  color: $light_heading_color;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul, ol {
+  padding: 0 0 0 2em;
+  margin: 0 0 0.85em;
+}
+
+blockquote {
+  margin: 0 0 0.85em;
+  padding: 0 15px;
+  color: $quote_color;
+  border-left: $quote_border;
+}
+
+
+// ----- Inline elements
+
+svg, img {
+  max-width: 100%;
+}
+
+a {
+  color: $link_color;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    outline: 0;
+    text-decoration: underline;
+  }
+}
+
+
+// ----- Tables
+
+table {
+  background: $body_background;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow: auto;
+  margin: 0 0 0.85em;
+}
+
+tr {
+  &:nth-child(2n) {
+    background-color: $table_alt_row_color;
+  }
+}
+
+th, td {
+  padding: 6px 13px;
+  border: 1px solid $table_border_color;
+}
+
+
+// ----- Code
+
+pre {
+  margin: 0 0 1.275em;
+  padding: .85em 1em;
+  overflow: auto;
+  background: $code_bg_color;
+  font-size: .85em;
+  font-family: $code_font;
+}
+
+code {
+  font-family: $code_font;
+}
+
+p, li {
+  > code {
+    background: $code_bg_color;
+    padding: .2em;
+    &:before, &:after {
+      letter-spacing: -.2em;
+      content: "\00a0";
+    }
+  }
+}
+
+pre code {
+  padding: 0;
+  white-space: pre;
+}
+
+
+// ===========================================================================
+//
+//  Layout
+//
+// ===========================================================================
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+
+// ===========================================================================
+//
+//  Header
+//
+// ===========================================================================
+
+.header {
+  display: flex;
+  padding: $gutter/2;
+  font-size: 0.875em;
+  background: $header_bg_color;
+  color: $doc_coverage_color;
+}
+
+.header-col {
+  margin: 0;
+  padding: 0 $gutter/2
+}
+
+.header-col--primary {
+  flex: 1;
+}
+
+.header-link {
+  color: $header_link_color;
+}
+
+.header-icon {
+  padding-right: 6px;
+  vertical-align: -4px;
+  height: 16px;
+}
+
+
+
+// ===========================================================================
+//
+//  Breadcrumbs
+//
+// ===========================================================================
+
+.breadcrumbs {
+  font-size: 0.875em;
+  padding: $gutter / 2 $gutter;
+  margin: 0;
+  background: $breadcrumbs_bg_color;
+  border-bottom: 1px solid $breadcrumbs_border_color;
+}
+
+.carat {
+  height: 10px;
+  margin: 0 5px;
+}
+
+
+// ===========================================================================
+//
+//  Navigation
+//
+// ===========================================================================
+
+.navigation {
+  order: 2;
+
+  @media (min-width: 768px) {
+    order: 1;
+    width: 25%;
+    max-width: $navigation_max_width;
+    padding-bottom: $gutter*4;
+    overflow: hidden;
+    word-wrap: normal;
+    background: $navigation_bg_color;
+    border-right: 1px solid $navigation_border_color;
+  }
+}
+
+.nav-groups {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.nav-group-name {
+  border-bottom: 1px solid $navigation_border_color;
+  padding: $gutter/2 0 $gutter/2 $gutter;
+}
+
+.nav-group-name-link {
+  color: $navigation_title_color;
+}
+
+.nav-group-tasks {
+  margin: $gutter/2 0;
+  padding: 0 0 0 $gutter/2;
+}
+
+.nav-group-task {
+  font-size: 1em;
+  list-style-type: none;
+}
+
+.nav-group-task-link {
+  color: $navigation_task_color;
+}
+
+// ===========================================================================
+//
+//  Content
+//
+// ===========================================================================
+
+.main-content {
+  order: 1;
+  @media (min-width: 768px) {
+    order: 2;
+    flex: 1;
+    padding-bottom: 60px;
+  }
+}
+
+.section {
+  padding: 0 $gutter * 2;
+  border-bottom: 1px solid $navigation_border_color;
+}
+
+.section-content {
+  max-width: 834px;
+  margin: 0 auto;
+  padding: $gutter 0;
+}
+
+.section-name {
+  color: #666;
+  display: block;
+}
+
+.declaration .highlight {
+  overflow-x: initial; // This allows the scrollbar to show up inside declarations
+  padding: $gutter/2 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.task-group-section {
+  border-top: $gray_border;
+}
+
+.task-group {
+  padding-top: 0px;
+}
+
+.task-name-container {
+  a[name] {
+    &:before {
+      content: "";
+      display: block;
+    }
+  }
+}
+
+.item-container {
+  padding: 0;
+}
+
+.item {
+  padding-top: 8px;
+  width: 100%;
+  list-style-type: none;
+
+  a[name] {
+    &:before {
+      content: "";
+      display: block;
+    }
+  }
+
+  .token {
+    padding-left: 3px;
+    margin-left: 0px;
+    font-size: 1.1rem;
+  }
+
+  .declaration-note {
+    font-size: .85em;
+    color: #808080;
+    font-style: italic;
+  }
+}
+
+.item-heading {
+  padding: $gutter / 2 0;
+  border-bottom: 1px solid #eee;
+
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    left: -47px;
+    top: 50%;
+    margin-top: -10px;
+    border-right: 4px solid #999;
+    border-top: 4px solid #999;
+    transform: rotate(45deg);
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+}
+.item:hover .item-heading:before {
+  opacity: 1;
+}
+
+.pointer-container,
+.pointer {
+  display: none;
+}
+
+.height-container {
+  .section {
+    border: none;
+    margin: $gutter / 2 $gutter / 4 $gutter * 2;
+    padding: $gutter / 2 0;
+  }
+}
+
+.aside, .language {
+  padding: 6px 12px;
+  margin: 12px 0;
+  border-left: $aside_border;
+  overflow-y: hidden;
+  .aside-title {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding-bottom: 0;
+    margin: 0;
+    color: $aside_color;
+    -webkit-user-select: none;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.language {
+  border-left: $declaration_language_border;
+  .aside-title {
+    color: $declaration_title_language_color;
+  }
+}
+
+.aside-warning {
+  border-left: $aside_warning_border;
+  .aside-title {
+    color: $aside_warning_color;
+  }
+}
+
+.graybox {
+  border-collapse: collapse;
+  width: 100%;
+  p {
+    margin: 0;
+    word-break: break-word;
+    min-width: 50px;
+  }
+  td {
+    border: $gray_border;
+    padding: 5px 25px 5px 10px;
+    vertical-align: middle;
+  }
+  tr td:first-of-type {
+    text-align: right;
+    padding: 7px;
+    vertical-align: top;
+    word-break: normal;
+    width: 40px;
+  }
+}
+
+.slightly-smaller {
+  font-size: 0.9em;
+}
+
+.button {
+  border: 1px solid #CA3522;
+  display: inline-block;
+  padding: 2px 10px;
+  margin-right: 4px;
+  transition: all 0.3s;
+  &:hover, &:focus {
+    text-decoration: none;
+    border-color: #333;
+    color: #333;
+  }
+}
+
+
+// ===========================================================================
+//
+//  Footer
+//
+// ===========================================================================
+
+.footer {
+  padding: $gutter/2 $gutter;
+  background: $footer_bg_color;
+  color: $footer_text_color;
+  font-size: 0.8em;
+
+  p {
+    margin: $gutter/2 0;
+  }
+
+  a {
+    color: $footer_link_color;
+  }
+}
+
+
+// ===========================================================================
+//
+//  Dash
+//
+// ===========================================================================
+
+html.dash {
+
+  .header, .breadcrumbs, .navigation, .footer {
+    display: none;
+  }
+
+  .height-container {
+    display: block;
+  }
+}
