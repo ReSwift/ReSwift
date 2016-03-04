@@ -267,7 +267,7 @@ class DeInitStore<State: StateType>: Store<State> {
 class DispatchingReducer: Reducer {
     var store: Store<TestAppState>? = nil
 
-    func handleAction(action: Action, state: TestAppState?) -> TestAppState {
+    func handleAction(action: Action, state: TestAppState?) -> TestAppState? {
         expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:
             "SwiftFlow:IllegalDispatchFromReducer"))
         return state ?? TestAppState()
