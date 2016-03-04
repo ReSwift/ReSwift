@@ -52,7 +52,7 @@ class FilteredStoreSpec: QuickSpec {
                 expect(subscriber.receivedValue.1).to(equal("TestName"))
             }
             
-             it("supports reducers that acces sub state via protocols") {
+             it("supports reducers that access sub state via protocols") {
             
                 let reducer = CombinedReducer([ TestComplexAppStateReducer(),TestHasOtherStateReducer()]);
                 let store = Store(reducer: reducer, state: TestComplexAppState())
