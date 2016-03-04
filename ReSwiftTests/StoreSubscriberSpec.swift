@@ -37,7 +37,7 @@ class FilteredStoreSpec: QuickSpec {
                 let subscriber = TestSelectiveSubscriber()
 
                 store.subscribe(subscriber) {
-                    (
+                   (
                         $0.testValue,
                         $0.otherState?.name
                     )
@@ -50,6 +50,40 @@ class FilteredStoreSpec: QuickSpec {
 
                 expect(subscriber.receivedValue.0).to(equal(5))
                 expect(subscriber.receivedValue.1).to(equal("TestName"))
+            }
+            
+             it("supports reducers that acces sub state via protocols") {
+            
+                let reducer = CombinedReducer([ TestComplexAppStateReducer(),TestHasOtherStateReducer()]);
+                let store = Store(reducer: reducer, state: TestComplexAppState())
+                let subscriber1 = TestSelectiveSubscriber()
+                let subscriber2 = TestOtherStateSubscriber()
+                store.subscribe(subscriber1) {
+                    (
+                        $0.testValue,
+                        $0.otherState?.name
+                    )
+                }
+                 store.subscribe(subscriber2) {
+                    (
+                        
+                        $0.otherState
+                    )
+                }
+
+                store.dispatch(SetValueAction(5))
+                store.dispatch(SetOtherStateAction(
+                    otherState: OtherState(name: "TestName", age: 99)
+                ))
+
+                expect(subscriber1.receivedValue.0).to(equal(5))
+                expect(subscriber1.receivedValue.1).to(equal("TestName"))
+                
+                store.dispatch(SetOtherStateAgeAction(age: 10))
+                store.dispatch(SetOtherStateNameAction(name: "Bloop"));
+
+                expect(subscriber2.receivedValue?.age).to(equal(10))
+                expect(subscriber2.receivedValue?.name).to(equal("Bloop"))
             }
         }
 
@@ -77,10 +111,8 @@ class TestSelectiveSubscriber: StoreSubscriber {
         receivedValue = state
     }
 }
-
-struct TestComplexAppState: StateType {
-    var testValue: Int?
-    var otherState: OtherState?
+protocol HasOtherState {
+    var otherState:OtherState? {get set}
 }
 
 struct OtherState {
@@ -88,8 +120,14 @@ struct OtherState {
     var age: Int?
 }
 
+struct TestComplexAppState: StateType,HasOtherState {
+    var testValue: Int?
+    var otherState: OtherState?
+}
+
+
 struct TestComplexAppStateReducer: Reducer {
-    func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState {
+    func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState? {
         var state = state ?? TestComplexAppState()
 
         switch action {
@@ -109,3 +147,48 @@ struct TestComplexAppStateReducer: Reducer {
 struct SetOtherStateAction: Action {
     var otherState: OtherState
 }
+
+/*
+Test reducers that access substates through Has<SomeState> protocol
+*/
+class TestOtherStateSubscriber: StoreSubscriber {
+    var receivedValue: OtherState?
+
+    func newState(state: OtherState?) {
+        receivedValue = state
+    }
+}
+
+
+struct TestHasOtherStateReducer: Reducer {
+    func handleAction(action: Action, state: HasOtherState?) -> HasOtherState? {
+      
+        if var state=state{
+            var otherState = state.otherState ?? OtherState();
+
+            switch action {
+            case let action as SetOtherStateNameAction:
+                otherState.name = action.name
+                break
+            case let action as SetOtherStateAgeAction:
+                otherState.age = action.age
+                 break
+            default:
+                break
+            }
+            state.otherState=otherState;
+            return state;
+        }
+        return state;
+       
+    }
+}
+
+struct SetOtherStateNameAction: Action {
+    var name: String
+}
+
+struct SetOtherStateAgeAction: Action {
+    var age: Int
+}
+
