@@ -37,7 +37,7 @@ class FilteredStoreSpec: QuickSpec {
                 let subscriber = TestSelectiveSubscriber()
 
                 store.subscribe(subscriber) {
-                   (
+                    (
                         $0.testValue,
                         $0.otherState?.name
                     )
@@ -51,10 +51,10 @@ class FilteredStoreSpec: QuickSpec {
                 expect(subscriber.receivedValue.0).to(equal(5))
                 expect(subscriber.receivedValue.1).to(equal("TestName"))
             }
-            
-             it("supports reducers that access sub state via protocols") {
-            
-                let reducer = CombinedReducer([ TestComplexAppStateReducer(),TestHasOtherStateReducer()]);
+
+            it("supports reducers that access sub state via protocols") {
+
+                let reducer = CombinedReducer([TestComplexAppStateReducer(), TestHasOtherStateReducer()])
                 let store = Store(reducer: reducer, state: TestComplexAppState())
                 let subscriber1 = TestSelectiveSubscriber()
                 let subscriber2 = TestOtherStateSubscriber()
@@ -64,9 +64,8 @@ class FilteredStoreSpec: QuickSpec {
                         $0.otherState?.name
                     )
                 }
-                 store.subscribe(subscriber2) {
+                store.subscribe(subscriber2) {
                     (
-                        
                         $0.otherState
                     )
                 }
@@ -78,17 +77,15 @@ class FilteredStoreSpec: QuickSpec {
 
                 expect(subscriber1.receivedValue.0).to(equal(5))
                 expect(subscriber1.receivedValue.1).to(equal("TestName"))
-                
+
                 store.dispatch(SetOtherStateAgeAction(age: 10))
-                store.dispatch(SetOtherStateNameAction(name: "Bloop"));
+                store.dispatch(SetOtherStateNameAction(name: "Bloop"))
 
                 expect(subscriber2.receivedValue?.age).to(equal(10))
                 expect(subscriber2.receivedValue?.name).to(equal("Bloop"))
             }
         }
-
     }
-
 }
 
 class TestFilteredSubscriber: StoreSubscriber {
@@ -97,7 +94,6 @@ class TestFilteredSubscriber: StoreSubscriber {
     func newState(state: Int?) {
         receivedValue = state
     }
-
 }
 
 /**
@@ -111,8 +107,9 @@ class TestSelectiveSubscriber: StoreSubscriber {
         receivedValue = state
     }
 }
+
 protocol HasOtherState {
-    var otherState:OtherState? {get set}
+    var otherState: OtherState? { get set }
 }
 
 struct OtherState {
@@ -120,11 +117,10 @@ struct OtherState {
     var age: Int?
 }
 
-struct TestComplexAppState: StateType,HasOtherState {
+struct TestComplexAppState: StateType, HasOtherState {
     var testValue: Int?
     var otherState: OtherState?
 }
-
 
 struct TestComplexAppStateReducer: Reducer {
     func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState? {
@@ -149,8 +145,8 @@ struct SetOtherStateAction: Action {
 }
 
 /*
-Test reducers that access substates through Has<SomeState> protocol
-*/
+ Test reducers that access substates through Has<SomeState> protocol
+ */
 class TestOtherStateSubscriber: StoreSubscriber {
     var receivedValue: OtherState?
 
@@ -159,12 +155,11 @@ class TestOtherStateSubscriber: StoreSubscriber {
     }
 }
 
-
 struct TestHasOtherStateReducer: Reducer {
     func handleAction(action: Action, state: HasOtherState?) -> HasOtherState? {
-      
-        if var state=state{
-            var otherState = state.otherState ?? OtherState();
+
+        if var state = state {
+            var otherState = state.otherState ?? OtherState()
 
             switch action {
             case let action as SetOtherStateNameAction:
@@ -172,15 +167,14 @@ struct TestHasOtherStateReducer: Reducer {
                 break
             case let action as SetOtherStateAgeAction:
                 otherState.age = action.age
-                 break
+                break
             default:
                 break
             }
-            state.otherState=otherState;
-            return state;
+            state.otherState = otherState
+            return state
         }
-        return state;
-       
+        return state
     }
 }
 
@@ -191,4 +185,3 @@ struct SetOtherStateNameAction: Action {
 struct SetOtherStateAgeAction: Action {
     var age: Int
 }
-
