@@ -160,7 +160,7 @@ And run `pod install`.
 
 ## Carthage
 
-You can install ReSwift via [Carthage]() by adding the following line to your Cartfile:
+You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by adding the following line to your Cartfile:
 
     github "ReSwift/ReSwift"
 
