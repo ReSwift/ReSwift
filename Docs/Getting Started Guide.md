@@ -140,7 +140,7 @@ Most of your `StoreSubscriber`s will be in the view layer and update their repre
 
 Ideally most of our subscribers should only be interested in a very small portion of the overall app state. `ReSwift` provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here's an example of subscribing, filtering and unsubscribing as used within a view controller:
 
-```
+```swift
 override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
@@ -175,15 +175,74 @@ When subscribing within a ViewController you will typically update the view from
 
 ##Asynchronous Operations
 
-In order to handle state updates from asynchronous operations, such as network requests, `ReSwift` provides `ActionCreator` methods. 
+Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to `ReSwift` state update:
+
+```swift
+func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
+    guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
+
+    Octokit(configuration).repositories { response in
+        dispatch_async(dispatch_get_main_queue()) {
+            store.dispatch(SetRepostories(repositories: response))
+        }
+    }
+
+    return nil
+}
+```
+
+In this example we're using the `Octokit` library to perform a network request that fetches a users repositories. Within the callback block of the method we dispatch a state update that injects the received repositories into the app state. This will trigger all receivers to be informed about the new state.
+
+Note that the callback block from the network request arrives on a background thread, therefore we're using `dispatch_async(dispatch_get_main_queue())` to perform the state update on the main thread. `ReSwift` will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but `ReSwift` does not enforce this recommendation.
+
+In many cases your asynchronous tasks will consist of two separate steps:
+
+1. Update UI to show a loading indicator
+2. Refresh the UI once data arrived
+
+You can extend the example above, by dispatching a separate action, as soon as the network request starts. The goal of that action is to trigger the UI to update & show a loading indicator.
+
+```swift
+func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
+    guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
+
+    Octokit(configuration).repositories { response in
+    	store.dispatch(SetRepositories(repositories: .Loading))
+    
+        dispatch_async(dispatch_get_main_queue()) {
+            store.dispatch(SetRepostories(repositories: `.Repositories(response)))
+        }
+    }
+
+    return nil
+}
+```
+
+In the example above, we're using an `enum` to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.
+
+##Action Creators
+
+An important aspect of adopting `ReSwift` is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering `Action`s upon user interactions.
+
+The triggering of actions should always be as simple as possible, we want to avoid any sort of complicated business logic in the view. However, in some cases it can be complicated to decide whether an action should be dispatched or not. Instead of checking the necessary state directly in the view or view controller, you can use `ActionCreator`s to perform a conditional dispatch.
+
+Just like an `Action` a `ActionCreator` function can be dispatched to the store. An `ActionCreator` takes the current application state, and a reference to a store and might or might not return an `Action`.
 
 An `ActionCreator` has the following type signature:
 ```swift
 typealias ActionCreator = (state: State, store: StoreType) -> Action?
 ```
-An `ActionCreator` takes the current application state, and a reference to a store and might or might not return an `Action`. Just like `Action`s, `ActionCreator`s can be dispatched to the `Store`.
 
-We use `ActionCreator` in cases where the dispatching code does not now wether or not an action.
+A very simple example of an `ActionCreator` might be:
+```swift
+func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Action? {
+	if state.testValue < 5 {
+		return SetValueAction(state.testValue! * 2)
+	} else {
+		return nil
+	}
+}
+```
 
 ## Middleware
 
