@@ -11,9 +11,11 @@ ReSwift is a [Redux](https://github.com/rackt/redux)-like implementation of the 
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
 - [Testing](#testing)
+- [Checking Out Source Code](#checking-out-source-code)
 - [Demo](#demo)
 - [Extensions](#extensions)
 - [Example Projects](#example-projects)
+- [Contributing](#contributing)
 - [Credits](#credits)
 - [Get in touch](#get-in-touch)
 
@@ -129,7 +131,7 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 
 # Getting Started Guide
 
-[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles I recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
+[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
 
 # Installation
 
@@ -152,7 +154,7 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 
     github "ReSwift/ReSwift"
 
-# Checking out Source Code and Running Tests
+# Checking out Source Code
 
 Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OSX & iOS only. After checkout, run the following from the terminal:
 
