@@ -2,7 +2,17 @@
 
 [![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md)
 
-ReSwift is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift. It embraces a unidirectional data flow that only allows state mutations through declarative actions.
+ReSwift is a [Redux](https://github.com/rackt/redux)-like implementation of the unidirectional data flow architecture in Swift. ReSwift helps you to separate three important concerns of your app's components:
+
+- **State**: in a ReSwift app the entire app state is explicitly stored in a data structure. This helps avoid complicated state management code, enables better debugging and has many, many more benefits...
+- **Views**: in a ReSwift app your views update when your state changes. Your views become simple visualizations of the current app state.
+- **State Changes**: in a ReSwift app you can only perform state changes through actions. Actions are small pieces of data that describe a state change. By drastically limiting the way state can be mutated, your app becomes easier to understand and it gets easier to work with many collaborators.
+
+The ReSwift library is tiny allowing users to dive into the code, understand every single line and [hopefully contribute](#contributing). 
+
+ReSwift is quickly growing beyond the core library, providing experimental extensions for routing and time traveling through past app states!
+
+Excited? So are we 🎉
 
 # Table of Contents
 
@@ -156,7 +166,9 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 
 # Checking out Source Code
 
-Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OSX & iOS only. After checkout, run the following from the terminal:
+After cloning this repository you need to use carthage to install testing frameworks that ReSwift depends on.
+
+Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OS X & iOS only. After checkout, run the following from the terminal:
 
 ```bash
 carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
