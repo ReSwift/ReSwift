@@ -15,7 +15,7 @@ The state struct should store your entire application state, that includes the U
 Here's an example of a state struct as defined in the [Counter Example](https://github.com/ReSwift/CounterExample):
 
 ```swift
-struct AppState: StateType, HasNavigationState {
+struct AppState: StateType {
     var counter: Int = 0
     var navigationState = NavigationState()
 }
@@ -23,55 +23,12 @@ struct AppState: StateType, HasNavigationState {
 
 There are multiple things to note:
 
-1. Your app state struct needs to conform to the `StateType` protocol, currently this is just a marker protocol, but we will likely add requirements (such as the ability to [serialize the state](https://github.com/ReSwift/ReSwift/issues/3)) before v1.0.
-2. If you are including `SwiftRouter` in your project, your app state needs to conform to the `HasNavigationState` protocol. This means you need to add a property called `navigationState` to your state struct. This is the sub-state the router will use to store the current route.
-
-## Viewing the State Through a Protocol
-
-Protocols are extremely useful for working with this library. As you can see in the example above, `SwiftRouter` can work with any app state that you define, as long as it conforms to the `HasNavigationState` protocol. The router will only ever access your app state through this protocol - this also means it won't ever see and depend upon any other state that you store within your state struct.
-
-**You should use this approach as much as possible in your app.** ReSwift provides some features that make this approach even easier to use. Let's say you want to expand the state above by a simple authentication state. You would do this by first defining a new struct for this sub-state:
-
-```swift
-struct AuthenticationState {
-    var userAuthenticated = false
-}
-```
-
-*Additionally,* you would define a protocol that requires your app state to include the `AuthenticationState`:
-
-```swift
-protocol HasAuthenticationState {
-    var authenticationState: AuthenticationState
-}
-```
-Now you can extend your state using this protocol:
-
-```swift
-struct AppState: StateType, HasNavigationState, HasAuthenticationState {
-    var counter: Int = 0
-    var navigationState = NavigationState()
-    var authenticationState = AuthenticationState()
-}
-```
-
-If you now add a view (or any other subscriber) that is only interested in this particular substate, you should express this within your `newState` method (that is the callback for all subscribers in ReSwift).
-
-You would implement the `newState` method as following:
-
-```swift
-    func newState(state: HasAuthenicationState) {
-        loggedInLabel.text = "\(state.authenticationState.userAuthenticated)"
-    }
-```
-ReSwift will infer the type that you have required and will automatically cast your app state to that type - this means the particular subscriber will only see the required substate, not any other state in your app. **This approach will help you reduce dependencies on state that should be irrelevant to your component**.
-
-Currently your method is not called if the state cannot be casted into the required type - [we're considering changing this into a `fatalError` as it will make debugging easier](https://github.com/ReSwift/ReSwift/issues/4).
+1. Your app state struct needs to conform to the `StateType` protocol, currently this is just a marker protocol.
+2. If you are including `ReSwiftRouter` in your project, your app state needs to contain a property of type `NavigationState`. This is the sub-state the router will use to store the current route.
 
 ## Derived State
 
 Note that you don't need to store derived state inside of your app state. E.g. instead of storing a `UIImage` you should store a image URL that can be used to fetch the image from a cache or via a download. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived.
-
 
 # Actions
 
@@ -79,7 +36,7 @@ Actions are used to express intended state changes. Actions don't contain functi
 
 In your ReSwift app you will define actions for every possible state change that can happen.
 
-Reducers handle these actions and implement state changes based on the information they provide.
+Reducers handle these actions and implement state changes based on the information the actions provide.
 
 All actions in ReSwift conform to the `Action` protocol, which currently is just a marker protocol.
 
@@ -117,44 +74,55 @@ Once ReSwift Recorder's implementation is further along, you will find detailed 
 
 # Reducers
 
-This is the only place where you should modify application state! Reducers, just as `StoreSubscribers` can define the particular slice of the app state that they are interested in by changing the type in their `handleAction` method. Here's an example of a part of a reducer in an app built with ReSwift:
+Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.
+
+You can do this implementing a top-level reducer that conforms to the `Reducer` protocol. This reducer will then call individual functions for each different part of the app state.
+
+Here's an example in which we construct a new state, by calling sub-reducers with different sub-states:
 
 ```swift
-struct DataMutationReducer: Reducer {
+struct AppReducer: Reducer {
 
-    func handleAction(state: HasDataState, action: Action) -> HasDataState {
-        switch action {
-        case let action as CreateContactWithEmail:
-            return createContact(state, email: action.email)
-        case let action as CreateContactWithTwitterUser:
-            return createContact(state, twitterUser: action.twitterUser)
-        case let action as DeleteContact:
-            return deleteContact(state, identifier: action.contactID)
-        case let action as SetContacts:
-            return setContacts(state, contacts: action.contacts)
-        default:
-            return state
-        }
+    func handleAction(action: Action, state: State?) -> State {
+        return State(
+            navigationState: NavigationReducer.handleAction(action, state: state?.navigationState),
+            authenticationState: authenticationReducer(state?.authenticationState, action: action),
+            repositories: repositoriesReducer(state?.repositories, action: action),
+            bookmarks: bookmarksReducer(state?.bookmarks, action: action)
+        )
     }
 
-    func createContact(var state: HasDataState, email: String) -> HasDataState {
-        let newContactID = state.dataState.contacts.count + 1
-        let newContact = Contact(identifier: newContactID, emailAddress: email)
-        state.dataState.contacts.append(newContact)
-
-        return state
-    }
-
-    func createContact(var state: HasDataState, twitterUser: TwitterUser) -> HasDataState {
-        let newContactID = state.dataState.contacts.count + 1
-        let newContact = Contact(identifier: newContactID, twitterHandle: twitterUser.username)
-        state.dataState.contacts.append(newContact)
-
-        return state
-    }
+}
 ```
+The `Reducer` protocol has a single method that takes an `Action` and an `State?` and returns a `State`. Typically reducers will be responsible for initializing the application state. When they receive `nil` as the current state, they should return the initial default value for their portion of the state. In the example above the `AppReducer` delegates all calls to other reducer functions. E.g. the `authenticationReducer` is responsible for providing the `authenticationState`.
 
-You typically switch over the types in `handleAction`, then call a method that implements the actual state mutation.
+Here's what the `authenticationReducer` function that is called from the `AppReducer` looks like:
+
+```swift
+func authenticationReducer(state: AuthenticationState?, action: Action) -> AuthenticationState {
+    var state = state ?? initialAuthenticationState()
+
+    switch action {
+    case _ as SwiftFlowInit:
+        break
+    case let action as SetOAuthURL:
+        state.oAuthURL = action.oAuthUrl
+    case let action as UpdateLoggedInState:
+        state.loggedInState = action.loggedInState
+    default:
+        break
+    }
+
+    return state
+}
+```
+You can see that the `authenticationReducer` function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the method in the `Reducer` protocol (current state and action in, new state out).
+
+This sub-reducer first checks if the state provided is `nil`. If that's the case, it sets the state to the initial default state. Next, the reducer switches over the provided `action` and checks its type. Depending on the type of action, this reducer will updated the state differently. This specific reducer is very simple, each action only triggers a single property of the state to update.
+
+Once the state update is complete, the reducer function returns the new state.
+
+After the `AppReducer` has called all of the sub-reducer functions, we have a new application state. `ReSwift` will take care of publishing this new state to all subscribers.
 
 # Store Subscribers
 
@@ -168,7 +136,115 @@ protocol StoreSubscriber {
 
 Most of your `StoreSubscriber`s will be in the view layer and update their representation whenever they receive a new state.
 
-# Middleware
+## Example With Filtered Subscriptions
+
+Ideally most of our subscribers should only be interested in a very small portion of the overall app state. `ReSwift` provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here's an example of subscribing, filtering and unsubscribing as used within a view controller:
+
+```swift
+override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+	// subscribe when VC appears
+   	// we are only interested in repository substate, filter it out of the overall state
+    store.subscribe(self) { state in
+        state.repositories
+    }
+}
+
+override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    // unsubscribe when VC disappears
+    store.unsubscribe(self)
+}
+
+// The `state` argument needs to match the selected substate
+func newState(state: Response<[Repository]>?) {
+    if case let .Success(repositories) = state {
+        dataSource?.array = repositories
+        tableView.reloadData()
+    }
+}
+```
+In the example above we only select a single property from the overall application state: a network `Response` with a list of repositories.
+
+When selecting a substate as part of calling the `subscribe` method, you need to make sure that the argument of the `newState` method has the same type as whatever you return from the state subselection in the `subscribe` method.
+
+When subscribing within a ViewController you will typically update the view from within the `newState` method.
+
+#Beyond the Basics
+
+##Asynchronous Operations
+
+Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to `ReSwift` state update:
+
+```swift
+func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
+    guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
+
+    Octokit(configuration).repositories { response in
+        dispatch_async(dispatch_get_main_queue()) {
+            store.dispatch(SetRepostories(repositories: response))
+        }
+    }
+
+    return nil
+}
+```
+
+In this example we're using the `Octokit` library to perform a network request that fetches a users repositories. Within the callback block of the method we dispatch a state update that injects the received repositories into the app state. This will trigger all receivers to be informed about the new state.
+
+Note that the callback block from the network request arrives on a background thread, therefore we're using `dispatch_async(dispatch_get_main_queue())` to perform the state update on the main thread. `ReSwift` will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but `ReSwift` does not enforce this recommendation.
+
+In many cases your asynchronous tasks will consist of two separate steps:
+
+1. Update UI to show a loading indicator
+2. Refresh the UI once data arrived
+
+You can extend the example above, by dispatching a separate action, as soon as the network request starts. The goal of that action is to trigger the UI to update & show a loading indicator.
+
+```swift
+func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
+    guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
+
+    Octokit(configuration).repositories { response in
+    	store.dispatch(SetRepositories(repositories: .Loading))
+    
+        dispatch_async(dispatch_get_main_queue()) {
+            store.dispatch(SetRepostories(repositories: `.Repositories(response)))
+        }
+    }
+
+    return nil
+}
+```
+
+In the example above, we're using an `enum` to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.
+
+##Action Creators
+
+An important aspect of adopting `ReSwift` is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering `Action`s upon user interactions.
+
+The triggering of actions should always be as simple as possible, we want to avoid any sort of complicated business logic in the view. However, in some cases it can be complicated to decide whether an action should be dispatched or not. Instead of checking the necessary state directly in the view or view controller, you can use `ActionCreator`s to perform a conditional dispatch.
+
+Just like an `Action` a `ActionCreator` function can be dispatched to the store. An `ActionCreator` takes the current application state, and a reference to a store and might or might not return an `Action`.
+
+An `ActionCreator` has the following type signature:
+```swift
+typealias ActionCreator = (state: State, store: StoreType) -> Action?
+```
+
+A very simple example of an `ActionCreator` might be:
+```swift
+func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Action? {
+	if state.testValue < 5 {
+		return SetValueAction(state.testValue! * 2)
+	} else {
+		return nil
+	}
+}
+```
+
+## Middleware
 
 ReSwift supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
 
