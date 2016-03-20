@@ -19,14 +19,14 @@
             "Why ReSwift",
             "Getting Started Guide",
             "Installation",
-            "Testing",
+            "Checking out Source Code",
             "Demo",
             "Extensions",
             "Example Projects",
             "Contributing",
-            "Changelog",
             "Credits",
             "Get in touch",
+            "Changelog",
             "License"
         ]
     }, {
@@ -66,6 +66,7 @@
 
     "string-replacements": {
         "Docs/img": "img",
-        "http://reswift.github.io/ReSwift/master/getting-started-guide.html": "getting-started-guide.html"
+        "http://reswift.github.io/ReSwift/master/getting-started-guide.html": "getting-started-guide.html",
+        "#contributing": "contributing.html"
     }
 }
