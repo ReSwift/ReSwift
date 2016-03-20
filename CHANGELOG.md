@@ -1,10 +1,18 @@
 #Upcoming Release
 
+#1.0.0
+
+*Released: 03/19/2015*
+
+**API Changes:**
+- Remove callback arguments on synchronous dispatch methods - @Ben-G
+
 **Other:**
 
-- Move all documentation source into `Docs`, except `Readme`, `Changelog` and `License`.
-- Replace duplicated documentation with an enhanced `generate_docs.sh` build script.
+- Move all documentation source into `Docs`, except `Readme`, `Changelog` and `License` - @agentk
+- Replace duplicated documentation with an enhanced `generate_docs.sh` build script - @agentk
 - Set CocoaPods documentation URL - (#56) @agentk
+- Update documentation for 1.0 release - @Ben-G
 
 #0.2.5
 
