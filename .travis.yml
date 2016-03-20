@@ -24,16 +24,7 @@ env:
     - TVOS_SDK=appletvsimulator9.1
     - WATCHOS_SDK=watchsimulator2.1
   matrix:
-    - DESTINATION="arch=x86_64"                    SCHEME="OSX"     SDK="$OSX_SDK"     ACTION="test"
     - DESTINATION="OS=9.2,name=iPhone 6S Plus"     SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=9.1,name=Apple TV 1080p"     SCHEME="tvOS"    SDK="$TVOS_SDK"    ACTION="build"
-    - DESTINATION="OS=2.1,name=Apple Watch - 38mm" SCHEME="watchOS" SDK="$WATCHOS_SDK" ACTION="build"
-    - DESTINATION="OS=9.1,name=iPhone 6S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=9.0,name=iPhone 6 Plus"      SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=8.4,name=iPhone 6"           SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=8.3,name=iPhone 5S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=8.2,name=iPhone 5"           SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
-    - DESTINATION="OS=8.1,name=iPhone 4S"          SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
 
 script:
   - set -o pipefail
@@ -45,14 +36,14 @@ script:
     -sdk "$SDK"
     -destination "$DESTINATION"
     -configuration Debug
-    ONLY_ACTIVE_ARCH=NO
+    ONLY_ACTIVE_ARCH=YES
     GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
     GCC_GENERATE_TEST_COVERAGE_FILES=YES
     "$ACTION"
     | xcpretty -c
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -J ReSwift
 
 before_deploy:
   - carthage build --no-skip-current
