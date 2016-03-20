@@ -1,6 +1,6 @@
 //
 //  MainStore.swift
-//  SwiftFlow
+//  ReSwift
 //
 //  Created by Benjamin Encz on 11/11/15.
 //  Copyright © 2015 DigiTales. All rights reserved.
@@ -112,37 +112,33 @@ public class Store<State: StateType>: StoreType {
     }
 
     public func dispatch(action: Action) -> Any {
-        return dispatch(action, callback: nil)
+        let returnValue = dispatchFunction(action)
+
+        return returnValue
     }
 
     public func dispatch(actionCreatorProvider: ActionCreator) -> Any {
-        return dispatch(actionCreatorProvider, callback: nil)
+        let action = actionCreatorProvider(state: state, store: self)
+
+        if let action = action {
+            dispatch(action)
+        }
+
+        return action
     }
 
     public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(action: Action, callback: DispatchCallback?) -> Any {
-        let returnValue = dispatchFunction(action)
-        callback?(state)
-
-        return returnValue
-    }
-
-    public func dispatch(actionCreatorProvider: ActionCreator, callback: DispatchCallback?) -> Any {
-        let action = actionCreatorProvider(state: state, store: self)
-
-        if let action = action {
-            dispatch(action, callback: callback)
-        }
-
-        return action
-    }
-
     public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
         actionCreatorProvider(state: state, store: self) { actionProvider in
-            self.dispatch(actionProvider, callback: callback)
+            let action = actionProvider(state: self.state, store: self)
+
+            if let action = action {
+                self.dispatch(action)
+                callback?(self.state)
+            }
         }
     }
 

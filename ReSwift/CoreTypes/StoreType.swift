@@ -1,6 +1,6 @@
 //
 //  Store.swift
-//  SwiftFlow
+//  ReSwift
 //
 //  Created by Benjamin Encz on 11/28/15.
 //  Copyright © 2015 DigiTales. All rights reserved.
@@ -79,14 +79,14 @@ public protocol StoreType {
 
      ```
      func deleteNote(noteID: Int) -> ActionCreator {
-     return { state, store in
-     // only delete note if editing is enabled
-     if (state.editingEnabled == true) {
-     return NoteDataAction.DeleteNote(noteID)
-     } else {
-     return nil
-     }
-     }
+        return { state, store in
+            // only delete note if editing is enabled
+            if (state.editingEnabled == true) {
+                return NoteDataAction.DeleteNote(noteID)
+            } else {
+                return nil
+            }
+        }
      }
      ```
 
@@ -106,65 +106,6 @@ public protocol StoreType {
      action creator asynchronously.
      */
     func dispatch(asyncActionCreator: AsyncActionCreator)
-
-    /**
-     Dispatches an action and calls the callback as soon as the action has been processed.
-     You will receive the updated store state as part of this callback.
-
-     Example of dispatching an action and implementing a callback:
-
-     ```
-     store.dispatch( CounterAction.IncreaseCounter ) { state in
-     print("New state: \(state)")
-     }
-     ```
-
-     - parameter action: The action that is being dispatched to the store
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
-     */
-    func dispatch(action: Action, callback: DispatchCallback?) -> Any
-
-    /**
-     Dispatches an action creator to the store. Action creators are functions that generate
-     actions. They are called by the store and receive the current state of the application
-     and a reference to the store as their input.
-
-     Based on that input the action creator can either return an action or not. Alternatively
-     the action creator can also perform an asynchronous operation and dispatch a new action
-     at the end of it.
-
-     Example of an action creator:
-
-     ```
-     func deleteNote(noteID: Int) -> ActionCreator {
-     return { state, store in
-     // only delete note if editing is enabled
-     if (state.editingEnabled == true) {
-     return NoteDataAction.DeleteNote(noteID)
-     } else {
-     return nil
-     }
-     }
-     }
-     ```
-
-     This action creator can then be dispatched as following:
-
-     ```
-     store.dispatch( noteActionCreatore.deleteNote(3) )
-     ```
-
-     This overloaded version of `dispatch` will call the provided `callback` as soon as a new
-     state has been calculated based on the dispatch action.
-
-     - Note: If the ActionCreator does not dispatch an action, the callback block will never
-     be called
-
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
-     */
-    func dispatch(actionCreator: ActionCreator, callback: DispatchCallback?) -> Any
 
     /**
      Dispatches an async action creator to the store. An async action creator generates an
@@ -197,14 +138,14 @@ public protocol StoreType {
 
      ```
      func deleteNote(noteID: Int) -> ActionCreator {
-     return { state, store in
-     // only delete note if editing is enabled
-     if (state.editingEnabled == true) {
-     return NoteDataAction.DeleteNote(noteID)
-     } else {
-     return nil
-     }
-     }
+        return { state, store in
+            // only delete note if editing is enabled
+            if (state.editingEnabled == true) {
+                return NoteDataAction.DeleteNote(noteID)
+            } else {
+                return nil
+            }
+        }
      }
      ```
 
