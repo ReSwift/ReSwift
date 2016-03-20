@@ -176,6 +176,9 @@ pre code {
 .nav-group-task-link {
   color: #808080; }
 
+.current-page {
+  color: #CA3522; }
+
 .main-content {
   order: 1; }
   @media (min-width: 768px) {

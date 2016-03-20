@@ -62,7 +62,7 @@
                 <a class='nav-group-task-link' href='installation.html'>Installation</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='testing.html'>Testing</a>
+                <a class='nav-group-task-link' href='checking-out-source-code.html'>Checking out Source Code</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='demo.html'>Demo</a>
@@ -77,13 +77,13 @@
                 <a class='nav-group-task-link' href='contributing.html'>Contributing</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='changelog.html'>Changelog</a>
-              </li>
-              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='credits.html'>Credits</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='get-in-touch.html'>Get in touch</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='changelog.html'>Changelog</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='license.html'>License</a>
@@ -175,7 +175,7 @@
 <p>The state struct should store your entire application state, that includes the UI state, the navigation state and the state of your model layer.</p>
 
 <p>Here&rsquo;s an example of a state struct as defined in the <a href="https://github.com/ReSwift/CounterExample">Counter Example</a>:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">,</span> <span class="kt">HasNavigationState</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">var</span> <span class="nv">navigationState</span> <span class="o">=</span> <span class="kt">NavigationState</span><span class="p">()</span>
 <span class="p">}</span>
@@ -184,44 +184,9 @@
 <p>There are multiple things to note:</p>
 
 <ol>
-<li>Your app state struct needs to conform to the <code>StateType</code> protocol, currently this is just a marker protocol, but we will likely add requirements (such as the ability to <a href="https://github.com/ReSwift/ReSwift/issues/3">serialize the state</a>) before v1.0.</li>
-<li>If you are including <code>SwiftRouter</code> in your project, your app state needs to conform to the <code>HasNavigationState</code> protocol. This means you need to add a property called <code>navigationState</code> to your state struct. This is the sub-state the router will use to store the current route.</li>
+<li>Your app state struct needs to conform to the <code>StateType</code> protocol, currently this is just a marker protocol.</li>
+<li>If you are including <code>ReSwiftRouter</code> in your project, your app state needs to contain a property of type <code>NavigationState</code>. This is the sub-state the router will use to store the current route.</li>
 </ol>
-<a href='#viewing_the_state_through_a_protocol' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='viewing_the_state_through_a_protocol'>Viewing the State Through a Protocol</h2>
-
-<p>Protocols are extremely useful for working with this library. As you can see in the example above, <code>SwiftRouter</code> can work with any app state that you define, as long as it conforms to the <code>HasNavigationState</code> protocol. The router will only ever access your app state through this protocol - this also means it won&rsquo;t ever see and depend upon any other state that you store within your state struct.</p>
-
-<p><strong>You should use this approach as much as possible in your app.</strong> ReSwift provides some features that make this approach even easier to use. Let&rsquo;s say you want to expand the state above by a simple authentication state. You would do this by first defining a new struct for this sub-state:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AuthenticationState</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">userAuthenticated</span> <span class="o">=</span> <span class="kc">false</span>
-<span class="p">}</span>
-</code></pre>
-
-<p><em>Additionally,</em> you would define a protocol that requires your app state to include the <code>AuthenticationState</code>:</p>
-<pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">HasAuthenticationState</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">authenticationState</span><span class="p">:</span> <span class="kt">AuthenticationState</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Now you can extend your state using this protocol:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">,</span> <span class="kt">HasNavigationState</span><span class="p">,</span> <span class="kt">HasAuthenticationState</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">var</span> <span class="nv">navigationState</span> <span class="o">=</span> <span class="kt">NavigationState</span><span class="p">()</span>
-    <span class="k">var</span> <span class="nv">authenticationState</span> <span class="o">=</span> <span class="kt">AuthenticationState</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>If you now add a view (or any other subscriber) that is only interested in this particular substate, you should express this within your <code>newState</code> method (that is the callback for all subscribers in ReSwift).</p>
-
-<p>You would implement the <code>newState</code> method as following:</p>
-<pre class="highlight swift"><code>    <span class="kd">func</span> <span class="nf">newState</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">HasAuthenicationState</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">loggedInLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"</span><span class="se">\(</span><span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">userAuthenticated</span><span class="se">)</span><span class="s">"</span>
-    <span class="p">}</span>
-</code></pre>
-
-<p>ReSwift will infer the type that you have required and will automatically cast your app state to that type - this means the particular subscriber will only see the required substate, not any other state in your app. <strong>This approach will help you reduce dependencies on state that should be irrelevant to your component</strong>.</p>
-
-<p>Currently your method is not called if the state cannot be casted into the required type - <a href="https://github.com/ReSwift/ReSwift/issues/4">we&rsquo;re considering changing this into a <code>fatalError</code> as it will make debugging easier</a>.</p>
 <a href='#derived_state' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='derived_state'>Derived State</h2>
 
 <p>Note that you don&rsquo;t need to store derived state inside of your app state. E.g. instead of storing a <code>UIImage</code> you should store a image URL that can be used to fetch the image from a cache or via a download. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived.</p>
@@ -231,7 +196,7 @@
 
 <p>In your ReSwift app you will define actions for every possible state change that can happen.</p>
 
-<p>Reducers handle these actions and implement state changes based on the information they provide.</p>
+<p>Reducers handle these actions and implement state changes based on the information the actions provide.</p>
 
 <p>All actions in ReSwift conform to the <code>Action</code> protocol, which currently is just a marker protocol.</p>
 
@@ -265,42 +230,53 @@
 <p>Once ReSwift Recorder&rsquo;s implementation is further along, you will find detailed information  on all of this in its documentation.</p>
 <a href='#reducers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='reducers'>Reducers</h1>
 
-<p>This is the only place where you should modify application state! Reducers, just as <code>StoreSubscribers</code> can define the particular slice of the app state that they are interested in by changing the type in their <code>handleAction</code> method. Here&rsquo;s an example of a part of a reducer in an app built with ReSwift:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">DataMutationReducer</span><span class="p">:</span> <span class="kt">Reducer</span> <span class="p">{</span>
+<p>Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.</p>
 
-    <span class="kd">func</span> <span class="nf">handleAction</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">HasDataState</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">HasDataState</span> <span class="p">{</span>
-        <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">CreateContactWithEmail</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nf">createContact</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nv">email</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
-        <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">CreateContactWithTwitterUser</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nf">createContact</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nv">twitterUser</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">twitterUser</span><span class="p">)</span>
-        <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">DeleteContact</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nf">deleteContact</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nv">identifier</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">contactID</span><span class="p">)</span>
-        <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">SetContacts</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nf">setContacts</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nv">contacts</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">contacts</span><span class="p">)</span>
-        <span class="k">default</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">state</span>
-        <span class="p">}</span>
+<p>You can do this implementing a top-level reducer that conforms to the <code>Reducer</code> protocol. This reducer will then call individual functions for each different part of the app state.</p>
+
+<p>Here&rsquo;s an example in which we construct a new state, by calling sub-reducers with different sub-states:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppReducer</span><span class="p">:</span> <span class="kt">Reducer</span> <span class="p">{</span>
+
+    <span class="kd">func</span> <span class="nf">handleAction</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">State</span><span class="p">(</span>
+            <span class="nv">navigationState</span><span class="p">:</span> <span class="kt">NavigationReducer</span><span class="o">.</span><span class="nf">handleAction</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">navigationState</span><span class="p">),</span>
+            <span class="nv">authenticationState</span><span class="p">:</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">authenticationState</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
+            <span class="nv">repositories</span><span class="p">:</span> <span class="nf">repositoriesReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">repositories</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
+            <span class="nv">bookmarks</span><span class="p">:</span> <span class="nf">bookmarksReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">bookmarks</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">)</span>
+        <span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="kd">func</span> <span class="nf">createContact</span><span class="p">(</span><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">HasDataState</span><span class="p">,</span> <span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">HasDataState</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">newContactID</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dataState</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">let</span> <span class="nv">newContact</span> <span class="o">=</span> <span class="kt">Contact</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="n">newContactID</span><span class="p">,</span> <span class="nv">emailAddress</span><span class="p">:</span> <span class="n">email</span><span class="p">)</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">dataState</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">newContact</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">state</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">createContact</span><span class="p">(</span><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">HasDataState</span><span class="p">,</span> <span class="nv">twitterUser</span><span class="p">:</span> <span class="kt">TwitterUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">HasDataState</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">newContactID</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dataState</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">let</span> <span class="nv">newContact</span> <span class="o">=</span> <span class="kt">Contact</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="n">newContactID</span><span class="p">,</span> <span class="nv">twitterHandle</span><span class="p">:</span> <span class="n">twitterUser</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">dataState</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">newContact</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">state</span>
-    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
-<p>You typically switch over the types in <code>handleAction</code>, then call a method that implements the actual state mutation.</p>
+<p>The <code>Reducer</code> protocol has a single method that takes an <code>Action</code> and an <code>State?</code> and returns a <code>State</code>. Typically reducers will be responsible for initializing the application state. When they receive <code>nil</code> as the current state, they should return the initial default value for their portion of the state. In the example above the <code>AppReducer</code> delegates all calls to other reducer functions. E.g. the <code>authenticationReducer</code> is responsible for providing the <code>authenticationState</code>.</p>
+
+<p>Here&rsquo;s what the <code>authenticationReducer</code> function that is called from the <code>AppReducer</code> looks like:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">AuthenticationState</span><span class="p">?,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AuthenticationState</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="nf">initialAuthenticationState</span><span class="p">()</span>
+
+    <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">SwiftFlowInit</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">SetOAuthURL</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">oAuthURL</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">oAuthUrl</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">UpdateLoggedInState</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">loggedInState</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">loggedInState</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">state</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the method in the <code>Reducer</code> protocol (current state and action in, new state out).</p>
+
+<p>This sub-reducer first checks if the state provided is <code>nil</code>. If that&rsquo;s the case, it sets the state to the initial default state. Next, the reducer switches over the provided <code>action</code> and checks its type. Depending on the type of action, this reducer will updated the state differently. This specific reducer is very simple, each action only triggers a single property of the state to update.</p>
+
+<p>Once the state update is complete, the reducer function returns the new state.</p>
+
+<p>After the <code>AppReducer</code> has called all of the sub-reducer functions, we have a new application state. <code>ReSwift</code> will take care of publishing this new state to all subscribers.</p>
 <a href='#store_subscribers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='store_subscribers'>Store Subscribers</h1>
 
 <p>Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the <code>newState</code> method on them. Subscribers need to conform to the <code>StoreSubscriber</code> protocol:</p>
@@ -310,7 +286,108 @@
 </code></pre>
 
 <p>Most of your <code>StoreSubscriber</code>s will be in the view layer and update their representation whenever they receive a new state.</p>
-<a href='#middleware' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='middleware'>Middleware</h1>
+<a href='#example_with_filtered_subscriptions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example_with_filtered_subscriptions'>Example With Filtered Subscriptions</h2>
+
+<p>Ideally most of our subscribers should only be interested in a very small portion of the overall app state. <code>ReSwift</code> provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here&rsquo;s an example of subscribing, filtering and unsubscribing as used within a view controller:</p>
+<pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
+
+    <span class="c1">// subscribe when VC appears</span>
+    <span class="c1">// we are only interested in repository substate, filter it out of the overall state</span>
+    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">repositories</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
+    <span class="c1">// unsubscribe when VC disappears</span>
+    <span class="n">store</span><span class="o">.</span><span class="nf">unsubscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// The `state` argument needs to match the selected substate</span>
+<span class="kd">func</span> <span class="nf">newState</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">Response</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">Repository</span><span class="p">]</span><span class="o">&gt;</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">Success</span><span class="p">(</span><span class="n">repositories</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span> <span class="p">{</span>
+        <span class="n">dataSource</span><span class="p">?</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">repositories</span>
+        <span class="n">tableView</span><span class="o">.</span><span class="nf">reloadData</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>In the example above we only select a single property from the overall application state: a network <code>Response</code> with a list of repositories.</p>
+
+<p>When selecting a substate as part of calling the <code>subscribe</code> method, you need to make sure that the argument of the <code>newState</code> method has the same type as whatever you return from the state subselection in the <code>subscribe</code> method.</p>
+
+<p>When subscribing within a ViewController you will typically update the view from within the <code>newState</code> method.</p>
+<a href='#beyond_the_basics' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='beyond_the_basics'>Beyond the Basics</h1>
+<a href='#asynchronous_operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='asynchronous_operations'>Asynchronous Operations</h2>
+
+<p>Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here&rsquo;s a simple example of how to tie an asynchronous network request to <code>ReSwift</code> state update:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchGitHubRepositories</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">LoggedIn</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">loggedInState</span>  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+
+    <span class="kt">Octokit</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="n">repositories</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nf">dispatch_async</span><span class="p">(</span><span class="nf">dispatch_get_main_queue</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="n">response</span><span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>In this example we&rsquo;re using the <code>Octokit</code> library to perform a network request that fetches a users repositories. Within the callback block of the method we dispatch a state update that injects the received repositories into the app state. This will trigger all receivers to be informed about the new state.</p>
+
+<p>Note that the callback block from the network request arrives on a background thread, therefore we&rsquo;re using <code>dispatch_async(dispatch_get_main_queue())</code> to perform the state update on the main thread. <code>ReSwift</code> will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but <code>ReSwift</code> does not enforce this recommendation.</p>
+
+<p>In many cases your asynchronous tasks will consist of two separate steps:</p>
+
+<ol>
+<li>Update UI to show a loading indicator</li>
+<li>Refresh the UI once data arrived</li>
+</ol>
+
+<p>You can extend the example above, by dispatching a separate action, as soon as the network request starts. The goal of that action is to trigger the UI to update &amp; show a loading indicator.</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchGitHubRepositories</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">LoggedIn</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">loggedInState</span>  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+
+    <span class="kt">Octokit</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="n">repositories</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepositories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="o">.</span><span class="kt">Loading</span><span class="p">))</span>
+
+        <span class="nf">dispatch_async</span><span class="p">(</span><span class="nf">dispatch_get_main_queue</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="err">`</span><span class="o">.</span><span class="kt">Repositories</span><span class="p">(</span><span class="n">response</span><span class="p">)))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>In the example above, we&rsquo;re using an <code>enum</code> to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.</p>
+<a href='#action_creators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='action_creators'>Action Creators</h2>
+
+<p>An important aspect of adopting <code>ReSwift</code> is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering <code>Action</code>s upon user interactions.</p>
+
+<p>The triggering of actions should always be as simple as possible, we want to avoid any sort of complicated business logic in the view. However, in some cases it can be complicated to decide whether an action should be dispatched or not. Instead of checking the necessary state directly in the view or view controller, you can use <code>ActionCreator</code>s to perform a conditional dispatch.</p>
+
+<p>Just like an <code>Action</code> a <code>ActionCreator</code> function can be dispatched to the store. An <code>ActionCreator</code> takes the current application state, and a reference to a store and might or might not return an <code>Action</code>.</p>
+
+<p>An <code>ActionCreator</code> has the following type signature:
+<code>swift
+typealias ActionCreator = (state: State, store: StoreType) -&gt; Action?
+</code></p>
+
+<p>A very simple example of an <code>ActionCreator</code> might be:
+<code>swift
+func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -&gt; Action? {
+    if state.testValue &lt; 5 {
+        return SetValueAction(state.testValue! * 2)
+    } else {
+        return nil
+    }
+}
+</code></p>
+<a href='#middleware' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='middleware'>Middleware</h2>
 
 <p>ReSwift supports middleware in the same way as Redux does, <a href="http://rackt.org/redux/docs/advanced/Middleware.html">you can read this great documentation on Redux middleware to get started</a>. Middleware allows developers to provide extensions that wrap the <code>dispatch</code> function.</p>
 
@@ -344,7 +421,7 @@
       </article>
     </div>
     <section class='footer'>
-      <p>&copy; 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved. (Last updated: 2016-02-25)</p>
+      <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
       <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.4.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
