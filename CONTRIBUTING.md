@@ -43,7 +43,7 @@ Tests are run in [Travis CI](https://travis-ci.org/ReSwift/ReSwift) automaticall
 
     If a comment is included, it is just as important as code and has the same technical debt weight. The only thing worse than a unneeded comment is a comment that is not maintained.
 
-## Documentation
+## Code documentation
 
 Code documentation is different from comments. Please be liberal with code docs.
 
@@ -60,3 +60,63 @@ In particular paying attention to:
 - Stating common issues that a user may run into
 
 See [NSHipster Swift Documentation](http://nshipster.com/swift-documentation/) for a good reference on writing documentation in Swift.
+
+## Generating documentation
+
+The documentation at `reswift.github.io/ReSwift` is generated from by combining the markdown documentation files with generated documentation using [jazzy](https://github.com/realm/jazzy).
+
+The markdown files used to generated documentation are:
+
+- README.md
+- CONTRIBUTING.md
+- CHANGELOG.md
+- LICENSE.md
+- Docs/
+    - Getting Started Guide.md
+    - templates/
+        - heading.md
+        - toc.md
+
+Along with the Documentation sections, API sections also support extra documentation found in:
+
+- Docs/
+    - Actions.md
+    - Reducers.md
+    - State.md
+    - Stores.md
+    - Utilities.md
+
+Each of the markdown files are processed by the `generate_docs.sh` script and saved into `Docs/tmp/` ready for jazzy to generate the final documentation.
+
+The processing of each file can include:
+
+- Extracting a single section (ie, for splitting up README.md)
+- Adding a title
+- Replacing \{\{version\}\} with the current version
+- Ad-hoc string replacements (found in .jazzy.json under "string-replacements")
+
+A forked version of Jazzy is currently used to support individual markdown sections and injecting markdown into API section headers. It can be installed from [https://github.com/agentk/jazzy/](https://github.com/agentk/jazzy/tree/integrated-markdown).
+
+The documentation is hosted by GitHub pages under the [ReSwift gh-pages](https://github.com/ReSwift/ReSwift/tree/gh-pages) branch. The `build.sh` script in the `gh-pages` branch, installs / updates jazzy, checks out the latest master branch of ReSwift, and calls the `generated_docs.sh` script to generate docs into the master folder. Docs changes can then be committed and pushed to the `gh-pages` branch.
+
+The custom jazzy theme is located in: `Docs/jazzy-theme`.
+
+Changes to `generate_docs.sh` will generally only be needed when sections / files are added or removed.
+
+### Documentation TL;DR
+
+To generate docs locally:
+
+```bash
+./generate_docs.sh # -> Output to doc_output
+```
+
+To update the GitHub pages documentation:
+
+```bash
+git clone https://github.com/ReSwift/ReSwift.git --branch gh-pages ReSwift-gh-pages
+cd ReSwift-gh-pages
+./build.sh
+# Documentation is ready to be committed.
+```
+

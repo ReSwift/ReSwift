@@ -5,14 +5,14 @@
 - [Why ReSwift?](why-reswift.html)
 - [Getting Started Guide](getting-started-guide.html)
 - [Installation](installation.html)
-- [Testing](testing.html)
+- [Checking out Source Code](checking-out-source-code.html)
 - [Demo](demo.html)
 - [Extensions](extensions.html)
 - [Example Projects](example-projects.html)
 - [Contributing](contributing.html)
-- [Changelog](changelog.html)
 - [Credits](credits.html)
 - [Get in touch](get-in-touch.html)
+- [Changelog](changelog.html)
 - [License](license.html)
 
 ### API
