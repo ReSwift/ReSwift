@@ -43,7 +43,7 @@ public struct StandardAction: Action {
      - parameter payload:       Payload convertable to JSON
      - parameter isTypedAction: Is Action a subclassed type
      */
-    public init(type: String, payload: [String: AnyObject]?, isTypedAction: Bool = false) {
+    public init(type: String, payload: [String: AnyObject]? = nil, isTypedAction: Bool = false) {
         self.type = type
         self.payload = payload
         self.isTypedAction = isTypedAction
