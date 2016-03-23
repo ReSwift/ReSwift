@@ -27,17 +27,9 @@ public struct StandardAction: Action {
     /// Indicates whether this action will be deserialized as a typed action or as a standard action
     public let isTypedAction: Bool
 
-    /// Initializes this `StandardAction` with only a type. The payload will be nil and
-    /// `isTypedAction` will be set to false.
-    public init(_ type: String) {
-        self.type = type
-        self.payload = nil
-        self.isTypedAction = false
-    }
-
     /// Initializes this `StandardAction` with a type, a payload and information about whether this
     /// is a typed action or not.
-    public init(type: String, payload: [String: AnyObject]?, isTypedAction: Bool = false) {
+    public init(type: String, payload: [String: AnyObject]? = nil, isTypedAction: Bool = false) {
         self.type = type
         self.payload = payload
         self.isTypedAction = isTypedAction
