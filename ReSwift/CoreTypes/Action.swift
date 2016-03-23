@@ -52,18 +52,23 @@ public struct StandardAction: Action {
 
 // MARK: Coding Extension
 
+private let kType = "type"
+private let kPayload = "payload"
+private let kIsTypedAction = "isTypedAction"
+
 extension StandardAction: Coding {
 
-    public init(dictionary: [String : AnyObject]) {
-        self.type = dictionary["type"] as! String
-        self.payload = dictionary["payload"] as? [String: AnyObject]
-        self.isTypedAction = (dictionary["isTypedAction"] as! Int) == 1 ? true : false
+    public init?(dictionary: [String: AnyObject]) {
+        guard let type = dictionary[kType] as? String,
+          dictionary = dictionary[kPayload] as? [String: AnyObject],
+          isTypedAction = dictionary[kIsTypedAction] as? Bool else { return nil }
+        self.type = type
+        self.payload = dictionary
+        self.isTypedAction = isTypedAction
     }
 
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        let payload: AnyObject = self.payload ?? "null"
-
-        return ["type": type, "payload": payload, "isTypedAction": isTypedAction ? 1 : 0]
+    public var dictionaryRepresentation: [String: AnyObject] {
+        return [kType: type, kPayload: payload ?? NSNull(), kIsTypedAction: isTypedAction]
     }
 }
 
