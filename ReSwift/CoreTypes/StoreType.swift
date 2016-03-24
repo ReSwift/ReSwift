@@ -16,7 +16,7 @@ import Foundation
  */
 public protocol StoreType {
 
-    typealias State: StateType
+    associatedtype State: StateType
 
     /// Initializes the store with a reducer and an intial state.
     init(reducer: AnyReducer, state: State?)
@@ -128,7 +128,7 @@ public protocol StoreType {
      a successful login). However, you should try to use this callback very seldom as it
      deviates slighlty from the unidirectional data flow principal.
      */
-    typealias DispatchCallback = (State) -> Void
+    associatedtype DispatchCallback = (State) -> Void
 
     /**
      An ActionCreator is a function that, based on the received state argument, might or might not
@@ -150,9 +150,9 @@ public protocol StoreType {
      ```
 
      */
-    typealias ActionCreator = (state: State, store: StoreType) -> Action?
+    associatedtype ActionCreator = (state: State, store: StoreType) -> Action?
 
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
-    typealias AsyncActionCreator = (state: State, store: StoreType,
+    associatedtype AsyncActionCreator = (state: State, store: StoreType,
     actionCreatorCallback: ActionCreator -> Void) -> Void
 }
