@@ -2,7 +2,7 @@
 
 #1.0.0
 
-*Released: 03/19/2015*
+*Released: 03/19/2016*
 
 **API Changes:**
 - Remove callback arguments on synchronous dispatch methods - @Ben-G
@@ -16,7 +16,7 @@
 
 #0.2.5
 
-*Released: 02/20/2015*
+*Released: 02/20/2016*
 
 **API Changes:**
 
@@ -37,7 +37,7 @@
 
 #0.2.4
 
-*Released: 01/23/2015*
+*Released: 01/23/2016*
 
 **API Changes:**
 
