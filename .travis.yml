@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode7.2
+osx_image: xcode7.3
 
 branches:
   except:
@@ -19,12 +19,12 @@ env:
     - LC_CTYPE=en_US.UTF-8
     - LANG=en_US.UTF-8
     - FRAMEWORK_NAME="ReSwift"
-    - IOS_SDK=iphonesimulator9.2
+    - IOS_SDK=iphonesimulator9.3
     - OSX_SDK=macosx10.11
-    - TVOS_SDK=appletvsimulator9.1
-    - WATCHOS_SDK=watchsimulator2.1
+    - TVOS_SDK=appletvsimulator9.2
+    - WATCHOS_SDK=watchsimulator2.2
   matrix:
-    - DESTINATION="OS=9.2,name=iPhone 6S Plus"     SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - DESTINATION="OS=9.3,name=iPhone 6S Plus"     SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
 
 script:
   - set -o pipefail
