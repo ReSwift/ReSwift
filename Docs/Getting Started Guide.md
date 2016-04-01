@@ -268,7 +268,7 @@ let loggingMiddleware: Middleware = { dispatch, getState in
 You can define which middleware you would like to use when creating your store:
 
 ```swift
-MainStore(reducer: reducer, appState: TestStringAppState(),
+Store(reducer: reducer, appState: TestStringAppState(),
                     middleware: [loggingMiddleware, secondMiddleware])
 ```
 The actions will pass through the middleware in the order in which they are arranged in the array passed to the store initializer, however ideally middleware should not make any assumptions about when exactly it is called.

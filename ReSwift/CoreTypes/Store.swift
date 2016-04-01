@@ -1,5 +1,5 @@
 //
-//  MainStore.swift
+//  Store.swift
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/11/15.
