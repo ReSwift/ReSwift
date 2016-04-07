@@ -13,7 +13,11 @@ public protocol AnyStoreSubscriber: class {
 }
 
 public protocol StoreSubscriber: AnyStoreSubscriber {
+    #if swift(>=2.2)
+    associatedtype StoreSubscriberStateType
+    #else
     typealias StoreSubscriberStateType
+    #endif
 
     func newState(state: StoreSubscriberStateType)
 }
