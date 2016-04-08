@@ -13,7 +13,7 @@ import Foundation
 
  ```swift
  let reducer = CombinedReducer([IncreaseByOneReducer(), IncreaseByTwoReducer()])
- MainStore(reducer: reducer, appState: CounterState())
+ Store(reducer: reducer, appState: CounterState())
  ```
 
  The order of the reducers in the array is the order in which the reducers will be invoked.
