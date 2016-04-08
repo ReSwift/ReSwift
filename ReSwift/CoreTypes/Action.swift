@@ -27,8 +27,14 @@ public struct StandardAction: Action {
     /// Indicates whether this action will be deserialized as a typed action or as a standard action
     public let isTypedAction: Bool
 
-    /// Initializes this `StandardAction` with a type, a payload and information about whether this
-    /// is a typed action or not.
+    /**
+     Initializes this `StandardAction` with a type, a payload and information about whether this is
+     a typed action or not.
+     
+     - parameter type:          String representation of the Action type
+     - parameter payload:       Payload convertable to JSON
+     - parameter isTypedAction: Is Action a subclassed type
+    */
     public init(type: String, payload: [String: AnyObject]? = nil, isTypedAction: Bool = false) {
         self.type = type
         self.payload = payload
