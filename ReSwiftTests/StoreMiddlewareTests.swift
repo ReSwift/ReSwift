@@ -67,7 +67,7 @@ let stateAccessingMiddleware: Middleware = { dispatch, getState in
                 dispatch?(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
-                return next(StandardAction("No-Op-Action"))
+                return next(StandardAction(type: "No-Op-Action"))
             }
 
             return next(action)

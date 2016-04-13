@@ -50,12 +50,11 @@ private let isTypedActionKey = "isTypedAction"
 
 extension StandardAction: Coding {
 
-    public init?(dictionary: [String: AnyObject]) {
+    public init?(dictionary: [String: AnyObject?]) {
         guard let type = dictionary[typeKey] as? String,
-          dictionary = dictionary[payloadKey] as? [String: AnyObject],
           isTypedAction = dictionary[isTypedActionKey] as? Bool else { return nil }
         self.type = type
-        self.payload = dictionary
+        self.payload = dictionary[payloadKey] as? [String: AnyObject]
         self.isTypedAction = isTypedAction
     }
 
