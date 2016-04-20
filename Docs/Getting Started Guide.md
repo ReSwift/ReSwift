@@ -207,14 +207,12 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
     guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
 
     Octokit(configuration).repositories { response in
-    	store.dispatch(SetRepositories(repositories: .Loading))
-    
         dispatch_async(dispatch_get_main_queue()) {
             store.dispatch(SetRepostories(repositories: `.Repositories(response)))
         }
     }
 
-    return nil
+    return SetRepositories(repositories: .Loading)
 }
 ```
 
