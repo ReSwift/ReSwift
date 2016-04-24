@@ -114,6 +114,12 @@ class ActionSpec: QuickSpec {
                     expect(deserializedAction?.type).to(equal("Test"))
                     expect(deserializedAction?.isTypedAction).to(equal(true))
                 }
+
+                it("initializer returns nil when invalid dictionary is passed in") {
+                    let deserializedAction = StandardAction(dictionary: [:])
+
+                    expect(deserializedAction).to(beNil())
+                }
             }
         }
 
