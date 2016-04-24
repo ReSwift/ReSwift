@@ -61,7 +61,10 @@ class CombinedReducerSpecs: QuickSpec {
 
                 let combinedReducer = CombinedReducer([mockReducer1, mockReducer2])
 
-                combinedReducer._handleAction(StandardAction(type: emptyAction), state: CounterState())
+                combinedReducer._handleAction(
+                    StandardAction(type: emptyAction),
+                    state: CounterState()
+                )
 
                 expect(mockReducer1.calledWithAction).to(haveCount(1))
                 expect(mockReducer2.calledWithAction).to(haveCount(1))

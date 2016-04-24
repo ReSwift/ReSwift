@@ -30,7 +30,7 @@ public struct StandardAction: Action {
     /**
      Initializes this `StandardAction` with a type, a payload and information about whether this is
      a typed action or not.
-     
+
      - parameter type:          String representation of the Action type
      - parameter payload:       Payload convertable to JSON
      - parameter isTypedAction: Is Action a subclassed type
