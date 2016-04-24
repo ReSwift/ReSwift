@@ -27,14 +27,6 @@ public struct StandardAction: Action {
     /// Indicates whether this action will be deserialized as a typed action or as a standard action
     public let isTypedAction: Bool
 
-    /// Initializes this `StandardAction` with only a type. The payload will be nil and
-    /// `isTypedAction` will be set to false.
-    public init(_ type: String) {
-        self.type = type
-        self.payload = nil
-        self.isTypedAction = false
-    }
-
     /**
      Initializes this `StandardAction` with a type, a payload and information about whether this is
      a typed action or not.
@@ -42,8 +34,8 @@ public struct StandardAction: Action {
      - parameter type:          String representation of the Action type
      - parameter payload:       Payload convertable to JSON
      - parameter isTypedAction: Is Action a subclassed type
-     */
-    public init(type: String, payload: [String: AnyObject]?, isTypedAction: Bool = false) {
+    */
+    public init(type: String, payload: [String: AnyObject]? = nil, isTypedAction: Bool = false) {
         self.type = type
         self.payload = payload
         self.isTypedAction = isTypedAction
@@ -52,18 +44,22 @@ public struct StandardAction: Action {
 
 // MARK: Coding Extension
 
+private let typeKey = "type"
+private let payloadKey = "payload"
+private let isTypedActionKey = "isTypedAction"
+
 extension StandardAction: Coding {
 
-    public init(dictionary: [String : AnyObject]) {
-        self.type = dictionary["type"] as! String
-        self.payload = dictionary["payload"] as? [String: AnyObject]
-        self.isTypedAction = (dictionary["isTypedAction"] as! Int) == 1 ? true : false
+    public init?(dictionary: [String: AnyObject?]) {
+        guard let type = dictionary[typeKey] as? String,
+          isTypedAction = dictionary[isTypedActionKey] as? Bool else { return nil }
+        self.type = type
+        self.payload = dictionary[payloadKey] as? [String: AnyObject]
+        self.isTypedAction = isTypedAction
     }
 
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        let payload: AnyObject = self.payload ?? "null"
-
-        return ["type": type, "payload": payload, "isTypedAction": isTypedAction ? 1 : 0]
+    public var dictionaryRepresentation: [String: AnyObject?] {
+        return [typeKey: type, payloadKey: payload, isTypedActionKey: isTypedAction]
     }
 }
 

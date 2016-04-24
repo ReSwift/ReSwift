@@ -20,7 +20,7 @@ class ActionSpec: QuickSpec {
             context("#init") {
 
                 it("can be initialized with just a type") {
-                    let action = StandardAction("Test")
+                    let action = StandardAction(type: "Test")
 
                     expect(action.type).to(equal("Test"))
                 }
@@ -39,24 +39,24 @@ class ActionSpec: QuickSpec {
             context("#init-serialization") {
 
                 it("can initialize action with a dictionary") {
-                    let actionDictionary = [
+                    let actionDictionary: [String: AnyObject?] = [
                         "type": "TestType",
-                        "payload": "null",
-                        "isTypedAction": 1
+                        "payload": nil,
+                        "isTypedAction": true
                     ]
 
                     let action = StandardAction(dictionary: actionDictionary)
 
-                    expect(action.type).to(equal("TestType"))
-                    expect(action.payload).to(beNil())
-                    expect(action.isTypedAction).to(equal(true))
+                    expect(action?.type).to(equal("TestType"))
+                    expect(action?.payload).to(beNil())
+                    expect(action?.isTypedAction).to(equal(true))
                 }
 
                 it("can convert an action to a dictionary") {
                     let action = StandardAction(type:"Test", payload: ["testKey": 5],
                         isTypedAction: true)
 
-                    let dictionary = action.dictionaryRepresentation()
+                    let dictionary = action.dictionaryRepresentation
 
                     let type = dictionary["type"] as! String
                     let payload = dictionary["payload"] as! [String: AnyObject]
@@ -69,50 +69,56 @@ class ActionSpec: QuickSpec {
 
                 it("can serialize / deserialize actions with payload and without custom type") {
                     let action = StandardAction(type:"Test", payload: ["testKey": 5])
-                    let dictionary = action.dictionaryRepresentation()
+                    let dictionary = action.dictionaryRepresentation
 
                     let deserializedAction = StandardAction(dictionary: dictionary)
 
-                    let payload = deserializedAction.payload!["testKey"]! as! Int
+                    let payload = deserializedAction?.payload?["testKey"] as? Int
 
                     expect(payload).to(equal(5))
-                    expect(deserializedAction.type).to(equal("Test"))
+                    expect(deserializedAction?.type).to(equal("Test"))
                 }
 
                 it("can serialize / deserialize actions with payload and with custom type") {
                     let action = StandardAction(type:"Test", payload: ["testKey": 5],
                                     isTypedAction: true)
-                    let dictionary = action.dictionaryRepresentation()
+                    let dictionary = action.dictionaryRepresentation
 
                     let deserializedAction = StandardAction(dictionary: dictionary)
 
-                    let payload = deserializedAction.payload!["testKey"]! as! Int
+                    let payload = deserializedAction?.payload?["testKey"] as? Int
 
                     expect(payload).to(equal(5))
-                    expect(deserializedAction.type).to(equal("Test"))
-                    expect(deserializedAction.isTypedAction).to(equal(true))
+                    expect(deserializedAction?.type).to(equal("Test"))
+                    expect(deserializedAction?.isTypedAction).to(equal(true))
                 }
 
                 it("can serialize / deserialize actions without payload and without custom type") {
                     let action = StandardAction(type:"Test", payload: nil)
-                    let dictionary = action.dictionaryRepresentation()
+                    let dictionary = action.dictionaryRepresentation
 
                     let deserializedAction = StandardAction(dictionary: dictionary)
 
-                    expect(deserializedAction.payload).to(beNil())
-                    expect(deserializedAction.type).to(equal("Test"))
+                    expect(deserializedAction?.payload).to(beNil())
+                    expect(deserializedAction?.type).to(equal("Test"))
                 }
 
                 it("can serialize / deserialize actions without payload and with custom type") {
                     let action = StandardAction(type:"Test", payload: nil,
                         isTypedAction: true)
-                    let dictionary = action.dictionaryRepresentation()
+                    let dictionary = action.dictionaryRepresentation
 
                     let deserializedAction = StandardAction(dictionary: dictionary)
 
-                    expect(deserializedAction.payload).to(beNil())
-                    expect(deserializedAction.type).to(equal("Test"))
-                    expect(deserializedAction.isTypedAction).to(equal(true))
+                    expect(deserializedAction?.payload).to(beNil())
+                    expect(deserializedAction?.type).to(equal("Test"))
+                    expect(deserializedAction?.isTypedAction).to(equal(true))
+                }
+
+                it("initializer returns nil when invalid dictionary is passed in") {
+                    let deserializedAction = StandardAction(dictionary: [:])
+
+                    expect(deserializedAction).to(beNil())
                 }
             }
         }
