@@ -208,7 +208,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
     Octokit(configuration).repositories { response in
         dispatch_async(dispatch_get_main_queue()) {
-            store.dispatch(SetRepostories(repositories: `.Repositories(response)))
+            store.dispatch(SetRepostories(repositories: .Repositories(response)))
         }
     }
 
