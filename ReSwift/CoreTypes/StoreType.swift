@@ -19,7 +19,7 @@ public protocol StoreType {
     #if swift(>=2.2)
     associatedtype State: StateType
     #else
-    typealias State: StateType
+    typealias State = StateType
     #endif
 
     /// Initializes the store with a reducer and an intial state.
