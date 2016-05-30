@@ -81,6 +81,21 @@ struct CounterReducer: Reducer {
 ```
 In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
 
+To maintain our state and delegate the actions to the reducers, we need a store. Let's call it `mainStore` and define it as a global constant, for example in the app delegate file:
+
+```swift
+let mainStore = Store<AppState>(
+	reducer: AppReducer(),
+	state: nil
+)
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+	[...]
+}
+```
+
+
 Lastly, your view layer, in this case a view controller, needs to tie into this system by subscribing to store updates and emitting actions whenever the app state needs to be changed:
 
 ```swift
