@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol AnyStoreSubscriber: class {
-    func _newState(state: Any)
+    func _newState(_ state: Any)
 }
 
 public protocol StoreSubscriber: AnyStoreSubscriber {
@@ -19,11 +19,11 @@ public protocol StoreSubscriber: AnyStoreSubscriber {
     typealias StoreSubscriberStateType
     #endif
 
-    func newState(state: StoreSubscriberStateType)
+    func newState(_ state: StoreSubscriberStateType)
 }
 
 extension StoreSubscriber {
-    public func _newState(state: Any) {
+    public func _newState(_ state: Any) {
         if let typedState = state as? StoreSubscriberStateType {
             newState(typedState)
         }

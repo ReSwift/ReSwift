@@ -49,7 +49,7 @@ public class Store<State: StateType>: StoreType {
 
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware
-            .reverse()
+            .reversed()
             .reduce({ [unowned self] action in self._defaultDispatch(action) }) {
                 [weak self] dispatchFunction, middleware in
                     let getState = { self?.state }
@@ -63,7 +63,7 @@ public class Store<State: StateType>: StoreType {
         }
     }
 
-    private func _isNewSubscriber(subscriber: AnyStoreSubscriber) -> Bool {
+    private func _isNewSubscriber(_ subscriber: AnyStoreSubscriber) -> Bool {
         if subscriptions.contains({ $0.subscriber === subscriber }) {
             print("Store subscriber is already added, ignoring.")
             return false
@@ -73,13 +73,13 @@ public class Store<State: StateType>: StoreType {
     }
 
     public func subscribe<S: StoreSubscriber
-        where S.StoreSubscriberStateType == State>(subscriber: S) {
+        where S.StoreSubscriberStateType == State>(_ subscriber: S) {
             subscribe(subscriber, selector: nil)
     }
 
     public func subscribe<SelectedState, S: StoreSubscriber
         where S.StoreSubscriberStateType == SelectedState>
-        (subscriber: S, selector: (State -> SelectedState)?) {
+        (_ subscriber: S, selector: ((State) -> SelectedState)?) {
             if !_isNewSubscriber(subscriber) { return }
 
             subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
@@ -89,16 +89,16 @@ public class Store<State: StateType>: StoreType {
             }
     }
 
-    public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        if let index = subscriptions.indexOf({ return $0.subscriber === subscriber }) {
-            subscriptions.removeAtIndex(index)
+    public func unsubscribe(_ subscriber: AnyStoreSubscriber) {
+        if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
+            subscriptions.remove(at: index)
         }
     }
 
-    public func _defaultDispatch(action: Action) -> Any {
+    public func _defaultDispatch(_ action: Action) -> Any {
         if isDispatching {
             // Use Obj-C exception since throwing of exceptions can be verified through tests
-            NSException.raise("SwiftFlow:IllegalDispatchFromReducer", format: "Reducers may not " +
+            NSException.raise("SwiftFlow:IllegalDispatchFromReducer" as NSExceptionName, format: "Reducers may not " +
                 "dispatch actions.", arguments: getVaList(["nil"]))
         }
 
@@ -111,13 +111,14 @@ public class Store<State: StateType>: StoreType {
         return action
     }
 
-    public func dispatch(action: Action) -> Any {
+    @discardableResult
+    public func dispatch(_ action: Action) -> Any {
         let returnValue = dispatchFunction(action)
 
         return returnValue
     }
 
-    public func dispatch(actionCreatorProvider: ActionCreator) -> Any {
+    public func dispatch(_ actionCreatorProvider: ActionCreator) -> Any {
         let action = actionCreatorProvider(state: state, store: self)
 
         if let action = action {
@@ -127,11 +128,11 @@ public class Store<State: StateType>: StoreType {
         return action
     }
 
-    public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
+    public func dispatch(_ asyncActionCreatorProvider: AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
+    public func dispatch(_ actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
         actionCreatorProvider(state: state, store: self) { actionProvider in
             let action = actionProvider(state: self.state, store: self)
 
@@ -149,6 +150,6 @@ public class Store<State: StateType>: StoreType {
     public typealias AsyncActionCreator = (
         state: State,
         store: Store,
-        actionCreatorCallback: ActionCreator -> Void
+        actionCreatorCallback: (ActionCreator) -> Void
     ) -> Void
 }

@@ -60,7 +60,7 @@ class FilteredStoreSpec: QuickSpec {
 class TestFilteredSubscriber: StoreSubscriber {
     var receivedValue: Int?
 
-    func newState(state: Int?) {
+    func newState(_ state: Int?) {
         receivedValue = state
     }
 
@@ -73,7 +73,7 @@ class TestFilteredSubscriber: StoreSubscriber {
 class TestSelectiveSubscriber: StoreSubscriber {
     var receivedValue: (Int?, String?)
 
-    func newState(state: (Int?, String?)) {
+    func newState(_ state: (Int?, String?)) {
         receivedValue = state
     }
 }
@@ -89,7 +89,7 @@ struct OtherState {
 }
 
 struct TestComplexAppStateReducer: Reducer {
-    func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState {
+    func handleAction(_ action: Action, state: TestComplexAppState?) -> TestComplexAppState {
         var state = state ?? TestComplexAppState()
 
         switch action {

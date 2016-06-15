@@ -66,7 +66,7 @@ struct SetValueStringAction: StandardActionConvertible {
 }
 
 struct TestReducer: Reducer {
-    func handleAction(action: Action, state: TestAppState?) -> TestAppState {
+    func handleAction(_ action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
 
         switch action {
@@ -80,7 +80,7 @@ struct TestReducer: Reducer {
 }
 
 struct TestValueStringReducer: Reducer {
-    func handleAction(action: Action, state: TestStringAppState?) -> TestStringAppState {
+    func handleAction(_ action: Action, state: TestStringAppState?) -> TestStringAppState {
         var state = state ?? TestStringAppState()
 
         switch action {
@@ -96,7 +96,7 @@ struct TestValueStringReducer: Reducer {
 class TestStoreSubscriber<T>: StoreSubscriber {
     var receivedStates: [T] = []
 
-    func newState(state: T) {
+    func newState(_ state: T) {
         receivedStates.append(state)
     }
 }
@@ -108,7 +108,7 @@ class DispatchingSubscriber: StoreSubscriber {
         self.store = store
     }
 
-    func newState(state: TestAppState) {
+    func newState(_ state: TestAppState) {
         // Test if we've already dispatched this action to
         // avoid endless recursion
         if state.testValue != 5 {

@@ -19,9 +19,9 @@ import Foundation
             casted to `SpecificStateType`.
  */
 func withSpecificTypes<SpecificStateType, Action>(
-        action: Action,
+        _ action: Action,
         state genericStateType: StateType?,
-        @noescape function: (action: Action, state: SpecificStateType?) -> SpecificStateType
+        function: @noescape (action: Action, state: SpecificStateType?) -> SpecificStateType
     ) -> StateType {
         guard let genericStateType = genericStateType else {
             return function(action: action, state: nil) as! StateType
