@@ -1,6 +1,6 @@
 //
-//  SwiftFlowTests.swift
-//  SwiftFlowTests
+//  StoreTests.swift
+//  ReSwift
 //
 //  Created by Benjamin Encz on 11/27/15.
 //  Copyright © 2015 DigiTales. All rights reserved.
@@ -269,7 +269,7 @@ class DispatchingReducer: Reducer {
 
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         expect(self.store?.dispatch(SetValueAction(20))).to(raiseException(named:
-            "SwiftFlow:IllegalDispatchFromReducer"))
+            "ReSwift:IllegalDispatchFromReducer"))
         return state ?? TestAppState()
     }
 }
