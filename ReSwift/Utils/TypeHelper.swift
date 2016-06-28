@@ -18,6 +18,23 @@ import Foundation
  - returns: A `StateType` from `handleAction` or the original `StateType` if it cannot be
             casted to `SpecificStateType`.
  */
+#if swift(>=3)
+func withSpecificTypes<SpecificStateType, Action>(
+        action: Action,
+        state genericStateType: StateType?,
+        function: @noescape (action: Action, state: SpecificStateType?) -> SpecificStateType
+    ) -> StateType {
+        guard let genericStateType = genericStateType else {
+            return function(action: action, state: nil) as! StateType
+        }
+
+        guard let specificStateType = genericStateType as? SpecificStateType else {
+            return genericStateType
+        }
+
+        return function(action: action, state: specificStateType) as! StateType
+}
+#else
 func withSpecificTypes<SpecificStateType, Action>(
         action: Action,
         state genericStateType: StateType?,
@@ -33,3 +50,4 @@ func withSpecificTypes<SpecificStateType, Action>(
 
         return function(action: action, state: specificStateType) as! StateType
 }
+#endif

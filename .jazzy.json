@@ -1,5 +1,5 @@
 {
-    "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-OSX"],
+    "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-macOS"],
     "swift_version": "2.1.1",
     "author_name": "ReSwift",
     "author_url": "https://github.com/ReSwift/ReSwift",

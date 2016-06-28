@@ -1,5 +1,9 @@
 #Upcoming Release
 
+**Other**:
+
+- Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) @agentk
+
 #2.0.0
 
 *Released: 06/27/2016*
