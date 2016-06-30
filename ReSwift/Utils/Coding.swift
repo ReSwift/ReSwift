@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol Coding {
-    init?(dictionary: [String: AnyObject?])
-    var dictionaryRepresentation: [String: AnyObject?] { get }
+    init?(dictionary: [String: AnyObject])
+    var dictionaryRepresentation: [String: AnyObject] { get }
 }

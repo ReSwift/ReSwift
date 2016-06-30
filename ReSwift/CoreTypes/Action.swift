@@ -47,10 +47,11 @@ public struct StandardAction: Action {
 private let typeKey = "type"
 private let payloadKey = "payload"
 private let isTypedActionKey = "isTypedAction"
+let reSwiftNull = "ReSwift_Null"
 
 extension StandardAction: Coding {
 
-    public init?(dictionary: [String: AnyObject?]) {
+    public init?(dictionary: [String: AnyObject]) {
         guard let type = dictionary[typeKey] as? String,
           isTypedAction = dictionary[isTypedActionKey] as? Bool else { return nil }
         self.type = type
@@ -58,7 +59,9 @@ extension StandardAction: Coding {
         self.isTypedAction = isTypedAction
     }
 
-    public var dictionaryRepresentation: [String: AnyObject?] {
+    public var dictionaryRepresentation: [String: AnyObject] {
+        let payload: AnyObject = self.payload ?? reSwiftNull
+
         return [typeKey: type, payloadKey: payload, isTypedActionKey: isTypedAction]
     }
 }
