@@ -167,7 +167,7 @@ public protocol StoreType {
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
     #if swift(>=2.2)
     associatedtype AsyncActionCreator = (state: State, store: StoreType,
-    actionCreatorCallback: ActionCreator -> Void) -> Void
+    actionCreatorCallback: (ActionCreator) -> Void) -> Void
     #else
     typealias AsyncActionCreator = (state: State, store: StoreType,
     actionCreatorCallback: ActionCreator -> Void) -> Void

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "25DBCF7A1C30C4AA00D63A58"
                BuildableName = "ReSwift.framework"
-               BlueprintName = "ReSwift-OSX"
+               BlueprintName = "ReSwift-macOS"
                ReferencedContainer = "container:ReSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "25DBCF861C30C4DB00D63A58"
-               BuildableName = "ReSwift-OSXTests.xctest"
-               BlueprintName = "ReSwift-OSXTests"
+               BuildableName = "ReSwift-macOSTests.xctest"
+               BlueprintName = "ReSwift-macOSTests"
                ReferencedContainer = "container:ReSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "25DBCF7A1C30C4AA00D63A58"
             BuildableName = "ReSwift.framework"
-            BlueprintName = "ReSwift-OSX"
+            BlueprintName = "ReSwift-macOS"
             ReferencedContainer = "container:ReSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,7 +67,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "25DBCF7A1C30C4AA00D63A58"
             BuildableName = "ReSwift.framework"
-            BlueprintName = "ReSwift-OSX"
+            BlueprintName = "ReSwift-macOS"
             ReferencedContainer = "container:ReSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,7 +85,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "25DBCF7A1C30C4AA00D63A58"
             BuildableName = "ReSwift.framework"
-            BlueprintName = "ReSwift-OSX"
+            BlueprintName = "ReSwift-macOS"
             ReferencedContainer = "container:ReSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

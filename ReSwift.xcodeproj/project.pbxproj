@@ -118,7 +118,7 @@
 		25DBCF4E1C30C18D00D63A58 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DBCF641C30C1AC00D63A58 /* ReSwift-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReSwift-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DBCF7B1C30C4AA00D63A58 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		25DBCF871C30C4DB00D63A58 /* ReSwift-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReSwift-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReSwift-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		621C06851C277759008029AE /* CombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducerTests.swift; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
 		625AA6311C33AFA600FEB431 /* ActionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpec.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				25DBCF4E1C30C18D00D63A58 /* ReSwift.framework */,
 				25DBCF641C30C1AC00D63A58 /* ReSwift-tvOSTests.xctest */,
 				25DBCF7B1C30C4AA00D63A58 /* ReSwift.framework */,
-				25DBCF871C30C4DB00D63A58 /* ReSwift-OSXTests.xctest */,
+				25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,9 +402,9 @@
 			productReference = 25DBCF641C30C1AC00D63A58 /* ReSwift-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		25DBCF7A1C30C4AA00D63A58 /* ReSwift-OSX */ = {
+		25DBCF7A1C30C4AA00D63A58 /* ReSwift-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 25DBCF801C30C4AA00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-OSX" */;
+			buildConfigurationList = 25DBCF801C30C4AA00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-macOS" */;
 			buildPhases = (
 				25DBCF761C30C4AA00D63A58 /* Sources */,
 				25DBCF771C30C4AA00D63A58 /* Frameworks */,
@@ -415,14 +415,14 @@
 			);
 			dependencies = (
 			);
-			name = "ReSwift-OSX";
+			name = "ReSwift-macOS";
 			productName = "ReSwift-Mac";
 			productReference = 25DBCF7B1C30C4AA00D63A58 /* ReSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		25DBCF861C30C4DB00D63A58 /* ReSwift-OSXTests */ = {
+		25DBCF861C30C4DB00D63A58 /* ReSwift-macOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 25DBCF8F1C30C4DB00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-OSXTests" */;
+			buildConfigurationList = 25DBCF8F1C30C4DB00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-macOSTests" */;
 			buildPhases = (
 				25DBCF831C30C4DB00D63A58 /* Sources */,
 				25DBCF841C30C4DB00D63A58 /* Frameworks */,
@@ -434,9 +434,9 @@
 			dependencies = (
 				25DBCF8E1C30C4DB00D63A58 /* PBXTargetDependency */,
 			);
-			name = "ReSwift-OSXTests";
+			name = "ReSwift-macOSTests";
 			productName = "ReSwift-MacTests";
-			productReference = 25DBCF871C30C4DB00D63A58 /* ReSwift-OSXTests.xctest */;
+			productReference = 25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		625E66821C1FF97E0027C288 /* ReSwift-iOS */ = {
@@ -484,7 +484,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Benjamin Encz";
 				TargetAttributes = {
 					25DBCF361C30BF2B00D63A58 = {
@@ -498,9 +498,11 @@
 					};
 					25DBCF7A1C30C4AA00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					25DBCF861C30C4DB00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					625E66821C1FF97E0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -524,8 +526,8 @@
 			targets = (
 				625E66821C1FF97E0027C288 /* ReSwift-iOS */,
 				625E66991C1FFA3C0027C288 /* ReSwift-iOSTests */,
-				25DBCF7A1C30C4AA00D63A58 /* ReSwift-OSX */,
-				25DBCF861C30C4DB00D63A58 /* ReSwift-OSXTests */,
+				25DBCF7A1C30C4AA00D63A58 /* ReSwift-macOS */,
+				25DBCF861C30C4DB00D63A58 /* ReSwift-macOSTests */,
 				25DBCF4D1C30C18D00D63A58 /* ReSwift-tvOS */,
 				25DBCF631C30C1AC00D63A58 /* ReSwift-tvOSTests */,
 				25DBCF361C30BF2B00D63A58 /* ReSwift-watchOS */,
@@ -771,7 +773,7 @@
 		};
 		25DBCF8E1C30C4DB00D63A58 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 25DBCF7A1C30C4AA00D63A58 /* ReSwift-OSX */;
+			target = 25DBCF7A1C30C4AA00D63A58 /* ReSwift-macOS */;
 			targetProxy = 25DBCF8D1C30C4DB00D63A58 /* PBXContainerItemProxy */;
 		};
 		625E66A11C1FFA3C0027C288 /* PBXTargetDependency */ = {
@@ -810,6 +812,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
@@ -840,6 +843,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Release;
@@ -871,6 +875,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -965,6 +970,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -990,6 +996,7 @@
 				PRODUCT_NAME = ReSwift;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1019,6 +1026,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1036,6 +1044,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift;
 				PRODUCT_NAME = ReSwift;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
@@ -1071,6 +1081,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1137,7 +1148,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		25DBCF801C30C4AA00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-OSX" */ = {
+		25DBCF801C30C4AA00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25DBCF811C30C4AA00D63A58 /* Debug */,
@@ -1146,7 +1157,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		25DBCF8F1C30C4DB00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-OSXTests" */ = {
+		25DBCF8F1C30C4DB00D63A58 /* Build configuration list for PBXNativeTarget "ReSwift-macOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25DBCF901C30C4DB00D63A58 /* Debug */,

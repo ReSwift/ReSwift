@@ -31,7 +31,11 @@ public struct CombinedReducer: AnyReducer {
 
     public func _handleAction(action: Action, state: StateType?) -> StateType {
         return reducers.reduce(state) { (currentState, reducer) -> StateType in
-            reducer._handleAction(action, state: currentState)
+            #if swift(>=3)
+                return reducer._handleAction(action: action, state: currentState)
+            #else
+                return reducer._handleAction(action, state: currentState)
+            #endif
         }!
     }
 }
