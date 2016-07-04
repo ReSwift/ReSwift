@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (48% documented)
+         (42% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -163,7 +163,7 @@
             <h1>CombinedReducer</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombinedReducer</span><span class="p">:</span> <span class="kt">AnyReducer</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombinedReducer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyReducer.html">AnyReducer</a></span></code></pre>
 
                 </div>
               </div>
@@ -171,7 +171,7 @@
 initial store setup:</p>
 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">reducer</span> <span class="o">=</span> <span class="kt">CombinedReducer</span><span class="p">([</span><span class="kt">IncreaseByOneReducer</span><span class="p">(),</span> <span class="kt">IncreaseByTwoReducer</span><span class="p">()])</span>
-<span class="kt">MainStore</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="n">reducer</span><span class="p">,</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">CounterState</span><span class="p">())</span>
+<span class="kt">Store</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="n">reducer</span><span class="p">,</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">CounterState</span><span class="p">())</span>
 </code></pre>
 
 <p>The order of the reducers in the array is the order in which the reducers will be invoked.</p>
@@ -186,9 +186,9 @@ initial store setup:</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FV7ReSwift15CombinedReducercFMS0_FGSaPS_10AnyReducer__S0_"></a>
+                    <a name="/s:FV7ReSwift15CombinedReducercFGSaPS_10AnyReducer__S0_"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV7ReSwift15CombinedReducercFMS0_FGSaPS_10AnyReducer__S0_">init(_:)</a>
+                    <a class="token" href="#/s:FV7ReSwift15CombinedReducercFGSaPS_10AnyReducer__S0_">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -203,7 +203,7 @@ initial store setup:</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">reducers</span><span class="p">:</span> <span class="p">[</span><span class="kt">AnyReducer</span><span class="p">])</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">reducers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/AnyReducer.html">AnyReducer</a></span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -217,9 +217,9 @@ initial store setup:</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FV7ReSwift15CombinedReducer13_handleActionFS0_FTPS_6Action_5stateGSqPS_9StateType___PS2__"></a>
+                    <a name="/s:FV7ReSwift15CombinedReducer13_handleActionFTPS_6Action_5stateGSqPS_9StateType___PS2__"></a>
                     <a name="//apple_ref/swift/Method/_handleAction(_:state:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV7ReSwift15CombinedReducer13_handleActionFS0_FTPS_6Action_5stateGSqPS_9StateType___PS2__">_handleAction(_:state:)</a>
+                    <a class="token" href="#/s:FV7ReSwift15CombinedReducer13_handleActionFTPS_6Action_5stateGSqPS_9StateType___PS2__">_handleAction(_:state:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -234,13 +234,13 @@ initial store setup:</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombinedReducer</span><span class="p">:</span> <span class="kt">AnyReducer</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombinedReducer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyReducer.html">AnyReducer</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/CombinedReducer.swift#L32-L36" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/CombinedReducer.swift#L32-L40" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -254,7 +254,7 @@ initial store setup:</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.4.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

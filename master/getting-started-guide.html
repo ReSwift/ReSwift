@@ -10,7 +10,6 @@
   </head>
   <body>
 
-    <a name='//apple_ref/swift/Guide/Getting Started Guide' class='dashAnchor'></a>
 
     <a title='Getting Started Guide  Reference'></a>
 
@@ -19,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (48% documented)
+         (42% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -161,7 +160,7 @@
         <section class='section'>
           <div class='section-content'>
             
-            <a href='#getting_started_with_reswift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='getting_started_with_reswift'>Getting Started with ReSwift</h1>
+            <a href='#getting-started-with-reswift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='getting-started-with-reswift'>Getting Started with ReSwift</h1>
 
 <p>ReSwift provides the infrastructure for <code>Store</code>s, <code>Action</code>s and <code>Reducer</code>s to enable a unidirectional data flow as shown below.</p>
 
@@ -174,7 +173,7 @@
 
 <p>The state struct should store your entire application state, that includes the UI state, the navigation state and the state of your model layer.</p>
 
-<p>Here&rsquo;s an example of a state struct as defined in the <a href="https://github.com/ReSwift/CounterExample">Counter Example</a>:</p>
+<p>Here&rsquo;s an example of a state struct as defined in the <a href="https://github.com/ReSwift/CounterExample-Navigation-TimeTravel">Counter Example</a>:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">var</span> <span class="nv">navigationState</span> <span class="o">=</span> <span class="kt">NavigationState</span><span class="p">()</span>
@@ -187,7 +186,7 @@
 <li>Your app state struct needs to conform to the <code>StateType</code> protocol, currently this is just a marker protocol.</li>
 <li>If you are including <code>ReSwiftRouter</code> in your project, your app state needs to contain a property of type <code>NavigationState</code>. This is the sub-state the router will use to store the current route.</li>
 </ol>
-<a href='#derived_state' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='derived_state'>Derived State</h2>
+<a href='#derived-state' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='derived-state'>Derived State</h2>
 
 <p>Note that you don&rsquo;t need to store derived state inside of your app state. E.g. instead of storing a <code>UIImage</code> you should store a image URL that can be used to fetch the image from a cache or via a download. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived.</p>
 <a href='#actions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='actions'>Actions</h1>
@@ -277,7 +276,7 @@
 <p>Once the state update is complete, the reducer function returns the new state.</p>
 
 <p>After the <code>AppReducer</code> has called all of the sub-reducer functions, we have a new application state. <code>ReSwift</code> will take care of publishing this new state to all subscribers.</p>
-<a href='#store_subscribers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='store_subscribers'>Store Subscribers</h1>
+<a href='#store-subscribers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='store-subscribers'>Store Subscribers</h1>
 
 <p>Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the <code>newState</code> method on them. Subscribers need to conform to the <code>StoreSubscriber</code> protocol:</p>
 <pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">StoreSubscriber</span> <span class="p">{</span>
@@ -286,7 +285,7 @@
 </code></pre>
 
 <p>Most of your <code>StoreSubscriber</code>s will be in the view layer and update their representation whenever they receive a new state.</p>
-<a href='#example_with_filtered_subscriptions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example_with_filtered_subscriptions'>Example With Filtered Subscriptions</h2>
+<a href='#example-with-filtered-subscriptions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example-with-filtered-subscriptions'>Example With Filtered Subscriptions</h2>
 
 <p>Ideally most of our subscribers should only be interested in a very small portion of the overall app state. <code>ReSwift</code> provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here&rsquo;s an example of subscribing, filtering and unsubscribing as used within a view controller:</p>
 <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
@@ -319,8 +318,8 @@
 <p>When selecting a substate as part of calling the <code>subscribe</code> method, you need to make sure that the argument of the <code>newState</code> method has the same type as whatever you return from the state subselection in the <code>subscribe</code> method.</p>
 
 <p>When subscribing within a ViewController you will typically update the view from within the <code>newState</code> method.</p>
-<a href='#beyond_the_basics' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='beyond_the_basics'>Beyond the Basics</h1>
-<a href='#asynchronous_operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='asynchronous_operations'>Asynchronous Operations</h2>
+<a href='#beyond-the-basics' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='beyond-the-basics'>Beyond the Basics</h1>
+<a href='#asynchronous-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='asynchronous-operations'>Asynchronous Operations</h2>
 
 <p>Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here&rsquo;s a simple example of how to tie an asynchronous network request to <code>ReSwift</code> state update:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchGitHubRepositories</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span> <span class="p">{</span>
@@ -352,19 +351,17 @@
     <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">LoggedIn</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">loggedInState</span>  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
 
     <span class="kt">Octokit</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="n">repositories</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
-        <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepositories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="o">.</span><span class="kt">Loading</span><span class="p">))</span>
-
         <span class="nf">dispatch_async</span><span class="p">(</span><span class="nf">dispatch_get_main_queue</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="err">`</span><span class="o">.</span><span class="kt">Repositories</span><span class="p">(</span><span class="n">response</span><span class="p">)))</span>
+            <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="o">.</span><span class="kt">Repositories</span><span class="p">(</span><span class="n">response</span><span class="p">)))</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="kc">nil</span>
+    <span class="k">return</span> <span class="kt">SetRepositories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="o">.</span><span class="kt">Loading</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>In the example above, we&rsquo;re using an <code>enum</code> to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.</p>
-<a href='#action_creators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='action_creators'>Action Creators</h2>
+<a href='#action-creators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='action-creators'>Action Creators</h2>
 
 <p>An important aspect of adopting <code>ReSwift</code> is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering <code>Action</code>s upon user interactions.</p>
 
@@ -408,7 +405,7 @@ func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -
 </code></pre>
 
 <p>You can define which middleware you would like to use when creating your store:</p>
-<pre class="highlight swift"><code><span class="kt">MainStore</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="n">reducer</span><span class="p">,</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">TestStringAppState</span><span class="p">(),</span>
+<pre class="highlight swift"><code><span class="kt">Store</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="n">reducer</span><span class="p">,</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">TestStringAppState</span><span class="p">(),</span>
                     <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="n">loggingMiddleware</span><span class="p">,</span> <span class="n">secondMiddleware</span><span class="p">])</span>
 </code></pre>
 
@@ -422,7 +419,7 @@ func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.4.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

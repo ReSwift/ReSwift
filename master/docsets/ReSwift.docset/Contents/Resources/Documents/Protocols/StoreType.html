@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (48% documented)
+         (42% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -167,8 +167,8 @@
 
                 </div>
               </div>
-            <p>Defines the interface of Stores in Swift Flow. <code>MainStore</code> is the default implementation of this
-interaface. Applications have a single store that stores the entire application state.
+            <p>Defines the interface of Stores in ReSwift. <code><a href="../Classes/Store.html">Store</a></code> is the default implementation of this
+interface. Applications have a single store that stores the entire application state.
 Stores receive actions and use reducers combined with these actions, to calculate state changes.
 Upon every state update a store informs all of its subscribers.</p>
 
@@ -182,9 +182,9 @@ Upon every state update a store informs all of its subscribers.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreTypecuRq_S0__FMq_FT7reducerPS_10AnyReducer_5stateGSqqq_S0_5State__q_"></a>
+                    <a name="/s:FP7ReSwift9StoreTypecFT7reducerPS_10AnyReducer_5stateGSqwx5State__x"></a>
                     <a name="//apple_ref/swift/Method/init(reducer:state:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreTypecuRq_S0__FMq_FT7reducerPS_10AnyReducer_5stateGSqqq_S0_5State__q_">init(reducer:state:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreTypecFT7reducerPS_10AnyReducer_5stateGSqwx5State__x">init(reducer:state:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -199,13 +199,13 @@ Upon every state update a store informs all of its subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="kt">AnyReducer</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyReducer.html">AnyReducer</a></span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L22" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L26" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -223,35 +223,20 @@ Upon every state update a store informs all of its subscribers.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An ActionCreator is a function that, based on the received state argument, might or might not
-create an action.</p>
-
-<p>Example:</p>
-
-<pre class="highlight plaintext"><code>func deleteNote(noteID: Int) -&gt; ActionCreator {
-return { state, store in
-// only delete note if editing is enabled
-if (state.editingEnabled == true) {
-return NoteDataAction.DeleteNote(noteID)
-} else {
-return nil
-}
-}
-}
-</code></pre>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">ActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">StoreType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L212" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L0" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -269,24 +254,20 @@ return nil
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An optional callback that can be passed to the <code>dispatch</code> method.
-This callback will be called when the dispatched action triggers a new state calculation.
-This is useful when you need to wait on a state change, triggered by an action (e.g. wait on
-a successful login). However, you should try to use this callback very seldom as it
-deviates slighlty from the unidirectional data flow principal.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">DispatchCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L190" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L0" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -304,20 +285,20 @@ deviates slighlty from the unidirectional data flow principal.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>AsyncActionCreators allow the developer to wait for the completion of an async action.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">AsyncActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">StoreType</span><span class="p">,</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L215" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L0" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -325,9 +306,9 @@ deviates slighlty from the unidirectional data flow principal.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreTypecuRq_S0__FMq_FT7reducerPS_10AnyReducer_5stateGSqqq_S0_5State_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS2__P_FPS2__P___q_"></a>
+                    <a name="/s:FP7ReSwift9StoreTypecFT7reducerPS_10AnyReducer_5stateGSqwx5State_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS3__P_FPS3__P___x"></a>
                     <a name="//apple_ref/swift/Method/init(reducer:state:middleware:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreTypecuRq_S0__FMq_FT7reducerPS_10AnyReducer_5stateGSqqq_S0_5State_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS2__P_FPS2__P___q_">init(reducer:state:middleware:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreTypecFT7reducerPS_10AnyReducer_5stateGSqwx5State_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS3__P_FPS3__P___x">init(reducer:state:middleware:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -343,13 +324,13 @@ Middleware is applied in the order in which it is passed into this constructor.<
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="kt">AnyReducer</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span> <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt">Middleware</span><span class="p">])</span></code></pre>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyReducer.html">AnyReducer</a></span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span> <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt">Middleware</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L26" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L30" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -357,9 +338,9 @@ Middleware is applied in the order in which it is passed into this constructor.<
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:vP7ReSwift9StoreType5stateGSQqq_S0_5State_"></a>
+                    <a name="/s:vP7ReSwift9StoreType5stateGSQwx5State_"></a>
                     <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP7ReSwift9StoreType5stateGSQqq_S0_5State_">state</a>
+                    <a class="token" href="#/s:vP7ReSwift9StoreType5stateGSQwx5State_">state</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -374,13 +355,13 @@ Middleware is applied in the order in which it is passed into this constructor.<
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L29" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L33" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -406,13 +387,13 @@ This dispatch function can be extended by providing middlewares.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt">DispatchFunction</span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt">DispatchFunction</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L35" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L39" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -420,9 +401,9 @@ This dispatch function can be extended by providing middlewares.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType9subscribeu__Rq_S0_qd__S_15StoreSubscriberzqq_S0_5Stateqqd__S1_24StoreSubscriberStateType_Fq_Fqd__T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType9subscribeuRd__S_15StoreSubscriberwx5Statezwd__24StoreSubscriberStateTyperFqd__T_"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType9subscribeu__Rq_S0_qd__S_15StoreSubscriberzqq_S0_5Stateqqd__S1_24StoreSubscriberStateType_Fq_Fqd__T_">subscribe(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType9subscribeuRd__S_15StoreSubscriberwx5Statezwd__24StoreSubscriberStateTyperFqd__T_">subscribe(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -439,7 +420,7 @@ state in this store changes.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">:</span> <span class="kt">StoreSubscriber</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">State</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">State</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -465,7 +446,7 @@ state in this store changes.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L44" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L48" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -473,9 +454,9 @@ state in this store changes.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType11unsubscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType11unsubscribeFPS_18AnyStoreSubscriber_T_"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType11unsubscribeuRq_S0__Fq_FPS_18AnyStoreSubscriber_T_">unsubscribe(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType11unsubscribeFPS_18AnyStoreSubscriber_T_">unsubscribe(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -491,7 +472,7 @@ receive state updates from this store.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt">AnyStoreSubscriber</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyStoreSubscriber.html">AnyStoreSubscriber</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -517,7 +498,7 @@ receive state updates from this store.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L52" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L56" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -525,9 +506,9 @@ receive state updates from this store.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FPS_6Action_P_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFPS_6Action_P_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FPS_6Action_P_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFPS_6Action_P_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -547,7 +528,7 @@ receive state updates from this store.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
 
                         </div>
                       </div>
@@ -578,7 +559,7 @@ receive state updates from this store.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L67" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L71" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -586,9 +567,9 @@ receive state updates from this store.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_Fqq_S0_13ActionCreatorP_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFwx13ActionCreatorP_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_Fqq_S0_13ActionCreatorP_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFwx13ActionCreatorP_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -607,14 +588,14 @@ at the end of it.</p>
 <p>Example of an action creator:</p>
 
 <pre class="highlight plaintext"><code>func deleteNote(noteID: Int) -&gt; ActionCreator {
-return { state, store in
-// only delete note if editing is enabled
-if (state.editingEnabled == true) {
-return NoteDataAction.DeleteNote(noteID)
-} else {
-return nil
-}
-}
+   return { state, store in
+       // only delete note if editing is enabled
+       if (state.editingEnabled == true) {
+           return NoteDataAction.DeleteNote(noteID)
+       } else {
+           return nil
+       }
+   }
 }
 </code></pre>
 
@@ -628,7 +609,7 @@ return nil
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">actionCreator</span><span class="p">:</span> <span class="kt">ActionCreator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">actionCreator</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:P7ReSwift9StoreType13ActionCreator">ActionCreator</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
 
                         </div>
                       </div>
@@ -639,7 +620,7 @@ return nil
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L102" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L106" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -647,9 +628,9 @@ return nil
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_Fqq_S0_18AsyncActionCreatorT_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFwx18AsyncActionCreatorT_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_Fqq_S0_18AsyncActionCreatorT_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFwx18AsyncActionCreatorT_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -665,13 +646,13 @@ action creator asynchronously.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="k">as</span><span class="nv">yncActionCreator</span><span class="p">:</span> <span class="kt">AsyncActionCreator</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="k">as</span><span class="nv">yncActionCreator</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:P7ReSwift9StoreType18AsyncActionCreator">AsyncActionCreator</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L108" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L112" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -679,144 +660,9 @@ action creator asynchronously.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTPS_6Action_8callbackGSqqq_S0_16DispatchCallback__P_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFTwx18AsyncActionCreator8callbackGSqwx16DispatchCallback__T_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTPS_6Action_8callbackGSqqq_S0_16DispatchCallback__P_">dispatch(_:callback:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Dispatches an action and calls the callback as soon as the action has been processed.
-You will receive the updated store state as part of this callback.</p>
-
-<p>Example of dispatching an action and implementing a callback:</p>
-
-<pre class="highlight plaintext"><code>store.dispatch( CounterAction.IncreaseCounter ) { state in
-print("New state: \(state)")
-}
-</code></pre>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kt">DispatchCallback</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h5>Parameters</h5>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>action</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The action that is being dispatched to the store</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h5>Return Value</h5>
-                        <p>By default returns the dispatched action, but middlewares can change the return type, e.g. to return promises</p>
-
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L126" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTqq_S0_13ActionCreator8callbackGSqqq_S0_16DispatchCallback__P_"></a>
-                    <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTqq_S0_13ActionCreator8callbackGSqqq_S0_16DispatchCallback__P_">dispatch(_:callback:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Dispatches an action creator to the store. Action creators are functions that generate
-actions. They are called by the store and receive the current state of the application
-and a reference to the store as their input.</p>
-
-<p>Based on that input the action creator can either return an action or not. Alternatively
-the action creator can also perform an asynchronous operation and dispatch a new action
-at the end of it.</p>
-
-<p>Example of an action creator:</p>
-
-<pre class="highlight plaintext"><code>func deleteNote(noteID: Int) -&gt; ActionCreator {
-return { state, store in
-// only delete note if editing is enabled
-if (state.editingEnabled == true) {
-return NoteDataAction.DeleteNote(noteID)
-} else {
-return nil
-}
-}
-}
-</code></pre>
-
-<p>This action creator can then be dispatched as following:</p>
-
-<pre class="highlight plaintext"><code>store.dispatch( noteActionCreatore.deleteNote(3) )
-</code></pre>
-
-<p>This overloaded version of <code>dispatch</code> will call the provided <code>callback</code> as soon as a new
-state has been calculated based on the dispatch action.</p>
-
-<div class="aside aside-note">
-          <p class="aside-title">Note</p>
-          <p>If the ActionCreator does not dispatch an action, the callback block will never
-be called</p>
-
-        </div>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">actionCreator</span><span class="p">:</span> <span class="kt">ActionCreator</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kt">DispatchCallback</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h5>Return Value</h5>
-                        <p>By default returns the dispatched action, but middlewares can change the return type, e.g. to return promises</p>
-
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L167" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTqq_S0_18AsyncActionCreator8callbackGSqqq_S0_16DispatchCallback__T_"></a>
-                    <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchuRq_S0__Fq_FTqq_S0_18AsyncActionCreator8callbackGSqqq_S0_16DispatchCallback__T_">dispatch(_:callback:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFTwx18AsyncActionCreator8callbackGSqwx16DispatchCallback__T_">dispatch(_:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -832,24 +678,24 @@ triggered by the asynchronously generated action creator.</p>
 asynchronoously dispatched action has caused a new state calculation.</p>
 
 <div class="aside aside-note">
-          <p class="aside-title">Note</p>
-          If the ActionCreator does not dispatch an action, the callback block will never
+    <p class="aside-title">Note</p>
+    If the ActionCreator does not dispatch an action, the callback block will never
 be called
 
-        </div>
+</div>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="k">as</span><span class="nv">yncActionCreator</span><span class="p">:</span> <span class="kt">AsyncActionCreator</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kt">DispatchCallback</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="k">as</span><span class="nv">yncActionCreator</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:P7ReSwift9StoreType18AsyncActionCreator">AsyncActionCreator</a></span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:P7ReSwift9StoreType16DispatchCallback">DispatchCallback</a></span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L180" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L125" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -863,7 +709,7 @@ be called
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.4.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
