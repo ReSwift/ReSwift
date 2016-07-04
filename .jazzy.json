@@ -1,16 +1,14 @@
 {
     "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-macOS"],
-    "swift_version": "2.1.1",
-    "author_name": "ReSwift",
+    "swift_version": "2.2",
+    "author": "ReSwift",
     "author_url": "https://github.com/ReSwift/ReSwift",
-    "module_name": "ReSwift",
-    "readme_path": "Docs/tmp/compile/README.md",
-    "docset_platform": "reswift",
-    "assets_directory": "Docs/jazzy-theme/assets",
-    "template_directory": "Docs/jazzy-theme/templates",
+    "module": "ReSwift",
+    "readme": "Docs/tmp/compile/README.md",
+    "theme": "Docs/jazzy-theme/",
 
-    "documentation_glob": "Docs/tmp/docs/*.md",
-    "abstract_glob": "Docs/tmp/api/*.md",
+    "documentation": "Docs/tmp/docs/*.md",
+    "abstract": "Docs/tmp/api/*.md",
 
     "custom_categories": [{
         "name": "Documentation",
