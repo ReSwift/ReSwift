@@ -21,6 +21,12 @@ public class Store<State: StateType>: StoreType {
 
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
 
+    private var _previousState : State?
+    public var previousState: State? {
+        get {
+            return _previousState
+        }
+    }
     /*private (set)*/ public var state: State! {
         didSet {
             subscriptions = subscriptions.filter { $0.subscriber != nil }
@@ -155,7 +161,8 @@ public class Store<State: StateType>: StoreType {
             let newState = reducer._handleAction(action, state: state) as! State
         #endif
         isDispatching = false
-
+        
+        _previousState = state
         state = newState
 
         return action
