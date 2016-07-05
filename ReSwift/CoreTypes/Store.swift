@@ -21,7 +21,7 @@ public class Store<State: StateType>: StoreType {
 
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
 
-    private var _previousState : State?
+    private var _previousState: State?
     public var previousState: State? {
         get {
             return _previousState
@@ -161,7 +161,7 @@ public class Store<State: StateType>: StoreType {
             let newState = reducer._handleAction(action, state: state) as! State
         #endif
         isDispatching = false
-        
+
         _previousState = state
         state = newState
 
