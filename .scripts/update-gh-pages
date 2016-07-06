@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# ----- Early exit check
+
+if [ "$TRAVIS_BRANCH" != "" ]; then
+    # Exit if we are running inside travis but not on the iOS scheme
+    if [ "$SCHEME" != "iOS" ]; then
+        echo " <== Early exit - SCHEME='$SCHEME'"
+        exit 0
+    fi
+fi
+
+
+# ----- Configuration
+
+ORGANISATION=ReSwift
+NAME=ReSwift
+BRANCH=$([ "$TRAVIS_BRANCH" == "" ] && echo "master" || echo "$TRAVIS_BRANCH")
+SHA=`git rev-parse --verify HEAD --short`
+REPO=`git config remote.origin.url`
+
+TMP=Docs/tmp
+CHECKOUT_PATH=Docs/output
+OUTPUT_PATH=$CHECKOUT_PATH/$BRANCH
+
+
+# ----- Clone the GitHub pages repo if required
+
+echo " ==> Updating documentation for '$BRANCH' branch"
+
+if [ -d "$CHECKOUT_PATH" ]; then
+    echo " ==> Update: gh-pages -> $CHECKOUT_PATH"
+    git -C "$CHECKOUT_PATH" pull origin gh-pages
+else
+    echo " ==> Checkout: gh-pages -> $CHECKOUT_PATH"
+    git clone --branch gh-pages "$REPO" "$CHECKOUT_PATH"
+fi
+
+if [ "$TRAVIS_BRANCH" != "" ]; then
+    echo " ==> Install: jazzy"
+    gem install --no-rdoc --no-ri jazzy
+fi
+
+echo " ==> Generate documentation"
+.scripts/generate-docs "$BRANCH" "$OUTPUT_PATH"
+
+# ----- Travis Documentation updater
+
+# Exit if not running from travis
+if [ "$TRAVIS_BRANCH" == "" ]; then exit; fi
+if [ "$SCHEME" != "iOS" ]; then exit; fi
+
+pushd "$CHECKOUT_PATH"
+
+    git config user.name "Travis CI"
+    git config user.email "$COMMIT_AUTHOR_EMAIL"
+
+    # Exit if there are no changes to the documentation
+    echo " ==> Check for documentation changes"
+    CHANGE_SET=$(git status -s)
+    if [ "$CHANGE_SET" == "" ]; then
+        echo " <== No changes to the output on this push; exiting."
+        exit 0
+    fi
+
+    # Exit if only the docset archive has changed (it always changes)
+    if [ "$CHANGE_SET" == " M $BRANCH/docsets/$NAME.tgz" ]; then
+        echo " <== Only the docset archive changed on this push; exiting."
+        exit 0
+    fi
+
+    echo " ==> Stage changes"
+    git add -A "$BRANCH"
+
+    echo " ==> Commit changes"
+    git commit -m "[$BRANCH $SHA] Regenerate documentation"
+
+    echo " ==> Push changes -> '$REPO'"
+    git push -q "https://$GITHUB_PAGES_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages
+
+    echo " <== All done 👊"
+popd

@@ -44,6 +44,7 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J ReSwift
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && .scripts/update-gh-pages
 
 before_deploy:
   - carthage build --no-skip-current
