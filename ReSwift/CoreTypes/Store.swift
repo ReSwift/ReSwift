@@ -98,8 +98,9 @@ public class Store<State: StateType>: StoreType {
     public func _defaultDispatch(_ action: Action) -> Any {
         if isDispatching {
             // Use Obj-C exception since throwing of exceptions can be verified through tests
-            NSException.raise("SwiftFlow:IllegalDispatchFromReducer" as NSExceptionName, format: "Reducers may not " +
-                "dispatch actions.", arguments: getVaList(["nil"]))
+            NSException.raise("SwiftFlow:IllegalDispatchFromReducer" as NSExceptionName,
+                              format: "Reducers may not " + "dispatch actions.",
+                              arguments: getVaList(["nil"]))
         }
 
         isDispatching = true

@@ -8,6 +8,8 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 public typealias DispatchFunction =  (Action) -> Any
 public typealias GetState = () -> StateType?
 public typealias Middleware = (DispatchFunction?, GetState) -> (DispatchFunction) -> DispatchFunction
+// swiftlint:enable line_length
