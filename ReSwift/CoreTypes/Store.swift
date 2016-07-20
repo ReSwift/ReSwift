@@ -85,7 +85,11 @@ public class Store<State: StateType>: StoreType {
             subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
 
             if let state = self.state {
-                subscriber._newState(selector?(state) ?? state)
+                if let selectedState = selector?(state) {
+                    subscriber._newState(selectedState)
+                } else {
+                    subscriber._newState(state)
+                }
             }
     }
 
