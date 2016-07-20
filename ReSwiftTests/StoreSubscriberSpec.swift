@@ -6,53 +6,57 @@
 //  Copyright © 2016 Benjamin Encz. All rights reserved.
 //
 
-import Quick
-import Nimble
+import XCTest
 @testable import ReSwift
 
 // swiftlint:disable function_body_length
-class FilteredStoreSpec: QuickSpec {
+class FilteredStoreSpec: XCTest {
 
-    override func spec() {
+    override func setUp() {
+        super.setUp()
+    }
 
-        describe("#subscribe") {
+    override func tearDown() {
+        super.tearDown()
+    }
 
-            it("allows to pass a state selector closure") {
-                let reducer = TestReducer()
-                let store = Store(reducer: reducer, state: TestAppState())
-                let subscriber = TestFilteredSubscriber()
 
-                store.subscribe(subscriber) {
-                    $0.testValue
-                }
+    // #subscribe
+    // allows to pass a state selector closure
+    func testAllowsToPassAStateSelectorClosure() {
+        let reducer = TestReducer()
+        let store = Store(reducer: reducer, state: TestAppState())
+        let subscriber = TestFilteredSubscriber()
 
-                store.dispatch(SetValueAction(3))
-
-                expect(subscriber.receivedValue).to(equal(3))
-            }
-
-            it("supports complex state selector closures") {
-                let reducer = TestComplexAppStateReducer()
-                let store = Store(reducer: reducer, state: TestComplexAppState())
-                let subscriber = TestSelectiveSubscriber()
-
-                store.subscribe(subscriber) {
-                    (
-                        $0.testValue,
-                        $0.otherState?.name
-                    )
-                }
-
-                store.dispatch(SetValueAction(5))
-                store.dispatch(SetOtherStateAction(
-                    otherState: OtherState(name: "TestName", age: 99)
-                ))
-
-                expect(subscriber.receivedValue.0).to(equal(5))
-                expect(subscriber.receivedValue.1).to(equal("TestName"))
-            }
+        store.subscribe(subscriber) {
+            $0.testValue
         }
 
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+    }
+
+    // supports complex state selector closures
+    func testSupportsComplexStateSelectorClosures() {
+        let reducer = TestComplexAppStateReducer()
+        let store = Store(reducer: reducer, state: TestComplexAppState())
+        let subscriber = TestSelectiveSubscriber()
+
+        store.subscribe(subscriber) {
+            (
+                $0.testValue,
+                $0.otherState?.name
+            )
+        }
+
+        store.dispatch(SetValueAction(5))
+        store.dispatch(SetOtherStateAction(
+            otherState: OtherState(name: "TestName", age: 99)
+        ))
+
+        XCTAssertEqual(subscriber.receivedValue.0, 5)
+        XCTAssertEqual(subscriber.receivedValue.1, "TestName")
     }
 
 }

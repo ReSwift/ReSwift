@@ -51,8 +51,10 @@ private let isTypedActionKey = "isTypedAction"
 extension StandardAction: Coding {
 
     public init?(dictionary: [String: AnyObject?]) {
+        // swiftlint:disable conditional_binding_cascade
         guard let type = dictionary[typeKey] as? String,
-          isTypedAction = dictionary[isTypedActionKey] as? Bool else { return nil }
+              let isTypedAction = dictionary[isTypedActionKey] as? Bool else { return nil }
+        // swiftlint:enabled conditional_binding_cascade
         self.type = type
         self.payload = dictionary[payloadKey] as? [String: AnyObject]
         self.isTypedAction = isTypedAction

@@ -85,7 +85,8 @@ public class Store<State: StateType>: StoreType {
             subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
 
             if let state = self.state {
-                subscriber._newState(selector?(state) ?? state)
+                let eitherState: Any = selector?(state) ?? state
+                subscriber._newState(eitherState)
             }
     }
 
@@ -98,7 +99,8 @@ public class Store<State: StateType>: StoreType {
     public func _defaultDispatch(_ action: Action) -> Any {
         if isDispatching {
             // Use Obj-C exception since throwing of exceptions can be verified through tests
-            NSException.raise("SwiftFlow:IllegalDispatchFromReducer" as NSExceptionName, format: "Reducers may not " +
+            NSException.raise("SwiftFlow:IllegalDispatchFromReducer" as NSExceptionName,
+                              format: "Reducers may not " +
                 "dispatch actions.", arguments: getVaList(["nil"]))
         }
 

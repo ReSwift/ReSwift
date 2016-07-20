@@ -183,16 +183,6 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 
     github "ReSwift/ReSwift"
 
-# Checking out Source Code
-
-After cloning this repository you need to use carthage to install testing frameworks that ReSwift depends on.
-
-Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OS X & iOS only. After checkout, run the following from the terminal:
-
-```bash
-carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
-```
-
 # Demo
 
 Using this library you can implement apps that have an explicit, reproducible state, allowing you, among many other things, to replay and rewind the app state, as shown below:
