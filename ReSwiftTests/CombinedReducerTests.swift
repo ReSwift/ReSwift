@@ -6,10 +6,8 @@
 //  Copyright © 2015 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-import Quick
-import Nimble
-@testable import ReSwift
+import XCTest
+import ReSwift
 
 class MockReducer: Reducer {
 
@@ -49,44 +47,50 @@ struct CounterState: StateType {
 
 let emptyAction = "EMPTY_ACTION"
 
-// swiftlint:disable function_body_length
-class CombinedReducerSpecs: QuickSpec {
 
-    override func spec() {
-        describe("Combined Reducer") {
+class CombinedReducerTest: XCTestCase {
 
-            it("calls each of the reducers with the given action exactly once") {
-                let mockReducer1 = MockReducer()
-                let mockReducer2 = MockReducer()
+    /**
+     it calls each of the reducers with the given action exactly once
+     */
+    func testCallsReducersOnce() {
+        let mockReducer1 = MockReducer()
+        let mockReducer2 = MockReducer()
 
-                let combinedReducer = CombinedReducer([mockReducer1, mockReducer2])
+        let combinedReducer = CombinedReducer([mockReducer1, mockReducer2])
 
-                combinedReducer._handleAction(
-                    StandardAction(type: emptyAction),
-                    state: CounterState()
-                )
+        #if swift(>=3)
+            _ = combinedReducer._handleAction(
+                action: StandardAction(type: emptyAction),
+                state: CounterState())
+        #else
+            combinedReducer._handleAction(StandardAction(type: emptyAction), state: CounterState())
+        #endif
 
-                expect(mockReducer1.calledWithAction).to(haveCount(1))
-                expect(mockReducer2.calledWithAction).to(haveCount(1))
-                expect((mockReducer1.calledWithAction[0] as! StandardAction).type)
-                    .to(equal(emptyAction))
-                expect((mockReducer2.calledWithAction[0] as! StandardAction).type)
-                    .to(equal(emptyAction))
-            }
-
-            it("combines the results from each individual reducer correctly") {
-                let increaseByOneReducer = IncreaseByOneReducer()
-                let increaseByTwoReducer = IncreaseByTwoReducer()
-
-                let combinedReducer = CombinedReducer([increaseByOneReducer, increaseByTwoReducer])
-                let newState = combinedReducer._handleAction(StandardAction(type: emptyAction),
-                    state: CounterState()) as? CounterState
-
-                expect(newState?.count).to(equal(3))
-            }
-
-        }
+        XCTAssertEqual(mockReducer1.calledWithAction.count, 1)
+        XCTAssertEqual(mockReducer2.calledWithAction.count, 1)
+        XCTAssertEqual((mockReducer1.calledWithAction[0] as! StandardAction).type, emptyAction)
+        XCTAssertEqual((mockReducer2.calledWithAction[0] as! StandardAction).type, emptyAction)
     }
 
+    /**
+     it combines the results from each individual reducer correctly
+     */
+    func testCombinesReducerResults() {
+        let increaseByOneReducer = IncreaseByOneReducer()
+        let increaseByTwoReducer = IncreaseByTwoReducer()
+
+        let combinedReducer = CombinedReducer([increaseByOneReducer, increaseByTwoReducer])
+        #if swift(>=3)
+            let newState = combinedReducer._handleAction(
+                action: StandardAction(type: emptyAction),
+                state: CounterState()) as? CounterState
+        #else
+            let newState = combinedReducer._handleAction(
+                StandardAction(type: emptyAction),
+                state: CounterState()) as? CounterState
+        #endif
+
+        XCTAssertEqual(newState?.count, 3)
+    }
 }
-// swiftlint:enable function_body_length

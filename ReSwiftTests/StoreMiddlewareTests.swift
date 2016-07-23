@@ -6,10 +6,8 @@
 //  Copyright © 2015 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-import Quick
-import Nimble
-@testable import ReSwift
+import XCTest
+import ReSwift
 
 let firstMiddleware: Middleware = { dispatch, getState in
     return { next in
@@ -44,7 +42,7 @@ let dispatchingMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueAction {
-                dispatch?(SetValueStringAction("\(action.value)"))
+                _ = dispatch?(SetValueStringAction("\(action.value)"))
 
                 return "Converted Action Successfully"
             }
@@ -64,7 +62,7 @@ let stateAccessingMiddleware: Middleware = { dispatch, getState in
             // avoid endless recursion by checking if we've dispatched exactly this action
             if appState?.testValue == "OK" && stringAction?.value != "Not OK" {
                 // dispatch a new action
-                dispatch?(SetValueStringAction("Not OK"))
+                _ = dispatch?(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
                 return next(StandardAction(type: "No-Op-Action"))
@@ -76,71 +74,72 @@ let stateAccessingMiddleware: Middleware = { dispatch, getState in
 }
 
 // swiftlint:disable function_body_length
-class StoreMiddlewareSpecs: QuickSpec {
+class StoreMiddlewareTests: XCTestCase {
 
+    /**
+     it can decorate dispatch function
+     */
+    func testDecorateDispatch() {
+        let reducer = TestValueStringReducer()
+        let store = Store<TestStringAppState>(reducer: reducer,
+            state: TestStringAppState(),
+            middleware: [firstMiddleware, secondMiddleware])
 
-    override func spec() {
+        let subscriber = TestStoreSubscriber<TestStringAppState>()
+        store.subscribe(subscriber)
 
-        describe("middleware") {
+        let action = SetValueStringAction("OK")
+        store.dispatch(action)
 
-            it("can decorate dispatch function") {
-                let reducer = TestValueStringReducer()
-                let store = Store<TestStringAppState>(reducer: reducer,
-                    state: TestStringAppState(),
-                    middleware: [firstMiddleware, secondMiddleware])
-
-                let subscriber = TestStoreSubscriber<TestStringAppState>()
-                store.subscribe(subscriber)
-
-                let action = SetValueStringAction("OK")
-                store.dispatch(action)
-
-                expect(store.state.testValue).to(
-                    equal("OK First Middleware Second Middleware"))
-            }
-
-            it("can dispatch actions") {
-                let reducer = TestValueStringReducer()
-                let store = Store<TestStringAppState>(reducer: reducer,
-                    state: TestStringAppState(),
-                    middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
-
-                let subscriber = TestStoreSubscriber<TestStringAppState>()
-                store.subscribe(subscriber)
-
-                let action = SetValueAction(10)
-                store.dispatch(action)
-
-                expect(store.state.testValue).to(
-                    equal("10 First Middleware Second Middleware"))
-            }
-
-            it("can change the return value of the dispatch function") {
-                let reducer = TestValueStringReducer()
-                let store = Store<TestStringAppState>(reducer: reducer,
-                    state: TestStringAppState(),
-                    middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
-
-                let action = SetValueAction(10)
-                let returnValue = store.dispatch(action) as? String
-
-                expect(returnValue).to(equal("Converted Action Successfully"))
-            }
-
-            it("middleware can access the store's state") {
-                let reducer = TestValueStringReducer()
-                var state = TestStringAppState()
-                state.testValue = "OK"
-
-                let store = Store<TestStringAppState>(reducer: reducer, state: state,
-                    middleware: [stateAccessingMiddleware])
-
-                store.dispatch(SetValueStringAction("Action That Won't Go Through"))
-
-                expect(store.state.testValue).to(equal("Not OK"))
-            }
-
-        }
+        XCTAssertEqual(store.state.testValue, "OK First Middleware Second Middleware")
     }
 
+    /**
+     it can dispatch actions
+     */
+    func testCanDispatch() {
+        let reducer = TestValueStringReducer()
+        let store = Store<TestStringAppState>(reducer: reducer,
+            state: TestStringAppState(),
+            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+
+        let subscriber = TestStoreSubscriber<TestStringAppState>()
+        store.subscribe(subscriber)
+
+        let action = SetValueAction(10)
+        store.dispatch(action)
+
+        XCTAssertEqual(store.state.testValue, "10 First Middleware Second Middleware")
+    }
+
+    /**
+     it can change the return value of the dispatch function
+     */
+    func testCanChangeReturnValue() {
+        let reducer = TestValueStringReducer()
+        let store = Store<TestStringAppState>(reducer: reducer,
+            state: TestStringAppState(),
+            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+
+        let action = SetValueAction(10)
+        let returnValue = store.dispatch(action) as? String
+
+        XCTAssertEqual(returnValue, "Converted Action Successfully")
+    }
+
+    /**
+     it middleware can access the store's state
+     */
+    func testMiddlewareCanAccessState() {
+        let reducer = TestValueStringReducer()
+        var state = TestStringAppState()
+        state.testValue = "OK"
+
+        let store = Store<TestStringAppState>(reducer: reducer, state: state,
+            middleware: [stateAccessingMiddleware])
+
+        store.dispatch(SetValueStringAction("Action That Won't Go Through"))
+
+        XCTAssertEqual(store.state.testValue, "Not OK")
+    }
 }
