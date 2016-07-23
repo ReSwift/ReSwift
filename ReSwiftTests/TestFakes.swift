@@ -1,5 +1,5 @@
 //
-//  Fakes.swift
+//  TestFakes.swift
 //  ReSwift
 //
 //  Created by Benji Encz on 12/24/15.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import ReSwift
+import ReSwift
 
 struct TestAppState: StateType {
     var testValue: Int?
@@ -114,5 +114,18 @@ class DispatchingSubscriber: StoreSubscriber {
         if state.testValue != 5 {
             self.store.dispatch(SetValueAction(5))
         }
+    }
+}
+
+class CallbackStoreSubscriber<T>: StoreSubscriber {
+
+    let handler: (T) -> Void
+
+    init(handler: (T) -> Void) {
+        self.handler = handler
+    }
+
+    func newState(state: T) {
+        handler(state)
     }
 }

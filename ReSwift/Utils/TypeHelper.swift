@@ -19,8 +19,9 @@ import Foundation
             casted to `SpecificStateType`.
  */
 #if swift(>=3)
+@discardableResult
 func withSpecificTypes<SpecificStateType, Action>(
-        action: Action,
+        _ action: Action,
         state genericStateType: StateType?,
         function: @noescape (action: Action, state: SpecificStateType?) -> SpecificStateType
     ) -> StateType {

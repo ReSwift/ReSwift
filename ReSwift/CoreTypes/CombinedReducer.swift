@@ -36,6 +36,6 @@ public struct CombinedReducer: AnyReducer {
             #else
                 return reducer._handleAction(action, state: currentState)
             #endif
-        }!
+            }!
     }
 }

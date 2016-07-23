@@ -12,6 +12,8 @@ ReSwift is a [Redux](https://github.com/reactjs/redux)-like implementation of th
 
 The ReSwift library is tiny - allowing users to dive into the code, understand every single line and [hopefully contribute](#contributing). 
 
+ReSwift also supports **Swift 2.2 through to Swift 3** without requiring you to make migration changes.
+
 ReSwift is quickly growing beyond the core library, providing experimental extensions for routing and time traveling through past app states!
 
 Excited? So are we 🎉
@@ -185,13 +187,7 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 
 # Checking out Source Code
 
-After cloning this repository you need to use carthage to install testing frameworks that ReSwift depends on.
-
-Due to an [issue in Nimble](https://github.com/Quick/Nimble/issues/213) at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble & Quick from binaries then rebuild OS X & iOS only. After checkout, run the following from the terminal:
-
-```bash
-carthage bootstrap && carthage bootstrap --no-use-binaries --platform ios,osx
-```
+ReSwift no longer has any carthage dependencies for development. Just checkout the project and run.
 
 # Demo
 

@@ -13,21 +13,13 @@ public protocol AnyReducer {
 }
 
 public protocol Reducer: AnyReducer {
-    #if swift(>=2.2)
     associatedtype ReducerStateType
-    #else
-    typealias ReducerStateType
-    #endif
 
     func handleAction(action: Action, state: ReducerStateType?) -> ReducerStateType
 }
 
 extension Reducer {
     public func _handleAction(action: Action, state: StateType?) -> StateType {
-        #if swift(>=3)
-            return withSpecificTypes(action: action, state: state, function: handleAction)
-        #else
-            return withSpecificTypes(action, state: state, function: handleAction)
-        #endif
+        return withSpecificTypes(action, state: state, function: handleAction)
     }
 }

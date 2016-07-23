@@ -3,6 +3,7 @@
 **Other**:
 
 - Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) @agentk
+- Migrate Quick/Nimble testing to XCTest - (#127) @agentk
 
 #2.0.0
 

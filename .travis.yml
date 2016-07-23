@@ -1,30 +1,29 @@
 language: objective-c
-osx_image: xcode7.3
 
 branches:
   except:
     - gh-pages
 
-before_install:
-  - brew update
-  - brew install carthage || brew outdated carthage || brew upgrade carthage
-  - carthage version
-
 install:
   - gem install xcpretty
-  - carthage bootstrap --no-use-binaries --platform Mac,iOS
 
 env:
   global:
     - LC_CTYPE=en_US.UTF-8
     - LANG=en_US.UTF-8
     - FRAMEWORK_NAME="ReSwift"
-    - IOS_SDK=iphonesimulator9.3
-    - OSX_SDK=macosx10.11
-    - TVOS_SDK=appletvsimulator9.2
-    - WATCHOS_SDK=watchsimulator2.2
-  matrix:
-    - DESTINATION="OS=9.3,name=iPhone 6S Plus"     SCHEME="iOS"     SDK="$IOS_SDK"     ACTION="test"
+    - UPDATE_DOCS="false"
+
+matrix:
+  include:
+    - osx_image: xcode8
+      env: SCHEME="macOS"  SDK="macosx10.12"          DESTINATION="arch=x86_64"
+    - osx_image: xcode7.3
+      env: SCHEME="macOS"  SDK="macosx10.11"          DESTINATION="arch=x86_64"  UPDATE_DOCS="true"
+    - osx_image: xcode7.3
+      env: SCHEME="iOS"    SDK="iphonesimulator9.3"   DESTINATION="OS=9.3,name=iPhone 6S Plus"
+    - osx_image: xcode7.3
+      env: SCHEME="tvOS"   SDK="appletvsimulator9.2"  DESTINATION="OS=9.2,name=Apple TV 1080p"
 
 script:
   - set -o pipefail
@@ -39,12 +38,15 @@ script:
     ONLY_ACTIVE_ARCH=YES
     GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
     GCC_GENERATE_TEST_COVERAGE_FILES=YES
-    "$ACTION"
+    test
     | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J ReSwift
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && .scripts/update-gh-pages
+  - test $TRAVIS_PULL_REQUEST == "false" &&
+    test $TRAVIS_BRANCH == "master" &&
+    test $UPDATE_DOCS == "true" &&
+    .scripts/update-gh-pages
 
 before_deploy:
   - carthage build --no-skip-current
