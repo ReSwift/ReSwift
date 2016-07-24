@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (42% documented)
+         (33% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -162,11 +162,7 @@
             
             <a href='#checking-out-source-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='checking-out-source-code'>Checking out Source Code</h1>
 
-<p>After cloning this repository you need to use carthage to install testing frameworks that ReSwift depends on.</p>
-
-<p>Due to an <a href="https://github.com/Quick/Nimble/issues/213">issue in Nimble</a> at the moment, tvOS tests will fail if building Nimble / Quick from source. You can however install Nimble &amp; Quick from binaries then rebuild OS X &amp; iOS only. After checkout, run the following from the terminal:</p>
-<pre class="highlight shell"><code>carthage bootstrap <span class="o">&amp;&amp;</span> carthage bootstrap --no-use-binaries --platform ios,osx
-</code></pre>
+<p>ReSwift no longer has any carthage dependencies for development. Just checkout the project and run.</p>
 
           </div>
         </section>
