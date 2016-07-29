@@ -10,7 +10,7 @@ ReSwift is a [Redux](https://github.com/reactjs/redux)-like implementation of th
 - **Views**: in a ReSwift app your views update when your state changes. Your views become simple visualizations of the current app state.
 - **State Changes**: in a ReSwift app you can only perform state changes through actions. Actions are small pieces of data that describe a state change. By drastically limiting the way state can be mutated, your app becomes easier to understand and it gets easier to work with many collaborators.
 
-The ReSwift library is tiny - allowing users to dive into the code, understand every single line and [hopefully contribute](#contributing). 
+The ReSwift library is tiny - allowing users to dive into the code, understand every single line and [hopefully contribute](#contributing).
 
 ReSwift also supports **Swift 2.2 through to Swift 3** without requiring you to make migration changes.
 
@@ -87,7 +87,7 @@ To maintain our state and delegate the actions to the reducers, we need a store.
 
 ```swift
 let mainStore = Store<AppState>(
-	reducer: AppReducer(),
+	reducer: CounterReducer(),
 	state: nil
 )
 
