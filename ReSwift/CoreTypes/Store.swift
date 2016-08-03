@@ -78,7 +78,7 @@ public class Store<State: StateType>: StoreType {
         #if swift(>=3)
             let contains = subscriptions.contains(where: { $0.subscriber === subscriber })
         #else
-            let contains = subscriptions.contains({ $0.subscriber === subscriber }  )
+            let contains = subscriptions.contains({ $0.subscriber === subscriber })
         #endif
 
         if contains {
