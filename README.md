@@ -136,7 +136,7 @@ The `newState` method will be called by the `Store` whenever a new app state is 
 
 Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.
 
-This is a very basic example that only shows a subset of ReSwift's features, read the Getting Started Guide to see how you can build entire apps with this architecture.
+This is a very basic example that only shows a subset of ReSwift's features, read the Getting Started Guide to see how you can build entire apps with this architecture. For a complete implementation of this example see the [CounterExample](https://github.com/ReSwift/CounterExample) project.
 
 [You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
 
@@ -204,7 +204,8 @@ This repository contains the core component for ReSwift, the following extension
 
 # Example Projects
 
-- [CounterExample](https://github.com/ReSwift/CounterExample-Navigation-TimeTravel): A very simple counter app implemented with ReSwift. This app also demonstrates the basics of routing with ReSwiftRouter.
+- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with ReSwift. 
+- [CounterExample-Navigation-TimeTravel](https://github.com/ReSwift/CounterExample-Navigation-TimeTravel): This example builds on the simple CounterExample app, adding time travel with [ReSwiftRecorder](https://github.com/ReSwift/ReSwift-Recorder) and routing with [ReSwiftRouter](https://github.com/ReSwift/ReSwift-Router).
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.
 
