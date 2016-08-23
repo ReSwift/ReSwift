@@ -39,7 +39,7 @@ struct SetValueAction: StandardActionConvertible {
     }
 
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueAction.type, payload: ["value": value],
+        return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
                                 isTypedAction: true)
     }
 
@@ -59,7 +59,7 @@ struct SetValueStringAction: StandardActionConvertible {
     }
 
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type, payload: ["value": value],
+        return StandardAction(type: SetValueStringAction.type, payload: ["value": value as AnyObject],
                                 isTypedAction: true)
     }
 
@@ -121,7 +121,7 @@ class CallbackStoreSubscriber<T>: StoreSubscriber {
 
     let handler: (T) -> Void
 
-    init(handler: (T) -> Void) {
+    init(handler: @escaping (T) -> Void) {
         self.handler = handler
     }
 

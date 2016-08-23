@@ -44,9 +44,9 @@ public struct StandardAction: Action {
 
 // MARK: Coding Extension
 
-private let typeKey = "type"
-private let payloadKey = "payload"
-private let isTypedActionKey = "isTypedAction"
+fileprivate let typeKey = "type"
+fileprivate let payloadKey = "payload"
+fileprivate let isTypedActionKey = "isTypedAction"
 let reSwiftNull = "ReSwift_Null"
 
 extension StandardAction: Coding {
@@ -60,9 +60,9 @@ extension StandardAction: Coding {
     }
 
     public var dictionaryRepresentation: [String: AnyObject] {
-        let payload: AnyObject = self.payload ?? reSwiftNull
+        let payload = self.payload as AnyObject? ?? reSwiftNull as AnyObject
 
-        return [typeKey: type, payloadKey: payload, isTypedActionKey: isTypedAction]
+        return [typeKey: type as AnyObject, payloadKey: payload, isTypedActionKey: isTypedAction as AnyObject]
     }
 }
 
