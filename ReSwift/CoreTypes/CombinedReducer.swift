@@ -20,7 +20,7 @@ import Foundation
 */
 public struct CombinedReducer: AnyReducer {
 
-    private let reducers: [AnyReducer]
+    fileprivate let reducers: [AnyReducer]
 
     /// Creates a Combined Reducer from the given list of Reducers
     public init(_ reducers: [AnyReducer]) {

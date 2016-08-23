@@ -42,7 +42,7 @@ public protocol StoreType {
      - parameter subscriber: Subscriber that will receive store updates
      */
     #if swift(>=3)
-    func subscribe<S: StoreSubscriber where S.StoreSubscriberStateType == State>(_ subscriber: S)
+    func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
     #else
     func subscribe<S: StoreSubscriber where S.StoreSubscriberStateType == State>(subscriber: S)
     #endif
@@ -174,9 +174,8 @@ public protocol StoreType {
      ```
 
      */
-    associatedtype ActionCreator = (state: State, store: StoreType) -> Action?
+    associatedtype ActionCreator = (State, StoreType) -> Action?
 
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
-    associatedtype AsyncActionCreator =
-        (state: State, store: StoreType, actionCreatorCallback: (ActionCreator) -> Void) -> Void
+    associatedtype AsyncActionCreator = (State, StoreType, (ActionCreator) -> Void) -> Void
 }

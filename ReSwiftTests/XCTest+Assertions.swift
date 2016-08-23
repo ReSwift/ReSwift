@@ -11,7 +11,7 @@ import XCTest
  */
 @testable import ReSwift
 
-private let noReturnFailureWaitTime = 0.1
+fileprivate let noReturnFailureWaitTime = 0.1
 
 
 public extension XCTestCase {
@@ -29,35 +29,28 @@ public extension XCTestCase {
      */
     public func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
                                  line: UInt = #line, testCase: () -> Void) {
-        expectAssertionNoReturnFunction(
-            functionName: "fatalError",
-            file: file,
-            line: line,
-            function: { (caller) -> Void in
-
-                Assertions.fatalErrorClosure = { message, _, _ in caller(message) }
-
+        expectAssertionNoReturnFunction(functionName: "fatalError",
+                                        file: file,
+                                        line: line,
+                                        function: { caller in
+                                            Assertions.fatalErrorClosure = { message, _, _ in
+                                                caller(message)
+                                            }
         }, expectedMessage: expectedMessage, testCase: testCase) { _ in
             Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
         }
     }
 
-    // MARK:- Private Methods
+    // MARK:- fileprivate Methods
 
-    // swiftlint:disable function_parameter_count
-    private func expectAssertionNoReturnFunction(
-        functionName funcName: String,
-        file: StaticString,
-        line: UInt,
-        function: (caller: (String) -> Void) -> Void,
-        expectedMessage: String? = nil,
-        testCase: () -> Void,
-        cleanUp: () -> ()) {
-
+    // swiftlint:disable function_parameter_count line_length
+    fileprivate func expectAssertionNoReturnFunction(functionName funcName: String,
+                                                     file: StaticString,
+                                                     line: UInt,
+                                                     function: ((String) -> Void) -> Void, expectedMessage: String? = nil, testCase: @escaping () -> Void, cleanUp: @escaping () -> Void) {
         let asyncExpectation = futureExpectation(withDescription: funcName + "-Expectation")
         var assertionMessage: String? = nil
-
-        function { (message) -> Void in
+        function { message in
             assertionMessage = message
             asyncExpectation.fulfill()
         }

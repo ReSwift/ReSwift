@@ -9,6 +9,6 @@
 import Foundation
 
 struct Subscription<State: StateType> {
-    private(set) weak var subscriber: AnyStoreSubscriber? = nil
+    fileprivate(set) weak var subscriber: AnyStoreSubscriber? = nil
     let selector: ((State) -> Any)?
 }
