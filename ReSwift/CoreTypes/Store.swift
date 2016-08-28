@@ -23,15 +23,15 @@ public class Store<State: StateType>: StoreType {
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
 
     /*private (set)*/ public var state: State! {
-        didSet {
+        willSet(newState) {
             subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
                 #if swift(>=3)
-                    $0.subscriber?._newState(state: $0.selector?(state) ?? state)
+                    $0.subscriber?._newState(state: $0.selector?(newState) ?? newState)
                 #else
-                    $0.subscriber?._newState($0.selector?(state) ?? state)
+                    $0.subscriber?._newState($0.selector?(newState) ?? newState)
                 #endif
             }
         }
