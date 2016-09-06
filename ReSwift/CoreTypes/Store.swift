@@ -90,8 +90,8 @@ public class Store<State: StateType>: StoreType {
     }
 
     #if swift(>=3)
-    public func subscribe<S: StoreSubscriber
-        where S.StoreSubscriberStateType == State>(_ subscriber: S) {
+    public func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
             subscribe(subscriber, selector: nil)
     }
     #else
@@ -102,9 +102,9 @@ public class Store<State: StateType>: StoreType {
     #endif
 
     #if swift(>=3)
-    public func subscribe<SelectedState, S: StoreSubscriber
-        where S.StoreSubscriberStateType == SelectedState>
-        (_ subscriber: S, selector: ((State) -> SelectedState)?) {
+    public func subscribe<SelectedState, S: StoreSubscriber>
+        (_ subscriber: S, selector: ((State) -> SelectedState)?)
+        where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
 
             subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
@@ -177,8 +177,8 @@ public class Store<State: StateType>: StoreType {
 
     #if swift(>=3)
     @discardableResult
-    public func dispatch(_ actionCreatorProvider: ActionCreator) -> Any {
-        let action = actionCreatorProvider(state: state, store: self)
+    public func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
+        let action = actionCreatorProvider(state, self)
 
         if let action = action {
             dispatch(action)
@@ -199,7 +199,7 @@ public class Store<State: StateType>: StoreType {
     #endif
 
     #if swift(>=3)
-    public func dispatch(_ asyncActionCreatorProvider: AsyncActionCreator) {
+    public func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
     #else
@@ -209,10 +209,10 @@ public class Store<State: StateType>: StoreType {
     #endif
 
     #if swift(>=3)
-    public func dispatch(_ actionCreatorProvider: AsyncActionCreator,
+    public func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
                          callback: DispatchCallback?) {
-        actionCreatorProvider(state: state, store: self) { actionProvider in
-            let action = actionProvider(state: self.state, store: self)
+        actionCreatorProvider(state, self) { actionProvider in
+            let action = actionProvider(self.state, self)
 
             if let action = action {
                 self.dispatch(action)
@@ -235,11 +235,23 @@ public class Store<State: StateType>: StoreType {
 
     public typealias DispatchCallback = (State) -> Void
 
+    #if swift(>=3)
+    public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
+    #else
     public typealias ActionCreator = (state: State, store: Store) -> Action?
+    #endif
 
+    #if swift(>=3)
+    public typealias AsyncActionCreator = (
+        _ state: State,
+        _ store: Store,
+        _ actionCreatorCallback: @escaping (ActionCreator) -> Void
+    ) -> Void
+    #else
     public typealias AsyncActionCreator = (
         state: State,
         store: Store,
         actionCreatorCallback: (ActionCreator) -> Void
     ) -> Void
+    #endif
 }

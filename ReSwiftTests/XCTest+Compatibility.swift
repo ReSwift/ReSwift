@@ -5,23 +5,27 @@ import XCTest
     internal typealias TimeInterval = NSTimeInterval
 #endif
 
+#if swift(>=3)
+internal func dispatchAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
+    DispatchQueue.global(qos: .default).async(execute: work)
+}
+#else
 internal func dispatchAsync(execute work: @convention(block) () -> Swift.Void) {
-    #if swift(>=3)
-        DispatchQueue.global(qos: .default).async(execute: work)
-    #else
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), work)
-    #endif
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), work)
 }
+#endif
 
 
+#if swift(>=3)
+internal func dispatchUserInitiatedAsync
+    (execute work: @escaping @convention(block) () -> Swift.Void) {
+    DispatchQueue.global(qos: .userInitiated).async(execute: work)
+}
+#else
 internal func dispatchUserInitiatedAsync(execute work: @convention(block) () -> Swift.Void) {
-    #if swift(>=3)
-        DispatchQueue.global(qos: .userInitiated).async(execute: work)
-    #else
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), work)
-    #endif
-
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), work)
 }
+#endif
 
 extension XCTestCase {
 
