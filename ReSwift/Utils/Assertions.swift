@@ -16,8 +16,8 @@ import Foundation
  - parameter line:    Calling line
  */
 #if swift(>=3)
-@noreturn internal func raiseFatalError(_ message: @autoclosure () -> String = "",
-                                 file: StaticString = #file, line: UInt = #line) {
+internal func raiseFatalError(_ message: @autoclosure () -> String = "",
+                                 file: StaticString = #file, line: UInt = #line) -> Never {
     Assertions.fatalErrorClosure(message(), file, line)
     repeat {
         RunLoop.current.run()
