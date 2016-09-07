@@ -5,7 +5,7 @@ import XCTest
     internal typealias TimeInterval = NSTimeInterval
 #endif
 
-internal func dispatchAsync(execute work: @convention(block) () -> Swift.Void) {
+internal func dispatchAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
     #if swift(>=3)
         DispatchQueue.global(qos: .default).async(execute: work)
     #else
@@ -14,7 +14,7 @@ internal func dispatchAsync(execute work: @convention(block) () -> Swift.Void) {
 }
 
 
-internal func dispatchUserInitiatedAsync(execute work: @convention(block) () -> Swift.Void) {
+internal func dispatchUserInitiatedAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
     #if swift(>=3)
         DispatchQueue.global(qos: .userInitiated).async(execute: work)
     #else

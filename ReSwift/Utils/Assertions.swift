@@ -37,5 +37,5 @@ internal func raiseFatalError(_ message: @autoclosure () -> String = "",
 /// override them.
 internal class Assertions {
     internal static var fatalErrorClosure = swiftFatalErrorClosure
-    internal static let swiftFatalErrorClosure = { Swift.fatalError($0, file: $1, line: $2) }
+    internal static let swiftFatalErrorClosure: (String, StaticString, UInt) -> Void = { Swift.fatalError($0, file: $1, line: $2) }
 }

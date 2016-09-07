@@ -15,7 +15,7 @@ import Foundation
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-public class Store<State: StateType>: StoreType {
+open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = Subscription<State>
 
@@ -238,7 +238,7 @@ public class Store<State: StateType>: StoreType {
     #if swift(>=3)
     public typealias ActionCreator = (State, Store) -> Action?
 
-    public typealias AsyncActionCreator = (State, Store, (ActionCreator) -> Void) -> Void
+    public typealias AsyncActionCreator = (State, Store, @escaping (ActionCreator) -> Void) -> Void
     #else
     public typealias ActionCreator = (state: State, store: Store) -> Action?
     

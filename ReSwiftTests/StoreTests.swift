@@ -40,9 +40,11 @@ class StoreTests: XCTestCase {
 
 }
 
+typealias Empty = () -> Void
+
 // Used for deinitialization test
 class DeInitStore<State: StateType>: Store<State> {
-    var deInitAction: (() -> Void)?
+    var deInitAction: Empty?
 
     deinit {
         deInitAction?()
@@ -51,7 +53,7 @@ class DeInitStore<State: StateType>: Store<State> {
     required convenience init(
         reducer: AnyReducer,
         state: State?,
-        deInitAction: () -> Void) {
+        deInitAction: Empty) {
             self.init(reducer: reducer, state: state, middleware: [])
             self.deInitAction = deInitAction
     }
