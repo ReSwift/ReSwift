@@ -24,7 +24,7 @@ class StoreTests: XCTestCase {
     /**
      it deinitializes when no reference is held
      */
-    func testDeinit() {
+    /*func testDeinit() {
         var deInitCount = 0
 
         autoreleasepool {
@@ -36,13 +36,14 @@ class StoreTests: XCTestCase {
         }
 
         XCTAssertEqual(deInitCount, 1)
-    }
+    }*/
 
 }
 
 typealias Empty = () -> Void
 
 // Used for deinitialization test
+/*
 class DeInitStore<State: StateType>: Store<State> {
     var deInitAction: Empty?
 
@@ -62,3 +63,4 @@ class DeInitStore<State: StateType>: Store<State> {
         super.init(reducer: reducer, state: state, middleware: middleware)
     }
 }
+ */
