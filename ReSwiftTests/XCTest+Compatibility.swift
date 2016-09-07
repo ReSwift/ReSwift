@@ -18,13 +18,14 @@ internal func dispatchAsync(execute work: @convention(block) () -> Swift.Void) {
 
 
 #if swift(>=3)
-internal func dispatchUserInitiatedAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
+internal func dispatchUserInitiatedAsync
+    (execute work: @escaping @convention(block) () -> Swift.Void) {
     DispatchQueue.global(qos: .userInitiated).async(execute: work)
 }
 #else
 internal func dispatchUserInitiatedAsync(execute work: @convention(block) () -> Swift.Void) {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), work)
-    
+
 }
 #endif
 

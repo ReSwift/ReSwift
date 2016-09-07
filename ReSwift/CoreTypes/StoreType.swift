@@ -174,7 +174,7 @@ public protocol StoreType {
      ```
 
      */
-    
+
     #if swift(>=3)
     associatedtype ActionCreator = (State, StoreType) -> Action?
 
@@ -183,7 +183,7 @@ public protocol StoreType {
         (State, StoreType, (ActionCreator) -> Void) -> Void
     #else
     associatedtype ActionCreator = (state: State, store: StoreType) -> Action?
-    
+
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
     associatedtype AsyncActionCreator =
     (state: State, store: StoreType, actionCreatorCallback: (ActionCreator) -> Void) -> Void

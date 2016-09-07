@@ -241,7 +241,7 @@ public class Store<State: StateType>: StoreType {
     public typealias AsyncActionCreator = (State, Store, @escaping (ActionCreator) -> Void) -> Void
     #else
     public typealias ActionCreator = (state: State, store: Store) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         state: State,
         store: Store,
