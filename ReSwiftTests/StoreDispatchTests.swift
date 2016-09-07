@@ -67,7 +67,7 @@ class StoreDispatchTests: XCTestCase {
         let asyncExpectation = futureExpectation(
             withDescription: "It accepts async action creators")
 
-        let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
+        let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { (_, _, callback) in
             dispatchAsync() {
                 // Provide the callback with an action creator
                 callback { state, store in
