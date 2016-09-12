@@ -24,7 +24,7 @@ class StandardActionInitTests: XCTestCase {
      it can be initialized with a type and a payload
      */
     func testInitWithTypeAndPayload() {
-        let action = StandardAction(type:"Test", payload: ["testKey": 5])
+        let action = StandardAction(type:"Test", payload: ["testKey": 5 as AnyObject])
 
         let payload = action.payload!["testKey"]! as! Int
 
@@ -41,9 +41,9 @@ class StandardActionInitSerializationTests: XCTestCase {
      */
     func testCanInitWithDictionary() {
         let actionDictionary: [String: AnyObject] = [
-            "type": "TestType",
-            "payload": "ReSwift_Null",
-            "isTypedAction": true
+            "type": "TestType" as AnyObject,
+            "payload": "ReSwift_Null" as AnyObject,
+            "isTypedAction": true as AnyObject
         ]
 
         let action = StandardAction(dictionary: actionDictionary)
@@ -57,7 +57,7 @@ class StandardActionInitSerializationTests: XCTestCase {
      it can convert an action to a dictionary
      */
     func testConvertActionToDict() {
-        let action = StandardAction(type:"Test", payload: ["testKey": 5],
+        let action = StandardAction(type:"Test", payload: ["testKey": 5 as AnyObject],
             isTypedAction: true)
 
         let dictionary = action.dictionaryRepresentation
@@ -75,7 +75,7 @@ class StandardActionInitSerializationTests: XCTestCase {
      it can serialize / deserialize actions with payload and without custom type
      */
     func testWithPayloadWithoutCustomType() {
-        let action = StandardAction(type:"Test", payload: ["testKey": 5])
+        let action = StandardAction(type:"Test", payload: ["testKey": 5 as AnyObject])
         let dictionary = action.dictionaryRepresentation
 
         let deserializedAction = StandardAction(dictionary: dictionary)
@@ -90,7 +90,7 @@ class StandardActionInitSerializationTests: XCTestCase {
      it can serialize / deserialize actions with payload and with custom type
      */
     func testWithPayloadAndCustomType() {
-        let action = StandardAction(type:"Test", payload: ["testKey": 5],
+        let action = StandardAction(type:"Test", payload: ["testKey": 5 as AnyObject],
                         isTypedAction: true)
         let dictionary = action.dictionaryRepresentation
 
@@ -147,7 +147,7 @@ class StandardActionConvertibleInit: XCTestCase {
      it initializer returns nil when invalid dictionary is passed in
      */
     func testInitWithStandardAction() {
-        let standardAction = StandardAction(type: "Test", payload: ["value": 10])
+        let standardAction = StandardAction(type: "Test", payload: ["value": 10 as AnyObject])
         let action = SetValueAction(standardAction)
 
         XCTAssertEqual(action.value, 10)

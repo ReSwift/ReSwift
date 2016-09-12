@@ -16,8 +16,8 @@ import Foundation
  - parameter line:    Calling line
  */
 #if swift(>=3)
-@noreturn internal func raiseFatalError(_ message: @autoclosure () -> String = "",
-                                 file: StaticString = #file, line: UInt = #line) {
+internal func raiseFatalError(_ message: @autoclosure () -> String = "",
+                              file: StaticString = #file, line: UInt = #line) -> Never {
     Assertions.fatalErrorClosure(message(), file, line)
     repeat {
         RunLoop.current.run()
@@ -37,5 +37,10 @@ import Foundation
 /// override them.
 internal class Assertions {
     internal static var fatalErrorClosure = swiftFatalErrorClosure
+    #if swift(>=3)
+    internal static let swiftFatalErrorClosure: (String, StaticString, UInt) -> Void
+        = { Swift.fatalError($0, file: $1, line: $2) }
+    #else
     internal static let swiftFatalErrorClosure = { Swift.fatalError($0, file: $1, line: $2) }
+    #endif
 }

@@ -60,9 +60,11 @@ extension StandardAction: Coding {
     }
 
     public var dictionaryRepresentation: [String: AnyObject] {
-        let payload: AnyObject = self.payload ?? reSwiftNull
+        let payload: AnyObject = self.payload as AnyObject? ?? reSwiftNull as AnyObject
 
-        return [typeKey: type, payloadKey: payload, isTypedActionKey: isTypedAction]
+        return [typeKey: type as AnyObject,
+                payloadKey: payload,
+                isTypedActionKey: isTypedAction as AnyObject]
     }
 }
 
