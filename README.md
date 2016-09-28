@@ -228,6 +228,7 @@ If you have any questions, you can find the core team on twitter:
 - [@benjaminencz](https://twitter.com/benjaminencz)
 - [@karlbowden](https://twitter.com/karlbowden)
 - [@ARendtslev](https://twitter.com/ARendtslev)
+- [@ctietze](https://twitter.com/ctietze)
 
 We also have a [public gitter chat!](https://gitter.im/ReSwift/public)
 
