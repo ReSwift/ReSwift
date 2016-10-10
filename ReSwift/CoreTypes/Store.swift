@@ -15,7 +15,7 @@ import Foundation
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-public class Store<State: StateType>: StoreType {
+open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = Subscription<State>
 
@@ -77,12 +77,12 @@ public class Store<State: StateType>: StoreType {
         return true
     }
 
-    public func subscribe<S: StoreSubscriber>(_ subscriber: S)
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             subscribe(subscriber, selector: nil)
     }
 
-    public func subscribe<SelectedState, S: StoreSubscriber>
+    open func subscribe<SelectedState, S: StoreSubscriber>
         (_ subscriber: S, selector: ((State) -> SelectedState)?)
         where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
@@ -94,13 +94,13 @@ public class Store<State: StateType>: StoreType {
             }
     }
 
-    public func unsubscribe(_ subscriber: AnyStoreSubscriber) {
+    open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
         if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
         }
     }
 
-    public func _defaultDispatch(action: Action) -> Any {
+    open func _defaultDispatch(action: Action) -> Any {
         guard !isDispatching else {
             raiseFatalError(
                 "ReSwift:IllegalDispatchFromReducer - Reducers may not dispatch actions.")
@@ -116,14 +116,14 @@ public class Store<State: StateType>: StoreType {
     }
 
     @discardableResult
-    public func dispatch(_ action: Action) -> Any {
+    open func dispatch(_ action: Action) -> Any {
         let returnValue = dispatchFunction(action)
 
         return returnValue
     }
 
     @discardableResult
-    public func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
+    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
         let action = actionCreatorProvider(state, self)
 
         if let action = action {
@@ -133,11 +133,11 @@ public class Store<State: StateType>: StoreType {
         return action
     }
 
-    public func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
+    open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
-    public func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
+    open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
                          callback: DispatchCallback?) {
         actionCreatorProvider(state, self) { actionProvider in
             let action = actionProvider(self.state, self)
