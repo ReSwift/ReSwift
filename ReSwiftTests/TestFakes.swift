@@ -122,15 +122,9 @@ class CallbackStoreSubscriber<T>: StoreSubscriber {
 
     let handler: (T) -> Void
 
-    #if swift(>=3)
     init(handler: @escaping (T) -> Void) {
         self.handler = handler
     }
-    #else
-    init(handler: (T) -> Void) {
-        self.handler = handler
-    }
-    #endif
 
     func newState(state: T) {
         handler(state)

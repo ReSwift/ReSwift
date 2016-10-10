@@ -21,11 +21,7 @@ public protocol StoreSubscriber: AnyStoreSubscriber {
 extension StoreSubscriber {
     public func _newState(state: Any) {
         if let typedState = state as? StoreSubscriberStateType {
-            #if swift(>=3)
-                newState(state: typedState)
-            #else
-                newState(typedState)
-            #endif
+            newState(state: typedState)
         }
     }
 }
