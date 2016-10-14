@@ -48,7 +48,12 @@ For a very simple app, that maintains a counter that can be increased and decrea
 
 ```swift
 struct AppState: StateType {
-    var counter: Int = 0
+
+    let counter: Int
+
+    init(counter: Int) {
+        self.counter = counter
+    }
 }
 ```
 
@@ -65,13 +70,21 @@ Your reducer needs to respond to these different action types, that can be done 
 struct CounterReducer: Reducer {
 
     func handleAction(action: Action, state: AppState?) -> AppState {
-        var state = state ?? AppState()
+
+        let state = state ?? AppState(counter: 0)
 
         switch action {
+
         case _ as CounterActionIncrease:
-            state.counter += 1
+
+            let state = AppState(counter: state.counter + 1)
+            return state
+
         case _ as CounterActionDecrease:
-            state.counter -= 1
+
+            let state = AppState(counter: state.counter - 1)
+            return state
+
         default:
             break
         }
