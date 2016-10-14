@@ -162,7 +162,7 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 
 # Getting Started Guide
 
-[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://rackt.org/redux/).
+[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://redux.js.org/).
 
 # Installation
 
@@ -219,7 +219,7 @@ There's still a lot of work to do here! We would love to see you involved! You c
 
 # Credits
 
-- Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building [Redux](https://github.com/rackt/redux) - all ideas in here and many implementation details were provided by his library.
+- Thanks a lot to [Dan Abramov](https://github.com/gaearon) for building [Redux](https://github.com/reactjs/redux) - all ideas in here and many implementation details were provided by his library.
 
 # Get in touch
 
