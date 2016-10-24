@@ -244,7 +244,7 @@ func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Acti
 
 ## Middleware
 
-ReSwift supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://rackt.org/redux/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
+ReSwift supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://redux.js.org/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
 
 Let's take a look at a quick example that shows how ReSwift supports Redux style middleware.
 
