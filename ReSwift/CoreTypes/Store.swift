@@ -15,7 +15,7 @@ import Foundation
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-public class Store<State: StateType>: StoreType {
+open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = Subscription<State>
 
@@ -28,11 +28,7 @@ public class Store<State: StateType>: StoreType {
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
-                #if swift(>=3)
-                    $0.subscriber?._newState(state: $0.selector?(state) ?? state)
-                #else
-                    $0.subscriber?._newState($0.selector?(state) ?? state)
-                #endif
+                $0.subscriber?._newState(state: $0.selector?(state) ?? state)
             }
         }
     }
@@ -56,11 +52,7 @@ public class Store<State: StateType>: StoreType {
         self.dispatchFunction = middleware
             .reversed()
             .reduce({ [unowned self] action in
-                #if swift(>=3)
-                    return self._defaultDispatch(action: action)
-                #else
-                    return self._defaultDispatch(action)
-                #endif
+                return self._defaultDispatch(action: action)
             }) {
                 [weak self] dispatchFunction, middleware in
                 let getState = { self?.state }
@@ -75,11 +67,7 @@ public class Store<State: StateType>: StoreType {
     }
 
     private func _isNewSubscriber(subscriber: AnyStoreSubscriber) -> Bool {
-        #if swift(>=3)
-            let contains = subscriptions.contains(where: { $0.subscriber === subscriber })
-        #else
-            let contains = subscriptions.contains({ $0.subscriber === subscriber })
-        #endif
+        let contains = subscriptions.contains(where: { $0.subscriber === subscriber })
 
         if contains {
             print("Store subscriber is already added, ignoring.")
@@ -89,20 +77,12 @@ public class Store<State: StateType>: StoreType {
         return true
     }
 
-    #if swift(>=3)
-    public func subscribe<S: StoreSubscriber>(_ subscriber: S)
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             subscribe(subscriber, selector: nil)
     }
-    #else
-    public func subscribe<S: StoreSubscriber
-        where S.StoreSubscriberStateType == State>(subscriber: S) {
-            subscribe(subscriber, selector: nil)
-    }
-    #endif
 
-    #if swift(>=3)
-    public func subscribe<SelectedState, S: StoreSubscriber>
+    open func subscribe<SelectedState, S: StoreSubscriber>
         (_ subscriber: S, selector: ((State) -> SelectedState)?)
         where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
@@ -113,46 +93,21 @@ public class Store<State: StateType>: StoreType {
                 subscriber._newState(state: selector?(state) ?? state)
             }
     }
-    #else
-    public func subscribe<SelectedState, S: StoreSubscriber
-        where S.StoreSubscriberStateType == SelectedState>
-        (subscriber: S, selector: ((State) -> SelectedState)?) {
-            if !_isNewSubscriber(subscriber) { return }
 
-            subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
-
-            if let state = self.state {
-                subscriber._newState(selector?(state) ?? state)
-            }
-    }
-    #endif
-
-    #if swift(>=3)
-    public func unsubscribe(_ subscriber: AnyStoreSubscriber) {
+    open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
         if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
         }
     }
-    #else
-    public func unsubscribe(subscriber: AnyStoreSubscriber) {
-        if let index = subscriptions.indexOf({ return $0.subscriber === subscriber }) {
-            subscriptions.removeAtIndex(index)
-        }
-    }
-    #endif
 
-    public func _defaultDispatch(action: Action) -> Any {
+    open func _defaultDispatch(action: Action) -> Any {
         guard !isDispatching else {
             raiseFatalError(
                 "ReSwift:IllegalDispatchFromReducer - Reducers may not dispatch actions.")
         }
 
         isDispatching = true
-        #if swift(>=3)
-            let newState = reducer._handleAction(action: action, state: state) as! State
-        #else
-            let newState = reducer._handleAction(action, state: state) as! State
-        #endif
+        let newState = reducer._handleAction(action: action, state: state) as! State
         isDispatching = false
 
         state = newState
@@ -160,24 +115,15 @@ public class Store<State: StateType>: StoreType {
         return action
     }
 
-    #if swift(>=3)
     @discardableResult
-    public func dispatch(_ action: Action) -> Any {
+    open func dispatch(_ action: Action) -> Any {
         let returnValue = dispatchFunction(action)
 
         return returnValue
     }
-    #else
-    public func dispatch(action: Action) -> Any {
-        let returnValue = dispatchFunction(action)
 
-        return returnValue
-    }
-    #endif
-
-    #if swift(>=3)
     @discardableResult
-    public func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
+    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
         let action = actionCreatorProvider(state, self)
 
         if let action = action {
@@ -186,30 +132,12 @@ public class Store<State: StateType>: StoreType {
 
         return action
     }
-    #else
-    public func dispatch(actionCreatorProvider: ActionCreator) -> Any {
-        let action = actionCreatorProvider(state: state, store: self)
 
-        if let action = action {
-            dispatch(action)
-        }
-
-        return action
-    }
-    #endif
-
-    #if swift(>=3)
-    public func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
+    open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
-    #else
-    public func dispatch(asyncActionCreatorProvider: AsyncActionCreator) {
-        dispatch(asyncActionCreatorProvider, callback: nil)
-    }
-    #endif
 
-    #if swift(>=3)
-    public func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
+    open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
                          callback: DispatchCallback?) {
         actionCreatorProvider(state, self) { actionProvider in
             let action = actionProvider(self.state, self)
@@ -220,38 +148,14 @@ public class Store<State: StateType>: StoreType {
             }
         }
     }
-    #else
-    public func dispatch(actionCreatorProvider: AsyncActionCreator, callback: DispatchCallback?) {
-        actionCreatorProvider(state: state, store: self) { actionProvider in
-            let action = actionProvider(state: self.state, store: self)
-
-            if let action = action {
-                self.dispatch(action)
-                callback?(self.state)
-            }
-        }
-    }
-    #endif
 
     public typealias DispatchCallback = (State) -> Void
 
-    #if swift(>=3)
     public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
-    #else
-    public typealias ActionCreator = (state: State, store: Store) -> Action?
-    #endif
 
-    #if swift(>=3)
     public typealias AsyncActionCreator = (
         _ state: State,
         _ store: Store,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
-    #else
-    public typealias AsyncActionCreator = (
-        state: State,
-        store: Store,
-        actionCreatorCallback: (ActionCreator) -> Void
-    ) -> Void
-    #endif
 }

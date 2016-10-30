@@ -72,10 +72,6 @@
 		625E66BF1C1FFC880027C288 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66B91C1FFC880027C288 /* State.swift */; };
 		625E66C11C1FFC880027C288 /* StoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */; };
 		625E67061C20032E0027C288 /* CombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E67051C20032E0027C288 /* CombinedReducer.swift */; };
-		7313C5DF1D30AA6E0073446F /* Swift+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */; };
-		7313C5E01D30AA6E0073446F /* Swift+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */; };
-		7313C5E11D30AA6E0073446F /* Swift+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */; };
-		7313C5E21D30AA6E0073446F /* Swift+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */; };
 		73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
 		73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
 		73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
@@ -150,7 +146,6 @@
 		625E66B91C1FFC880027C288 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSubscriber.swift; sourceTree = "<group>"; };
 		625E67051C20032E0027C288 /* CombinedReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedReducer.swift; sourceTree = "<group>"; };
-		7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Compatibility.swift"; sourceTree = "<group>"; };
 		73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Compatibility.swift"; sourceTree = "<group>"; };
 		73E545D41D22BC3900D114E8 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		73E545D91D22BCD600D114E8 /* XCTest+Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Assertions.swift"; sourceTree = "<group>"; };
@@ -272,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				73E545D41D22BC3900D114E8 /* Assertions.swift */,
-				7313C5DE1D30AA6E0073446F /* Swift+Compatibility.swift */,
 				625E66B11C1FFC830027C288 /* Coding.swift */,
 				625E66B21C1FFC830027C288 /* TypeHelper.swift */,
 			);
@@ -615,7 +609,6 @@
 				25DBCF451C30C16000D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF461C30C16000D63A58 /* Middleware.swift in Sources */,
 				25DBCF471C30C16000D63A58 /* Coding.swift in Sources */,
-				7313C5E21D30AA6E0073446F /* Swift+Compatibility.swift in Sources */,
 				25DBCF481C30C16000D63A58 /* TypeHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,7 +628,6 @@
 				25DBCF5C1C30C19500D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF5D1C30C19500D63A58 /* Middleware.swift in Sources */,
 				25DBCF5E1C30C19500D63A58 /* Coding.swift in Sources */,
-				7313C5E11D30AA6E0073446F /* Swift+Compatibility.swift in Sources */,
 				25DBCF5F1C30C19500D63A58 /* TypeHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,7 +665,6 @@
 				25DBCF981C30C4F000D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF991C30C4F000D63A58 /* Middleware.swift in Sources */,
 				25DBCF9A1C30C4F000D63A58 /* Coding.swift in Sources */,
-				7313C5E01D30AA6E0073446F /* Swift+Compatibility.swift in Sources */,
 				25DBCF9B1C30C4F000D63A58 /* TypeHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,7 +702,6 @@
 				625E66BE1C1FFC880027C288 /* Reducer.swift in Sources */,
 				625E66B41C1FFC830027C288 /* TypeHelper.swift in Sources */,
 				625E67061C20032E0027C288 /* CombinedReducer.swift in Sources */,
-				7313C5DF1D30AA6E0073446F /* Swift+Compatibility.swift in Sources */,
 				625E66BF1C1FFC880027C288 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

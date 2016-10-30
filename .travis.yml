@@ -18,12 +18,10 @@ matrix:
   include:
     - osx_image: xcode8
       env: SCHEME="macOS"  SDK="macosx10.12"          DESTINATION="arch=x86_64"
-    - osx_image: xcode7.3
-      env: SCHEME="macOS"  SDK="macosx10.11"          DESTINATION="arch=x86_64"  UPDATE_DOCS="true"
-    - osx_image: xcode7.3
-      env: SCHEME="iOS"    SDK="iphonesimulator9.3"   DESTINATION="OS=9.3,name=iPhone 6S Plus"
-    - osx_image: xcode7.3
-      env: SCHEME="tvOS"   SDK="appletvsimulator9.2"  DESTINATION="OS=9.2,name=Apple TV 1080p"
+    - osx_image: xcode8
+      env: SCHEME="iOS"    SDK="iphonesimulator10.0"  DESTINATION="OS=10.0,name=iPhone 6S Plus"
+    - osx_image: xcode8
+      env: SCHEME="tvOS"   SDK="appletvsimulator10.0"  DESTINATION="OS=10.0,name=Apple TV 1080p"
 
 script:
   - set -o pipefail
@@ -39,7 +37,6 @@ script:
     GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
     GCC_GENERATE_TEST_COVERAGE_FILES=YES
     test
-    | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J ReSwift
