@@ -130,7 +130,7 @@ open class Store<State: StateType>: StoreType {
             dispatch(action)
         }
 
-        return action
+        return action as Any
     }
 
     open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
