@@ -1,5 +1,18 @@
 #Upcoming Release
 
+#3.0.0
+*Released: 11/12/2016*
+
+**Breaking API Changes:**
+- Dropped support for Swift 2.2 and lower (#157) - @Ben-G
+
+**API Changes:**
+- Mark `Store` as `open`, this reverts a previously accidental breaking API Change (#157) - @Ben-G
+
+**Other**:
+- Update to Swift 3.0.1 - @Cristiam, @Ben-G
+- Documentation changes - @vkotovv
+
 #2.1.0
 
 *Released: 09/15/2016*
@@ -10,7 +23,7 @@
 - Xcode 8 GM Swift 3 Updates (#149) - @tkersey
 - Migrate Quick/Nimble testing to XCTest - (#127) - @agentk
 - Automatically build docs via Travis CI (#128) - @agentk
-- Documentation Updates & Fixes	- @mikekavouras, @ColinEberhardt
+- Documentation Updates & Fixes- @mikekavouras, @ColinEberhardt
 
 #2.0.0
 
