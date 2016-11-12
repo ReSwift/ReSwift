@@ -62,9 +62,9 @@ extension StandardAction: Coding {
     public var dictionaryRepresentation: [String: AnyObject] {
         let payload: AnyObject = self.payload as AnyObject? ?? reSwiftNull as AnyObject
 
-        return [typeKey: type as AnyObject,
+        return [typeKey: type as NSString,
                 payloadKey: payload,
-                isTypedActionKey: isTypedAction as AnyObject]
+                isTypedActionKey: isTypedAction as NSNumber]
     }
 }
 
