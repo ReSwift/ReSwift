@@ -170,21 +170,39 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 ## CocoaPods
 
 You can install ReSwift via CocoaPods by adding it to your `Podfile`:
+```
+use_frameworks!
 
-	use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
 
-	source 'https://github.com/CocoaPods/Specs.git'
-	platform :ios, '8.0'
-
-	pod 'ReSwift'
+pod 'ReSwift'
+```
 
 And run `pod install`.
 
 ## Carthage
 
-You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by adding the following line to your Cartfile:
+You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by adding the following line to your `Cartfile`:
 
-    github "ReSwift/ReSwift"
+```
+github "ReSwift/ReSwift"
+```
+
+## Swift Package Manager
+
+You can install ReSwift via [Swift Package Manager](https://swift.org/package-manager/) by adding the following line to your `Package.swift`:
+
+```
+import PackageDescription
+
+let package = Package(
+    [...]
+    dependencies: [
+        .Package(url: "https://github.com/ReSwift/ReSwift.git", majorVersion: XYZ)
+    ]
+)
+```
 
 # Checking out Source Code
 
