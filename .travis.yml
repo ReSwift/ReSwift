@@ -37,6 +37,7 @@ script:
     GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
     GCC_GENERATE_TEST_COVERAGE_FILES=YES
     test
+  - ruby Scripts/verify_carthage.rb
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J ReSwift
