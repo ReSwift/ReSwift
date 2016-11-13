@@ -64,11 +64,11 @@ class StandardActionInitSerializationTests: XCTestCase {
 
         let type = dictionary["type"] as! String
         let payload = dictionary["payload"] as! [String: AnyObject]
-        let isTypedAction = dictionary["isTypedAction"] as! Int
+        let isTypedAction = dictionary["isTypedAction"] as! Bool
 
         XCTAssertEqual(type, "Test")
         XCTAssertEqual(payload["testKey"] as? Int, 5)
-        XCTAssertEqual(isTypedAction, 1)
+        XCTAssertEqual(isTypedAction, true)
     }
 
     /**

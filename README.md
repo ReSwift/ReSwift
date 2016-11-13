@@ -2,6 +2,9 @@
 
 [![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md)
 
+**Supported Swift Version:**: Swift 3.0.1
+For Swift 2.2 Support use [Release 2.0.0](https://github.com/ReSwift/ReSwift/releases/tag/2.0.0) or earlier.
+
 # Introduction
 
 ReSwift is a [Redux](https://github.com/reactjs/redux)-like implementation of the unidirectional data flow architecture in Swift. ReSwift helps you to separate three important concerns of your app's components:
@@ -11,8 +14,6 @@ ReSwift is a [Redux](https://github.com/reactjs/redux)-like implementation of th
 - **State Changes**: in a ReSwift app you can only perform state changes through actions. Actions are small pieces of data that describe a state change. By drastically limiting the way state can be mutated, your app becomes easier to understand and it gets easier to work with many collaborators.
 
 The ReSwift library is tiny - allowing users to dive into the code, understand every single line and [hopefully contribute](#contributing).
-
-ReSwift also supports **Swift 2.2 through to Swift 3** without requiring you to make migration changes.
 
 ReSwift is quickly growing beyond the core library, providing experimental extensions for routing and time traveling through past app states!
 
