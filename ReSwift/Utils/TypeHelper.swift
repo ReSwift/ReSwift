@@ -34,3 +34,17 @@ func withSpecificTypes<SpecificStateType, Action>(
 
         return function(action, specificStateType) as! StateType
 }
+
+@discardableResult
+func withObservableSpecificTypes<SpecificStateType, Action>(
+    _ action: Action,
+    state genericStateType: StateType,
+    function: (_ action: Action, _ state: SpecificStateType) -> SpecificStateType
+    ) -> StateType {
+    
+    guard let specificStateType = genericStateType as? SpecificStateType else {
+        return genericStateType
+    }
+    
+    return function(action, specificStateType) as! StateType
+}
