@@ -65,7 +65,7 @@ enum AppAction: Action {
 Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
 
 ```swift
-struct AppReducer: Reducer {
+struct AppReducer: ObservableReducer {
 	func handleAction(action: Action, state: AppState) -> AppState {
 		return AppState(
           counter: counterReducer(action: action, counter: state.counter)
