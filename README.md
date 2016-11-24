@@ -53,7 +53,7 @@ struct AppState: StateType {
 }
 ```
 
-You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](http://reswift.github.io/ReSwift/master/getting-started-guide.html) you can find out how to construct complex actions. For the simple actions in this example we can define empty structs that conform to action:
+You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](http://reswift.github.io/ReSwift/master/getting-started-guide.html) you can find out how to construct complex actions. For the simple actions in this example we can an enum that conforms to action:
 
 ```swift
 enum AppAction: Action {
@@ -62,10 +62,10 @@ enum AppAction: Action {
 }
 ```
 
-Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
+Your reducer needs to respond to these different actions, that can be done by switching over the value of action:
 
 ```swift
-struct AppReducer: ObservableReducer {
+struct AppReducer: Reducer {
 	func handleAction(action: Action, state: AppState) -> AppState {
 		return AppState(
           counter: counterReducer(action: action, counter: state.counter)
