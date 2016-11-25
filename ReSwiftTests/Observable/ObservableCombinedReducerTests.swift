@@ -33,7 +33,7 @@ class IncreaseByTwoObservableReducer: ObservableReducer {
     }
 }
 
-class CombinedObservableReducerTest: XCTestCase {
+class ObservableCombinedReducerTest: XCTestCase {
 
     /**
      it calls each of the reducers with the given action exactly once
