@@ -120,7 +120,6 @@ public protocol StoreType {
      */
     func dispatch(_ asyncActionCreator: AsyncActionCreator, callback: DispatchCallback?)
 
-
     /**
      An optional callback that can be passed to the `dispatch` method.
      This callback will be called when the dispatched action triggers a new state calculation.

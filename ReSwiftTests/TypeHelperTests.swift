@@ -12,8 +12,8 @@ import XCTest
  */
 @testable import ReSwift
 
-struct AppState1: StateType {}
-struct AppState2: StateType {}
+fileprivate struct AppState1: StateType {}
+fileprivate struct AppState2: StateType {}
 
 class TypeHelperTests: XCTestCase {
 

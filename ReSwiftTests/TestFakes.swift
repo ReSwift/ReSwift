@@ -9,20 +9,18 @@
 import Foundation
 import ReSwift
 
+let emptyAction = "EMPTY_ACTION"
+
+struct CounterState: StateType {
+    var count: Int = 0
+}
+
 struct TestAppState: StateType {
     var testValue: Int?
-
-    init() {
-        testValue = nil
-    }
 }
 
 struct TestStringAppState: StateType {
     var testValue: String?
-
-    init() {
-        testValue = nil
-    }
 }
 
 struct SetValueAction: StandardActionConvertible {
