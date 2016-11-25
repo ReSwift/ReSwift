@@ -23,7 +23,7 @@ public protocol SubscriptionReferenceType {
 
 public final class ObservableProperty<ValueType>: ObservablePropertyType {
     public typealias ObservableSubscriptionReferenceType = ObservableSubscriptionReference<ValueType>
-    private var subscriptions = [ObservableSubscriptionReferenceType : (ValueType) -> Void]()
+    internal var subscriptions = [ObservableSubscriptionReferenceType : (ValueType) -> Void]()
     private var subscriptionToken: Int = 0
     public var value: ValueType {
         didSet {
@@ -80,8 +80,8 @@ public class SubscriptionReferenceBag {
     public init() {
     }
     
-    public init(references: SubscriptionReferenceType...) {
-        self.references = references
+    public init(references: SubscriptionReferenceType?...) {
+        self.references = references.flatMap({ $0 })
     }
     
     deinit {
