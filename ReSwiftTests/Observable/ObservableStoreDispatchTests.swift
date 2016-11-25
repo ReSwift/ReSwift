@@ -53,6 +53,9 @@ class ObservableStoreDispatchTests: XCTestCase {
         store.dispatch(SetValueAction(10))
     }
 
+    /**
+     it subscribes to the property we pass in and dispatches any new values
+     */
     func testLiftingWorksAsExpected() {
         let property = ObservableProperty(SetValueAction(10))
         store = ObservableStore(reducer: reducer,
