@@ -44,5 +44,5 @@ class RxTests: XCTestCase {
         reference?.dispose()
         reference?.dispose()
     }
-    
+
 }
