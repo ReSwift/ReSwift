@@ -47,7 +47,6 @@ struct CounterState: StateType {
 
 let emptyAction = "EMPTY_ACTION"
 
-
 class CombinedReducerTest: XCTestCase {
 
     /**

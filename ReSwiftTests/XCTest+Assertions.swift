@@ -13,7 +13,6 @@ import XCTest
 
 private let noReturnFailureWaitTime = 0.1
 
-
 public extension XCTestCase {
     /**
      Expects an `fatalError` to be called.
