@@ -104,20 +104,9 @@
 		9E1F6E871DDD190B00912955 /* Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E7D1DDD190B00912955 /* Rx.swift */; };
 		9E1F6E881DDD190B00912955 /* Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E7D1DDD190B00912955 /* Rx.swift */; };
 		9E1F6E891DDD190B00912955 /* Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E7D1DDD190B00912955 /* Rx.swift */; };
-		9E1F6E8B1DDD1D2400912955 /* ObservableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */; };
-		9E1F6E8C1DDD1D2400912955 /* ObservableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */; };
-		9E1F6E8D1DDD1D2400912955 /* ObservableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */; };
-		9E1F6E8E1DDD1D2400912955 /* ObservableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */; };
 		9E1F6F261DE7C01F00912955 /* MiddlewareFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F251DE7C01F00912955 /* MiddlewareFakes.swift */; };
 		9E1F6F271DE7C01F00912955 /* MiddlewareFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F251DE7C01F00912955 /* MiddlewareFakes.swift */; };
 		9E1F6F281DE7C01F00912955 /* MiddlewareFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F251DE7C01F00912955 /* MiddlewareFakes.swift */; };
-		9E1F6F351DE7C8B700912955 /* ObservableCombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */; };
-		9E1F6F361DE7C8B800912955 /* ObservableCombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */; };
-		9E1F6F371DE7C8BB00912955 /* ObservableCombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */; };
-		9E1F6F381DE7C8BB00912955 /* ObservableCombinedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */; };
-		9E1F6F451DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3E1DE7D15200912955 /* ObservableCombinedReducerTests.swift */; };
-		9E1F6F461DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3E1DE7D15200912955 /* ObservableCombinedReducerTests.swift */; };
-		9E1F6F471DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3E1DE7D15200912955 /* ObservableCombinedReducerTests.swift */; };
 		9E1F6F481DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3F1DE7D15200912955 /* ObservableStoreDispatchTests.swift */; };
 		9E1F6F491DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3F1DE7D15200912955 /* ObservableStoreDispatchTests.swift */; };
 		9E1F6F4A1DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F3F1DE7D15200912955 /* ObservableStoreDispatchTests.swift */; };
@@ -130,9 +119,6 @@
 		9E1F6F511DE7D15200912955 /* ObservableTestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F421DE7D15200912955 /* ObservableTestFakes.swift */; };
 		9E1F6F521DE7D15200912955 /* ObservableTestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F421DE7D15200912955 /* ObservableTestFakes.swift */; };
 		9E1F6F531DE7D15200912955 /* ObservableTestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F421DE7D15200912955 /* ObservableTestFakes.swift */; };
-		9E1F6F541DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F431DE7D15200912955 /* ObservableTypeHelperTests.swift */; };
-		9E1F6F551DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F431DE7D15200912955 /* ObservableTypeHelperTests.swift */; };
-		9E1F6F561DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F431DE7D15200912955 /* ObservableTypeHelperTests.swift */; };
 		9E1F6F571DE7D15200912955 /* RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F441DE7D15200912955 /* RxTests.swift */; };
 		9E1F6F581DE7D15200912955 /* RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F441DE7D15200912955 /* RxTests.swift */; };
 		9E1F6F591DE7D15200912955 /* RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6F441DE7D15200912955 /* RxTests.swift */; };
@@ -199,15 +185,11 @@
 		9E1F6E7B1DDD190B00912955 /* ObservableStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableStore.swift; sourceTree = "<group>"; };
 		9E1F6E7C1DDD190B00912955 /* ObservableStoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableStoreType.swift; sourceTree = "<group>"; };
 		9E1F6E7D1DDD190B00912955 /* Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rx.swift; sourceTree = "<group>"; };
-		9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableReducer.swift; sourceTree = "<group>"; };
 		9E1F6F251DE7C01F00912955 /* MiddlewareFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddlewareFakes.swift; sourceTree = "<group>"; };
-		9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableCombinedReducer.swift; sourceTree = "<group>"; };
-		9E1F6F3E1DE7D15200912955 /* ObservableCombinedReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableCombinedReducerTests.swift; path = Observable/ObservableCombinedReducerTests.swift; sourceTree = "<group>"; };
 		9E1F6F3F1DE7D15200912955 /* ObservableStoreDispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableStoreDispatchTests.swift; path = Observable/ObservableStoreDispatchTests.swift; sourceTree = "<group>"; };
 		9E1F6F401DE7D15200912955 /* ObservableStoreMiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableStoreMiddlewareTests.swift; path = Observable/ObservableStoreMiddlewareTests.swift; sourceTree = "<group>"; };
 		9E1F6F411DE7D15200912955 /* ObservableStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableStoreTests.swift; path = Observable/ObservableStoreTests.swift; sourceTree = "<group>"; };
 		9E1F6F421DE7D15200912955 /* ObservableTestFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableTestFakes.swift; path = Observable/ObservableTestFakes.swift; sourceTree = "<group>"; };
-		9E1F6F431DE7D15200912955 /* ObservableTypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableTypeHelperTests.swift; path = Observable/ObservableTypeHelperTests.swift; sourceTree = "<group>"; };
 		9E1F6F441DE7D15200912955 /* RxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxTests.swift; path = Observable/RxTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -338,8 +320,6 @@
 				625E66B61C1FFC880027C288 /* Action.swift */,
 				625E67051C20032E0027C288 /* CombinedReducer.swift */,
 				259737FC1C2C661100869B8F /* Middleware.swift */,
-				9E1F6F311DE7C8AF00912955 /* ObservableCombinedReducer.swift */,
-				9E1F6E8A1DDD1D2400912955 /* ObservableReducer.swift */,
 				9E1F6E7B1DDD190B00912955 /* ObservableStore.swift */,
 				9E1F6E7C1DDD190B00912955 /* ObservableStoreType.swift */,
 				625E66B81C1FFC880027C288 /* Reducer.swift */,
@@ -356,12 +336,10 @@
 		9E1F6F391DE7CA8A00912955 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
-				9E1F6F3E1DE7D15200912955 /* ObservableCombinedReducerTests.swift */,
 				9E1F6F3F1DE7D15200912955 /* ObservableStoreDispatchTests.swift */,
 				9E1F6F401DE7D15200912955 /* ObservableStoreMiddlewareTests.swift */,
 				9E1F6F411DE7D15200912955 /* ObservableStoreTests.swift */,
 				9E1F6F421DE7D15200912955 /* ObservableTestFakes.swift */,
-				9E1F6F431DE7D15200912955 /* ObservableTypeHelperTests.swift */,
 				9E1F6F441DE7D15200912955 /* RxTests.swift */,
 			);
 			name = Observable;
@@ -677,11 +655,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF3F1C30C16000D63A58 /* CombinedReducer.swift in Sources */,
-				9E1F6E8E1DDD1D2400912955 /* ObservableReducer.swift in Sources */,
 				25DBCF401C30C16000D63A58 /* Action.swift in Sources */,
 				25DBCF411C30C16000D63A58 /* Store.swift in Sources */,
 				9E1F6E811DDD190B00912955 /* ObservableStore.swift in Sources */,
-				9E1F6F361DE7C8B800912955 /* ObservableCombinedReducer.swift in Sources */,
 				25DBCF421C30C16000D63A58 /* Reducer.swift in Sources */,
 				25DBCF431C30C16000D63A58 /* State.swift in Sources */,
 				9E1F6E851DDD190B00912955 /* ObservableStoreType.swift in Sources */,
@@ -701,11 +677,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF561C30C19500D63A58 /* CombinedReducer.swift in Sources */,
-				9E1F6E8D1DDD1D2400912955 /* ObservableReducer.swift in Sources */,
 				25DBCF571C30C19500D63A58 /* Action.swift in Sources */,
 				25DBCF581C30C19500D63A58 /* Store.swift in Sources */,
 				9E1F6E801DDD190B00912955 /* ObservableStore.swift in Sources */,
-				9E1F6F351DE7C8B700912955 /* ObservableCombinedReducer.swift in Sources */,
 				25DBCF591C30C19500D63A58 /* Reducer.swift in Sources */,
 				25DBCF5A1C30C19500D63A58 /* State.swift in Sources */,
 				9E1F6E841DDD190B00912955 /* ObservableStoreType.swift in Sources */,
@@ -733,7 +707,6 @@
 				73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				9E1F6F4D1DE7D15200912955 /* ObservableStoreMiddlewareTests.swift in Sources */,
 				9E1F6F281DE7C01F00912955 /* MiddlewareFakes.swift in Sources */,
-				9E1F6F561DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */,
 				9E1F6F4A1DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */,
 				9E1F6F501DE7D15200912955 /* ObservableStoreTests.swift in Sources */,
 				625AA6351C33AFB800FEB431 /* StandardActionTests.swift in Sources */,
@@ -741,7 +714,6 @@
 				25DBCF731C30C34000D63A58 /* CombinedReducerTests.swift in Sources */,
 				9E1F6F591DE7D15200912955 /* RxTests.swift in Sources */,
 				25DBCF741C30C34000D63A58 /* TypeHelperTests.swift in Sources */,
-				9E1F6F471DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */,
 				25DBCF751C30C34000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -751,11 +723,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF921C30C4F000D63A58 /* CombinedReducer.swift in Sources */,
-				9E1F6E8C1DDD1D2400912955 /* ObservableReducer.swift in Sources */,
 				25DBCF931C30C4F000D63A58 /* Action.swift in Sources */,
 				25DBCF941C30C4F000D63A58 /* Store.swift in Sources */,
 				9E1F6E7F1DDD190B00912955 /* ObservableStore.swift in Sources */,
-				9E1F6F371DE7C8BB00912955 /* ObservableCombinedReducer.swift in Sources */,
 				25DBCF951C30C4F000D63A58 /* Reducer.swift in Sources */,
 				25DBCF961C30C4F000D63A58 /* State.swift in Sources */,
 				9E1F6E831DDD190B00912955 /* ObservableStoreType.swift in Sources */,
@@ -783,7 +753,6 @@
 				73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				9E1F6F4C1DE7D15200912955 /* ObservableStoreMiddlewareTests.swift in Sources */,
 				9E1F6F271DE7C01F00912955 /* MiddlewareFakes.swift in Sources */,
-				9E1F6F551DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */,
 				9E1F6F491DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */,
 				9E1F6F4F1DE7D15200912955 /* ObservableStoreTests.swift in Sources */,
 				625AA6341C33AFB700FEB431 /* StandardActionTests.swift in Sources */,
@@ -791,7 +760,6 @@
 				25DBCF9E1C30C50000D63A58 /* CombinedReducerTests.swift in Sources */,
 				9E1F6F581DE7D15200912955 /* RxTests.swift in Sources */,
 				25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */,
-				9E1F6F461DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */,
 				25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,11 +769,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E66C11C1FFC880027C288 /* StoreSubscriber.swift in Sources */,
-				9E1F6E8B1DDD1D2400912955 /* ObservableReducer.swift in Sources */,
 				625E66BD1C1FFC880027C288 /* Store.swift in Sources */,
 				625E66B31C1FFC830027C288 /* Coding.swift in Sources */,
 				9E1F6E7E1DDD190B00912955 /* ObservableStore.swift in Sources */,
-				9E1F6F381DE7C8BB00912955 /* ObservableCombinedReducer.swift in Sources */,
 				625E66BC1C1FFC880027C288 /* Action.swift in Sources */,
 				259737FD1C2C661100869B8F /* Middleware.swift in Sources */,
 				9E1F6E821DDD190B00912955 /* ObservableStoreType.swift in Sources */,
@@ -833,7 +799,6 @@
 				73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				9E1F6F4B1DE7D15200912955 /* ObservableStoreMiddlewareTests.swift in Sources */,
 				9E1F6F261DE7C01F00912955 /* MiddlewareFakes.swift in Sources */,
-				9E1F6F541DE7D15200912955 /* ObservableTypeHelperTests.swift in Sources */,
 				9E1F6F481DE7D15200912955 /* ObservableStoreDispatchTests.swift in Sources */,
 				9E1F6F4E1DE7D15200912955 /* ObservableStoreTests.swift in Sources */,
 				625AA6331C33AFB600FEB431 /* StandardActionTests.swift in Sources */,
@@ -841,7 +806,6 @@
 				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				9E1F6F571DE7D15200912955 /* RxTests.swift in Sources */,
 				621C06861C277759008029AE /* CombinedReducerTests.swift in Sources */,
-				9E1F6F451DE7D15200912955 /* ObservableCombinedReducerTests.swift in Sources */,
 				259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

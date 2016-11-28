@@ -17,14 +17,14 @@ class ObservableStoreDispatchTests: XCTestCase {
     typealias CallbackSubscriber = CallbackStoreSubscriber<TestAppState>
 
     fileprivate var store: ObservableStoreTestType!
-    var reducer: ObservableTestReducer!
+    var reducer: TestReducer!
 
     private struct EmptyAction: Action {
     }
 
     override func setUp() {
         super.setUp()
-        reducer = ObservableTestReducer()
+        reducer = TestReducer()
         store = ObservableStore(reducer: reducer,
                                 stateType: TestAppState.self,
                                 observable: ObservableProperty(TestAppState()))
@@ -68,13 +68,13 @@ class ObservableStoreDispatchTests: XCTestCase {
 }
 
 // Needs to be class so that shared reference can be modified to inject store
-class ObservableDispatchingReducer: XCTestCase, ObservableReducer {
+class ObservableDispatchingReducer: XCTestCase, Reducer {
     fileprivate var store: ObservableStoreTestType? = nil
 
-    func handleAction(action: Action, state: TestAppState) -> TestAppState {
+    func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         expectFatalError {
             self.store?.dispatch(SetValueAction(20))
         }
-        return state
+        return state ?? TestAppState()
     }
 }

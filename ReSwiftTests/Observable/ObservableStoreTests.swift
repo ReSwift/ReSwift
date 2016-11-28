@@ -15,7 +15,7 @@ class ObservableStoreTests: XCTestCase {
      it dispatches an Init action when it doesn't receive an initial state
      */
     func testInit() {
-        let reducer = MockObservableReducer()
+        let reducer = MockReducer()
         _ = ObservableStore(reducer: reducer,
                             stateType: CounterState.self,
                             observable: ObservableProperty(CounterState()))
@@ -30,7 +30,7 @@ class ObservableStoreTests: XCTestCase {
         var deInitCount = 0
 
         autoreleasepool {
-            _ = DeInitObservableStore(reducer: ObservableTestReducer(),
+            _ = DeInitObservableStore(reducer: TestReducer(),
                                       stateType: TestAppState.self,
                                       observable: ObservableProperty(TestAppState()),
                                       deInitAction: { deInitCount += 1 })
@@ -50,7 +50,7 @@ class DeInitObservableStore<State: StateType>: ObservableStore<ObservablePropert
     }
 
     required convenience init(
-        reducer: AnyObservableReducer,
+        reducer: AnyReducer,
         stateType: ObservableProperty.ValueType.Type,
         observable: ObservableProperty,
         deInitAction: (() -> Void)?) {
@@ -58,7 +58,7 @@ class DeInitObservableStore<State: StateType>: ObservableStore<ObservablePropert
         self.deInitAction = deInitAction
     }
 
-    required init(reducer: AnyObservableReducer,
+    required init(reducer: AnyReducer,
                   stateType: ObservableProperty.ValueType.Type,
                   observable: ObservableProperty,
                   middleware: [Middleware]) {

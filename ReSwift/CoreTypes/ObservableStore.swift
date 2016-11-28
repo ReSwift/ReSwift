@@ -21,7 +21,7 @@ public class ObservableStore<ObservableProperty: ObservablePropertyType>: Observ
 
     public var dispatchFunction: DispatchFunction!
 
-    private var reducer: AnyObservableReducer
+    private var reducer: AnyReducer
 
     public var observable: ObservableProperty!
 
@@ -29,13 +29,13 @@ public class ObservableStore<ObservableProperty: ObservablePropertyType>: Observ
 
     private var disposeBag = SubscriptionReferenceBag()
 
-    public required convenience init(reducer: AnyObservableReducer,
+    public required convenience init(reducer: AnyReducer,
                                      stateType: ObservableProperty.ValueType.Type,
                                      observable: ObservableProperty) {
         self.init(reducer: reducer, stateType: stateType, observable: observable, middleware: [])
     }
 
-    public required init(reducer: AnyObservableReducer,
+    public required init(reducer: AnyReducer,
                          stateType: ObservableProperty.ValueType.Type,
                          observable: ObservableProperty,
                          middleware: [Middleware]) {

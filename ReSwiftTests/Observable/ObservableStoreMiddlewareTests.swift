@@ -16,7 +16,7 @@ class ObservableStoreMiddlewareTests: XCTestCase {
      it can decorate dispatch function
      */
     func testDecorateDispatch() {
-        let store = ObservableStore(reducer: ObservableTestValueStringReducer(),
+        let store = ObservableStore(reducer: TestValueStringReducer(),
             stateType: TestStringAppState.self,
             observable: ObservableProperty(TestStringAppState()),
             middleware: [firstMiddleware, secondMiddleware])
@@ -34,7 +34,7 @@ class ObservableStoreMiddlewareTests: XCTestCase {
      it can dispatch actions
      */
     func testCanDispatch() {
-        let store = ObservableStore(reducer: ObservableTestValueStringReducer(),
+        let store = ObservableStore(reducer: TestValueStringReducer(),
             stateType: TestStringAppState.self,
             observable: ObservableProperty(TestStringAppState()),
             middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
@@ -52,7 +52,7 @@ class ObservableStoreMiddlewareTests: XCTestCase {
      it can change the return value of the dispatch function
      */
     func testCanChangeReturnValue() {
-        let store = ObservableStore(reducer: ObservableTestValueStringReducer(),
+        let store = ObservableStore(reducer: TestValueStringReducer(),
             stateType: TestStringAppState.self,
             observable: ObservableProperty(TestStringAppState()),
             middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
@@ -68,7 +68,7 @@ class ObservableStoreMiddlewareTests: XCTestCase {
      */
     func testMiddlewareCanAccessState() {
         let property = ObservableProperty(TestStringAppState(testValue: "OK"))
-        let store = ObservableStore(reducer: ObservableTestValueStringReducer(),
+        let store = ObservableStore(reducer: TestValueStringReducer(),
                                     stateType: TestStringAppState.self,
                                     observable: property,
                                     middleware: [stateAccessingMiddleware])

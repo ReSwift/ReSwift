@@ -20,11 +20,11 @@ public protocol ObservableStoreType {
     associatedtype State: StateType
 
     /// Initializes the store with a reducer and an intial state.
-    init(reducer: AnyObservableReducer, stateType: State.Type, observable: ObservableProperty)
+    init(reducer: AnyReducer, stateType: State.Type, observable: ObservableProperty)
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
-    init(reducer: AnyObservableReducer,
+    init(reducer: AnyReducer,
          stateType: State.Type,
          observable: ObservableProperty,
          middleware: [Middleware])
