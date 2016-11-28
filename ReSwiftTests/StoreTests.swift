@@ -52,8 +52,8 @@ class DeInitStore<State: StateType>: Store<State> {
         reducer: AnyReducer,
         state: State?,
         deInitAction: (() -> Void)?) {
-            self.init(reducer: reducer, state: state, middleware: [])
-            self.deInitAction = deInitAction
+        self.init(reducer: reducer, state: state, middleware: [])
+        self.deInitAction = deInitAction
     }
 
     required init(reducer: AnyReducer, state: State?, middleware: [Middleware]) {

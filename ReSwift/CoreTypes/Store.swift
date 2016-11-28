@@ -15,6 +15,7 @@ import Foundation
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
+
 open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = Subscription<State>

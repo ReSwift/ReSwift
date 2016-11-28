@@ -49,37 +49,39 @@ For a very simple app, that maintains a counter that can be increased and decrea
 
 ```swift
 struct AppState: StateType {
-    var counter: Int = 0
+  let counter: Int
 }
 ```
 
-You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](http://reswift.github.io/ReSwift/master/getting-started-guide.html) you can find out how to construct complex actions. For the simple actions in this example we can define empty structs that conform to action:
+You would also define two actions, one for increasing and one for decreasing the counter. In the [Getting Started Guide](http://reswift.github.io/ReSwift/master/getting-started-guide.html) you can find out how to construct complex actions. For the simple actions in this example we can an enum that conforms to action:
 
 ```swift
-struct CounterActionIncrease: Action {}
-struct CounterActionDecrease: Action {}
+enum AppAction: Action {
+	case Increase
+    case Decrease
+}
 ```
 
-Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
+Your reducer needs to respond to these different actions, that can be done by switching over the value of action:
 
 ```swift
-struct CounterReducer: Reducer {
+struct AppReducer: Reducer {
+	func handleAction(action: Action, state: AppState) -> AppState {
+		return AppState(
+          counter: counterReducer(action: action, counter: state.counter)
+		)
+	}
+}
 
-    func handleAction(action: Action, state: AppState?) -> AppState {
-        var state = state ?? AppState()
-
-        switch action {
-        case _ as CounterActionIncrease:
-            state.counter += 1
-        case _ as CounterActionDecrease:
-            state.counter -= 1
-        default:
-            break
-        }
-
-        return state
-    }
-
+func counterReducer(action: Action, counter: Int) -> Int {
+	switch action as? AppAction {
+	case .Increase?:
+        return counter + 1
+	case .Decrease?:
+        return max(0, counter - 1)
+	default:
+		return counter
+	}
 }
 ```
 In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
@@ -87,9 +89,10 @@ In order to have a predictable app state, it is important that the reducer is al
 To maintain our state and delegate the actions to the reducers, we need a store. Let's call it `mainStore` and define it as a global constant, for example in the app delegate file:
 
 ```swift
-let mainStore = Store<AppState>(
-	reducer: CounterReducer(),
-	state: nil
+let mainStore = ObservableStore(
+  reducer: AppReducer(),
+  stateType: AppState.self,
+  observable: ObservableProperty(AppState(counter: 0))
 )
 
 @UIApplicationMain
@@ -102,38 +105,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 Lastly, your view layer, in this case a view controller, needs to tie into this system by subscribing to store updates and emitting actions whenever the app state needs to be changed:
 
 ```swift
-class CounterViewController: UIViewController, StoreSubscriber {
+class CounterViewController: UIViewController {
 
-    @IBOutlet var counterLabel: UILabel!
+  private let disposeBag = SubscriptionReferenceBag()
+  @IBOutlet var counterLabel: UILabel!
 
-    override func viewWillAppear(animated: Bool) {
-        mainStore.subscribe(self)
+  override func viewDidLoad() {
+    disposeBag += mainStore.observable.subscribe { [weak self] state in
+      self?.counterLabel.text = "\(state.counter)"
     }
+  }
 
-    override func viewWillDisappear(animated: Bool) {
-        mainStore.unsubscribe(self)
-    }
+  @IBAction func increaseButtonTapped(sender: UIButton) {
+    mainStore.dispatch(
+      AppState.CounterActionIncrease
+    )
+  }
 
-    func newState(state: AppState) {
-        counterLabel.text = "\(state.counter)"
-    }
-
-    @IBAction func increaseButtonTapped(sender: UIButton) {
-        mainStore.dispatch(
-            CounterActionIncrease()
-        )
-    }
-
-    @IBAction func decreaseButtonTapped(sender: UIButton) {
-        mainStore.dispatch(
-            CounterActionDecrease()
-        )
-    }
+  @IBAction func decreaseButtonTapped(sender: UIButton) {
+    mainStore.dispatch(
+      AppState.CounterActionDecrease
+    )
+  }
 
 }
 ```
 
-The `newState` method will be called by the `Store` whenever a new app state is available, this is where we need to adjust our view to reflect the latest app state.
+The `mainStore.observable.subscribe` block will be called by the `ObservableStore` whenever a new app state is available, this is where we need to adjust our view to reflect the latest app state.
 
 Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.
 
@@ -223,7 +221,7 @@ This repository contains the core component for ReSwift, the following extension
 
 # Example Projects
 
-- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with ReSwift. 
+- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with ReSwift.
 - [CounterExample-Navigation-TimeTravel](https://github.com/ReSwift/CounterExample-Navigation-TimeTravel): This example builds on the simple CounterExample app, adding time travel with [ReSwiftRecorder](https://github.com/ReSwift/ReSwift-Recorder) and routing with [ReSwiftRouter](https://github.com/ReSwift/ReSwift-Router).
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.
@@ -250,4 +248,3 @@ If you have any questions, you can find the core team on twitter:
 - [@ctietze](https://twitter.com/ctietze)
 
 We also have a [public gitter chat!](https://gitter.im/ReSwift/public)
-

@@ -41,12 +41,6 @@ class IncreaseByTwoReducer: Reducer {
     }
 }
 
-struct CounterState: StateType {
-    var count: Int = 0
-}
-
-let emptyAction = "EMPTY_ACTION"
-
 class CombinedReducerTest: XCTestCase {
 
     /**
