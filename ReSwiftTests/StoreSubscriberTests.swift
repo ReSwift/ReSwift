@@ -16,7 +16,7 @@ class StoreSubscriberTests: XCTestCase {
      */
     func testAllowsSelectorClosure() {
         let reducer = TestReducer()
-        let store = Store(reducer: reducer, state: TestAppState())
+        let store = Store(reducer: reducer.handleAction, state: TestAppState())
         let subscriber = TestFilteredSubscriber()
 
         store.subscribe(subscriber) {
@@ -32,7 +32,7 @@ class StoreSubscriberTests: XCTestCase {
      */
     func testComplexStateSelector() {
         let reducer = TestComplexAppStateReducer()
-        let store = Store(reducer: reducer, state: TestComplexAppState())
+        let store = Store(reducer: reducer.handleAction, state: TestComplexAppState())
         let subscriber = TestSelectiveSubscriber()
 
         store.subscribe(subscriber) { ($0.testValue, $0.otherState?.name) }
@@ -77,7 +77,7 @@ struct OtherState {
     var age: Int?
 }
 
-struct TestComplexAppStateReducer: Reducer {
+struct TestComplexAppStateReducer {
     func handleAction(action: Action, state: TestComplexAppState?) -> TestComplexAppState {
         var state = state ?? TestComplexAppState()
 

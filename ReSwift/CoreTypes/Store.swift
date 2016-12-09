@@ -35,17 +35,21 @@ open class Store<State: StateType>: StoreType {
 
     public var dispatchFunction: DispatchFunction!
 
-    private var reducer: AnyReducer
+    private var reducer: Reducer<State>
 
     var subscriptions: [SubscriptionType] = []
 
     private var isDispatching = false
 
-    public required convenience init(reducer: AnyReducer, state: State?) {
+    public required convenience init(reducer: @escaping Reducer<State>, state: State?) {
         self.init(reducer: reducer, state: state, middleware: [])
     }
 
-    public required init(reducer: AnyReducer, state: State?, middleware: [Middleware]) {
+    public required init(
+        reducer: @escaping Reducer<State>,
+        state: State?,
+        middleware: [Middleware]
+    ) {
         self.reducer = reducer
 
         // Wrap the dispatch function with all middlewares
@@ -107,7 +111,7 @@ open class Store<State: StateType>: StoreType {
         }
 
         isDispatching = true
-        let newState = reducer._handleAction(action: action, state: state) as! State
+        let newState = reducer(action, state)
         isDispatching = false
 
         state = newState
