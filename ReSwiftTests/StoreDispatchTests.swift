@@ -20,7 +20,7 @@ class StoreDispatchTests: XCTestCase {
     override func setUp() {
         super.setUp()
         reducer = TestReducer()
-        store = Store(reducer: reducer, state: TestAppState())
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
     }
 
     /**
@@ -39,7 +39,7 @@ class StoreDispatchTests: XCTestCase {
     func testThrowsExceptionWhenReducersDispatch() {
         // Expectation lives in the `DispatchingReducer` class
         let reducer = DispatchingReducer()
-        store = Store(reducer: reducer, state: TestAppState())
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
         reducer.store = store
         store.dispatch(SetValueAction(10))
     }
@@ -124,7 +124,7 @@ class StoreDispatchTests: XCTestCase {
 }
 
 // Needs to be class so that shared reference can be modified to inject store
-class DispatchingReducer: XCTestCase, Reducer {
+class DispatchingReducer: XCTestCase {
     var store: Store<TestAppState>? = nil
 
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {

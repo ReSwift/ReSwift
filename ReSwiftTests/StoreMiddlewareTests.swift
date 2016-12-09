@@ -81,7 +81,7 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testDecorateDispatch() {
         let reducer = TestValueStringReducer()
-        let store = Store<TestStringAppState>(reducer: reducer,
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
             middleware: [firstMiddleware, secondMiddleware])
 
@@ -99,7 +99,7 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testCanDispatch() {
         let reducer = TestValueStringReducer()
-        let store = Store<TestStringAppState>(reducer: reducer,
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
             middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
 
@@ -117,7 +117,7 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testCanChangeReturnValue() {
         let reducer = TestValueStringReducer()
-        let store = Store<TestStringAppState>(reducer: reducer,
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
             middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
 
@@ -135,7 +135,7 @@ class StoreMiddlewareTests: XCTestCase {
         var state = TestStringAppState()
         state.testValue = "OK"
 
-        let store = Store<TestStringAppState>(reducer: reducer, state: state,
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction, state: state,
             middleware: [stateAccessingMiddleware])
 
         store.dispatch(SetValueStringAction("Action That Won't Go Through"))

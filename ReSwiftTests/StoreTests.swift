@@ -16,7 +16,7 @@ class StoreTests: XCTestCase {
      */
     func testInit() {
         let reducer = MockReducer()
-        let _ = Store<CounterState>(reducer: reducer, state: nil)
+        let _ = Store<CounterState>(reducer: reducer.handleAction, state: nil)
 
         XCTAssert(reducer.calledWithAction[0] is ReSwiftInit)
     }
@@ -30,7 +30,7 @@ class StoreTests: XCTestCase {
         autoreleasepool {
             let reducer = TestReducer()
             let _ = DeInitStore(
-                reducer: reducer,
+                reducer: reducer.handleAction,
                 state: TestAppState(),
                 deInitAction: { deInitCount += 1 })
         }
@@ -49,14 +49,30 @@ class DeInitStore<State: StateType>: Store<State> {
     }
 
     required convenience init(
-        reducer: AnyReducer,
+        reducer: @escaping Reducer<State>,
         state: State?,
         deInitAction: (() -> Void)?) {
             self.init(reducer: reducer, state: state, middleware: [])
             self.deInitAction = deInitAction
     }
 
-    required init(reducer: AnyReducer, state: State?, middleware: [Middleware]) {
+    required init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware]) {
         super.init(reducer: reducer, state: state, middleware: middleware)
     }
+}
+
+struct CounterState: StateType {
+    var count: Int = 0
+}
+
+class MockReducer {
+
+    var calledWithAction: [Action] = []
+
+    func handleAction(action: Action, state: CounterState?) -> CounterState {
+        calledWithAction.append(action)
+
+        return state ?? CounterState()
+    }
+
 }
