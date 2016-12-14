@@ -25,3 +25,27 @@ extension StoreSubscriber {
         }
     }
 }
+
+public protocol EquatableStateStoreSubscriber: StoreSubscriber {
+    var stateUUID: String? { get set }
+}
+
+extension EquatableStateStoreSubscriber {
+
+    public func _newState(state: Any) {
+        if let typedState = state as? StoreSubscriberStateType {
+            if let eqState = typedState as? EquatableState {
+                guard let uuid = stateUUID else {
+                    stateUUID = eqState.uuid
+                    newState(state: typedState)
+                    return
+                }
+
+                if uuid != eqState.uuid {
+                    stateUUID = eqState.uuid
+                    newState(state: typedState)
+                }
+            }
+        }
+    }
+}
