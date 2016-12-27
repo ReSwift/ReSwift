@@ -104,7 +104,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    open func _defaultDispatch(action: Action) -> Any {
+    open func _defaultDispatch(action: Action) -> Void {
         guard !isDispatching else {
             raiseFatalError(
                 "ReSwift:IllegalDispatchFromReducer - Reducers may not dispatch actions.")
@@ -115,26 +115,18 @@ open class Store<State: StateType>: StoreType {
         isDispatching = false
 
         state = newState
-
-        return action
     }
 
     @discardableResult
-    open func dispatch(_ action: Action) -> Any {
-        let returnValue = dispatchFunction(action)
-
-        return returnValue
+    open func dispatch(_ action: Action) -> Void {
+        dispatchFunction(action)
     }
 
     @discardableResult
-    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Any {
-        let action = actionCreatorProvider(state, self)
-
-        if let action = action {
+    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Void {
+        if let action = actionCreatorProvider(state, self) {
             dispatch(action)
         }
-
-        return action as Any
     }
 
     open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
