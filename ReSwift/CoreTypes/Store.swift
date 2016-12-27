@@ -33,7 +33,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    public var dispatchFunction: DispatchFunction!
+    public let middleware: Middleware
 
     private var reducer: Reducer<State>
 
@@ -42,26 +42,17 @@ open class Store<State: StateType>: StoreType {
     private var isDispatching = false
 
     public required convenience init(reducer: @escaping Reducer<State>, state: State?) {
-        self.init(reducer: reducer, state: state, middleware: [])
+        self.init(reducer: reducer, state: state, middleware: Middleware())
     }
 
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware]
+        middleware: Middleware
     ) {
         self.reducer = reducer
 
-        // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware
-            .reversed()
-            .reduce({ [unowned self] action in
-                return self._defaultDispatch(action: action)
-            }) {
-                [weak self] dispatchFunction, middleware in
-                let getState = { self?.state }
-                return middleware(self?.dispatch, getState)(dispatchFunction)
-        }
+        self.middleware = middleware
 
         if let state = state {
             self.state = state
@@ -119,7 +110,7 @@ open class Store<State: StateType>: StoreType {
 
     @discardableResult
     open func dispatch(_ action: Action) -> Void {
-        dispatchFunction(action)
+        middleware.transform({ self.state }, dispatch, action).forEach(_defaultDispatch)
     }
 
     @discardableResult

@@ -23,16 +23,15 @@ public protocol StoreType {
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
-    init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware])
+    init(reducer: @escaping Reducer<State>, state: State?, middleware: Middleware)
 
     /// The current state stored in the store.
     var state: State! { get }
 
     /**
-     The main dispatch function that is used by all convenience `dispatch` methods.
-     This dispatch function can be extended by providing middlewares.
+     The middleware that is used by all `dispatch` methods.
      */
-    var dispatchFunction: DispatchFunction! { get }
+    var middleware: Middleware { get }
 
     /**
      Subscribes the provided subscriber to this store.

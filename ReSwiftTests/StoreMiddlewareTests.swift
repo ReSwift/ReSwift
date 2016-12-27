@@ -9,66 +9,38 @@
 import XCTest
 import ReSwift
 
-let firstMiddleware: Middleware = { dispatch, getState in
-    return { next in
-        return { action in
-
-            if var action = action as? SetValueStringAction {
-                action.value = action.value + " First Middleware"
-                return next(action)
-            } else {
-                return next(action)
-            }
-        }
+let firstMiddleware = Middleware().map { state, action in
+    if let action = action as? SetValueStringAction {
+        return SetValueStringAction(action.value + " First Middleware")
     }
+    return action
 }
 
-let secondMiddleware: Middleware = { dispatch, getState in
-    return { next in
-        return { action in
-
-            if var action = action as? SetValueStringAction {
-                action.value = action.value + " Second Middleware"
-                return next(action)
-            } else {
-                return next(action)
-            }
-        }
+let secondMiddleware = Middleware().map { state, action in
+    if let action = action as? SetValueStringAction {
+        return SetValueStringAction(action.value + " Second Middleware")
     }
+    return action
 }
 
-let dispatchingMiddleware: Middleware = { dispatch, getState in
-    return { next in
-        return { action in
-
-            if var action = action as? SetValueAction {
-                _ = dispatch?(SetValueStringAction("\(action.value)"))
-            }
-
-            return next(action)
-        }
+let dispatchingMiddleware = Middleware().sideEffect { state, dispatch, action in
+    if let action = action as? SetValueAction {
+        dispatch(SetValueStringAction("\(action.value)"))
     }
+}.filter { _, action in
+    !(action is SetValueAction)
 }
 
-let stateAccessingMiddleware: Middleware = { dispatch, getState in
-    return { next in
-        return { action in
-
-            let appState = getState() as? TestStringAppState,
-                stringAction = action as? SetValueStringAction
-
-            // avoid endless recursion by checking if we've dispatched exactly this action
-            if appState?.testValue == "OK" && stringAction?.value != "Not OK" {
-                // dispatch a new action
-                _ = dispatch?(SetValueStringAction("Not OK"))
-
-                // and swallow the current one
-                return next(StandardAction(type: "No-Op-Action"))
-            }
-
-            return next(action)
+let stateAccessingMiddleware = Middleware().sideEffect { state, dispatch, action in
+    if let action = action as? SetValueStringAction, let state = state() as? TestStringAppState {
+        //Avoid endless recursion by checking if we've exactly this action
+        if state.testValue == "OK" && action.value != "Not OK" {
+            dispatch(SetValueStringAction("Not OK"))
         }
     }
+}.filter { state, action in
+    print("Swallowing action \(action)")
+    return (action as? SetValueStringAction)?.value == "Not OK"
 }
 
 // swiftlint:disable function_body_length
@@ -81,7 +53,7 @@ class StoreMiddlewareTests: XCTestCase {
         let reducer = TestValueStringReducer()
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware])
+            middleware: firstMiddleware.concat(secondMiddleware))
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -99,7 +71,7 @@ class StoreMiddlewareTests: XCTestCase {
         let reducer = TestValueStringReducer()
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+            middleware: Middleware(firstMiddleware, secondMiddleware, dispatchingMiddleware))
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -119,10 +91,27 @@ class StoreMiddlewareTests: XCTestCase {
         state.testValue = "OK"
 
         let store = Store<TestStringAppState>(reducer: reducer.handleAction, state: state,
-            middleware: [stateAccessingMiddleware])
+            middleware: stateAccessingMiddleware)
 
         store.dispatch(SetValueStringAction("Action That Won't Go Through"))
 
         XCTAssertEqual(store.state.testValue, "Not OK")
+    }
+
+    /**
+     it actions should be multiplied via the increase function
+     */
+    func testMiddlewareMultiplies() {
+        let increaseByOneReducer: Reducer<CounterState> = { action, state in
+            var state = state
+            state?.count += 1
+            return state
+        }
+        let multiplexingMiddleware = Middleware().increase { [$1, $1, $1] }.flatMap { $1 }
+        let store = Store<CounterState>(reducer: increaseByOneReducer,
+                          state: CounterState(),
+                          middleware: multiplexingMiddleware)
+        store.dispatch(SetValueStringAction("Meaningless Action"))
+        XCTAssertEqual(store.state.count, 3)
     }
 }
