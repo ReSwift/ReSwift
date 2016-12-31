@@ -64,7 +64,7 @@ public protocol StoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
-    func dispatch(_ action: Action) -> Any
+    func dispatch(_ action: Action)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
@@ -99,7 +99,7 @@ public protocol StoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
-    func dispatch(_ actionCreator: ActionCreator) -> Any
+    func dispatch(_ actionCreator: ActionCreator)
 
     /**
      Dispatches an async action creator to the store. An async action creator generates an
