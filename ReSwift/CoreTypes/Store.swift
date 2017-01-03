@@ -107,7 +107,7 @@ open class Store<State: StateType>: StoreType {
     open func _defaultDispatch(action: Action) -> Void {
         guard !isDispatching else {
             raiseFatalError(
-                "ReSwift:IllegalDispatchFromReducer - Reducers may not dispatch actions.")
+                "ReSwift:ConcurrentMutationError- Concurrent mutation detected. Possible causes: A reducer is dispatching an action, multiple GCD queues are dispatching/subscribing to a single store, or a concurrent GCD queue (such as global()) is being dispatched/subscribed/unsubscribed to")
         }
 
         isDispatching = true
