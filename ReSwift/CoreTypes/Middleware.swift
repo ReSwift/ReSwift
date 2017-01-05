@@ -18,7 +18,9 @@ public struct Middleware {
 
     /// Create a blank slate Middleware.
     public init() {
-        self.transform = { [$2] }
+        self.transform = { _, _, action in
+            return [action]
+        }
     }
 
     /**
@@ -88,11 +90,11 @@ public struct Middleware {
         }
     }
 
-    /// Drop the Action if `predicate(action) != true`.
-    public func filter(_ predicate: @escaping (GetState, Action) -> Bool) -> Middleware {
+    /// Drop the Action if `isIncluded(action) != true`.
+    public func filter(_ isIncluded: @escaping (GetState, Action) -> Bool) -> Middleware {
         return Middleware { getState, dispatch, action in
             self.transform(getState, dispatch, action).filter {
-                predicate(getState, $0)
+                isIncluded(getState, $0)
             }
         }
     }
