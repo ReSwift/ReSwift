@@ -57,8 +57,7 @@ open class Store<State: StateType>: StoreType {
             .reversed()
             .reduce({ [unowned self] action in
                 return self._defaultDispatch(action: action)
-            }) {
-                [weak self] dispatchFunction, middleware in
+            }) { [weak self] dispatchFunction, middleware in
                 let getState = { self?.state }
                 return middleware(self?.dispatch, getState)(dispatchFunction)
         }

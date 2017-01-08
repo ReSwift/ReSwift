@@ -58,9 +58,9 @@ class StoreDispatchTests: XCTestCase {
             withDescription: "It accepts async action creators")
 
         let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
-            dispatchAsync() {
+            dispatchAsync {
                 // Provide the callback with an action creator
-                callback { state, store in
+                callback { _, _ in
                     return SetValueAction(5)
                 }
             }
@@ -90,9 +90,9 @@ class StoreDispatchTests: XCTestCase {
             "It calls the callback once state update from async action is complete")
 
         let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
-            dispatchAsync() {
+            dispatchAsync {
                 // Provide the callback with an action creator
-                callback { state, store in
+                callback { _, _ in
                     return SetValueAction(5)
                 }
             }
