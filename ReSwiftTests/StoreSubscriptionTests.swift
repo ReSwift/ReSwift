@@ -91,6 +91,23 @@ class StoreSubscriptionTests: XCTestCase {
     }
 
     /**
+     it does not notify subscriber for unchanged equatable state
+     */
+    func testDontNotifyForUnchangedState() {
+        let reducer = TestEquatableReducer()
+
+        var state = TestEquatableAppState()
+        state.testValue = 2
+        let store = Store<TestEquatableAppState>(reducer: reducer.handleAction, state: state)
+        let subscriber = TestStoreSubscriber<TestEquatableAppState>()
+
+        store.subscribe(subscriber)
+        store.dispatch(SetValueAction(2))
+
+        XCTAssertEqual(subscriber.receivedStates.count, 1)
+    }
+
+    /**
      it does not dispatch value after subscriber unsubscribes
      */
     func testDontDispatchToUnsubscribers() {

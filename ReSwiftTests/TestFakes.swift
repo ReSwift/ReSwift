@@ -25,6 +25,18 @@ struct TestStringAppState: StateType {
     }
 }
 
+struct TestEquatableAppState: StateType, Equatable {
+    var testValue: Int?
+
+    init() {
+        testValue = nil
+    }
+
+    static func == (left: TestEquatableAppState, right: TestEquatableAppState) -> Bool {
+        return left.testValue == right.testValue
+    }
+}
+
 struct SetValueAction: StandardActionConvertible {
 
     let value: Int
@@ -69,6 +81,20 @@ struct SetValueStringAction: StandardActionConvertible {
 struct TestReducer {
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
+
+        switch action {
+        case let action as SetValueAction:
+            state.testValue = action.value
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+struct TestEquatableReducer {
+    func handleAction(action: Action, state: TestEquatableAppState?) -> TestEquatableAppState {
+        var state = state ?? TestEquatableAppState()
 
         switch action {
         case let action as SetValueAction:
