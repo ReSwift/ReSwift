@@ -9,3 +9,13 @@
 import Foundation
 
 public protocol StateType { }
+
+public protocol EquatableState {
+    func isEqualState(to state: Self) -> Bool
+}
+
+public extension EquatableState where Self: Equatable {
+    public func isEqualState(to state: Self) -> Bool {
+        return self == state
+    }
+}

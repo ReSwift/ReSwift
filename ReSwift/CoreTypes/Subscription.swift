@@ -26,7 +26,7 @@ struct Subscription<State: StateType, SelectedState> {
     }
 }
 
-struct EquatableSubscription<State: StateType, SelectedState: Equatable> {
+struct EquatableSubscription<State: StateType, SelectedState: EquatableState> {
     private(set) weak var subscriber: AnyStoreSubscriber? = nil
     let selector: ((State) -> SelectedState)?
 
@@ -39,7 +39,7 @@ struct EquatableSubscription<State: StateType, SelectedState: Equatable> {
     }
 }
 
-struct OptionalEquatableSubscription<State: StateType, SelectedState: Equatable> {
+struct OptionalEquatableSubscription<State: StateType, SelectedState: EquatableState> {
     private(set) weak var subscriber: AnyStoreSubscriber? = nil
     let selector: ((State) -> SelectedState?)?
 

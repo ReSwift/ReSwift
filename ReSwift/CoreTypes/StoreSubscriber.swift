@@ -10,8 +10,8 @@ import Foundation
 
 public protocol AnyStoreSubscriber: class {
     func _newState<T: Any>(state: T, oldState: T?)
-    func _newEquatableState<T: Equatable>(state: T, oldState: T?)
-    func _newOptionalEquatableState<T: Equatable>(state: T?, oldState: T??)
+    func _newEquatableState<T: EquatableState>(state: T, oldState: T?)
+    func _newOptionalEquatableState<T: EquatableState>(state: T?, oldState: T??)
 }
 
 public protocol StoreSubscriber: AnyStoreSubscriber {
@@ -27,9 +27,9 @@ extension StoreSubscriber {
         }
     }
 
-    public func _newEquatableState<T: Equatable>(state: T, oldState: T?) {
+    public func _newEquatableState<T: EquatableState>(state: T, oldState: T?) {
         if let oldState = oldState,
-            state == oldState {
+            state.isEqualState(to: oldState) {
             return
         }
 
@@ -38,10 +38,18 @@ extension StoreSubscriber {
         }
     }
 
-    public func _newOptionalEquatableState<T: Equatable>(state: T?, oldState: T??) {
-        if let oldState = oldState,
-            state == oldState {
-            return
+    public func _newOptionalEquatableState<T: EquatableState>(state: T?, oldState: T??) {
+        if let oldState = oldState {
+            switch (state, oldState) {
+            case let (.some(state), .some(oldState)):
+                if state.isEqualState(to: oldState) {
+                    return
+                }
+            case (.none, .none):
+                return
+            default:
+                break
+            }
         }
 
         if let typedState = state as? StoreSubscriberStateType {

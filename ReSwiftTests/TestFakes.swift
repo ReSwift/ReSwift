@@ -9,6 +9,8 @@
 import Foundation
 import ReSwift
 
+extension Int: EquatableState {}
+
 struct TestAppState: StateType {
     var testValue: Int?
     var otherTestValue: Int = 0
@@ -26,7 +28,7 @@ struct TestStringAppState: StateType {
     }
 }
 
-struct TestEquatableAppState: StateType, Equatable {
+struct TestEquatableAppState: StateType, EquatableState, Equatable {
     var testValue: Int?
 
     init() {

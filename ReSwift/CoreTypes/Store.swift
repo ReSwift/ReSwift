@@ -97,7 +97,7 @@ open class Store<State: StateType>: StoreType {
             }
     }
 
-    open func subscribe<SelectedState: Equatable, S: StoreSubscriber>
+    open func subscribe<SelectedState: EquatableState, S: StoreSubscriber>
         (_ subscriber: S, selector: ((State) -> SelectedState)?)
         where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
@@ -113,7 +113,7 @@ open class Store<State: StateType>: StoreType {
             }
     }
 
-    open func subscribe<SelectedState: Equatable, S: StoreSubscriber>
+    open func subscribe<SelectedState: EquatableState, S: StoreSubscriber>
         (_ subscriber: S, selector: ((State) -> SelectedState?)?)
         where S.StoreSubscriberStateType == SelectedState? {
             if !_isNewSubscriber(subscriber: subscriber) { return }
@@ -187,9 +187,9 @@ open class Store<State: StateType>: StoreType {
     ) -> Void
 }
 
-extension Store where State: Equatable {
+extension Store where State: EquatableState {
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where State: Equatable, S.StoreSubscriberStateType == State {
+        where State: EquatableState, S.StoreSubscriberStateType == State {
             subscribe(subscriber, selector: nil)
     }
 }
