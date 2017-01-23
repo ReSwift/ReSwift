@@ -63,7 +63,7 @@ public struct Middleware {
         }
     }
 
-    /// Concatenates the transform function onto the callee's transform.
+    /// Transform the action into another action.
     public func map(_ transform: @escaping (GetState, Action) -> Action) -> Middleware {
         return Middleware { getState, dispatch, action in
             self.transform(getState, dispatch, action).map {
@@ -72,7 +72,7 @@ public struct Middleware {
         }
     }
 
-    /// Concatenates the transform function onto the callee's transform.
+    /// One to many pattern allowing one action to be turned into multiple.
     public func increase(_ transform: @escaping (GetState, Action) -> [Action]) -> Middleware {
         return Middleware { getState, dispatch, action in
             self.transform(getState, dispatch, action).flatMap {
@@ -81,7 +81,7 @@ public struct Middleware {
         }
     }
 
-    /// Concatenates the transform function onto the callee's transform.
+    /// Filters while mapping actions to new actions.
     public func flatMap(_ transform: @escaping (GetState, Action) -> Action?) -> Middleware {
         return Middleware { getState, dispatch, action in
             self.transform(getState, dispatch, action).flatMap {
@@ -90,7 +90,7 @@ public struct Middleware {
         }
     }
 
-    /// Drop the Action if `isIncluded(action) != true`.
+    /// Drop the action iff `isIncluded(action) != true`.
     public func filter(_ isIncluded: @escaping (GetState, Action) -> Bool) -> Middleware {
         return Middleware { getState, dispatch, action in
             self.transform(getState, dispatch, action).filter {
