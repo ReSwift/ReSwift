@@ -41,14 +41,10 @@ open class Store<State: StateType>: StoreType {
 
     private var isDispatching = false
 
-    public required convenience init(reducer: @escaping Reducer<State>, state: State?) {
-        self.init(reducer: reducer, state: state, middleware: [])
-    }
-
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware]
+        middleware: [Middleware] = []
     ) {
         self.reducer = reducer
 
@@ -57,8 +53,7 @@ open class Store<State: StateType>: StoreType {
             .reversed()
             .reduce({ [unowned self] action in
                 return self._defaultDispatch(action: action)
-            }) {
-                [weak self] dispatchFunction, middleware in
+            }) { [weak self] dispatchFunction, middleware in
                 let getState = { self?.state }
                 return middleware(self?.dispatch, getState)(dispatchFunction)
         }

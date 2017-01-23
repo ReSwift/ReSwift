@@ -18,9 +18,6 @@ public protocol StoreType {
 
     associatedtype State: StateType
 
-    /// Initializes the store with a reducer and an intial state.
-    init(reducer: @escaping Reducer<State>, state: State?)
-
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
     init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware])
