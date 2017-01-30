@@ -18,9 +18,6 @@ public protocol StoreType {
 
     associatedtype State: StateType
 
-    /// Initializes the store with a reducer and an intial state.
-    init(reducer: @escaping Reducer<State>, state: State?)
-
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
     init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware])
@@ -42,6 +39,18 @@ public protocol StoreType {
      - parameter subscriber: Subscriber that will receive store updates
      */
     func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
+
+    /**
+     Subscribes the provided subscriber to this store.
+     Subscribers will receive a call to `newState` whenever the
+     state in this store changes.
+
+     - parameter subscriber: Subscriber that will receive store updates
+     - parameter selector: A selector for the sub-state the subscriber will receive
+     */
+    func subscribe<SelectedState, S: StoreSubscriber>
+        (_ subscriber: S, selector: ((State) -> SelectedState)?)
+    where S.StoreSubscriberStateType == SelectedState
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer
