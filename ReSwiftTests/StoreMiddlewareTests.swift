@@ -14,7 +14,7 @@ let firstMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueStringAction {
-                action.value = action.value + " First Middleware"
+                action.value += " First Middleware"
                 return next(action)
             } else {
                 return next(action)
@@ -28,7 +28,7 @@ let secondMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueStringAction {
-                action.value = action.value + " Second Middleware"
+                action.value += " Second Middleware"
                 return next(action)
             } else {
                 return next(action)
