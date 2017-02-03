@@ -188,7 +188,7 @@ open class Store<State: StateType>: StoreType {
 
 extension Store where State: EquatableState {
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where State: EquatableState, S.StoreSubscriberStateType == State {
+        where S.StoreSubscriberStateType == State {
             subscribe(subscriber, selector: nil)
     }
 }

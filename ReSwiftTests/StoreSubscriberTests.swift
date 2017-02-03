@@ -82,6 +82,7 @@ class StoreSubscriberTests: XCTestCase {
         }
 
         XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
 
         store.dispatch(SetValueAction(3))
 
