@@ -17,23 +17,17 @@ import Foundation
  */
 open class Store<State: StateType>: StoreType {
 
-    typealias SubscriptionType = Subscription<State>
+    typealias SubscriptionType = SubscriptionBox<State>
 
     // swiftlint:disable todo
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
+    // swiftlint:enable todo
 
     /*private (set)*/ public var state: State! {
         didSet {
             subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
-                // if a selector is available, subselect the relevant state
-                // otherwise pass the entire state to the subscriber
-                guard let state = state else {
-                    // State should never be nil after `ReSwiftInit`
-                    preconditionFailure("Unexpectedly found `nil` while unwrapping state")
-                }
-
-                $0.subscriber?._newState(state: $0.selector?(state) ?? state)
+                $0.newValues(oldState: oldValue, newState: state)
             }
         }
     }
@@ -83,19 +77,37 @@ open class Store<State: StateType>: StoreType {
 
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
-            subscribe(subscriber, selector: nil)
+            _ = subscribe(subscriber, transform: nil)
     }
 
-    open func subscribe<SelectedState, S: StoreSubscriber>
-        (_ subscriber: S, selector: ((State) -> SelectedState)?)
-        where S.StoreSubscriberStateType == SelectedState {
-            if !_isNewSubscriber(subscriber: subscriber) { return }
+    @discardableResult
+    open func subscribe<SelectedState, S: StoreSubscriber>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState
+    {
+        // If the same subscriber is already registered with the store, replace the existing
+        // subscription with the new one.
+        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
+            subscriptions.remove(at: index)
+        }
 
-            subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
+        // Create a subscription for the new subscriber.
+        let originalSubscription = Subscription<State>()
+        // Call the optional transformation closure. This allows callers to modify
+        // the subscription, e.g. in order to subselect parts of the store's state.
+        let transformedSubscription = transform?(originalSubscription)
 
-            if let state = self.state {
-                subscriber._newState(state: selector?(state) ?? state)
-            }
+        let subscriptionBox = SubscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
+
+        subscriptions.append(subscriptionBox)
+
+        if let state = self.state {
+            originalSubscription.newValues(oldState: nil, newState: state)
+        }
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
