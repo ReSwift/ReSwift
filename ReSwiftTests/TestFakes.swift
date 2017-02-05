@@ -18,10 +18,10 @@ struct TestAppState: StateType {
 }
 
 struct TestStringAppState: StateType {
-    var testValue: String?
+    var testValue: String
 
     init() {
-        testValue = nil
+        testValue = "Initial"
     }
 }
 
