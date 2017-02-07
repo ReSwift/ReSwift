@@ -14,7 +14,7 @@ import Foundation
  Stores receive actions and use reducers combined with these actions, to calculate state changes.
  Upon every state update a store informs all of its subscribers.
  */
-public protocol StoreType {
+public protocol StoreType: DispatchingStoreType {
 
     associatedtype State: StateType
 
@@ -59,21 +59,6 @@ public protocol StoreType {
      - parameter subscriber: Subscriber that will be unsubscribed
      */
     func unsubscribe(_ subscriber: AnyStoreSubscriber)
-
-    /**
-     Dispatches an action. This is the simplest way to modify the stores state.
-
-     Example of dispatching an action:
-
-     ```
-     store.dispatch( CounterAction.IncreaseCounter )
-     ```
-
-     - parameter action: The action that is being dispatched to the store
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
-     */
-    func dispatch(_ action: Action)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
