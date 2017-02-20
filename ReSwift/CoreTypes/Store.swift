@@ -17,8 +17,6 @@ import Foundation
  */
 open class Store<State: StateType>: StoreType {
 
-    typealias SubscriptionType = Subscription<State>
-
     // swiftlint:disable todo
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
 
@@ -28,7 +26,7 @@ open class Store<State: StateType>: StoreType {
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
-                $0.subscriber?._newState(state: $0.selector?(state) ?? state)
+                $0.newState(state: state, oldState: oldValue)
             }
         }
     }
@@ -37,7 +35,7 @@ open class Store<State: StateType>: StoreType {
 
     private var reducer: Reducer<State>
 
-    var subscriptions: [SubscriptionType] = []
+    var subscriptions: [AnySubscription] = []
 
     private var isDispatching = false
 
@@ -86,10 +84,43 @@ open class Store<State: StateType>: StoreType {
         where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
 
-            subscriptions.append(Subscription(subscriber: subscriber, selector: selector))
+            let subscription = Subscription(subscriber: subscriber, selector: selector)
+            subscriptions.append(subscription)
 
             if let state = self.state {
-                subscriber._newState(state: selector?(state) ?? state)
+                subscription.newState(state: state, oldState: nil)
+            }
+    }
+
+    open func subscribe<SelectedState: EquatableState, S: StoreSubscriber>
+        (_ subscriber: S, selector: ((State) -> SelectedState)?)
+        where S.StoreSubscriberStateType == SelectedState {
+            if !_isNewSubscriber(subscriber: subscriber) { return }
+
+            let subscription = EquatableSubscription(
+                subscriber: subscriber,
+                selector: selector
+            )
+            subscriptions.append(subscription)
+
+            if let state = self.state {
+                subscription.newState(state: state, oldState: nil)
+            }
+    }
+
+    open func subscribe<SelectedState: EquatableState, S: StoreSubscriber>
+        (_ subscriber: S, selector: ((State) -> SelectedState?)?)
+        where S.StoreSubscriberStateType == SelectedState? {
+            if !_isNewSubscriber(subscriber: subscriber) { return }
+
+            let subscription = OptionalEquatableSubscription(
+                subscriber: subscriber,
+                selector: selector
+            )
+            subscriptions.append(subscription)
+
+            if let state = self.state {
+                subscription.newState(state: state, oldState: nil)
             }
     }
 
@@ -149,4 +180,11 @@ open class Store<State: StateType>: StoreType {
         _ store: Store,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
+}
+
+extension Store where State: EquatableState {
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
+            subscribe(subscriber, selector: nil)
+    }
 }

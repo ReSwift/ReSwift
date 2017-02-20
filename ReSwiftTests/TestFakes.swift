@@ -9,8 +9,11 @@
 import Foundation
 import ReSwift
 
+extension Int: EquatableState {}
+
 struct TestAppState: StateType {
     var testValue: Int?
+    var otherTestValue: Int = 0
 
     init() {
         testValue = nil
@@ -22,6 +25,18 @@ struct TestStringAppState: StateType {
 
     init() {
         testValue = nil
+    }
+}
+
+struct TestEquatableAppState: StateType, EquatableState, Equatable {
+    var testValue: Int?
+
+    init() {
+        testValue = nil
+    }
+
+    static func == (left: TestEquatableAppState, right: TestEquatableAppState) -> Bool {
+        return left.testValue == right.testValue
     }
 }
 
@@ -69,6 +84,20 @@ struct SetValueStringAction: StandardActionConvertible {
 struct TestReducer {
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
+
+        switch action {
+        case let action as SetValueAction:
+            state.testValue = action.value
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+struct TestEquatableReducer {
+    func handleAction(action: Action, state: TestEquatableAppState?) -> TestEquatableAppState {
+        var state = state ?? TestEquatableAppState()
 
         switch action {
         case let action as SetValueAction:

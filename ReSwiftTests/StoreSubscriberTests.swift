@@ -44,15 +44,71 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.receivedValue.0, 5)
         XCTAssertEqual(subscriber.receivedValue.1, "TestName")
     }
+
+    /**
+     it does not notify subscriber for unchanged equatable state
+     */
+    func testUnchangedStateSelector() {
+        let reducer = TestReducer()
+        var state = TestAppState()
+        state.testValue = 3
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber()
+
+        store.subscribe(subscriber) {
+            $0.testValue
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    /**
+     it does not notify subscriber for unchanged equatable state
+     */
+    func testUnchangedNonOptionalStateSelector() {
+        let reducer = TestReducer()
+        var state = TestAppState()
+        state.otherTestValue = 3
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredNonOptionalSubscriber()
+
+        store.subscribe(subscriber) {
+            $0.otherTestValue
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
 }
 
 class TestFilteredSubscriber: StoreSubscriber {
     var receivedValue: Int?
+    var newStateCallCount: Int = 0
 
     func newState(state: Int?) {
         receivedValue = state
+        newStateCallCount += 1
     }
+}
 
+class TestFilteredNonOptionalSubscriber: StoreSubscriber {
+    var receivedValue: Int?
+    var newStateCallCount: Int = 0
+
+    func newState(state: Int) {
+        receivedValue = state
+        newStateCallCount += 1
+    }
 }
 
 /**
