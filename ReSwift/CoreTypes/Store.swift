@@ -28,6 +28,11 @@ open class Store<State: StateType>: StoreType {
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
+                guard let state = state else {
+                    // State should never be nil after `ReSwiftInit`
+                    preconditionFailure("Unexpectedly found `nil` while unwrapping state")
+                }
+
                 $0.subscriber?._newState(state: $0.selector?(state) ?? state)
             }
         }
@@ -112,12 +117,10 @@ open class Store<State: StateType>: StoreType {
         state = newState
     }
 
-    @discardableResult
     open func dispatch(_ action: Action) -> Void {
         dispatchFunction(action)
     }
 
-    @discardableResult
     open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Void {
         if let action = actionCreatorProvider(state, self) {
             dispatch(action)
