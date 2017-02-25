@@ -58,11 +58,7 @@ class SubscriptionBox<State> {
 /// reactive programming libraries.
 public class Subscription<State> {
 
-    // MARK: Public Interface
-
-    /// Provides a subscription that selects a substate of the state of the original subscription.
-    /// - parameter selector: A closure that maps a state to a selected substate
-    public func select<Substate>(
+    private func _select<Substate>(
         _ selector: @escaping (State) -> Substate
         ) -> Subscription<Substate>
     {
@@ -71,6 +67,27 @@ public class Subscription<State> {
                 sink(oldState.map(selector) ?? nil, newState.map(selector) ?? nil)
             }
         }
+    }
+
+    // MARK: Public Interface
+
+    /// Provides a subscription that selects a substate of the state of the original subscription.
+    /// - parameter selector: A closure that maps a state to a selected substate
+    public func select<Substate>(
+        _ selector: @escaping (State) -> Substate
+        ) -> Subscription<Substate>
+    {
+        return self._select(selector)
+    }
+
+    /// Provides a subscription that selects a substate of the state of the original subscription.
+    /// If the selected substate is `Equatable` repeated state updates will be skipped.
+    /// - parameter selector: A closure that maps a state to a selected substate
+    public func select<Substate: Equatable>(
+        _ selector: @escaping (State) -> Substate
+        ) -> Subscription<Substate>
+    {
+        return self._select(selector).skipRepeats()
     }
 
     /// Provides a subscription that skips certain state updates of the original subscription.
