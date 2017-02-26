@@ -99,6 +99,28 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     /**
+     it skips repeated state values by when `skipRepeats` returns `true`.
+     */
+    func testSkipsStateUpdatesForCustomEqualityChecks() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.substate }
+                .skipRepeats { $0.value == $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    /**
      it skips repeated state values by default when the selected substate is `Equatable`.
      */
     func testSkipsStateUpdatesForEquatableSubstatesByDefault() {

@@ -25,6 +25,22 @@ struct TestStringAppState: StateType {
     }
 }
 
+struct TestCustomAppState: StateType {
+    var substate: TestCustomSubstate
+
+    init(substate: TestCustomSubstate) {
+        self.substate = substate
+    }
+
+    init(substateValue value: Int = 0) {
+        self.substate = TestCustomSubstate(value: value)
+    }
+
+    struct TestCustomSubstate {
+        var value: Int
+    }
+}
+
 struct SetValueAction: StandardActionConvertible {
 
     let value: Int
@@ -66,6 +82,26 @@ struct SetValueStringAction: StandardActionConvertible {
 
 }
 
+struct SetCustomSubstateAction: StandardActionConvertible {
+
+    var value: Int
+    static let type = "SetCustomSubstateAction"
+
+    init (_ value: Int) {
+        self.value = value
+    }
+
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! Int
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueStringAction.type,
+                              payload: ["value": value as AnyObject],
+                              isTypedAction: true)
+    }
+}
+
 struct TestReducer {
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
@@ -87,6 +123,20 @@ struct TestValueStringReducer {
         switch action {
         case let action as SetValueStringAction:
             state.testValue = action.value
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+struct TestCustomAppStateReducer {
+    func handleAction(action: Action, state: TestCustomAppState?) -> TestCustomAppState {
+        var state = state ?? TestCustomAppState()
+
+        switch action {
+        case let action as SetCustomSubstateAction:
+            state.substate.value = action.value
             return state
         default:
             return state
