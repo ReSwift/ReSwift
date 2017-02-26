@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A box arounds subscriptions and subscribers.
+/// A box around subscriptions and subscribers.
 ///
 /// Acts as a type-erasing wrapper around a subscription and its transformed subscription.
 /// The transformed subscription has a type argument that matches the selected substate of the
