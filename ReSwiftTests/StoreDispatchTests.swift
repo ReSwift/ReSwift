@@ -115,7 +115,7 @@ class StoreDispatchTests: XCTestCase {
 
 // Needs to be class so that shared reference can be modified to inject store
 class DispatchingReducer: XCTestCase {
-    var store: Store<TestAppState>? = nil
+    var store: Store<TestAppState>?
 
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         expectFatalError {
