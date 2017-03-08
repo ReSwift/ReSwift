@@ -81,13 +81,8 @@ open class Store<State: StateType>: StoreType {
         return true
     }
 
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            subscribe(subscriber, selector: nil)
-    }
-
     open func subscribe<SelectedState, S: StoreSubscriber>
-        (_ subscriber: S, selector: ((State) -> SelectedState)?)
+        (_ subscriber: S, selector: ((State) -> SelectedState)? = nil)
         where S.StoreSubscriberStateType == SelectedState {
             if !_isNewSubscriber(subscriber: subscriber) { return }
 

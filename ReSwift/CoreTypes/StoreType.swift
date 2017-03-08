@@ -37,15 +37,6 @@ public protocol StoreType: DispatchingStoreType {
      state in this store changes.
 
      - parameter subscriber: Subscriber that will receive store updates
-     */
-    func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
-
-    /**
-     Subscribes the provided subscriber to this store.
-     Subscribers will receive a call to `newState` whenever the
-     state in this store changes.
-
-     - parameter subscriber: Subscriber that will receive store updates
      - parameter selector: A selector for the sub-state the subscriber will receive
      */
     func subscribe<SelectedState, S: StoreSubscriber>
