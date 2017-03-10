@@ -165,3 +165,12 @@ open class Store<State: StateType>: StoreType {
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
 }
+
+// MARK: Skip Repeats for Equatable States
+
+extension Store where State: Equatable {
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
+            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
+    }
+}
