@@ -14,7 +14,7 @@ let firstMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueStringAction {
-                action.value = action.value + " First Middleware"
+                action.value += " First Middleware"
                 return next(action)
             } else {
                 return next(action)
@@ -28,7 +28,7 @@ let secondMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueStringAction {
-                action.value = action.value + " Second Middleware"
+                action.value += " Second Middleware"
                 return next(action)
             } else {
                 return next(action)
@@ -42,7 +42,7 @@ let dispatchingMiddleware: Middleware = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueAction {
-                _ = dispatch?(SetValueStringAction("\(action.value)"))
+                dispatch?(SetValueStringAction("\(action.value)"))
             }
 
             return next(action)
@@ -60,7 +60,7 @@ let stateAccessingMiddleware: Middleware = { dispatch, getState in
             // avoid endless recursion by checking if we've dispatched exactly this action
             if appState?.testValue == "OK" && stringAction?.value != "Not OK" {
                 // dispatch a new action
-                _ = dispatch?(SetValueStringAction("Not OK"))
+                dispatch?(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
                 return next(StandardAction(type: "No-Op-Action"))

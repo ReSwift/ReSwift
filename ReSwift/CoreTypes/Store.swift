@@ -28,6 +28,11 @@ open class Store<State: StateType>: StoreType {
             subscriptions.forEach {
                 // if a selector is available, subselect the relevant state
                 // otherwise pass the entire state to the subscriber
+                guard let state = state else {
+                    // State should never be nil after `ReSwiftInit`
+                    preconditionFailure("Unexpectedly found `nil` while unwrapping state")
+                }
+
                 $0.subscriber?._newState(state: $0.selector?(state) ?? state)
             }
         }
@@ -41,14 +46,10 @@ open class Store<State: StateType>: StoreType {
 
     private var isDispatching = false
 
-    public required convenience init(reducer: @escaping Reducer<State>, state: State?) {
-        self.init(reducer: reducer, state: state, middleware: [])
-    }
-
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware]
+        middleware: [Middleware] = []
     ) {
         self.reducer = reducer
 
@@ -57,8 +58,7 @@ open class Store<State: StateType>: StoreType {
             .reversed()
             .reduce({ [unowned self] action in
                 return self._defaultDispatch(action: action)
-            }) {
-                [weak self] dispatchFunction, middleware in
+            }) { [weak self] dispatchFunction, middleware in
                 let getState = { self?.state }
                 return middleware(self?.dispatch, getState)(dispatchFunction)
         }
@@ -104,7 +104,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    open func _defaultDispatch(action: Action) -> Void {
+    open func _defaultDispatch(action: Action) {
         guard !isDispatching else {
             raiseFatalError(
                 "ReSwift:ConcurrentMutationError- Concurrent mutation detected. Possible causes: " +
@@ -121,13 +121,11 @@ open class Store<State: StateType>: StoreType {
         state = newState
     }
 
-    @discardableResult
-    open func dispatch(_ action: Action) -> Void {
+    open func dispatch(_ action: Action) {
         dispatchFunction(action)
     }
 
-    @discardableResult
-    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) -> Void {
+    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
         if let action = actionCreatorProvider(state, self) {
             dispatch(action)
         }
@@ -138,7 +136,7 @@ open class Store<State: StateType>: StoreType {
     }
 
     open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
-                         callback: DispatchCallback?) {
+                       callback: DispatchCallback?) {
         actionCreatorProvider(state, self) { actionProvider in
             let action = actionProvider(self.state, self)
 

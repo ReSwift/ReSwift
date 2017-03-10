@@ -14,12 +14,9 @@ import Foundation
  Stores receive actions and use reducers combined with these actions, to calculate state changes.
  Upon every state update a store informs all of its subscribers.
  */
-public protocol StoreType {
+public protocol StoreType: DispatchingStoreType {
 
     associatedtype State: StateType
-
-    /// Initializes the store with a reducer and an intial state.
-    init(reducer: @escaping Reducer<State>, state: State?)
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     /// Middleware is applied in the order in which it is passed into this constructor.
@@ -44,27 +41,24 @@ public protocol StoreType {
     func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
 
     /**
+     Subscribes the provided subscriber to this store.
+     Subscribers will receive a call to `newState` whenever the
+     state in this store changes.
+
+     - parameter subscriber: Subscriber that will receive store updates
+     - parameter selector: A selector for the sub-state the subscriber will receive
+     */
+    func subscribe<SelectedState, S: StoreSubscriber>
+        (_ subscriber: S, selector: ((State) -> SelectedState)?)
+    where S.StoreSubscriberStateType == SelectedState
+
+    /**
      Unsubscribes the provided subscriber. The subscriber will no longer
      receive state updates from this store.
 
      - parameter subscriber: Subscriber that will be unsubscribed
      */
     func unsubscribe(_ subscriber: AnyStoreSubscriber)
-
-    /**
-     Dispatches an action. This is the simplest way to modify the stores state.
-
-     Example of dispatching an action:
-
-     ```
-     store.dispatch( CounterAction.IncreaseCounter )
-     ```
-
-     - parameter action: The action that is being dispatched to the store
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
-     */
-    func dispatch(_ action: Action)
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate

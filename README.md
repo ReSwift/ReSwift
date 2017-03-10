@@ -193,7 +193,7 @@ github "ReSwift/ReSwift"
 
 You can install ReSwift via [Swift Package Manager](https://swift.org/package-manager/) by adding the following line to your `Package.swift`:
 
-```
+```swift
 import PackageDescription
 
 let package = Package(
