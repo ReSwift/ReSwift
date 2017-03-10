@@ -123,6 +123,7 @@ open class Store<State: StateType>: StoreType {
                 " a previous action is action is being processed. A reducer" +
                 " is dispatching an action, or ReSwift is used in a concurrent context" +
                 " (e.g. from multiple threads)."
+            )
         }
 
         isDispatching = true
