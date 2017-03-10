@@ -25,6 +25,12 @@ struct TestStringAppState: StateType {
     }
 }
 
+extension TestStringAppState: Equatable {
+    static func == (lhs: TestStringAppState, rhs: TestStringAppState) -> Bool {
+        return lhs.testValue == rhs.testValue
+    }
+}
+
 struct TestCustomAppState: StateType {
     var substate: TestCustomSubstate
 
