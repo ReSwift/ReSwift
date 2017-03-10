@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Defines the interface of a dispatching, stateless Store in ReSwift. `StoreType` is 
+ Defines the interface of a dispatching, stateless Store in ReSwift. `StoreType` is
  the default usage of this interface. Can be used for store variables where you don't
  care about the state, but want to be able to dispatch actions.
  */

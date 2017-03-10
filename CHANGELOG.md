@@ -1,4 +1,44 @@
-#Upcoming Release
+#4.0.0
+
+*Work in Progress*
+
+**Breaking API Changes:**
+
+- Introduced a new Subscription API (#203) - @Ben-G
+
+  - The subscription API provides basic operators, such as `skipRepeats` (skip calls to `newState` unless state value changed) and `select` (sub-select a state).
+
+  - This is a breaking API change that requires migrating existing subscriptions that sub-select a portion of a store's state:
+
+    - Subselecting state in 3.0.0:
+
+      ```swift
+      store.subscribe(subscriber) { ($0.testValue, $0.otherState?.name) }
+      ```
+    - Subselecting state in 4.0.0:
+
+      ```swift
+      store.subscribe(subscriber) {
+        $0.select {
+          ($0.testValue, $0.otherState?.name)
+        }
+      }
+      ```
+
+  - For any store state that is `Equatable` or any sub-selected state that is `Equatable`, `skipRepeats` will be used by default.
+
+  - For states/substates that are not `Equatable`, `skipRepeats` can be implemented via a closure:
+
+    ```swift
+    store.subscribe(subscriber) {
+      $0.select {
+          $0.testValue
+          }.skipRepeats {
+              return $0 == $1
+          }
+    }
+    ```
+
 
 #3.0.0
 *Released: 11/12/2016*
