@@ -1,7 +1,8 @@
-# CocoaPods is used only to fetch and pin the version of SwiftLint that we
-# want to use in the project, we are defining it for ReSwift-iOS only
-# because the Podfile DSL (at the time of CP 1.2.0) requires pods to be
-# defined within a target.
-target 'ReSwift-iOS' do
+# CocoaPods is used only to fetch and pin the version of SwiftLint that we want
+# to use in the project. The Podfile DSL (at the time of CP 1.2.0) requires
+# pods to be defined within a target. To work with that without having to make
+# any of the actual ReSwift targets dirty or bloated a dummy target called
+# SwiftLintIntegration has been added.
+target 'SwiftLintIntegration' do
   pod 'SwiftLint', '0.16.1'
 end

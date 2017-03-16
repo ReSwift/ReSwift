@@ -40,6 +40,10 @@ xcuserdata
 # this is just a development dependency it is ok to ignore it, and rely on
 # developers to generate it when required.
 Pods/
+# Same rationale for the Pods folder for the xcworkspace. Since it's generated
+# by CocoaPods and is not meant to be used or edited we might as well ignore
+# it
+ReSwift.xcworkspace
 
 # Carthage
 #
