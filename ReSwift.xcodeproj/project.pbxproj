@@ -570,7 +570,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/BuildPhases/run_swiftlint.sh\"";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
 		};
 		73E545D31D22B0D600D114E8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -584,7 +584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/BuildPhases/run_swiftlint.sh\"";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
