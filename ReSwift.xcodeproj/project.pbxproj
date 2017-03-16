@@ -570,7 +570,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"$SRCROOT/BuildPhases/run_swiftlint.sh\"";
 		};
 		73E545D31D22B0D600D114E8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -584,7 +584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"$SRCROOT/BuildPhases/run_swiftlint.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
