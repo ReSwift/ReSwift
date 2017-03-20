@@ -146,8 +146,8 @@ override func viewWillAppear(animated: Bool) {
 
 	// subscribe when VC appears
    	// we are only interested in repository substate, filter it out of the overall state
-    store.subscribe(self) { state in
-        state.repositories
+    store.subscribe(self) { subcription in
+        subcription.select { state in state.repositories }
     }
 }
 
