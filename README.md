@@ -63,23 +63,19 @@ struct CounterActionDecrease: Action {}
 Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
 
 ```swift
-struct CounterReducer: Reducer {
+func counterReducer(action: Action, state: AppState?) -> AppState {
+    var state = state ?? AppState()
 
-    func handleAction(action: Action, state: AppState?) -> AppState {
-        var state = state ?? AppState()
-
-        switch action {
-        case _ as CounterActionIncrease:
-            state.counter += 1
-        case _ as CounterActionDecrease:
-            state.counter -= 1
-        default:
-            break
-        }
-
-        return state
+    switch action {
+    case _ as CounterActionIncrease:
+        state.counter += 1
+    case _ as CounterActionDecrease:
+        state.counter -= 1
+    default:
+        break
     }
 
+    return state
 }
 ```
 In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
@@ -88,7 +84,7 @@ To maintain our state and delegate the actions to the reducers, we need a store.
 
 ```swift
 let mainStore = Store<AppState>(
-	reducer: CounterReducer(),
+	reducer: counterReducer,
 	state: nil
 )
 
