@@ -50,11 +50,10 @@ open class Store<State: StateType>: StoreType {
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware
             .reversed()
-            .reduce({ [unowned self] action in
-                return self._defaultDispatch(action: action)
-            }) { [weak self] dispatchFunction, middleware in
-                let getState = { self?.state }
-                return middleware(self?.dispatch, getState)(dispatchFunction)
+            .reduce({ [unowned self] action in return self._defaultDispatch(action: action)
+            }) { [unowned self] dispatchFunction, middleware in
+                let getState: GetState = { self.state }
+                return middleware(self.dispatch, getState)(dispatchFunction)
         }
 
         if let state = state {
