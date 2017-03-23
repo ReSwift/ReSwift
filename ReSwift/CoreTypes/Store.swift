@@ -83,7 +83,6 @@ open class Store<State: StateType>: StoreType {
             _ = subscribe(subscriber, transform: nil)
     }
 
-    @discardableResult
     open func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
