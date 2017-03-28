@@ -96,7 +96,7 @@ public protocol StoreType: DispatchingStoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
-    func dispatch(_ actionCreator: ActionCreator)
+    func dispatch(_ actionCreator: ActionCreator<State>)
 
     /**
      Dispatches an async action creator to the store. An async action creator generates an
@@ -126,30 +126,8 @@ public protocol StoreType: DispatchingStoreType {
      */
     associatedtype DispatchCallback = (State) -> Void
 
-    /**
-     An ActionCreator is a function that, based on the received state argument, might or might not
-     create an action.
-
-     Example:
-
-     ```
-     func deleteNote(noteID: Int) -> Store<AppState>.ActionCreator {
-        return { state in
-            // only delete note if editing is enabled
-            if (state.editingEnabled == true) {
-                return NoteDataAction.DeleteNote(noteID)
-            } else {
-                return nil
-            }
-        }
-     }
-     ```
-
-     */
-    associatedtype ActionCreator = (_ state: State) -> Action?
-
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
     associatedtype AsyncActionCreator =
         (_ state: State, _ store: StoreType,
-         _ actionCreatorCallback: (ActionCreator) -> Void) -> Void
+         _ actionCreatorCallback: (ActionCreator<State>) -> Void) -> Void
 }

@@ -9,7 +9,11 @@
 import Foundation
 import ReSwift
 
-struct TestAppState: StateType {
+protocol HasTestValue {
+    var testValue: Int? { get }
+}
+
+struct TestAppState: StateType, HasTestValue {
     var testValue: Int?
 
     init() {

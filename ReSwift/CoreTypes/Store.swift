@@ -141,7 +141,7 @@ open class Store<State: StateType>: StoreType {
         dispatchFunction(action)
     }
 
-    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
+    open func dispatch(_ actionCreatorProvider: ActionCreator<State>) {
         if let action = actionCreatorProvider(state) {
             dispatch(action)
         }
@@ -165,12 +165,10 @@ open class Store<State: StateType>: StoreType {
 
     public typealias DispatchCallback = (State) -> Void
 
-    public typealias ActionCreator = (_ state: State) -> Action?
-
     public typealias AsyncActionCreator = (
         _ state: State,
         _ store: Store,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
+        _ actionCreatorCallback: @escaping ((ActionCreator<State>) -> Void)
     ) -> Void
 }
 

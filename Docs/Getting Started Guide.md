@@ -224,7 +224,7 @@ Just like an `Action` a `ActionCreator` function can be dispatched to the store.
 
 An `ActionCreator` has the following type signature:
 ```swift
-typealias ActionCreator = (state: State) -> Action?
+typealias ActionCreator<S: StateType> = (state: S) -> Action?
 ```
 
 A very simple example of an `ActionCreator` might be:

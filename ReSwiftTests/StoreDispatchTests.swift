@@ -40,7 +40,22 @@ class StoreDispatchTests: XCTestCase {
     func testAcceptsActionCreators() {
         store.dispatch(SetValueAction(5))
 
-        let doubleValueActionCreator: Store<TestAppState>.ActionCreator = { state in
+        let doubleValueActionCreator: ActionCreator<TestAppState> = { state in
+            return SetValueAction(state.testValue! * 2)
+        }
+
+        store.dispatch(doubleValueActionCreator)
+
+        XCTAssertEqual(store.state.testValue, 10)
+    }
+
+    /**
+     it accepts action creators specifying a protocol to which Store.State conforms
+     */
+    func testAcceptsConformingActionCreators() {
+        store.dispatch(SetValueAction(5))
+
+        let doubleValueActionCreator: ActionCreator<HasTestValue> = { state in
             return SetValueAction(state.testValue! * 2)
         }
 
