@@ -40,7 +40,7 @@ class StoreDispatchTests: XCTestCase {
     func testAcceptsActionCreators() {
         store.dispatch(SetValueAction(5))
 
-        let doubleValueActionCreator: Store<TestAppState>.ActionCreator = { state, store in
+        let doubleValueActionCreator: Store<TestAppState>.ActionCreator = { state in
             return SetValueAction(state.testValue! * 2)
         }
 
@@ -60,7 +60,7 @@ class StoreDispatchTests: XCTestCase {
         let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
             dispatchAsync {
                 // Provide the callback with an action creator
-                callback { _, _ in
+                callback { _ in
                     return SetValueAction(5)
                 }
             }
@@ -92,7 +92,7 @@ class StoreDispatchTests: XCTestCase {
         let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
             dispatchAsync {
                 // Provide the callback with an action creator
-                callback { _, _ in
+                callback { _ in
                     return SetValueAction(5)
                 }
             }

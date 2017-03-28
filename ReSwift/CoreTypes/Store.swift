@@ -142,7 +142,7 @@ open class Store<State: StateType>: StoreType {
     }
 
     open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
-        if let action = actionCreatorProvider(state, self) {
+        if let action = actionCreatorProvider(state) {
             dispatch(action)
         }
     }
@@ -154,7 +154,7 @@ open class Store<State: StateType>: StoreType {
     open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
                        callback: DispatchCallback?) {
         actionCreatorProvider(state, self) { actionProvider in
-            let action = actionProvider(self.state, self)
+            let action = actionProvider(self.state)
 
             if let action = action {
                 self.dispatch(action)
@@ -165,7 +165,7 @@ open class Store<State: StateType>: StoreType {
 
     public typealias DispatchCallback = (State) -> Void
 
-    public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
+    public typealias ActionCreator = (_ state: State) -> Action?
 
     public typealias AsyncActionCreator = (
         _ state: State,

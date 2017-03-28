@@ -220,16 +220,16 @@ An important aspect of adopting `ReSwift` is an improved separation of concerns.
 
 The triggering of actions should always be as simple as possible, we want to avoid any sort of complicated business logic in the view. However, in some cases it can be complicated to decide whether an action should be dispatched or not. Instead of checking the necessary state directly in the view or view controller, you can use `ActionCreator`s to perform a conditional dispatch.
 
-Just like an `Action` a `ActionCreator` function can be dispatched to the store. An `ActionCreator` takes the current application state, and a reference to a store and might or might not return an `Action`.
+Just like an `Action` a `ActionCreator` function can be dispatched to the store. An `ActionCreator` takes the current application state and might or might not return an `Action`.
 
 An `ActionCreator` has the following type signature:
 ```swift
-typealias ActionCreator = (state: State, store: StoreType) -> Action?
+typealias ActionCreator = (state: State) -> Action?
 ```
 
 A very simple example of an `ActionCreator` might be:
 ```swift
-func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Action? {
+func doubleValueIfSmall(state: TestAppState) -> Action? {
 	if state.testValue < 5 {
 		return SetValueAction(state.testValue! * 2)
 	} else {

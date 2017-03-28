@@ -75,8 +75,8 @@ public protocol StoreType: DispatchingStoreType {
      Example of an action creator:
 
      ```
-     func deleteNote(noteID: Int) -> ActionCreator {
-        return { state, store in
+     func deleteNote(noteID: Int) -> Store<AppState>.ActionCreator {
+        return { state in
             // only delete note if editing is enabled
             if (state.editingEnabled == true) {
                 return NoteDataAction.DeleteNote(noteID)
@@ -90,7 +90,7 @@ public protocol StoreType: DispatchingStoreType {
      This action creator can then be dispatched as following:
 
      ```
-     store.dispatch( noteActionCreatore.deleteNote(3) )
+     store.dispatch( deleteNote(3) )
      ```
 
      - returns: By default returns the dispatched action, but middlewares can change the
@@ -133,8 +133,8 @@ public protocol StoreType: DispatchingStoreType {
      Example:
 
      ```
-     func deleteNote(noteID: Int) -> ActionCreator {
-        return { state, store in
+     func deleteNote(noteID: Int) -> Store<AppState>.ActionCreator {
+        return { state in
             // only delete note if editing is enabled
             if (state.editingEnabled == true) {
                 return NoteDataAction.DeleteNote(noteID)
@@ -146,7 +146,7 @@ public protocol StoreType: DispatchingStoreType {
      ```
 
      */
-    associatedtype ActionCreator = (_ state: State, _ store: StoreType) -> Action?
+    associatedtype ActionCreator = (_ state: State) -> Action?
 
     /// AsyncActionCreators allow the developer to wait for the completion of an async action.
     associatedtype AsyncActionCreator =
