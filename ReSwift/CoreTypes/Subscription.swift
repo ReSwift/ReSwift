@@ -112,7 +112,7 @@ public class Subscription<State> {
 
     // MARK: Internals
 
-    var observer: ((State?, State?) -> Void)? = nil
+    var observer: ((State?, State?) -> Void)?
 
     init() {}
 
