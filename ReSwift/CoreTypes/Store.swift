@@ -119,6 +119,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
+    // swiftlint:disable:next identifier_name
     open func _defaultDispatch(action: Action) {
         guard !isDispatching else {
             raiseFatalError(
