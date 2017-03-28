@@ -224,7 +224,7 @@ This repository contains the core component for ReSwift, the following extension
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.
 
-##Production Apps with Open Source Code
+## Production Apps with Open Source Code
 
 - [Product Hunt for OS X](https://github.com/producthunt/producthunt-osx) Official Product Hunt client for OS X.
 
