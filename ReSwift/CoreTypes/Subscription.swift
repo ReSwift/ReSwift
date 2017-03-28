@@ -32,13 +32,13 @@ class SubscriptionBox<State> {
         // If we received a transformed subscription, we subscribe to that subscription
         // and forward all new values to the subscriber.
         if let transformedSubscription = transformedSubscription {
-            transformedSubscription.observe { oldState, newState in
+            transformedSubscription.observe { _, newState in
                 self.subscriber?._newState(state: newState as Any)
             }
         // If we haven't received a transformed subscription, we forward all values
         // from the original subscription.
         } else {
-            originalSubscription.observe { oldState, newState in
+            originalSubscription.observe { _, newState in
                 self.subscriber?._newState(state: newState as Any)
             }
         }
@@ -112,7 +112,7 @@ public class Subscription<State> {
 
     // MARK: Internals
 
-    var observer: ((State?, State?) -> Void)? = nil
+    var observer: ((State?, State?) -> Void)?
 
     init() {}
 
