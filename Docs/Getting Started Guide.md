@@ -167,9 +167,9 @@ When selecting a substate as part of calling the `subscribe` method, you need to
 
 When subscribing within a ViewController you will typically update the view from within the `newState` method.
 
-#Beyond the Basics
+# Beyond the Basics
 
-##Asynchronous Operations
+## Asynchronous Operations
 
 Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to `ReSwift` state update:
 
@@ -214,7 +214,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
 In the example above, we're using an `enum` to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.
 
-##Action Creators
+## Action Creators
 
 An important aspect of adopting `ReSwift` is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering `Action`s upon user interactions.
 
