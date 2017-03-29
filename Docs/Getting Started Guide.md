@@ -247,7 +247,7 @@ Let's take a look at a quick example that shows how ReSwift supports Redux style
 The simplest example of a middleware, is one that prints all actions to the console. Here's how you can implement it:
 
 ```swift
-let loggingMiddleware: Middleware = { dispatch, getState in
+let loggingMiddleware: Middleware<Any> = { dispatch, getState in
     return { next in
         return { action in
             // perform middleware logic
@@ -259,6 +259,8 @@ let loggingMiddleware: Middleware = { dispatch, getState in
     }
 }
 ```
+The generic in middleware refers to the return type in `getState`, and needs to be compatible with the `State` associated type in your `Store`.
+
 You can define which middleware you would like to use when creating your store:
 
 ```swift

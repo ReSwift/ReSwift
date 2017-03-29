@@ -9,7 +9,7 @@
 import XCTest
 import ReSwift
 
-let firstMiddleware: Middleware = { dispatch, getState in
+let firstMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
         return { action in
 
@@ -23,7 +23,7 @@ let firstMiddleware: Middleware = { dispatch, getState in
     }
 }
 
-let secondMiddleware: Middleware = { dispatch, getState in
+let secondMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
         return { action in
 
@@ -37,7 +37,7 @@ let secondMiddleware: Middleware = { dispatch, getState in
     }
 }
 
-let dispatchingMiddleware: Middleware = { dispatch, getState in
+let dispatchingMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
         return { action in
 
@@ -50,11 +50,11 @@ let dispatchingMiddleware: Middleware = { dispatch, getState in
     }
 }
 
-let stateAccessingMiddleware: Middleware = { dispatch, getState in
+let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getState in
     return { next in
         return { action in
 
-            let appState = getState() as? TestStringAppState,
+            let appState = getState(),
                 stringAction = action as? SetValueStringAction
 
             // avoid endless recursion by checking if we've dispatched exactly this action

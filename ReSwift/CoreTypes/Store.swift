@@ -43,7 +43,7 @@ open class Store<State: StateType>: StoreType {
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware] = []
+        middleware: [Middleware<State>] = []
     ) {
         self.reducer = reducer
 
