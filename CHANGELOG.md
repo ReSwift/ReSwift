@@ -1,10 +1,10 @@
-#4.0.0
+# 4.0.0
 
 *Work in Progress*
 
 **Breaking API Changes:**
 
-- Introduced a new Subscription API (#203) - @Ben-G
+- Introduced a new Subscription API (#203) - @Ben-G, @mjarvis, @DivineDominion
 
   - The subscription API provides basic operators, such as `skipRepeats` (skip calls to `newState` unless state value changed) and `select` (sub-select a state).
 
@@ -39,8 +39,44 @@
     }
     ```
 
+- Reducer type has been removed in favor of reducer function (#177) - Ben-G
 
-#3.0.0
+  - Here's an example of a new app reducer, for details see the README:
+
+    ```swift
+    func counterReducer(action: Action, state: AppState?) -> AppState {
+        var state = state ?? AppState()
+
+        switch action {
+        case _ as CounterActionIncrease:
+            state.counter += 1
+        case _ as CounterActionDecrease:
+            state.counter -= 1
+        default:
+            break
+        }
+
+        return state
+    }
+    ```
+
+- `dispatch` functions now return `Void` instead of `Any` (#187) - @Qata
+
+  - The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fullfilled when a dispatched action is processed. While it's generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a `dispatch` overload that takes a `callback` argument and serves this purpose.
+
+- Make `dispatch` argument in middleware non-optional (#225) -  @dimazen, @mjarvis, @Ben-G
+
+
+**Other:**
+
+- Extend `StoreType` with substate selector subscription (#192) - @mjarvis
+- Add `DispatchingStoreType` protocol for testing (#197) - @mjarvis
+- Installation guide for Swift Package Manager - @thomaspaulmann
+- Update documentation to reflect breaking API changes - @mjarvis
+- Clarify error message on concurrent usage of ReSwift - @langford
+
+# 3.0.0
+
 *Released: 11/12/2016*
 
 **Breaking API Changes:**
@@ -53,7 +89,7 @@
 - Update to Swift 3.0.1 - @Cristiam, @Ben-G
 - Documentation changes - @vkotovv
 
-#2.1.0
+# 2.1.0
 
 *Released: 09/15/2016*
 
@@ -65,7 +101,7 @@
 - Automatically build docs via Travis CI (#128) - @agentk
 - Documentation Updates & Fixes- @mikekavouras, @ColinEberhardt
 
-#2.0.0
+# 2.0.0
 
 *Released: 06/27/2016*
 
@@ -79,7 +115,7 @@
 - Documentation Updates & Fixes - @okla, @gregpardo, @tomj, @askielboe, @mitsuse, @esttorhe, @RyanCCollins, @thomaspaulmann, @jlampa
 
 
-#1.0.0
+# 1.0.0
 
 *Released: 03/19/2016*
 
@@ -93,7 +129,7 @@
 - Set CocoaPods documentation URL - (#56) @agentk
 - Update documentation for 1.0 release - @Ben-G
 
-#0.2.5
+# 0.2.5
 
 *Released: 02/20/2016*
 
@@ -114,7 +150,7 @@
 - Refactored subscribers into a explicit `Subscription` typealias - @DivineDominion
 - Refactored `dispatch` for `AsyncActionCreator` to avoid duplicate code - @sendyhalim
 
-#0.2.4
+# 0.2.4
 
 *Released: 01/23/2016*
 

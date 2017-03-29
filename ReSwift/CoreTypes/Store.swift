@@ -43,7 +43,7 @@ open class Store<State: StateType>: StoreType {
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware] = []
+        middleware: [Middleware<State>] = []
     ) {
         self.reducer = reducer
 
@@ -52,9 +52,12 @@ open class Store<State: StateType>: StoreType {
             .reversed()
             .reduce({ [unowned self] action in
                 return self._defaultDispatch(action: action)
-            }) { [weak self] dispatchFunction, middleware in
-                let getState = { self?.state }
-                return middleware(self?.dispatch, getState)(dispatchFunction)
+            }) { dispatchFunction, middleware in
+                // If the store get's deinitialized before the middleware is complete; drop
+                // the action without dispatching.
+                let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
+                let getState = { [weak self] in self?.state }
+                return middleware(dispatch, getState)(dispatchFunction)
         }
 
         if let state = state {
@@ -80,7 +83,6 @@ open class Store<State: StateType>: StoreType {
             _ = subscribe(subscriber, transform: nil)
     }
 
-    @discardableResult
     open func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
@@ -116,6 +118,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
+    // swiftlint:disable:next identifier_name
     open func _defaultDispatch(action: Action) {
         guard !isDispatching else {
             raiseFatalError(

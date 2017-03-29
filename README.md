@@ -63,23 +63,19 @@ struct CounterActionDecrease: Action {}
 Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
 
 ```swift
-struct CounterReducer: Reducer {
+func counterReducer(action: Action, state: AppState?) -> AppState {
+    var state = state ?? AppState()
 
-    func handleAction(action: Action, state: AppState?) -> AppState {
-        var state = state ?? AppState()
-
-        switch action {
-        case _ as CounterActionIncrease:
-            state.counter += 1
-        case _ as CounterActionDecrease:
-            state.counter -= 1
-        default:
-            break
-        }
-
-        return state
+    switch action {
+    case _ as CounterActionIncrease:
+        state.counter += 1
+    case _ as CounterActionDecrease:
+        state.counter -= 1
+    default:
+        break
     }
 
+    return state
 }
 ```
 In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
@@ -88,7 +84,7 @@ To maintain our state and delegate the actions to the reducers, we need a store.
 
 ```swift
 let mainStore = Store<AppState>(
-	reducer: CounterReducer(),
+	reducer: counterReducer,
 	state: nil
 )
 
@@ -228,7 +224,7 @@ This repository contains the core component for ReSwift, the following extension
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.
 
-##Production Apps with Open Source Code
+## Production Apps with Open Source Code
 
 - [Product Hunt for OS X](https://github.com/producthunt/producthunt-osx) Official Product Hunt client for OS X.
 
@@ -248,6 +244,7 @@ If you have any questions, you can find the core team on twitter:
 - [@karlbowden](https://twitter.com/karlbowden)
 - [@ARendtslev](https://twitter.com/ARendtslev)
 - [@ctietze](https://twitter.com/ctietze)
+- [@mjarvis](https://twitter.com/mjarvis)
 
 We also have a [public gitter chat!](https://gitter.im/ReSwift/public)
 

@@ -81,22 +81,18 @@ You can do this implementing a top-level reducer that conforms to the `Reducer` 
 Here's an example in which we construct a new state, by calling sub-reducers with different sub-states:
 
 ```swift
-struct AppReducer: Reducer {
-
-    func handleAction(action: Action, state: State?) -> State {
-        return State(
-            navigationState: NavigationReducer.handleAction(action, state: state?.navigationState),
-            authenticationState: authenticationReducer(state?.authenticationState, action: action),
-            repositories: repositoriesReducer(state?.repositories, action: action),
-            bookmarks: bookmarksReducer(state?.bookmarks, action: action)
-        )
-    }
-
+func appReducer(action: Action, state: State?) -> State {
+    return State(
+      navigationState: navigationReducer(action, state: state?.navigationState),
+      authenticationState: authenticationReducer(state?.authenticationState, action: action),
+      repositories: repositoriesReducer(state?.repositories, action: action),
+      bookmarks: bookmarksReducer(state?.bookmarks, action: action)
+   )
 }
 ```
-The `Reducer` protocol has a single method that takes an `Action` and an `State?` and returns a `State`. Typically reducers will be responsible for initializing the application state. When they receive `nil` as the current state, they should return the initial default value for their portion of the state. In the example above the `AppReducer` delegates all calls to other reducer functions. E.g. the `authenticationReducer` is responsible for providing the `authenticationState`.
+The `Reducer` typealias is a method that takes an `Action` and an `State?` and returns a `State`. Typically reducers will be responsible for initializing the application state. When they receive `nil` as the current state, they should return the initial default value for their portion of the state. In the example above the `appReducer` delegates all calls to other reducer functions. E.g. the `authenticationReducer` is responsible for providing the `authenticationState`.
 
-Here's what the `authenticationReducer` function that is called from the `AppReducer` looks like:
+Here's what the `authenticationReducer` function that is called from the `appReducer` looks like:
 
 ```swift
 func authenticationReducer(state: AuthenticationState?, action: Action) -> AuthenticationState {
@@ -116,13 +112,13 @@ func authenticationReducer(state: AuthenticationState?, action: Action) -> Authe
     return state
 }
 ```
-You can see that the `authenticationReducer` function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the method in the `Reducer` protocol (current state and action in, new state out).
+You can see that the `authenticationReducer` function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the `Reducer` typealias (current state and action in, new state out).
 
 This sub-reducer first checks if the state provided is `nil`. If that's the case, it sets the state to the initial default state. Next, the reducer switches over the provided `action` and checks its type. Depending on the type of action, this reducer will updated the state differently. This specific reducer is very simple, each action only triggers a single property of the state to update.
 
 Once the state update is complete, the reducer function returns the new state.
 
-After the `AppReducer` has called all of the sub-reducer functions, we have a new application state. `ReSwift` will take care of publishing this new state to all subscribers.
+After the `appReducer` has called all of the sub-reducer functions, we have a new application state. `ReSwift` will take care of publishing this new state to all subscribers.
 
 # Store Subscribers
 
@@ -146,8 +142,8 @@ override func viewWillAppear(animated: Bool) {
 
 	// subscribe when VC appears
    	// we are only interested in repository substate, filter it out of the overall state
-    store.subscribe(self) { state in
-        state.repositories
+    store.subscribe(self) { subcription in
+        subcription.select { state in state.repositories }
     }
 }
 
@@ -171,9 +167,9 @@ When selecting a substate as part of calling the `subscribe` method, you need to
 
 When subscribing within a ViewController you will typically update the view from within the `newState` method.
 
-#Beyond the Basics
+# Beyond the Basics
 
-##Asynchronous Operations
+## Asynchronous Operations
 
 Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to `ReSwift` state update:
 
@@ -218,7 +214,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
 In the example above, we're using an `enum` to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.
 
-##Action Creators
+## Action Creators
 
 An important aspect of adopting `ReSwift` is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering `Action`s upon user interactions.
 
@@ -251,7 +247,7 @@ Let's take a look at a quick example that shows how ReSwift supports Redux style
 The simplest example of a middleware, is one that prints all actions to the console. Here's how you can implement it:
 
 ```swift
-let loggingMiddleware: Middleware = { dispatch, getState in
+let loggingMiddleware: Middleware<Any> = { dispatch, getState in
     return { next in
         return { action in
             // perform middleware logic
@@ -263,6 +259,8 @@ let loggingMiddleware: Middleware = { dispatch, getState in
     }
 }
 ```
+The generic in middleware refers to the return type in `getState`, and needs to be compatible with the `State` associated type in your `Store`.
+
 You can define which middleware you would like to use when creating your store:
 
 ```swift
