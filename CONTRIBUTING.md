@@ -1,4 +1,4 @@
-#Contributing to ReSwift
+# Contributing to ReSwift
 
 Some design decisions for the core of ReSwift are still up in the air (see [issues](https://github.com/ReSwift/ReSwift/issues)), there's lots of useful documentation that can be written and a ton of extensions and tools are waiting to be built on top of ReSwift.
 
