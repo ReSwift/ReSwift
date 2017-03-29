@@ -65,6 +65,29 @@ class StoreSubscriptionTests: XCTestCase {
     }
 
     /**
+     it replaces the subscription of an existing subscriber with the new one.
+     */
+    func testDuplicateSubscription() {
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestSubscriber()
+
+        // Initial subscription.
+        store.subscribe(subscriber)
+        // Subsequent subscription that skips repeated updates.
+        store.subscribe(subscriber) { $0.skipRepeats { $0.testValue == $1.testValue } }
+
+        // One initial state update for every subscription.
+        XCTAssertEqual(subscriber.receivedStates.count, 2)
+
+        store.dispatch(SetValueAction(3))
+        store.dispatch(SetValueAction(3))
+        store.dispatch(SetValueAction(3))
+        store.dispatch(SetValueAction(3))
+
+        // Only a single further state update, since latest subscription skips repeated values.
+        XCTAssertEqual(subscriber.receivedStates.count, 3)
+    }
+    /**
      it dispatches initial value upon subscription
      */
     func testDispatchInitialValue() {
