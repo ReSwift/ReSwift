@@ -9,3 +9,8 @@
 import Foundation
 
 public protocol StateType { }
+
+public protocol EquatableState: StateType {
+
+    var uuid: String { get set }
+}
