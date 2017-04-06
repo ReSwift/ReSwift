@@ -66,6 +66,8 @@
 
 - Make `dispatch` argument in middleware non-optional (#225) -  @dimazen, @mjarvis, @Ben-G
 
+- `Middleware` now has a generic type parameter that is used for the `getState` method and matches the Store's `State` type. This allows accessing the state in middleware code without type casting (#226) - @mjarvis
+
 
 **Other:**
 
