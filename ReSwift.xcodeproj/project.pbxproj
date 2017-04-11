@@ -51,6 +51,8 @@
 		25DBCF9D1C30C50000D63A58 /* StoreMiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */; };
 		25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
 		25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737FA1C2C618A00869B8F /* TestFakes.swift */; };
+		3F13C0EB1E7B3E4000D8442C /* SwiftLintIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */; };
+		3F13C0ED1E7B3E4000D8442C /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
 		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
 		625AA6331C33AFB600FEB431 /* StandardActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* StandardActionTests.swift */; };
 		625AA6341C33AFB700FEB431 /* StandardActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* StandardActionTests.swift */; };
@@ -85,6 +87,7 @@
 		81BCBECF1C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBED01C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBED11C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
+		B7C9625775EAE647982F3EEE /* libPods-SwiftLintIntegration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */; };
 		D47D2D561E32C3F50064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D571E32C4170064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D581E32C4180064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
@@ -106,6 +109,13 @@
 			remoteGlobalIDString = 25DBCF7A1C30C4AA00D63A58;
 			remoteInfo = "ReSwift-Mac";
 		};
+		3F13C0EE1E7B3E4000D8442C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625E667A1C1FF97E0027C288 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 625E66821C1FF97E0027C288;
+			remoteInfo = "ReSwift-iOS";
+		};
 		625E66A01C1FFA3C0027C288 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 625E667A1C1FF97E0027C288 /* Project object */;
@@ -126,6 +136,10 @@
 		25DBCF641C30C1AC00D63A58 /* ReSwift-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReSwift-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DBCF7B1C30C4AA00D63A58 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ReSwift-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F13C0E81E7B3E4000D8442C /* SwiftLintIntegration.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLintIntegration.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLintIntegration.swift; sourceTree = "<group>"; };
+		3F13C0EC1E7B3E4000D8442C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.release.xcconfig"; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
 		625AA6311C33AFA600FEB431 /* StandardActionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardActionTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +161,8 @@
 		73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDispatchTests.swift; sourceTree = "<group>"; };
 		73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSubscriptionTests.swift; sourceTree = "<group>"; };
 		81BCBECD1C63167A00AA4F03 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.debug.xcconfig"; sourceTree = "<group>"; };
+		B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLintIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchingStoreType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +204,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F13C0E51E7B3E4000D8442C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F13C0ED1E7B3E4000D8442C /* ReSwift.framework in Frameworks */,
+				B7C9625775EAE647982F3EEE /* libPods-SwiftLintIntegration.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		625E667F1C1FF97E0027C288 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,12 +231,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02EE66684F9DEF6554824E17 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */,
+				5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3F13C0E91E7B3E4000D8442C /* SwiftLintIntegration */ = {
+			isa = PBXGroup;
+			children = (
+				3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */,
+				3F13C0EC1E7B3E4000D8442C /* Info.plist */,
+			);
+			path = SwiftLintIntegration;
+			sourceTree = "<group>";
+		};
 		625E66791C1FF97E0027C288 = {
 			isa = PBXGroup;
 			children = (
 				625E66851C1FF97E0027C288 /* ReSwift */,
 				625E669B1C1FFA3C0027C288 /* ReSwiftTests */,
+				3F13C0E91E7B3E4000D8442C /* SwiftLintIntegration */,
 				625E66841C1FF97E0027C288 /* Products */,
+				02EE66684F9DEF6554824E17 /* Pods */,
+				94839D2BD4CCEE6386BD477E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +271,7 @@
 				25DBCF641C30C1AC00D63A58 /* ReSwift-tvOSTests.xctest */,
 				25DBCF7B1C30C4AA00D63A58 /* ReSwift.framework */,
 				25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */,
+				3F13C0E81E7B3E4000D8442C /* SwiftLintIntegration.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,6 +329,14 @@
 				81BCBECD1C63167A00AA4F03 /* Subscription.swift */,
 			);
 			path = CoreTypes;
+			sourceTree = "<group>";
+		};
+		94839D2BD4CCEE6386BD477E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,6 +465,27 @@
 			productReference = 25DBCF871C30C4DB00D63A58 /* ReSwift-macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3F13C0E71E7B3E4000D8442C /* SwiftLintIntegration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F13C0F21E7B3E4000D8442C /* Build configuration list for PBXNativeTarget "SwiftLintIntegration" */;
+			buildPhases = (
+				6012A4D4990919B303E1357A /* [CP] Check Pods Manifest.lock */,
+				3F13C0E41E7B3E4000D8442C /* Sources */,
+				3F13C0E51E7B3E4000D8442C /* Frameworks */,
+				3F13C0E61E7B3E4000D8442C /* Resources */,
+				C6C5ED535A5FCEB5648419A2 /* [CP] Embed Pods Frameworks */,
+				3BED8D2D43A452D599C2F312 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F13C0EF1E7B3E4000D8442C /* PBXTargetDependency */,
+			);
+			name = SwiftLintIntegration;
+			productName = SwiftLintIntegration;
+			productReference = 3F13C0E81E7B3E4000D8442C /* SwiftLintIntegration.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		625E66821C1FF97E0027C288 /* ReSwift-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 625E668B1C1FF97E0027C288 /* Build configuration list for PBXNativeTarget "ReSwift-iOS" */;
@@ -453,7 +529,7 @@
 		625E667A1C1FF97E0027C288 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Benjamin Encz";
 				TargetAttributes = {
@@ -473,6 +549,10 @@
 					25DBCF861C30C4DB00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
+					};
+					3F13C0E71E7B3E4000D8442C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
 					};
 					625E66821C1FF97E0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -501,6 +581,7 @@
 				25DBCF4D1C30C18D00D63A58 /* ReSwift-tvOS */,
 				25DBCF631C30C1AC00D63A58 /* ReSwift-tvOSTests */,
 				25DBCF361C30BF2B00D63A58 /* ReSwift-watchOS */,
+				3F13C0E71E7B3E4000D8442C /* SwiftLintIntegration */,
 			);
 		};
 /* End PBXProject section */
@@ -541,6 +622,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F13C0E61E7B3E4000D8442C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		625E66811C1FF97E0027C288 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -558,6 +646,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3BED8D2D43A452D599C2F312 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6012A4D4990919B303E1357A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		621C06541C277459008029AE /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,7 +688,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
 		};
 		73E545D31D22B0D600D114E8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -584,7 +702,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
+		};
+		C6C5ED535A5FCEB5648419A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -680,6 +813,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F13C0E41E7B3E4000D8442C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F13C0EB1E7B3E4000D8442C /* SwiftLintIntegration.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		625E667E1C1FF97E0027C288 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -728,6 +869,11 @@
 			isa = PBXTargetDependency;
 			target = 25DBCF7A1C30C4AA00D63A58 /* ReSwift-macOS */;
 			targetProxy = 25DBCF8D1C30C4DB00D63A58 /* PBXContainerItemProxy */;
+		};
+		3F13C0EF1E7B3E4000D8442C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 625E66821C1FF97E0027C288 /* ReSwift-iOS */;
+			targetProxy = 3F13C0EE1E7B3E4000D8442C /* PBXContainerItemProxy */;
 		};
 		625E66A11C1FFA3C0027C288 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -887,6 +1033,37 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3F13C0F01E7B3E4000D8442C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = SwiftLintIntegration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3F13C0F11E7B3E4000D8442C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = SwiftLintIntegration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1104,6 +1281,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3F13C0F21E7B3E4000D8442C /* Build configuration list for PBXNativeTarget "SwiftLintIntegration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F13C0F01E7B3E4000D8442C /* Debug */,
+				3F13C0F11E7B3E4000D8442C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		625E667D1C1FF97E0027C288 /* Build configuration list for PBXProject "ReSwift" */ = {
 			isa = XCConfigurationList;
