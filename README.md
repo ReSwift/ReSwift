@@ -202,7 +202,7 @@ let package = Package(
 
 # Checking out Source Code
 
-ReSwift no longer has any carthage dependencies for development. Just checkout the project and run.
+After checking out the project run `pod install` to get the latest supported version of [SwiftLint](https://github.com/realm/SwiftLint), which we use to ensure a consistent style in the codebase.
 
 # Demo
 
