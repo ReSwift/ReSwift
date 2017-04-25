@@ -1,5 +1,8 @@
 import Foundation
 
+public typealias ActionCreator<T> = (_ store: DispatchingStoreType) -> T
+public typealias StatedActionCreator<S: StateType, T> = (_ store: DispatchingStoreType, _ getState: @escaping () -> S) -> T
+
 /**
  Defines the interface of a dispatching, stateless Store in ReSwift. `StoreType` is
  the default usage of this interface. Can be used for store variables where you don't
@@ -21,4 +24,10 @@ public protocol DispatchingStoreType {
      return type, e.g. to return promises
      */
     func dispatch(_ action: Action)
+    
+    @discardableResult
+    func dispatch<ReturnValue>(_ actionCreator: ActionCreator<ReturnValue>) -> ReturnValue
+    
+    @discardableResult
+    func dispatch<State: StateType, ReturnValue>(_ actionCreator: StatedActionCreator<State, ReturnValue>) -> ReturnValue
 }
