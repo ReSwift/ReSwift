@@ -50,14 +50,13 @@ open class Store<State: StateType>: StoreType {
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware
             .reversed()
-            .reduce({ [unowned self] action in
-                return self._defaultDispatch(action: action)
-            }) { dispatchFunction, middleware in
+            .reduce({ [unowned self] params in
+                return self._defaultDispatch(params: params)
+            }) { [unowned self] dispatchFunction, middleware in
                 // If the store get's deinitialized before the middleware is complete; drop
                 // the action without dispatching.
-                let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
                 let getState = { [weak self] in self?.state }
-                return middleware(dispatch, getState)(dispatchFunction)
+                return middleware(self, getState)(dispatchFunction)
         }
 
         if let state = state {
@@ -108,7 +107,7 @@ open class Store<State: StateType>: StoreType {
     }
 
     // swiftlint:disable:next identifier_name
-    open func _defaultDispatch(action: Action) {
+    open func _defaultDispatch(params: [Any]) -> Any {
         guard !isDispatching else {
             raiseFatalError(
                 "ReSwift:ConcurrentMutationError- Action has been dispatched while" +
@@ -117,34 +116,26 @@ open class Store<State: StateType>: StoreType {
                 " (e.g. from multiple threads)."
             )
         }
+        
+        guard let action = params.first as? Action else {
+            raiseFatalError(
+                "ReSwift:NonActionReachedDefaultDispatch - Dispatch param is not an action"
+            )
+        }
 
         isDispatching = true
         let newState = reducer(action, state)
         isDispatching = false
 
         state = newState
-    }
 
-    open func dispatch(_ action: Action) {
-        dispatchFunction(action)
+        return action
     }
     
     @discardableResult
-    public func dispatch<ReturnValue>(_ actionCreator: ActionCreator<ReturnValue>) -> ReturnValue {
-        return actionCreator(self)
+    open func dispatch(_ params: Any...) -> Any {
+        return dispatchFunction(params)
     }
-    
-    @discardableResult
-    public func dispatch<State, ReturnValue>(_ actionCreator: StatedActionCreator<State, ReturnValue>) -> ReturnValue {
-        return actionCreator(self) {
-            guard let state = self.state as? State else {
-                fatalError("ReSwift: You tried to dispatch action creator with different state type")
-            }
-            return state
-        }
-    }
-
-    public typealias DispatchCallback = (State) -> Void
 }
 
 // MARK: Skip Repeats for Equatable States

@@ -1,7 +1,7 @@
 import Foundation
 
 public typealias ActionCreator<T> = (_ store: DispatchingStoreType) -> T
-public typealias StatedActionCreator<S: StateType, T> = (_ store: DispatchingStoreType, _ getState: @escaping () -> S) -> T
+public typealias AsyncActionCreator<T> = (_ store: DispatchingStoreType, _ next: (T) -> Void) -> Void
 
 /**
  Defines the interface of a dispatching, stateless Store in ReSwift. `StoreType` is
@@ -23,11 +23,36 @@ public protocol DispatchingStoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
-    func dispatch(_ action: Action)
-    
     @discardableResult
-    func dispatch<ReturnValue>(_ actionCreator: ActionCreator<ReturnValue>) -> ReturnValue
+    func dispatch(_ actions: Any...) -> Any
+}
+
+extension DispatchingStoreType {
+    public func dispatch(_ action: Action) {
+        dispatch(action as Any)
+    }
+
+    public func dispatch<ReturnValue>(_ actionCreator: @escaping ActionCreator<ReturnValue>) -> ReturnValue {
+        guard let result = dispatch(actionCreator as ActionCreator<Any>) as? ReturnValue else {
+            raiseFatalError("ReSwift: You tried to dispatch action creator with different return value type")
+        }
+        return result
+    }
     
-    @discardableResult
-    func dispatch<State: StateType, ReturnValue>(_ actionCreator: StatedActionCreator<State, ReturnValue>) -> ReturnValue
+    public func dispatch<CallbackParam>(_ asyncActionCreator: @escaping AsyncActionCreator<CallbackParam>, callback: @escaping (CallbackParam) -> Void) {
+        let typeErasedActionCreator: AsyncActionCreator<Any> = { store, next in
+            asyncActionCreator(store, { (param) in
+                next(param)
+            })
+        }
+        
+        let typeErasedCallback: (Any) -> Void = { param in
+            guard let param = param as? CallbackParam else {
+                raiseFatalError()
+            }
+            callback(param)
+        }
+        
+        dispatch(typeErasedActionCreator as Any, typeErasedCallback as Any)
+    }
 }
