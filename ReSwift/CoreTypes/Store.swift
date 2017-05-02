@@ -116,7 +116,7 @@ open class Store<State: StateType>: StoreType {
                 " (e.g. from multiple threads)."
             )
         }
-        
+
         guard let action = params.first as? Action else {
             raiseFatalError(
                 "ReSwift:NonActionReachedDefaultDispatch - Dispatch param is not an action"
@@ -131,7 +131,7 @@ open class Store<State: StateType>: StoreType {
 
         return action
     }
-    
+
     @discardableResult
     open func dispatch(_ params: Any...) -> Any {
         return dispatchFunction(params)

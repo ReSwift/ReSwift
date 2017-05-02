@@ -19,13 +19,13 @@ public func thunkMiddleware<State>(store: DispatchingStoreType, getState: () -> 
             if let actionCreator = actions.first as? ActionCreator<Any> {
                 return actionCreator(store)
             }
-            
+
             if let actionCreator = actions.first as? AsyncActionCreator<Any> {
                 if let callback = actions.last as? (Any) -> Void {
                     return actionCreator(store, callback)
                 }
             }
-            
+
             return next(actions)
         }
     }

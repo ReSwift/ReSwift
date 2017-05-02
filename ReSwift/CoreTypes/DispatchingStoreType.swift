@@ -1,7 +1,13 @@
 import Foundation
 
-public typealias ActionCreator<T> = (_ store: DispatchingStoreType) -> T
-public typealias AsyncActionCreator<T> = (_ store: DispatchingStoreType, _ next: (T) -> Void) -> Void
+public typealias ActionCreator<T> = (
+    _ store: DispatchingStoreType
+) -> T
+
+public typealias AsyncActionCreator<T> = (
+    _ store: DispatchingStoreType,
+    _ next: (T) -> Void
+) -> Void
 
 /**
  Defines the interface of a dispatching, stateless Store in ReSwift. `StoreType` is
@@ -32,27 +38,35 @@ extension DispatchingStoreType {
         dispatch(action as Any)
     }
 
-    public func dispatch<ReturnValue>(_ actionCreator: @escaping ActionCreator<ReturnValue>) -> ReturnValue {
+    public func dispatch<ReturnValue>(
+        _ actionCreator: @escaping ActionCreator<ReturnValue>
+    ) -> ReturnValue {
         guard let result = dispatch(actionCreator as ActionCreator<Any>) as? ReturnValue else {
-            raiseFatalError("ReSwift: You tried to dispatch action creator with different return value type")
+            raiseFatalError(
+                "ReSwift: You tried to dispatch action creator" +
+                " with different return value type"
+            )
         }
         return result
     }
-    
-    public func dispatch<CallbackParam>(_ asyncActionCreator: @escaping AsyncActionCreator<CallbackParam>, callback: @escaping (CallbackParam) -> Void) {
+
+    public func dispatch<CallbackParam>(
+        _ asyncActionCreator: @escaping AsyncActionCreator<CallbackParam>,
+        _ callback: @escaping (CallbackParam) -> Void
+    ) {
         let typeErasedActionCreator: AsyncActionCreator<Any> = { store, next in
             asyncActionCreator(store, { (param) in
                 next(param)
             })
         }
-        
+
         let typeErasedCallback: (Any) -> Void = { param in
             guard let param = param as? CallbackParam else {
                 raiseFatalError()
             }
             callback(param)
         }
-        
+
         dispatch(typeErasedActionCreator as Any, typeErasedCallback as Any)
     }
 }
