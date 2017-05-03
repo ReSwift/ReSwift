@@ -143,3 +143,31 @@ extension Subscription where State: Equatable {
         return self.skipRepeats(==)
     }
 }
+
+/// Subscription skipping convenience methods
+extension Subscription {
+
+    /// Provides a subscription that skips certain state updates of the original subscription.
+    ///
+    /// This is identical to `skipRepeats` and is provided simply for convenience.
+    /// - parameter when: A closure that determines whether a given state update is a repeat and
+    /// thus should be skipped and not forwarded to subscribers.
+    /// - parameter oldState: The store's old state, before the action is reduced.
+    /// - parameter newState: The store's new state, after the action has been reduced.
+    public func skip(when: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
+        return self.skipRepeats(when)
+    }
+
+    /// Provides a subscription that only updates for certain state changes.
+    ///
+    /// This is effectively the inverse of `skip(when:)` / `skipRepeats(:)`
+    /// - parameter when: A closure that determines whether a given state update should notify
+    /// - parameter oldState: The store's old state, before the action is reduced.
+    /// - parameter newState: The store's new state, after the action has been reduced.
+    /// the subscriber.
+    public func only(when: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
+        return self.skipRepeats { oldState, newState in
+            return !when(oldState, newState)
+        }
+    }
+}
