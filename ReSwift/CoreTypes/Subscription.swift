@@ -95,7 +95,8 @@ public class Subscription<State> {
     /// thus should be skipped and not forwarded to subscribers.
     /// - parameter oldState: The store's old state, before the action is reduced.
     /// - parameter newState: The store's new state, after the action has been reduced.
-    public func skipRepeats(_ isRepeat: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
+    public func skipRepeats(_ isRepeat: @escaping (_ oldState: State, _ newState: State) -> Bool)
+        -> Subscription<State> {
         return Subscription<State> { sink in
             self.observe { oldState, newState in
                 switch (oldState, newState) {
