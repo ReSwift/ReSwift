@@ -1,6 +1,5 @@
 {
     "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-macOS"],
-    "swift_version": "2.2",
     "author": "ReSwift",
     "author_url": "https://github.com/ReSwift/ReSwift",
     "module": "ReSwift",
