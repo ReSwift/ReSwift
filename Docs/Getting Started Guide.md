@@ -6,6 +6,60 @@ ReSwift provides the infrastructure for `Store`s, `Action`s and `Reducer`s to en
 
 The following steps will describe how to set up the individual components for your ReSwift app.
 
+# General Setup and High Level Overview
+
+To get the infrastructure up and running, you need to set up a `Store` for a root app state type. The type requirement is `ReSwiftStore<State: ReSwift.StateType>`. You set it up like this:
+
+```swift
+import ReSwift
+
+struct AppState: StateType {
+    // ... app state properties here ...
+}
+
+func appReducer(action: Action, state: AppState?) -> AppState {
+    // ...
+}
+
+let store = Store(
+    reducer: appReducer, 
+    state: AppState(),   // You may also start with `nil`
+    middleware: [])      // Middlewares are optional
+```
+
+Keep the store around somewhere (for example in an `NSDocumentController`, the `AppDelegate`, or as a global variable). 
+
+The process of implementing then works like this:
+
+1. You can add **subscribers** to the store and **dispatch actions**. 
+2. The actions will be pre-processed by your **middleware**. The middleware can act on actions and pass them along, producing side effects or dispatch additional actions itself. It can also do some side effects like logging to the console and pass the action along. 
+3. Finally, if any action was passed through all middleware, it'll reach the root **reducer**, here called `appReducer` by convention. The reducer changes the **state** according to the incoming action. 
+4. The resulting state is then stored in the **store**. The store consequently propagates the new state to all **subscriptions**, reaching the **subscriber** objects if the subscription requirements are met. For example, you can notify subscribers only when the state they are interested in has changed.
+
+For reference, the store's initializer and the initializer's type requierements all together look like this:
+
+```swift
+class Store<State: StateType>: StoreType {
+    public required init(
+        reducer: @escaping Reducer<State>,
+        state: State?,
+        middleware: [Middleware<State>] = []
+    ) { ... }
+}
+```
+
+... where  `Reducer<State>` is a mere function signature alias:
+
+```
+typealias Reducer<ReducerStateType> =
+    (_ action: Action, _ state: ReducerStateType?) -> ReducerStateType
+```
+
+To find out more about how to implement the concrete types and satisfy their requirements, read on.
+
+To get a look at the few core types that make up ReSwift, [check out the code.](https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes)
+
+
 # State
 
 The application state is defined in a single data structure which should be a struct. This struct can have other structs as members, that allows you to add different sub-states as your app grows.
