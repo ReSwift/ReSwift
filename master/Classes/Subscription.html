@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>StandardAction Struct Reference</title>
+    <title>Subscription Class Reference</title>
     <link rel='stylesheet' type='text/css' href='../css/jazzy.css' />
     <link rel='stylesheet' type='text/css' href='../css/highlight.css' />
     <meta charset='utf-8'>
@@ -10,9 +10,9 @@
   </head>
   <body>
 
-    <a name='//apple_ref/swift/Struct/StandardAction' class='dashAnchor'></a>
+    <a name='//apple_ref/swift/Class/Subscription' class='dashAnchor'></a>
 
-    <a title='StandardAction Struct Reference'></a>
+    <a title='Subscription Class Reference'></a>
 
     <header class='header'>
       <p class='header-col header-col--primary'>
@@ -40,7 +40,7 @@
     <p class='breadcrumbs'>
       <a class='breadcrumb' href='../index.html'>ReSwift Reference</a>
       <img class='carat' src='../img/carat.png' />
-      StandardAction Struct Reference
+      Subscription Class Reference
     </p>
 
     <div class='content-wrapper'>
@@ -162,23 +162,17 @@
 
         <section class='section'>
           <div class='section-content'>
-            <h1>StandardAction</h1>
+            <h1>Subscription</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
-            <p>This is ReSwift&rsquo;s built in action type, it is the only built in type that conforms to the
-<code><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></code> protocol. <code>StandardAction</code> can be serialized and can therefore be used with developer
-tools that restore state between app launches.</p>
-
-<p>The downside of <code>StandardAction</code> is that it carries its payload as an untyped dictionary which does
-not play well with Swift&rsquo;s type system.</p>
-
-<p>It is recommended that you define your own types that conform to <code><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></code> - if you want to be able
-to serialize your custom action types, you can implement <code><a href="../Protocols/StandardActionConvertible.html">StandardActionConvertible</a></code> which will
-make it possible to generate a <code>StandardAction</code> from your typed action - the best of both worlds!</p>
+            <p>Represents a subscription of a subscriber to the store. The subscription determines which new
+values from the store are forwarded to the subscriber, and how they are transformed.
+The subscription acts as a very-light weight signal/observable that you might know from
+reactive programming libraries.</p>
 
           </div>
         </section>
@@ -186,13 +180,20 @@ make it possible to generate a <code>StandardAction</code> from your typed actio
         <section class='section'>
           <div class='section-content'>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20Interface"></a>
+                <a name="//apple_ref/swift/Section/Public Interface" class="dashAnchor"></a>
+                <a href="#/Public%20Interface">
+                  <h3 class="section-name">Public Interface</h3>
+                </a>
+              </div>
               <ul class='item-container'>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:vV7ReSwift14StandardAction4typeSS"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV7ReSwift14StandardAction4typeSS">type</a>
+                    <a name="/s:FC7ReSwift12Subscription6selecturFFxqd__GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/select(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift12Subscription6selecturFFxqd__GS0_qd___">select(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -200,108 +201,16 @@ make it possible to generate a <code>StandardAction</code> from your typed actio
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A String that identifies the type of this <code>StandardAction</code></p>
+                        <p>Provides a subscription that selects a substate of the state of the original subscription.</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L24" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:vV7ReSwift14StandardAction7payloadGSqGVs10DictionarySSPs9AnyObject___"></a>
-                    <a name="//apple_ref/swift/Property/payload" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV7ReSwift14StandardAction7payloadGSqGVs10DictionarySSPs9AnyObject___">payload</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>An untyped, JSON-compatible payload</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">payload</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L26" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:vV7ReSwift14StandardAction13isTypedActionSb"></a>
-                    <a name="//apple_ref/swift/Property/isTypedAction" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV7ReSwift14StandardAction13isTypedActionSb">isTypedAction</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Indicates whether this action will be deserialized as a typed action or as a standard action</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">isTypedAction</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L28" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FV7ReSwift14StandardActioncFT4typeSS7payloadGSqGVs10DictionarySSPs9AnyObject___13isTypedActionSb_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(type:payload:isTypedAction:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV7ReSwift14StandardActioncFT4typeSS7payloadGSqGVs10DictionarySSPs9AnyObject___13isTypedActionSb_S0_">init(type:payload:isTypedAction:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initializes this <code>StandardAction</code> with a type, a payload and information about whether this is
-a typed action or not.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">payload</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">isTypedAction</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">selector</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Substate</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -312,36 +221,12 @@ a typed action or not.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>type</em>
+                                <em>selector</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>String representation of the Action type</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>payload</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Payload convertable to JSON</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>isTypedAction</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Is Action a subclassed type</p>
+                                  <p>A closure that maps a state to a selected substate</p>
                                 </div>
                               </td>
                             </tr>
@@ -350,7 +235,111 @@ a typed action or not.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L38-L42" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L76-L81" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FC7ReSwift12Subscription6selectuRd__s9EquatablerFFxqd__GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/select(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift12Subscription6selectuRd__s9EquatablerFFxqd__GS0_qd___">select(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a subscription that selects a substate of the state of the original subscription.
+If the selected substate is <code>Equatable</code> repeated state updates will be skipped.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">selector</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Substate</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>selector</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that maps a state to a selected substate</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L86-L91" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FC7ReSwift12Subscription11skipRepeatsFFTxx_SbGS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/skipRepeats(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift12Subscription11skipRepeatsFFTxx_SbGS0_x_">skipRepeats(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a subscription that skips certain state updates of the original subscription.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">(</span><span class="n">_</span> <span class="nv">isRepeat</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">,</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isRepeat</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that determines whether a given state update is a repeat and
+thus should be skipped and not forwarded to subscribers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L96-L111" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -362,9 +351,9 @@ a typed action or not.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FV7ReSwift14StandardActioncFT10dictionaryGVs10DictionarySSPs9AnyObject___GSqS0__"></a>
-                    <a name="//apple_ref/swift/Method/init(dictionary:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV7ReSwift14StandardActioncFT10dictionaryGVs10DictionarySSPs9AnyObject___GSqS0__">init(dictionary:)</a>
+                    <a name="/s:Fe7ReSwiftRxs9EquatablerCS_12Subscription11skipRepeatsFT_GS1_x_"></a>
+                    <a name="//apple_ref/swift/Method/skipRepeats()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe7ReSwiftRxs9EquatablerCS_12Subscription11skipRepeatsFT_GS1_x_">skipRepeats()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -379,44 +368,13 @@ a typed action or not.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L54-L60" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:vV7ReSwift14StandardAction24dictionaryRepresentationGVs10DictionarySSPs9AnyObject__"></a>
-                    <a name="//apple_ref/swift/Property/dictionaryRepresentation" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV7ReSwift14StandardAction24dictionaryRepresentationGVs10DictionarySSPs9AnyObject__">dictionaryRepresentation</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L62-L68" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L142-L144" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

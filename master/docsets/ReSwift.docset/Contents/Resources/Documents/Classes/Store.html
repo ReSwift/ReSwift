@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -133,24 +133,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='../Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='../Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -163,7 +165,7 @@
             <h1>Store</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                 </div>
               </div>
@@ -190,9 +192,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:vC7ReSwift5Store5stateGSQx_"></a>
+                    <a name="/s:vP7ReSwift9StoreType5stateGSQwx5State_"></a>
                     <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7ReSwift5Store5stateGSQx_">state</a>
+                    <a class="token" href="#/s:vP7ReSwift9StoreType5stateGSQwx5State_">state</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -200,20 +202,19 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="cm">/*private (set)*/</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L25-L38" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L26-L33" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -221,9 +222,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:vC7ReSwift5Store16dispatchFunctionGSQFPS_6Action_P__"></a>
+                    <a name="/s:vP7ReSwift9StoreType16dispatchFunctionGSQFPS_6Action_T__"></a>
                     <a name="//apple_ref/swift/Property/dispatchFunction" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7ReSwift5Store16dispatchFunctionGSQFPS_6Action_P__">dispatchFunction</a>
+                    <a class="token" href="#/s:vP7ReSwift9StoreType16dispatchFunctionGSQFPS_6Action_T__">dispatchFunction</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -231,20 +232,19 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt">DispatchFunction</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L0" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L32" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -252,40 +252,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5StorecFT7reducerPS_10AnyReducer_5stateGSqx__GS0_x_"></a>
-                    <a name="//apple_ref/swift/Method/init(reducer:state:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5StorecFT7reducerPS_10AnyReducer_5stateGSqx__GS0_x_">init(reducer:state:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L48-L50" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FC7ReSwift5StorecFT7reducerPS_10AnyReducer_5stateGSqx_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS2__P_FPS2__P___GS0_x_"></a>
+                    <a name="/s:FP7ReSwift9StoreTypecFT7reducerFTPS_6Action_GSqwx5State__wxS2_5stateGSqwxS2__10middlewareGSaFTFPS1__T_FT_GSqwxS2___FFPS1__T_FPS1__T___x"></a>
                     <a name="//apple_ref/swift/Method/init(reducer:state:middleware:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5StorecFT7reducerPS_10AnyReducer_5stateGSqx_10middlewareGSaFTGSqFPS_6Action_P__FT_GSqPS_9StateType___FFPS2__P_FPS2__P___GS0_x_">init(reducer:state:middleware:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreTypecFT7reducerFTPS_6Action_GSqwx5State__wxS2_5stateGSqwxS2__10middlewareGSaFTFPS1__T_FT_GSqwxS2___FFPS1__T_FPS1__T___x">init(reducer:state:middleware:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -293,20 +262,23 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span>
+        <span class="nv">reducer</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Reducer</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span>
+        <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt">Middleware</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L52-L75" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L43-L68" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -314,9 +286,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store9subscribeuRd__S_15StoreSubscriberxzwd__24StoreSubscriberStateTyperFqd__T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType9subscribeuRd__S_15StoreSubscriberwx5Statezwd__24StoreSubscriberStateTyperFqd__T_"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store9subscribeuRd__S_15StoreSubscriberxzwd__24StoreSubscriberStateTyperFqd__T_">subscribe(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType9subscribeuRd__S_15StoreSubscriberwx5Statezwd__24StoreSubscriberStateTyperFqd__T_">subscribe(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -324,20 +296,39 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
+        <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">State</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L92-L95" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L70-L73" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -345,9 +336,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store9subscribeu0_Rd_0_S_15StoreSubscriberd__zwd_0_24StoreSubscriberStateTyperFTqd_0_8selectorGSqFxqd____T_"></a>
-                    <a name="//apple_ref/swift/Method/subscribe(_:selector:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store9subscribeu0_Rd_0_S_15StoreSubscriberd__zwd_0_24StoreSubscriberStateTyperFTqd_0_8selectorGSqFxqd____T_">subscribe(_:selector:)</a>
+                    <a name="/s:FP7ReSwift9StoreType9subscribeu0_Rd_0_S_15StoreSubscriberd__zwd_0_24StoreSubscriberStateTyperFTqd_0_9transformGSqFGCS_12Subscriptionwx5State_GS3_qd_____T_"></a>
+                    <a name="//apple_ref/swift/Method/subscribe(_:transform:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType9subscribeu0_Rd_0_S_15StoreSubscriberd__zwd_0_24StoreSubscriberStateTyperFTqd_0_9transformGSqFGCS_12Subscriptionwx5State_GS3_qd_____T_">subscribe(_:transform:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -355,20 +346,52 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="p">,</span> <span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="o">&gt;</span><span class="p">)?</span>
+    <span class="p">)</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">SelectedState</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transform</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L111-L121" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L75-L102" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -376,9 +399,58 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store11unsubscribeFPS_18AnyStoreSubscriber_T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType11unsubscribeFPS_18AnyStoreSubscriber_T_"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store11unsubscribeFPS_18AnyStoreSubscriber_T_">unsubscribe(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType11unsubscribeFPS_18AnyStoreSubscriber_T_">unsubscribe(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnyStoreSubscriber.html">AnyStoreSubscriber</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L104-L108" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FC7ReSwift5Store16_defaultDispatchFT6actionPS_6Action__T_"></a>
+                    <a name="//apple_ref/swift/Method/_defaultDispatch(action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift5Store16_defaultDispatchFT6actionPS_6Action__T_">_defaultDispatch(action:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -393,13 +465,13 @@ argument.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L131-L135" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L111-L126" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -407,40 +479,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store16_defaultDispatchFPS_6Action_P_"></a>
-                    <a name="//apple_ref/swift/Method/_defaultDispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store16_defaultDispatchFPS_6Action_P_">_defaultDispatch(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L138-L155" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FC7ReSwift5Store8dispatchFPS_6Action_P_"></a>
+                    <a name="/s:FP7ReSwift20DispatchingStoreType8dispatchFPS_6Action_T_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store8dispatchFPS_6Action_P_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift20DispatchingStoreType8dispatchFPS_6Action_T_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -448,20 +489,38 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L165-L169" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L128-L130" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -469,9 +528,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store8dispatchFFT5statex5storeGS0_x__GSqPS_6Action__P_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFwx13ActionCreatorT_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store8dispatchFFT5statex5storeGS0_x__GSqPS_6Action__P_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFwx13ActionCreatorT_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -479,20 +538,19 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">_</span> <span class="nv">actionCreatorProvider</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">ActionCreator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L184-L192" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L132-L136" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -500,9 +558,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store8dispatchFFT5statex5storeGS0_x_21actionCreatorCallbackFFT5statex5storeGS0_x__GSqPS_6Action__T__T_T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFwx18AsyncActionCreatorT_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store8dispatchFFT5statex5storeGS0_x_21actionCreatorCallbackFFT5statex5storeGS0_x__GSqPS_6Action__T__T_T_">dispatch(_:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFwx18AsyncActionCreatorT_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -510,20 +568,19 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">_</span> <span class="nv">asyncActionCreatorProvider</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">AsyncActionCreator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L200-L202" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L138-L140" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -531,9 +588,44 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift5Store8dispatchFTFT5statex5storeGS0_x_21actionCreatorCallbackFFT5statex5storeGS0_x__GSqPS_6Action__T__T_8callbackGSqFxT___T_"></a>
+                    <a name="/s:FP7ReSwift9StoreType8dispatchFTwx18AsyncActionCreator8callbackGSqwx16DispatchCallback__T_"></a>
                     <a name="//apple_ref/swift/Method/dispatch(_:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift5Store8dispatchFTFT5statex5storeGS0_x_21actionCreatorCallbackFFT5statex5storeGS0_x__GSqPS_6Action__T__T_8callbackGSqFxT___T_">dispatch(_:callback:)</a>
+                    <a class="token" href="#/s:FP7ReSwift9StoreType8dispatchFTwx18AsyncActionCreator8callbackGSqwx16DispatchCallback__T_">dispatch(_:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">_</span> <span class="nv">actionCreatorProvider</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">AsyncActionCreator</span><span class="p">,</span>
+                       <span class="nv">callback</span><span class="p">:</span> <span class="kt">DispatchCallback</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L142-L152" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:Fe7ReSwiftRxS_9StateTypexs9EquatablerCS_5Store9subscribeuRd__S_15StoreSubscriberxzwd__24StoreSubscriberStateTyperFqd__T_"></a>
+                    <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe7ReSwiftRxS_9StateTypexs9EquatablerCS_5Store9subscribeuRd__S_15StoreSubscriberxzwd__24StoreSubscriberStateTyperFqd__T_">subscribe(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -548,13 +640,13 @@ argument.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L218-L227" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L168-L171" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -568,7 +660,7 @@ argument.</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

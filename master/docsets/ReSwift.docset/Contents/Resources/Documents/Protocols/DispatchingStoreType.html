@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Reducer Protocol Reference</title>
+    <title>DispatchingStoreType Protocol Reference</title>
     <link rel='stylesheet' type='text/css' href='../css/jazzy.css' />
     <link rel='stylesheet' type='text/css' href='../css/highlight.css' />
     <meta charset='utf-8'>
@@ -10,16 +10,16 @@
   </head>
   <body>
 
-    <a name='//apple_ref/swift/Protocol/Reducer' class='dashAnchor'></a>
+    <a name='//apple_ref/swift/Protocol/DispatchingStoreType' class='dashAnchor'></a>
 
-    <a title='Reducer Protocol Reference'></a>
+    <a title='DispatchingStoreType Protocol Reference'></a>
 
     <header class='header'>
       <p class='header-col header-col--primary'>
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -40,7 +40,7 @@
     <p class='breadcrumbs'>
       <a class='breadcrumb' href='../index.html'>ReSwift Reference</a>
       <img class='carat' src='../img/carat.png' />
-      Reducer Protocol Reference
+      DispatchingStoreType Protocol Reference
     </p>
 
     <div class='content-wrapper'>
@@ -133,24 +133,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='../Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='../Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -160,8 +162,16 @@
 
         <section class='section'>
           <div class='section-content'>
-            <h1>Reducer</h1>
-            <p>Undocumented</p>
+            <h1>DispatchingStoreType</h1>
+              <div class='declaration'>
+                <div class='language'>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DispatchingStoreType</span></code></pre>
+
+                </div>
+              </div>
+            <p>Defines the interface of a dispatching, stateless Store in ReSwift. <code><a href="../Protocols/StoreType.html">StoreType</a></code> is
+the default usage of this interface. Can be used for store variables where you don&rsquo;t
+care about the state, but want to be able to dispatch actions.</p>
 
           </div>
         </section>
@@ -173,9 +183,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift7Reducer12handleActionFTPS_6Action_5stateGSqwx16ReducerStateType__wxS2_"></a>
-                    <a name="//apple_ref/swift/Method/handleAction(_:state:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift7Reducer12handleActionFTPS_6Action_5stateGSqwx16ReducerStateType__wxS2_">handleAction(_:state:)</a>
+                    <a name="/s:FP7ReSwift20DispatchingStoreType8dispatchFPS_6Action_T_"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP7ReSwift20DispatchingStoreType8dispatchFPS_6Action_T_">dispatch(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -183,42 +193,48 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Dispatches an action. This is the simplest way to modify the stores state.</p>
 
+<p>Example of dispatching an action:</p>
+<pre class="highlight plaintext"><code>store.dispatch( CounterAction.IncreaseCounter )
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The action that is being dispatched to the store</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>By default returns the dispatched action, but middlewares can change the
+return type, e.g. to return promises</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Reducer.swift#L0" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class='item-container'>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:FE7ReSwiftPS_7Reducer13_handleActionFTPS_6Action_5stateGSqPS_9StateType___PS2__"></a>
-                    <a name="//apple_ref/swift/Method/_handleAction(_:state:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE7ReSwiftPS_7Reducer13_handleActionFTPS_6Action_5stateGSqPS_9StateType___PS2__">_handleAction(_:state:)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Reducer.swift#L22-L24" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/DispatchingStoreType.swift#L23" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -232,7 +248,7 @@
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

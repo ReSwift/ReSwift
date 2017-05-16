@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -132,24 +132,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -160,16 +162,120 @@
         <section class='section'>
           <div class='section-content'>
             
-            <a href='#changelog' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='changelog'>Changelog</h1>
-<a href='#upcoming-release' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='upcoming-release'>Upcoming Release</h1>
+            <h1 id='changelog' class='heading'>Changelog</h1>
+<h1 id='4-0-0' class='heading'>4.0.0</h1>
+
+<p><em>Work in Progress</em></p>
+
+<p><strong>Breaking API Changes:</strong></p>
+
+<ul>
+<li><p>Introduced a new Subscription API (#203) - @Ben-G, @mjarvis, @DivineDominion</p>
+
+<ul>
+<li>The subscription API provides basic operators, such as <code>skipRepeats</code> (skip calls to <code>newState</code> unless state value changed) and <code>select</code> (sub-select a state).</li>
+<li>This is a breaking API change that requires migrating existing subscriptions that sub-select a portion of a store&rsquo;s state:</li>
+<li>Subselecting state in 3.0.0:</li>
+</ul>
+<pre class="highlight swift"><code>  <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">testValue</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">otherState</span><span class="p">?</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>Subselecting state in 4.0.0:</li>
+</ul>
+<pre class="highlight swift"><code>  <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$0</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span>
+      <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">testValue</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">otherState</span><span class="p">?</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>For any store state that is <code>Equatable</code> or any sub-selected state that is <code>Equatable</code>, <code>skipRepeats</code> will be used by default.</li>
+<li>For states/substates that are not <code>Equatable</code>, <code>skipRepeats</code> can be implemented via a closure:</li>
+</ul>
+<pre class="highlight swift"><code><span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$0</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span>
+      <span class="nv">$0</span><span class="o">.</span><span class="n">testValue</span>
+      <span class="p">}</span><span class="o">.</span><span class="n">skipRepeats</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nv">$0</span> <span class="o">==</span> <span class="nv">$1</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></li>
+<li><p>Reducer type has been removed in favor of reducer function (#177) - Ben-G</p>
+
+<ul>
+<li>Here&rsquo;s an example of a new app reducer, for details see the README:</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">counterReducer</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AppState</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">AppState</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="kt">AppState</span><span class="p">()</span>
+
+    <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionIncrease</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionDecrease</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">state</span>
+<span class="p">}</span>
+</code></pre></li>
+<li><p><code>dispatch</code> functions now return <code>Void</code> instead of <code>Any</code> (#187) - @Qata</p>
+
+<ul>
+<li>The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fullfilled when a dispatched action is processed. While it&rsquo;s generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a <code>dispatch</code> overload that takes a <code>callback</code> argument and serves this purpose.</li>
+</ul></li>
+<li><p>Make <code>dispatch</code> argument in middleware non-optional (#225) -  @dimazen, @mjarvis, @Ben-G</p></li>
+<li><p><code>Middleware</code> now has a generic type parameter that is used for the <code>getState</code> method and matches the Store&rsquo;s <code>State</code> type. This allows accessing the state in middleware code without type casting (#226) - @mjarvis</p></li>
+</ul>
+
+<p><strong>Other:</strong></p>
+
+<ul>
+<li>Extend <code>StoreType</code> with substate selector subscription (#192) - @mjarvis</li>
+<li>Add <code>DispatchingStoreType</code> protocol for testing (#197) - @mjarvis</li>
+<li>Installation guide for Swift Package Manager - @thomaspaulmann</li>
+<li>Update documentation to reflect breaking API changes - @mjarvis</li>
+<li>Clarify error message on concurrent usage of ReSwift - @langford</li>
+</ul>
+<h1 id='3-0-0' class='heading'>3.0.0</h1>
+
+<p><em>Released: 11/12/2016</em></p>
+
+<p><strong>Breaking API Changes:</strong></p>
+
+<ul>
+<li>Dropped support for Swift 2.2 and lower (#157) - @Ben-G</li>
+</ul>
+
+<p><strong>API Changes:</strong></p>
+
+<ul>
+<li>Mark <code>Store</code> as <code>open</code>, this reverts a previously accidental breaking API Change (#157) - @Ben-G</li>
+</ul>
 
 <p><strong>Other</strong>:</p>
 
 <ul>
-<li>Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) @agentk</li>
-<li>Migrate Quick/Nimble testing to XCTest - (#127) @agentk</li>
+<li>Update to Swift 3.0.1 - @Cristiam, @Ben-G</li>
+<li>Documentation changes - @vkotovv</li>
 </ul>
-<a href='#2-0-0' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='2-0-0'>2.0.0</h1>
+<h1 id='2-1-0' class='heading'>2.1.0</h1>
+
+<p><em>Released: 09/15/2016</em></p>
+
+<p><strong>Other</strong>:</p>
+
+<ul>
+<li>Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) - @agentk</li>
+<li>Xcode 8 GM Swift 3 Updates (#149) - @tkersey</li>
+<li>Migrate Quick/Nimble testing to XCTest - (#127) - @agentk</li>
+<li>Automatically build docs via Travis CI (#128) - @agentk</li>
+<li>Documentation Updates &amp; Fixes- @mikekavouras, @ColinEberhardt</li>
+</ul>
+<h1 id='2-0-0' class='heading'>2.0.0</h1>
 
 <p><em>Released: 06/27/2016</em></p>
 
@@ -185,12 +291,15 @@
 <li>Swift 2.3 Updates - @agentk</li>
 <li>Documentation Updates &amp; Fixes - @okla, @gregpardo, @tomj, @askielboe, @mitsuse, @esttorhe, @RyanCCollins, @thomaspaulmann, @jlampa</li>
 </ul>
-<a href='#1-0-0' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='1-0-0'>1.0.0</h1>
+<h1 id='1-0-0' class='heading'>1.0.0</h1>
 
 <p><em>Released: 03/19/2016</em></p>
 
-<p><strong>API Changes:</strong>
-- Remove callback arguments on synchronous dispatch methods - @Ben-G</p>
+<p><strong>API Changes:</strong></p>
+
+<ul>
+<li>Remove callback arguments on synchronous dispatch methods - @Ben-G</li>
+</ul>
 
 <p><strong>Other:</strong></p>
 
@@ -200,7 +309,7 @@
 <li>Set CocoaPods documentation URL - (#56) @agentk</li>
 <li>Update documentation for 1.0 release - @Ben-G</li>
 </ul>
-<a href='#0-2-5' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='0-2-5'>0.2.5</h1>
+<h1 id='0-2-5' class='heading'>0.2.5</h1>
 
 <p><em>Released: 02/20/2016</em></p>
 
@@ -226,7 +335,7 @@
 <li>Refactored subscribers into a explicit <code>Subscription</code> typealias - @DivineDominion</li>
 <li>Refactored <code>dispatch</code> for <code>AsyncActionCreator</code> to avoid duplicate code - @sendyhalim</li>
 </ul>
-<a href='#0-2-4' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='0-2-4'>0.2.4</h1>
+<h1 id='0-2-4' class='heading'>0.2.4</h1>
 
 <p><em>Released: 01/23/2016</em></p>
 
@@ -259,7 +368,7 @@
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

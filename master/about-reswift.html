@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -132,24 +132,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -160,12 +162,15 @@
         <section class='section'>
           <div class='section-content'>
             
-            <a href='#about-reswift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='about-reswift'>About ReSwift</h1>
+            <h1 id='about-reswift' class='heading'>About ReSwift</h1>
 
-<p>ReSwift relies on a few principles:
-- <strong>The Store</strong> stores your entire app state in the form of a single data structure. This state can only be modified by dispatching Actions to the store. Whenever the state in the store changes, the store will notify all observers.
-- <strong>Actions</strong> are a declarative way of describing a state change. Actions don&rsquo;t contain any code, they are consumed by the store and forwarded to reducers. Reducers will handle the actions by implementing a different state change for each action.
-- <strong>Reducers</strong> provide pure functions, that based on the current action and the current app state, create a new app state</p>
+<p>ReSwift relies on a few principles:</p>
+
+<ul>
+<li><strong>The Store</strong> stores your entire app state in the form of a single data structure. This state can only be modified by dispatching Actions to the store. Whenever the state in the store changes, the store will notify all observers.</li>
+<li><strong>Actions</strong> are a declarative way of describing a state change. Actions don&rsquo;t contain any code, they are consumed by the store and forwarded to reducers. Reducers will handle the actions by implementing a different state change for each action.</li>
+<li><strong>Reducers</strong> provide pure functions, that based on the current action and the current app state, create a new app state</li>
+</ul>
 
 <p><img src="img/reswift_concept.png" alt=""></p>
 
@@ -181,23 +186,19 @@
 </code></pre>
 
 <p>Your reducer needs to respond to these different action types, that can be done by switching over the type of action:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">CounterReducer</span><span class="p">:</span> <span class="kt">Reducer</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">counterReducer</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AppState</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">AppState</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="kt">AppState</span><span class="p">()</span>
 
-    <span class="kd">func</span> <span class="nf">handleAction</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AppState</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">AppState</span> <span class="p">{</span>
-        <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="kt">AppState</span><span class="p">()</span>
-
-        <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionIncrease</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionDecrease</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="k">default</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">state</span>
+    <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionIncrease</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">CounterActionDecrease</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">break</span>
     <span class="p">}</span>
 
+    <span class="k">return</span> <span class="n">state</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -205,7 +206,7 @@
 
 <p>To maintain our state and delegate the actions to the reducers, we need a store. Let&rsquo;s call it <code>mainStore</code> and define it as a global constant, for example in the app delegate file:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">mainStore</span> <span class="o">=</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">AppState</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="nv">reducer</span><span class="p">:</span> <span class="kt">AppReducer</span><span class="p">(),</span>
+    <span class="nv">reducer</span><span class="p">:</span> <span class="n">counterReducer</span><span class="p">,</span>
     <span class="nv">state</span><span class="p">:</span> <span class="kc">nil</span>
 <span class="p">)</span>
 
@@ -251,7 +252,7 @@
 
 <p>Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.</p>
 
-<p>This is a very basic example that only shows a subset of ReSwift&rsquo;s features, read the Getting Started Guide to see how you can build entire apps with this architecture.</p>
+<p>This is a very basic example that only shows a subset of ReSwift&rsquo;s features, read the Getting Started Guide to see how you can build entire apps with this architecture. For a complete implementation of this example see the <a href="https://github.com/ReSwift/CounterExample">CounterExample</a> project.</p>
 
 <p><a href="https://realm.io/news/benji-encz-unidirectional-data-flow-swift/">You can also watch this talk on the motivation behind ReSwift</a>.</p>
 
@@ -263,7 +264,7 @@
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

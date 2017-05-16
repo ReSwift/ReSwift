@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -132,24 +132,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -160,14 +162,14 @@
         <section class='section'>
           <div class='section-content'>
             
-            <a href='#getting-started-with-reswift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='getting-started-with-reswift'>Getting Started with ReSwift</h1>
+            <h1 id='getting-started-with-reswift' class='heading'>Getting Started with ReSwift</h1>
 
 <p>ReSwift provides the infrastructure for <code>Store</code>s, <code>Action</code>s and <code>Reducer</code>s to enable a unidirectional data flow as shown below.</p>
 
 <p><img src="img/reswift_detail.png" alt=""></p>
 
 <p>The following steps will describe how to set up the individual components for your ReSwift app.</p>
-<a href='#state' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='state'>State</h1>
+<h1 id='state' class='heading'>State</h1>
 
 <p>The application state is defined in a single data structure which should be a struct. This struct can have other structs as members, that allows you to add different sub-states as your app grows.</p>
 
@@ -186,10 +188,10 @@
 <li>Your app state struct needs to conform to the <code>StateType</code> protocol, currently this is just a marker protocol.</li>
 <li>If you are including <code>ReSwiftRouter</code> in your project, your app state needs to contain a property of type <code>NavigationState</code>. This is the sub-state the router will use to store the current route.</li>
 </ol>
-<a href='#derived-state' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='derived-state'>Derived State</h2>
+<h2 id='derived-state' class='heading'>Derived State</h2>
 
 <p>Note that you don&rsquo;t need to store derived state inside of your app state. E.g. instead of storing a <code>UIImage</code> you should store a image URL that can be used to fetch the image from a cache or via a download. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived.</p>
-<a href='#actions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='actions'>Actions</h1>
+<h1 id='actions' class='heading'>Actions</h1>
 
 <p>Actions are used to express intended state changes. Actions don&rsquo;t contain functions, instead they provide information about the intended state change, e.g. which user should be deleted.</p>
 
@@ -227,30 +229,26 @@
 <p>If you want to use custom types for actions, but still want to be able to make use of the features provided by ReSwift Recorder, you can implement the <code>StandardActionConvertible</code> protocol. This will allow ReSwift to convert your typed actions to standard actions that can then be serialized.</p>
 
 <p>Once ReSwift Recorder&rsquo;s implementation is further along, you will find detailed information  on all of this in its documentation.</p>
-<a href='#reducers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='reducers'>Reducers</h1>
+<h1 id='reducers' class='heading'>Reducers</h1>
 
 <p>Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.</p>
 
 <p>You can do this implementing a top-level reducer that conforms to the <code>Reducer</code> protocol. This reducer will then call individual functions for each different part of the app state.</p>
 
 <p>Here&rsquo;s an example in which we construct a new state, by calling sub-reducers with different sub-states:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppReducer</span><span class="p">:</span> <span class="kt">Reducer</span> <span class="p">{</span>
-
-    <span class="kd">func</span> <span class="nf">handleAction</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kt">State</span><span class="p">(</span>
-            <span class="nv">navigationState</span><span class="p">:</span> <span class="kt">NavigationReducer</span><span class="o">.</span><span class="nf">handleAction</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">navigationState</span><span class="p">),</span>
-            <span class="nv">authenticationState</span><span class="p">:</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">authenticationState</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
-            <span class="nv">repositories</span><span class="p">:</span> <span class="nf">repositoriesReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">repositories</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
-            <span class="nv">bookmarks</span><span class="p">:</span> <span class="nf">bookmarksReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">bookmarks</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">)</span>
-        <span class="p">)</span>
-    <span class="p">}</span>
-
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">appReducer</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">State</span><span class="p">(</span>
+      <span class="nv">navigationState</span><span class="p">:</span> <span class="nf">navigationReducer</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">navigationState</span><span class="p">),</span>
+      <span class="nv">authenticationState</span><span class="p">:</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">authenticationState</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
+      <span class="nv">repositories</span><span class="p">:</span> <span class="nf">repositoriesReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">repositories</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">),</span>
+      <span class="nv">bookmarks</span><span class="p">:</span> <span class="nf">bookmarksReducer</span><span class="p">(</span><span class="n">state</span><span class="p">?</span><span class="o">.</span><span class="n">bookmarks</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="n">action</span><span class="p">)</span>
+   <span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>The <code>Reducer</code> protocol has a single method that takes an <code>Action</code> and an <code>State?</code> and returns a <code>State</code>. Typically reducers will be responsible for initializing the application state. When they receive <code>nil</code> as the current state, they should return the initial default value for their portion of the state. In the example above the <code>AppReducer</code> delegates all calls to other reducer functions. E.g. the <code>authenticationReducer</code> is responsible for providing the <code>authenticationState</code>.</p>
+<p>The <code>Reducer</code> typealias is a method that takes an <code>Action</code> and an <code>State?</code> and returns a <code>State</code>. Typically reducers will be responsible for initializing the application state. When they receive <code>nil</code> as the current state, they should return the initial default value for their portion of the state. In the example above the <code>appReducer</code> delegates all calls to other reducer functions. E.g. the <code>authenticationReducer</code> is responsible for providing the <code>authenticationState</code>.</p>
 
-<p>Here&rsquo;s what the <code>authenticationReducer</code> function that is called from the <code>AppReducer</code> looks like:</p>
+<p>Here&rsquo;s what the <code>authenticationReducer</code> function that is called from the <code>appReducer</code> looks like:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">AuthenticationState</span><span class="p">?,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AuthenticationState</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="nf">initialAuthenticationState</span><span class="p">()</span>
 
@@ -269,14 +267,14 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the method in the <code>Reducer</code> protocol (current state and action in, new state out).</p>
+<p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the <code>Reducer</code> typealias (current state and action in, new state out).</p>
 
 <p>This sub-reducer first checks if the state provided is <code>nil</code>. If that&rsquo;s the case, it sets the state to the initial default state. Next, the reducer switches over the provided <code>action</code> and checks its type. Depending on the type of action, this reducer will updated the state differently. This specific reducer is very simple, each action only triggers a single property of the state to update.</p>
 
 <p>Once the state update is complete, the reducer function returns the new state.</p>
 
-<p>After the <code>AppReducer</code> has called all of the sub-reducer functions, we have a new application state. <code>ReSwift</code> will take care of publishing this new state to all subscribers.</p>
-<a href='#store-subscribers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='store-subscribers'>Store Subscribers</h1>
+<p>After the <code>appReducer</code> has called all of the sub-reducer functions, we have a new application state. <code>ReSwift</code> will take care of publishing this new state to all subscribers.</p>
+<h1 id='store-subscribers' class='heading'>Store Subscribers</h1>
 
 <p>Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the <code>newState</code> method on them. Subscribers need to conform to the <code>StoreSubscriber</code> protocol:</p>
 <pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">StoreSubscriber</span> <span class="p">{</span>
@@ -285,7 +283,7 @@
 </code></pre>
 
 <p>Most of your <code>StoreSubscriber</code>s will be in the view layer and update their representation whenever they receive a new state.</p>
-<a href='#example-with-filtered-subscriptions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example-with-filtered-subscriptions'>Example With Filtered Subscriptions</h2>
+<h2 id='example-with-filtered-subscriptions' class='heading'>Example With Filtered Subscriptions</h2>
 
 <p>Ideally most of our subscribers should only be interested in a very small portion of the overall app state. <code>ReSwift</code> provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here&rsquo;s an example of subscribing, filtering and unsubscribing as used within a view controller:</p>
 <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
@@ -293,8 +291,8 @@
 
     <span class="c1">// subscribe when VC appears</span>
     <span class="c1">// we are only interested in repository substate, filter it out of the overall state</span>
-    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">repositories</span>
+    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">subcription</span> <span class="k">in</span>
+        <span class="n">subcription</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span> <span class="n">state</span><span class="o">.</span><span class="n">repositories</span> <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -318,8 +316,8 @@
 <p>When selecting a substate as part of calling the <code>subscribe</code> method, you need to make sure that the argument of the <code>newState</code> method has the same type as whatever you return from the state subselection in the <code>subscribe</code> method.</p>
 
 <p>When subscribing within a ViewController you will typically update the view from within the <code>newState</code> method.</p>
-<a href='#beyond-the-basics' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='beyond-the-basics'>Beyond the Basics</h1>
-<a href='#asynchronous-operations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='asynchronous-operations'>Asynchronous Operations</h2>
+<h1 id='beyond-the-basics' class='heading'>Beyond the Basics</h1>
+<h2 id='asynchronous-operations' class='heading'>Asynchronous Operations</h2>
 
 <p>Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here&rsquo;s a simple example of how to tie an asynchronous network request to <code>ReSwift</code> state update:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchGitHubRepositories</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span> <span class="p">{</span>
@@ -337,7 +335,7 @@
 
 <p>In this example we&rsquo;re using the <code>Octokit</code> library to perform a network request that fetches a users repositories. Within the callback block of the method we dispatch a state update that injects the received repositories into the app state. This will trigger all receivers to be informed about the new state.</p>
 
-<p>Note that the callback block from the network request arrives on a background thread, therefore we&rsquo;re using <code>dispatch_async(dispatch_get_main_queue())</code> to perform the state update on the main thread. <code>ReSwift</code> will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but <code>ReSwift</code> does not enforce this recommendation.</p>
+<p>Note that the callback block from the network request arrives on a background thread, therefore we&rsquo;re using <code>dispatch_async(dispatch_get_main_queue())</code> to perform the state update on the main thread. <code>ReSwift</code> will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but <code>ReSwift</code> does not enforce this recommendation. ReSwift <em>will</em> enforce that all Dispatches, Store Subscribes and Store Unsubscribes are on the same thread or serial Grand Central Dispatch queue. Therefore the main dispatch queue works, however the global dispatch queue, being concurrent, will fail.</p>
 
 <p>In many cases your asynchronous tasks will consist of two separate steps:</p>
 
@@ -361,7 +359,7 @@
 </code></pre>
 
 <p>In the example above, we&rsquo;re using an <code>enum</code> to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.</p>
-<a href='#action-creators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='action-creators'>Action Creators</h2>
+<h2 id='action-creators' class='heading'>Action Creators</h2>
 
 <p>An important aspect of adopting <code>ReSwift</code> is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering <code>Action</code>s upon user interactions.</p>
 
@@ -369,29 +367,27 @@
 
 <p>Just like an <code>Action</code> a <code>ActionCreator</code> function can be dispatched to the store. An <code>ActionCreator</code> takes the current application state, and a reference to a store and might or might not return an <code>Action</code>.</p>
 
-<p>An <code>ActionCreator</code> has the following type signature:
-<code>swift
-typealias ActionCreator = (state: State, store: StoreType) -&gt; Action?
-</code></p>
+<p>An <code>ActionCreator</code> has the following type signature:</p>
+<pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">ActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">StoreType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span>
+</code></pre>
 
-<p>A very simple example of an <code>ActionCreator</code> might be:
-<code>swift
-func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -&gt; Action? {
-    if state.testValue &lt; 5 {
-        return SetValueAction(state.testValue! * 2)
-    } else {
-        return nil
-    }
-}
-</code></p>
-<a href='#middleware' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='middleware'>Middleware</h2>
+<p>A very simple example of an <code>ActionCreator</code> might be:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">doubleValueIfSmall</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">TestAppState</span><span class="p">,</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">TestAppState</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Action</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">testValue</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">SetValueAction</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">testValue</span><span class="o">!</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='middleware' class='heading'>Middleware</h2>
 
-<p>ReSwift supports middleware in the same way as Redux does, <a href="http://rackt.org/redux/docs/advanced/Middleware.html">you can read this great documentation on Redux middleware to get started</a>. Middleware allows developers to provide extensions that wrap the <code>dispatch</code> function.</p>
+<p>ReSwift supports middleware in the same way as Redux does, <a href="http://redux.js.org/docs/advanced/Middleware.html">you can read this great documentation on Redux middleware to get started</a>. Middleware allows developers to provide extensions that wrap the <code>dispatch</code> function.</p>
 
 <p>Let&rsquo;s take a look at a quick example that shows how ReSwift supports Redux style middleware.</p>
 
 <p>The simplest example of a middleware, is one that prints all actions to the console. Here&rsquo;s how you can implement it:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">loggingMiddleware</span><span class="p">:</span> <span class="kt">Middleware</span> <span class="o">=</span> <span class="p">{</span> <span class="n">dispatch</span><span class="p">,</span> <span class="n">getState</span> <span class="k">in</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">loggingMiddleware</span><span class="p">:</span> <span class="kt">Middleware</span><span class="o">&lt;</span><span class="kt">Any</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="n">dispatch</span><span class="p">,</span> <span class="n">getState</span> <span class="k">in</span>
     <span class="k">return</span> <span class="p">{</span> <span class="n">next</span> <span class="k">in</span>
         <span class="k">return</span> <span class="p">{</span> <span class="n">action</span> <span class="k">in</span>
             <span class="c1">// perform middleware logic</span>
@@ -403,6 +399,8 @@ func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+
+<p>The generic in middleware refers to the return type in <code>getState</code>, and needs to be compatible with the <code>State</code> associated type in your <code>Store</code>.</p>
 
 <p>You can define which middleware you would like to use when creating your store:</p>
 <pre class="highlight swift"><code><span class="kt">Store</span><span class="p">(</span><span class="nv">reducer</span><span class="p">:</span> <span class="n">reducer</span><span class="p">,</span> <span class="nv">appState</span><span class="p">:</span> <span class="kt">TestStringAppState</span><span class="p">(),</span>
@@ -419,7 +417,7 @@ func doubleValueIfSmall(state: TestAppState, store: Store&lt;TestAppState&gt;) -
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

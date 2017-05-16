@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -133,24 +133,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='../Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='../Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='../Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -168,9 +170,13 @@
                 </div>
               </div>
             <p>Implement this protocol on your custom <code><a href="../Actions.html#/s:P7ReSwift6Action">Action</a></code> type if you want to make the action
-serializable.
-- Note: We are working on a tool to automatically generate the implementation of this protocol
-    for your custom action types.</p>
+serializable.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    We are working on a tool to automatically generate the implementation of this protocol
+for your custom action types.
+
+</div>
 
           </div>
         </section>
@@ -196,12 +202,10 @@ serializable.
  state of your custom action type.</p>
 
 <p>Example:</p>
-
 <pre class="highlight plaintext"><code> init(_ standardAction: StandardAction) {
     self.twitterUser = decode(standardAction.payload!["twitterUser"]!)
  }
 </code></pre>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     If you, as most developers, only use action serialization/deserialization during
@@ -220,7 +224,7 @@ development, you can feel free to use the unsafe <code>!</code> operator.
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L89" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L91" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -244,7 +248,6 @@ to set <code>isTypedAction</code> to <code>true</code>. Use the information from
 configure the payload of the <code><a href="../Structs/StandardAction.html">StandardAction</a></code>.</p>
 
 <p>Example:</p>
-
 <pre class="highlight plaintext"><code>func toStandardAction() -&gt; StandardAction {
    let payload = ["twitterUser": encode(self.twitterUser)]
 
@@ -264,7 +267,7 @@ configure the payload of the <code><a href="../Structs/StandardAction.html">Stan
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L109" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Action.swift#L111" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -278,7 +281,7 @@ configure the payload of the <code><a href="../Structs/StandardAction.html">Stan
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

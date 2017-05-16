@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (33% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -132,24 +132,26 @@
             </ul>
           </li>
           <li class='nav-group-name'>
-            <a class='nav-group-name-link' href='Reducers.html'>Reducers</a>
-            <ul class='nav-group-tasks'>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/Reducer.html'>Reducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/AnyReducer.html'>AnyReducer</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/CombinedReducer.html'>CombinedReducer</a>
-              </li>
-            </ul>
-          </li>
-          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Protocols/Coding.html'>Coding</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Classes.html'>Other Classes</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Classes/Subscription.html'>Subscription</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Protocols.html'>Other Protocols</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Protocols/DispatchingStoreType.html'>DispatchingStoreType</a>
               </li>
             </ul>
           </li>
@@ -199,7 +201,7 @@ argument.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                         </div>
                       </div>
@@ -207,7 +209,7 @@ argument.</p>
                         
                           <a href="Classes/Store.html" class="button">See more</a>
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L18-L239" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L18-L163" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -239,7 +241,7 @@ Upon every state update a store informs all of its subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span><span class="p">:</span> <span class="kt"><a href="Protocols/DispatchingStoreType.html">DispatchingStoreType</a></span></code></pre>
 
                         </div>
                       </div>
@@ -247,7 +249,7 @@ Upon every state update a store informs all of its subscribers.</p>
                         
                           <a href="Protocols/StoreType.html" class="button">See more</a>
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L17-L182" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L17-L155" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -276,7 +278,7 @@ Upon every state update a store informs all of its subscribers.</p>
                         
                           <a href="Protocols/StoreSubscriber.html" class="button">See more</a>
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreSubscriber.swift#L15-L19" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreSubscriber.swift#L16-L20" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -301,7 +303,7 @@ Upon every state update a store informs all of its subscribers.</p>
                         
                           <a href="Protocols/AnyStoreSubscriber.html" class="button">See more</a>
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreSubscriber.swift#L11-L13" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreSubscriber.swift#L11-L14" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -315,7 +317,7 @@ Upon every state update a store informs all of its subscribers.</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.7.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
