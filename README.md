@@ -159,7 +159,9 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 
 # Getting Started Guide
 
-[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). It will be expanded in the next few weeks. To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://redux.js.org/).
+[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). 
+
+To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://redux.js.org/).
 
 # Installation
 
