@@ -1,6 +1,6 @@
 # 4.0.0
 
-*Work in Progress*
+*Released: 4/19/2017*
 
 **Breaking API Changes:**
 
