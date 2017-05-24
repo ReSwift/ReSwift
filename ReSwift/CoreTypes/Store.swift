@@ -23,6 +23,12 @@ open class Store<State: StateType>: StoreType {
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
     // swiftlint:enable todo
 
+    private var _previousState: State?
+    public var previousState: State? {
+        get {
+            return _previousState
+        }
+    }
     /*private (set)*/ public var state: State! {
         didSet {
             subscriptions = subscriptions.filter { $0.subscriber != nil }
@@ -122,6 +128,7 @@ open class Store<State: StateType>: StoreType {
         let newState = reducer(action, state)
         isDispatching = false
 
+        _previousState = state
         state = newState
     }
 
