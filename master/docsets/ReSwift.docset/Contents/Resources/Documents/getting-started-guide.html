@@ -253,7 +253,7 @@
     <span class="k">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="nf">initialAuthenticationState</span><span class="p">()</span>
 
     <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">SwiftFlowInit</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">_</span> <span class="k">as</span> <span class="kt">ReSwiftInit</span><span class="p">:</span>
         <span class="k">break</span>
     <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">SetOAuthURL</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">oAuthURL</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">oAuthUrl</span>
