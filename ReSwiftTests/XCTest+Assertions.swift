@@ -35,7 +35,7 @@ public extension XCTestCase {
 
                 Assertions.fatalErrorClosure = { message, _, _ in caller(message) }
 
-        }, expectedMessage: expectedMessage, testCase: testCase) { _ in
+        }, expectedMessage: expectedMessage, testCase: testCase) {
             Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
         }
     }
