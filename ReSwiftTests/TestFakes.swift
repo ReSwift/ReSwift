@@ -193,7 +193,7 @@ struct CustomEquatable: Equatable {
     var value: Int = 0
     var customEquatCount: Int = 0
 
-    static func ==(left: CustomEquatable, right: CustomEquatable) -> Bool {
+    static func == (left: CustomEquatable, right: CustomEquatable) -> Bool {
         customEquatableCount += 1
         return left.value == right.value
     }
