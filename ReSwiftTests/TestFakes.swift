@@ -186,3 +186,31 @@ class CallbackStoreSubscriber<T>: StoreSubscriber {
         handler(state)
     }
 }
+
+var customEquatableCount: Int = 0
+
+struct CustomEquatable: Equatable {
+    var value: Int = 0
+    var customEquatCount: Int = 0
+
+    static func ==(left: CustomEquatable, right: CustomEquatable) -> Bool {
+        customEquatableCount += 1
+        return left.value == right.value
+    }
+}
+
+struct TestCustomEquatableAppState: StateType {
+    var testValue: CustomEquatable = CustomEquatable()
+}
+
+func testCustomEquatableReducer(action: Action, state: TestCustomEquatableAppState?) -> TestCustomEquatableAppState {
+    var state = state ?? TestCustomEquatableAppState()
+
+    switch action {
+    case let action as SetValueAction:
+        state.testValue.value = action.value
+        return state
+    default:
+        return state
+    }
+}
