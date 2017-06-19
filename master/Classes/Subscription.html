@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (74% documented)
+         (75% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -313,7 +313,8 @@ If the selected substate is <code>Equatable</code> repeated state updates will b
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">(</span><span class="n">_</span> <span class="nv">isRepeat</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">,</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">(</span><span class="n">_</span> <span class="nv">isRepeat</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
+        <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -334,12 +335,36 @@ thus should be skipped and not forwarded to subscribers.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>oldState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s old state, before the action is reduced.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s new state, after the action has been reduced.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L96-L111" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L98-L114" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -374,7 +399,165 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L142-L144" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L145-L147" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FC7ReSwift12Subscription4skipFT4whenFTxx_Sb_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/skip(when:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift12Subscription4skipFT4whenFTxx_Sb_GS0_x_">skip(when:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a subscription that skips certain state updates of the original subscription.</p>
+
+<p>This is identical to <code>skipRepeats</code> and is provided simply for convenience.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skip</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>when</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that determines whether a given state update is a repeat and
+thus should be skipped and not forwarded to subscribers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>oldState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s old state, before the action is reduced.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s new state, after the action has been reduced.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L160-L162" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:FC7ReSwift12Subscription4onlyFT4whenFTxx_Sb_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/only(when:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift12Subscription4onlyFT4whenFTxx_Sb_GS0_x_">only(when:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a subscription that only updates for certain state changes.</p>
+
+<p>This is effectively the inverse of <code><a href="../Classes/Subscription.html#/s:FC7ReSwift12Subscription4skipFT4whenFTxx_Sb_GS0_x_">skip(when:)</a></code> / <code>skipRepeats(:)</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">only</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>when</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that determines whether a given state update should notify</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>oldState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s old state, before the action is reduced.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The store&rsquo;s new state, after the action has been reduced.
+the subscriber.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L171-L175" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
