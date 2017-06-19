@@ -1,3 +1,8 @@
+# Upcoming
+
+**Other**:
+- Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
+
 # 4.0.0
 
 *Released: 4/19/2017*

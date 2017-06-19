@@ -157,6 +157,43 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 
+    func testSkipWhen() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.substate }
+                .skip { $0.value == $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testOnlyWhen() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.substate }
+                .only { $0.value != $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
 }
 
 class TestFilteredSubscriber<T>: StoreSubscriber {
