@@ -4,9 +4,111 @@ ReSwift provides the infrastructure for `Store`s, `Action`s and `Reducer`s to en
 
 ![](img/reswift_detail.png)
 
-The following steps will describe how to set up the individual components for your ReSwift app.
+The following section will briefly describe how to set up the core components of ReSwift in your app.
 
-# State
+The section afterwards will describe the components that power ReSwift in depth.
+
+To see ReSwift in action, [have a look at the repositories on GitHub](https://github.com/ReSwift/) to download example apps and playgrounds.
+
+# General Setup and High Level Overview
+
+This section will show you how to set up the core ReSwift components in your app quickly. It is intended to provide a quick start to get the ball rolling.
+
+## High-Level Overview
+
+To get the infrastructure up and running, you need to set up a `Store` for a root app state type. The type requirement is `ReSwiftStore<State: ReSwift.StateType>`. You set it up like this:
+
+```swift
+import ReSwift
+
+struct AppState: StateType {
+    // ... app state properties here ...
+}
+
+func appReducer(action: Action, state: AppState?) -> AppState {
+    // ...
+}
+
+let store = Store(
+    reducer: appReducer, 
+    state: AppState(),   // You may also start with `nil`
+    middleware: [])      // Middlewares are optional
+```
+
+Keep the store around somewhere (for example in an `NSDocumentController`, the `AppDelegate`, or as a global variable). 
+
+The process of implementing then works like this:
+
+1. You can add **subscribers** to the store and **dispatch actions**. 
+2. The actions will be pre-processed by your **middleware**. The middleware can act on actions and pass them along, producing side effects or dispatch additional actions itself. It can also do some side effects like logging to the console and pass the action along. 
+3. Finally, if any action was passed through all middleware, it'll reach the root **reducer**, here called `appReducer` by convention. The reducer changes the **state** according to the incoming action. 
+4. The resulting state is then stored in the **store**. The store consequently propagates the new state to all **subscriptions**, reaching the **subscriber** objects if the subscription requirements are met. For example, you can notify subscribers only when the state they are interested in has changed.
+
+For reference, the store's initializer and the initializer's type requirements all together look like this:
+
+```swift
+class Store<State: StateType>: StoreType {
+    public required init(
+        reducer: @escaping Reducer<State>,
+        state: State?,
+        middleware: [Middleware<State>] = []
+    ) { ... }
+}
+```
+
+... where  `Reducer<State>` is a mere function signature alias:
+
+```swift
+typealias Reducer<ReducerStateType> =
+    (_ action: Action, _ state: ReducerStateType?) -> ReducerStateType
+```
+
+To find out more about how to implement the concrete types and satisfy their requirements, read on.
+
+To get a look at the source of these few core types that make up ReSwift, [check out the code on GitHub.](https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes)
+
+## Minimal Working Example
+
+If you want to see how you can fill in the gaps we left above, take a look at the following example:
+
+```swift
+import ReSwift
+
+struct AppState: StateType {
+    var count = 0
+}
+
+// This action does not have state and is a mere marker of "X happened":
+struct AddAction: Action { }
+
+func appReducer(action: Action, state: AppState?) -> AppState {
+    var state = state ?? AppState()
+
+    switch action {
+    case let addAction as AddAction: state.count += 1
+    default: break
+    }
+
+    return state
+}
+
+let store = Store(
+    reducer: appReducer, 
+    state: AppState(),
+    middleware: [])
+```
+
+And then this would be how you make something happen:
+
+```swift
+store.dispatch(AddAction())
+```
+
+# Components
+
+This section will show details about the various core components you've been shown in the last section. 
+
+## State
 
 The application state is defined in a single data structure which should be a struct. This struct can have other structs as members, that allows you to add different sub-states as your app grows.
 
@@ -26,11 +128,11 @@ There are multiple things to note:
 1. Your app state struct needs to conform to the `StateType` protocol, currently this is just a marker protocol.
 2. If you are including `ReSwiftRouter` in your project, your app state needs to contain a property of type `NavigationState`. This is the sub-state the router will use to store the current route.
 
-## Derived State
+### Derived State
 
 Note that you don't need to store derived state inside of your app state. E.g. instead of storing a `UIImage` you should store a image URL that can be used to fetch the image from a cache or via a download. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived.
 
-# Actions
+## Actions
 
 Actions are used to express intended state changes. Actions don't contain functions, instead they provide information about the intended state change, e.g. which user should be deleted.
 
@@ -72,7 +174,7 @@ If you want to use custom types for actions, but still want to be able to make u
 
 Once ReSwift Recorder's implementation is further along, you will find detailed information  on all of this in its documentation.
 
-# Reducers
+## Reducers
 
 Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.
 
@@ -120,7 +222,7 @@ Once the state update is complete, the reducer function returns the new state.
 
 After the `appReducer` has called all of the sub-reducer functions, we have a new application state. `ReSwift` will take care of publishing this new state to all subscribers.
 
-# Store Subscribers
+## Store Subscribers
 
 Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the `newState` method on them. Subscribers need to conform to the `StoreSubscriber` protocol:
 
@@ -132,7 +234,7 @@ protocol StoreSubscriber {
 
 Most of your `StoreSubscriber`s will be in the view layer and update their representation whenever they receive a new state.
 
-## Example With Filtered Subscriptions
+### Example With Filtered Subscriptions
 
 Ideally most of our subscribers should only be interested in a very small portion of the overall app state. `ReSwift` provides a way to subselect the relevant state for a particular subscriber at the point of subscription. Here's an example of subscribing, filtering and unsubscribing as used within a view controller:
 
@@ -167,9 +269,9 @@ When selecting a substate as part of calling the `subscribe` method, you need to
 
 When subscribing within a ViewController you will typically update the view from within the `newState` method.
 
-# Beyond the Basics
+## Beyond the Basics
 
-## Asynchronous Operations
+### Asynchronous Operations
 
 Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to `ReSwift` state update:
 
@@ -214,7 +316,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
 In the example above, we're using an `enum` to represent the different states of a single state slice that depends on a network request (e.g. loading, result available, network request failed). There are many different ways to model states of a network request but it will mostly involve using multiple dispatched actions at different stages of your network requests.
 
-## Action Creators
+### Action Creators
 
 An important aspect of adopting `ReSwift` is an improved separation of concerns. Specifically, your view layer should mostly be concerned with adopting its representation to match a new app state and for triggering `Action`s upon user interactions.
 
@@ -238,7 +340,7 @@ func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Acti
 }
 ```
 
-## Middleware
+### Middleware
 
 ReSwift supports middleware in the same way as Redux does, [you can read this great documentation on Redux middleware to get started](http://redux.js.org/docs/advanced/Middleware.html). Middleware allows developers to provide extensions that wrap the `dispatch` function.
 
