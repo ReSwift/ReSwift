@@ -138,7 +138,7 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.newStateCallCount, 2)
     }
 
-    func testSkipsStateUpdatesForEquatableStateByDefault() {
+    func testPassesOnDuplicateStateUpdatesByDefault() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
         let store = Store(reducer: reducer.handleAction, state: state)
@@ -151,7 +151,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.newStateCallCount, 2)
     }
 
     func testSkipWhen() {
