@@ -49,15 +49,15 @@ struct TestCustomAppState: StateType {
 
 struct SetValueAction: StandardActionConvertible {
 
-    let value: Int
+    let value: Int?
     static let type = "SetValueAction"
 
-    init (_ value: Int) {
+    init (_ value: Int?) {
         self.value = value
     }
 
     init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int
+        self.value = standardAction.payload!["value"] as! Int?
     }
 
     func toStandardAction() -> StandardAction {
