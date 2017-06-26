@@ -26,6 +26,10 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueAction(3))
 
         XCTAssertEqual(subscriber.receivedValue, 3)
+
+        store.dispatch(SetValueAction(nil))
+
+        XCTAssertEqual(subscriber.receivedValue, nil)
     }
 
     /**
