@@ -1,0 +1,110 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Action.swift",
+      "line": 54,
+      "symbol": "StandardAction.init(dictionary:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Action.swift",
+      "line": 62,
+      "symbol": "StandardAction.dictionaryRepresentation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/State.swift",
+      "line": 11,
+      "symbol": "StateType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 111,
+      "symbol": "Store._defaultDispatch(action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 168,
+      "symbol": "Store.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": null,
+      "symbol": "StoreSubscriber",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 11,
+      "symbol": "AnyStoreSubscriber",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 13,
+      "symbol": "AnyStoreSubscriber._newState(state:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 16,
+      "symbol": "StoreSubscriber",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 19,
+      "symbol": "StoreSubscriber.newState(state:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 24,
+      "symbol": "StoreSubscriber._newState(state:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Subscription.swift",
+      "line": 145,
+      "symbol": "Subscription.skipRepeats()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "line": 11,
+      "symbol": "Coding",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "line": 12,
+      "symbol": "Coding.init(dictionary:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "line": 13,
+      "symbol": "Coding.dictionaryRepresentation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/travis/build/ReSwift/ReSwift"
+}
