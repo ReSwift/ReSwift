@@ -63,7 +63,7 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
                 dispatch(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
-                return next(StandardAction(type: "No-Op-Action"))
+                return next(NoOpAction())
             }
 
             return next(action)
