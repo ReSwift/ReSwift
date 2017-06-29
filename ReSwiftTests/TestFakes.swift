@@ -47,7 +47,9 @@ struct TestCustomAppState: StateType {
     }
 }
 
-struct SetValueAction: StandardActionConvertible {
+struct NoOpAction: Action {}
+
+struct SetValueAction: Action {
 
     let value: Int?
     static let type = "SetValueAction"
@@ -55,19 +57,9 @@ struct SetValueAction: StandardActionConvertible {
     init (_ value: Int?) {
         self.value = value
     }
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int?
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
-                                isTypedAction: true)
-    }
-
 }
 
-struct SetValueStringAction: StandardActionConvertible {
+struct SetValueStringAction: Action {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -75,36 +67,15 @@ struct SetValueStringAction: StandardActionConvertible {
     init (_ value: String) {
         self.value = value
     }
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! String
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
-    }
-
 }
 
-struct SetCustomSubstateAction: StandardActionConvertible {
+struct SetCustomSubstateAction: Action {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
 
     init (_ value: Int) {
         self.value = value
-    }
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
     }
 }
 
