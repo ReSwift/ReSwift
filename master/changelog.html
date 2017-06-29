@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (75% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -121,12 +121,6 @@
                 <a class='nav-group-task-link' href='Actions.html#/s:P7ReSwift6Action'>Action</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/StandardAction.html'>StandardAction</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/StandardActionConvertible.html'>StandardActionConvertible</a>
-              </li>
-              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Actions.html#/s:V7ReSwift11ReSwiftInit'>ReSwiftInit</a>
               </li>
             </ul>
@@ -164,6 +158,17 @@
             
             <h1 id='changelog' class='heading'>Changelog</h1>
 <h1 id='upcoming' class='heading'>Upcoming</h1>
+
+<p><strong>Breaking API Changes:</strong></p>
+
+<ul>
+<li><p>Remove <code>StandardAction</code> and <code>StandardActionConvertible</code> (#270) - @mjarvis</p>
+
+<ul>
+<li>The existence of <code>StandardAction</code> and <code>StandardActionConvertible</code> is somewhat confusing to new users, and does not have a direct use case within the core ReSwift library. Therefore, it has been moved to <a href="https://github.com/ReSwift/ReSwift-Recorder">ReSwift-Recorder</a> where it belongs.</li>
+<li>If you&rsquo;re using <code>StandardAction</code> in your project without <code>ReSwift-Recorder</code>, you can copy the old implementation into your project as a middle ground while you migrate away from its usage.</li>
+</ul></li>
+</ul>
 
 <p><strong>Other</strong>:</p>
 

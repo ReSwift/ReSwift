@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (75% documented)
+         (74% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -119,12 +119,6 @@
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Actions.html#/s:P7ReSwift6Action'>Action</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Structs/StandardAction.html'>StandardAction</a>
-              </li>
-              <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Protocols/StandardActionConvertible.html'>StandardActionConvertible</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='Actions.html#/s:V7ReSwift11ReSwiftInit'>ReSwiftInit</a>
@@ -291,34 +285,11 @@
 
 <p>All actions in ReSwift conform to the <code>Action</code> protocol, which currently is just a marker protocol.</p>
 
-<p>You can either provide custom types as actions, or you can use the built in <code>StandardAction</code>.</p>
-
-<p>The <code>StandardAction</code> has the following structure:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">StandardAction</span><span class="p">:</span> <span class="kt">Action</span> <span class="p">{</span>
-    <span class="c1">// identifies the action</span>
-    <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span>
-    <span class="c1">// provides information that is relevant to processing this action</span>
-    <span class="c1">// e.g. details about which post should be favorited</span>
-    <span class="k">let</span> <span class="nv">payload</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?</span>
-    <span class="c1">// this flag is used for serialization when working with ReSwift Recorder</span>
-    <span class="k">let</span> <span class="nv">isTypedAction</span><span class="p">:</span> <span class="kt">Bool</span>
-<span class="p">}</span>
-</code></pre>
-
-<p><strong>For most applications it is recommended to create your own types for actions instead of using <code>StandardAction</code>, as this allows you to take advantage of Swift&rsquo;s type system</strong>.</p>
-
 <p>To provide your own action, simply create a type that conforms to the <code>Action</code> protocol:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">LikePostAction</span><span class="p">:</span> <span class="kt">Action</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">post</span><span class="p">:</span> <span class="kt">Post</span>
-    <span class="k">let</span> <span class="nv">userLikingPost</span><span class="p">:</span> <span class="kt">User</span>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">SetOAuthURL</span><span class="p">:</span> <span class="kt">Action</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">oAuthUrl</span><span class="p">:</span> <span class="kt">URL</span>
 <span class="p">}</span>
 </code></pre>
-
-<p>The advantage of using a <code>StandardAction</code> is that it can be serialized; this is required for using the features provided by <a href="https://github.com/ReSwift/ReSwift-Recorder">ReSwift Recorder</a>; such as persisting the application state between app launches.</p>
-
-<p>If you want to use custom types for actions, but still want to be able to make use of the features provided by ReSwift Recorder, you can implement the <code>StandardActionConvertible</code> protocol. This will allow ReSwift to convert your typed actions to standard actions that can then be serialized.</p>
-
-<p>Once ReSwift Recorder&rsquo;s implementation is further along, you will find detailed information  on all of this in its documentation.</p>
 <h2 id='reducers' class='heading'>Reducers</h2>
 
 <p>Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.</p>

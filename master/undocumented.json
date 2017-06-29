@@ -1,20 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Action.swift",
-      "line": 54,
-      "symbol": "StandardAction.init(dictionary:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Action.swift",
-      "line": 62,
-      "symbol": "StandardAction.dictionaryRepresentation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/State.swift",
       "line": 11,
       "symbol": "StateType",
