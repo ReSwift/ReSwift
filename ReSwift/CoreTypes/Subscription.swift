@@ -64,7 +64,7 @@ public class Subscription<State> {
     {
         return Subscription<Substate> { sink in
             self.observe { oldState, newState in
-                sink(oldState.map(selector) ?? nil, newState.map(selector) ?? nil)
+                sink(oldState.map(selector) ?? nil, selector(newState))
             }
         }
     }
@@ -90,7 +90,7 @@ public class Subscription<State> {
         return Subscription<State> { sink in
             self.observe { oldState, newState in
                 switch (oldState, newState) {
-                case let (old?, new?):
+                case let (old?, new):
                     if !isRepeat(old, new) {
                         sink(oldState, newState)
                     } else {
@@ -105,13 +105,13 @@ public class Subscription<State> {
 
     // MARK: Internals
 
-    var observer: ((State?, State?) -> Void)?
+    var observer: ((State?, State) -> Void)?
 
     init() {}
 
     /// Initializes a subscription with a sink closure. The closure provides a way to send
     /// new values over this subscription.
-    private init(sink: @escaping (@escaping (State?, State?) -> Void) -> Void) {
+    private init(sink: @escaping (@escaping (State?, State) -> Void) -> Void) {
         // Provide the caller with a closure that will forward all values
         // to observers of this subscription.
         sink { old, new in
@@ -120,13 +120,13 @@ public class Subscription<State> {
     }
 
     /// Sends new values over this subscription. Observers will be notified of these new values.
-    func newValues(oldState: State?, newState: State?) {
+    func newValues(oldState: State?, newState: State) {
         self.observer?(oldState, newState)
     }
 
     /// A caller can observe new values of this subscription through the provided closure.
     /// - Note: subscriptions only support a single observer.
-    fileprivate func observe(observer: @escaping (State?, State?) -> Void) {
+    fileprivate func observe(observer: @escaping (State?, State) -> Void) {
         self.observer = observer
     }
 }

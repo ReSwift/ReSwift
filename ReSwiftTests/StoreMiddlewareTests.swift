@@ -42,7 +42,7 @@ let dispatchingMiddleware: Middleware<StateType> = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueAction {
-                dispatch(SetValueStringAction("\(action.value)"))
+                dispatch(SetValueStringAction("\(action.value ?? 0)"))
             }
 
             return next(action)
@@ -63,7 +63,7 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
                 dispatch(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
-                return next(StandardAction(type: "No-Op-Action"))
+                return next(NoOpAction())
             }
 
             return next(action)
