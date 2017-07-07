@@ -18,10 +18,6 @@ public protocol StoreType: DispatchingStoreType {
 
     associatedtype State: StateType
 
-    /// Initializes the store with a reducer, an initial state and a list of middleware.
-    /// Middleware is applied in the order in which it is passed into this constructor.
-    init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware<State>])
-
     /// The current state stored in the store.
     var state: State! { get }
 

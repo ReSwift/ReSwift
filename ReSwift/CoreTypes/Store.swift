@@ -40,6 +40,9 @@ open class Store<State: StateType>: StoreType {
 
     private var isDispatching = false
 
+    /// Initializes the store with a reducer, an initial state and a list of middleware.
+    ///
+    /// Middleware is applied in the order in which it is passed into this constructor.
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
