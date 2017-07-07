@@ -180,7 +180,6 @@ open class Store<State: StateType>: StoreType {
     ) -> Void
 }
 
-
 // MARK: Skip Repeats for Equatable States
 
 extension Store where State: Equatable {
