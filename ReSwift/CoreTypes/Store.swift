@@ -40,14 +40,29 @@ open class Store<State: StateType>: StoreType {
 
     private var isDispatching = false
 
+    /// Indicates if new subscriptions attempt to apply `skipRepeats` 
+    /// by default.
+    let subscriptionsAutomaticallySkipRepeats: Bool
+
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     ///
     /// Middleware is applied in the order in which it is passed into this constructor.
+    ///
+    /// - parameter reducer: Main reducer that processes incomind actions.
+    /// - parameter state: Initial state, if any. Can be `nil` and will be 
+    ///   provided by the reducer in that case.
+    /// - parameter middleware: Ordered list of action pre-processors, acting 
+    ///   before the root reducer.
+    /// - parameter automaticallySkipsRepeats: If `true`, the store will attempt 
+    ///   to skip idempotent state updates when a subscriber's state type 
+    ///   implements `Equatable`. Defaults to `false`.
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware<State>] = []
+        middleware: [Middleware<State>] = [],
+        automaticallySkipsRepeats: Bool = false
     ) {
+        self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
         self.reducer = reducer
 
         // Wrap the dispatch function with all middlewares
@@ -163,4 +178,18 @@ open class Store<State: StateType>: StoreType {
         _ store: Store,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
+}
+
+
+// MARK: Skip Repeats for Equatable States
+
+extension Store where State: Equatable {
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
+            guard subscriptionsAutomaticallySkipRepeats else {
+                _ = subscribe(subscriber, transform: nil)
+                return
+            }
+            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
+    }
 }
