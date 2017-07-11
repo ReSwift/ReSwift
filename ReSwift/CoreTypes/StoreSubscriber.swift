@@ -27,3 +27,27 @@ extension StoreSubscriber {
         }
     }
 }
+
+final class AnonymousSubscriber<T>: StoreSubscriber {
+    let closure: (T) -> Void
+
+    init(closure: @escaping (T) -> Void) {
+        self.closure = closure
+    }
+
+    func newState(state: T) {
+        self.closure(state)
+    }
+}
+
+extension Store {
+
+    // Someone needs to retain `AnonymousSubscriber`; could store in a global dictionary or similar
+    // then return a unique token from this function, such that when token unregisters, anonymous wrapper is freed.
+    func subscribe(closure: @escaping (Store.State) -> Void) {
+        self.subscribe(AnonymousSubscriber(closure: closure))
+    }
+
+}
+
+

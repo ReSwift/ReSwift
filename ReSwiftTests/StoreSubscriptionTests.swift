@@ -140,6 +140,18 @@ class StoreSubscriptionTests: XCTestCase {
         XCTAssertEqual(subscriber.receivedStates[subscriber.receivedStates.count - 1].testValue, 20)
     }
 
+    func testAnonymousSubscription() {
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
+
+        store.dispatch(SetValueAction(18))
+
+        store.subscribe { state in
+            print(state)
+        }
+
+        store.dispatch(SetValueAction(42))
+    }
+
     /**
      it ignores identical subscribers
      */
