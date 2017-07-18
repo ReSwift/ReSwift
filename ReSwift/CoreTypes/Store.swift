@@ -42,7 +42,7 @@ open class Store<State: StateType>: StoreType {
 
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
-    let subscriptionsAutomaticallySkipRepeats: Bool
+    fileprivate let subscriptionsAutomaticallySkipRepeats: Bool
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     ///
