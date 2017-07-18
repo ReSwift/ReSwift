@@ -55,12 +55,12 @@ open class Store<State: StateType>: StoreType {
     ///   before the root reducer.
     /// - parameter automaticallySkipsRepeats: If `true`, the store will attempt 
     ///   to skip idempotent state updates when a subscriber's state type 
-    ///   implements `Equatable`. Defaults to `false`.
+    ///   implements `Equatable`. Defaults to `true`.
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
         middleware: [Middleware<State>] = [],
-        automaticallySkipsRepeats: Bool = false
+        automaticallySkipsRepeats: Bool = true
     ) {
         self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
         self.reducer = reducer
