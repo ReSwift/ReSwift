@@ -42,7 +42,7 @@ The process of implementing then works like this:
 1. You can add **subscribers** to the store and **dispatch actions**. 
 2. The actions will be pre-processed by your **middleware**. The middleware can act on actions and pass them along, producing side effects or dispatch additional actions itself. It can also do some side effects like logging to the console and pass the action along. 
 3. Finally, if any action was passed through all middleware, it'll reach the root **reducer**, here called `appReducer` by convention. The reducer changes the **state** according to the incoming action. 
-4. The resulting state is then stored in the **store**. The store consequently propagates the new state to all **subscriptions**, reaching the **subscriber** objects if the subscription requirements are met. For example, you can notify subscribers only when the state they are interested in has changed.
+4. The resulting state is then stored in the **store**. The store consequently propagates the new state to all **subscriptions**, reaching the **subscriber** objects if the subscription requirements are met. For example, one requirement may be to notify subscribers only when the state they are interested in has changed. This is the default `Store` setting. If you want to pass on identical states after a reducer pass, have a look at `automaticallySkipsRepeats` in the `Store`'s initializer.
 
 For reference, the store's initializer and the initializer's type requirements all together look like this:
 
@@ -244,6 +244,36 @@ In the example above we only select a single property from the overall applicati
 When selecting a substate as part of calling the `subscribe` method, you need to make sure that the argument of the `newState` method has the same type as whatever you return from the state subselection in the `subscribe` method.
 
 When subscribing within a ViewController you will typically update the view from within the `newState` method.
+
+## Example With Skipping Identical State Update
+
+By default, when you create a `Store`, it will be set up to use the `skipRepeats` subscription transformation for the selected substate if it conforms to `Equatable`. You can disable this by setting `automaticallySkipsRepeats` to `false` in the identifier. With this change, every dispatched action will trigger an update to all subscribers, even if their substate has not changed its value.
+
+You can selectively enable skipping duplicate values with `skip(when:)`:
+
+```swift
+override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    store.subscribe(self) { subcription in
+        subcription.skip(when: ==)
+    }
+}
+```
+
+If your state does not conform to `Equatable`, simply passing `==` as the predicate won't work unless you write the equality function. You can also pass a closure to do the work, giving you more control over what should be considered a change for each of your subscribers. A more complex example:
+
+```swift
+store.subscribe(self) { subcription in
+    subcription
+        // We're only interested in repositories ...
+        .select  { state in state.repositories }
+        // ... but want to always refresh the view when the state has content,
+        // for example because checking contents for equality would be 
+        // too expensive. In other words, skip if empty.
+        .skip(when: { repositories in repositories.isEmpty })
+}
+```
 
 ## Beyond the Basics
 
