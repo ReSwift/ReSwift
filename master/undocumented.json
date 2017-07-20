@@ -9,14 +9,14 @@
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 111,
+      "line": 129,
       "symbol": "Store._defaultDispatch(action:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 168,
+      "line": 186,
       "symbol": "Store.subscribe(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -65,7 +65,7 @@
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Subscription.swift",
-      "line": 145,
+      "line": 135,
       "symbol": "Subscription.skipRepeats()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

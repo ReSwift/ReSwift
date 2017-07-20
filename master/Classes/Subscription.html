@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (74% documented)
+         (72% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -237,59 +237,6 @@ reactive programming libraries.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FC7ReSwift12Subscription6selectuRd__s9EquatablerFFxqd__GS0_qd___"></a>
-                    <a name="//apple_ref/swift/Method/select(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7ReSwift12Subscription6selectuRd__s9EquatablerFFxqd__GS0_qd___">select(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Provides a subscription that selects a substate of the state of the original subscription.
-If the selected substate is <code>Equatable</code> repeated state updates will be skipped.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span>
-        <span class="n">_</span> <span class="nv">selector</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Substate</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h5>Parameters</h5>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>selector</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A closure that maps a state to a selected substate</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L86-L91" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
                     <a name="/s:FC7ReSwift12Subscription11skipRepeatsFFTxx_SbGS0_x_"></a>
                     <a name="//apple_ref/swift/Method/skipRepeats(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FC7ReSwift12Subscription11skipRepeatsFFTxx_SbGS0_x_">skipRepeats(_:)</a>
@@ -358,7 +305,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L98-L114" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L88-L104" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -393,7 +340,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L145-L147" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L135-L137" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -474,7 +421,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L160-L162" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L150-L152" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -551,7 +498,7 @@ the subscriber.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L171-L175" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L161-L165" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -565,7 +512,7 @@ the subscriber.</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.3</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

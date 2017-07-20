@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (74% documented)
+         (72% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -197,7 +197,7 @@
 <li>You can add <strong>subscribers</strong> to the store and <strong>dispatch actions</strong>.</li>
 <li>The actions will be pre-processed by your <strong>middleware</strong>. The middleware can act on actions and pass them along, producing side effects or dispatch additional actions itself. It can also do some side effects like logging to the console and pass the action along.</li>
 <li>Finally, if any action was passed through all middleware, it&rsquo;ll reach the root <strong>reducer</strong>, here called <code>appReducer</code> by convention. The reducer changes the <strong>state</strong> according to the incoming action.</li>
-<li>The resulting state is then stored in the <strong>store</strong>. The store consequently propagates the new state to all <strong>subscriptions</strong>, reaching the <strong>subscriber</strong> objects if the subscription requirements are met. For example, you can notify subscribers only when the state they are interested in has changed.</li>
+<li>The resulting state is then stored in the <strong>store</strong>. The store consequently propagates the new state to all <strong>subscriptions</strong>, reaching the <strong>subscriber</strong> objects if the subscription requirements are met. For example, one requirement may be to notify subscribers only when the state they are interested in has changed. This is the default <code>Store</code> setting. If you want to pass on identical states after a reducer pass, have a look at <code>automaticallySkipsRepeats</code> in the <code>Store</code>&lsquo;s initializer.</li>
 </ol>
 
 <p>For reference, the store&rsquo;s initializer and the initializer&rsquo;s type requirements all together look like this:</p>
@@ -377,6 +377,31 @@
 <p>When selecting a substate as part of calling the <code>subscribe</code> method, you need to make sure that the argument of the <code>newState</code> method has the same type as whatever you return from the state subselection in the <code>subscribe</code> method.</p>
 
 <p>When subscribing within a ViewController you will typically update the view from within the <code>newState</code> method.</p>
+<h2 id='example-with-skipping-identical-state-update' class='heading'>Example With Skipping Identical State Update</h2>
+
+<p>By default, when you create a <code>Store</code>, it will be set up to use the <code>skipRepeats</code> subscription transformation for the selected substate if it conforms to <code>Equatable</code>. You can disable this by setting <code>automaticallySkipsRepeats</code> to <code>false</code> in the identifier. With this change, every dispatched action will trigger an update to all subscribers, even if their substate has not changed its value.</p>
+
+<p>You can selectively enable skipping duplicate values with <code>skip(when:)</code>:</p>
+<pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="nf">viewWillAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
+
+    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">subcription</span> <span class="k">in</span>
+        <span class="n">subcription</span><span class="o">.</span><span class="nf">skip</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="o">==</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>If your state does not conform to <code>Equatable</code>, simply passing <code>==</code> as the predicate won&rsquo;t work unless you write the equality function. You can also pass a closure to do the work, giving you more control over what should be considered a change for each of your subscribers. A more complex example:</p>
+<pre class="highlight swift"><code><span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">subcription</span> <span class="k">in</span>
+    <span class="n">subcription</span>
+        <span class="c1">// We're only interested in repositories ...</span>
+        <span class="o">.</span><span class="n">select</span>  <span class="p">{</span> <span class="n">state</span> <span class="k">in</span> <span class="n">state</span><span class="o">.</span><span class="n">repositories</span> <span class="p">}</span>
+        <span class="c1">// ... but want to always refresh the view when the state has content,</span>
+        <span class="c1">// for example because checking contents for equality would be </span>
+        <span class="c1">// too expensive. In other words, skip if empty.</span>
+        <span class="o">.</span><span class="nf">skip</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="p">{</span> <span class="n">repositories</span> <span class="k">in</span> <span class="n">repositories</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">})</span>
+<span class="p">}</span>
+</code></pre>
 <h2 id='beyond-the-basics' class='heading'>Beyond the Basics</h2>
 <h3 id='asynchronous-operations' class='heading'>Asynchronous Operations</h3>
 
@@ -478,7 +503,7 @@
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.3</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

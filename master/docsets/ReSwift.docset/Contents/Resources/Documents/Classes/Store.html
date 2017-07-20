@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (74% documented)
+         (72% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -238,7 +238,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L32" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L28" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -246,9 +246,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:FP7ReSwift9StoreTypecFT7reducerFTPS_6Action_GSqwx5State__wxS2_5stateGSqwxS2__10middlewareGSaFTFPS1__T_FT_GSqwxS2___FFPS1__T_FPS1__T___x"></a>
-                    <a name="//apple_ref/swift/Method/init(reducer:state:middleware:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7ReSwift9StoreTypecFT7reducerFTPS_6Action_GSqwx5State__wxS2_5stateGSqwxS2__10middlewareGSaFTFPS1__T_FT_GSqwxS2___FFPS1__T_FPS1__T___x">init(reducer:state:middleware:)</a>
+                    <a name="/s:FC7ReSwift5StorecFT7reducerFTPS_6Action_GSqx__x5stateGSqx_10middlewareGSaFTFPS1__T_FT_GSqx__FFPS1__T_FPS1__T__25automaticallySkipsRepeatsSb_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(reducer:state:middleware:automaticallySkipsRepeats:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7ReSwift5StorecFT7reducerFTPS_6Action_GSqx__x5stateGSqx_10middlewareGSaFTFPS1__T_FT_GSqx__FFPS1__T_FPS1__T__25automaticallySkipsRepeatsSb_GS0_x_">init(reducer:state:middleware:automaticallySkipsRepeats:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -256,7 +256,10 @@ argument.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Initializes the store with a reducer, an initial state and a list of middleware.</p>
+
+<p>Middleware is applied in the order in which it is passed into this constructor.</p>
+
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
@@ -265,14 +268,74 @@ argument.</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span>
         <span class="nv">reducer</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Reducer</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span>
-        <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt">Middleware</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt">Middleware</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="nv">automaticallySkipsRepeats</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
     <span class="p">)</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reducer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Main reducer that processes incomind actions.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>state</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Initial state, if any. Can be <code>nil</code> and will be 
+provided by the reducer in that case.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>middleware</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Ordered list of action pre-processors, acting 
+before the root reducer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>automaticallySkipsRepeats</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the store will attempt 
+to skip idempotent state updates when a subscriber&rsquo;s state type 
+implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L43-L68" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L59-L86" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -322,7 +385,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L70-L73" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L88-L91" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -385,7 +448,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L75-L102" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L93-L120" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -434,7 +497,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L104-L108" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L122-L126" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -465,7 +528,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L111-L126" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L129-L144" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -514,7 +577,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L128-L130" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L146-L148" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -544,7 +607,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L132-L136" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L150-L154" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -574,7 +637,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L138-L140" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L156-L158" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -605,7 +668,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L142-L152" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L160-L170" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -640,7 +703,7 @@ argument.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L168-L171" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L186-L193" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -654,7 +717,7 @@ argument.</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.2</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.3</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
