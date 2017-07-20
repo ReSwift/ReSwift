@@ -8,6 +8,7 @@
 
 **Other**:
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
+- Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 
 # 4.0.0
 

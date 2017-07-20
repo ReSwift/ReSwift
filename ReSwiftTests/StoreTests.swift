@@ -52,15 +52,24 @@ class DeInitStore<State: StateType>: Store<State> {
         reducer: @escaping Reducer<State>,
         state: State?,
         deInitAction: (() -> Void)?) {
-            self.init(reducer: reducer, state: state, middleware: [])
+            self.init(
+                reducer: reducer,
+                state: state,
+                middleware: [],
+                automaticallySkipsRepeats: false)
             self.deInitAction = deInitAction
     }
 
     required init(
         reducer: @escaping Reducer<State>,
         state: State?,
-        middleware: [Middleware<State>]) {
-            super.init(reducer: reducer, state: state, middleware: middleware)
+        middleware: [Middleware<State>],
+        automaticallySkipsRepeats: Bool) {
+            super.init(
+                reducer: reducer,
+                state: state,
+                middleware: middleware,
+                automaticallySkipsRepeats: automaticallySkipsRepeats)
     }
 }
 

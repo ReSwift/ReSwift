@@ -80,16 +80,6 @@ public class Subscription<State> {
         return self._select(selector)
     }
 
-    /// Provides a subscription that selects a substate of the state of the original subscription.
-    /// If the selected substate is `Equatable` repeated state updates will be skipped.
-    /// - parameter selector: A closure that maps a state to a selected substate
-    public func select<Substate: Equatable>(
-        _ selector: @escaping (State) -> Substate
-        ) -> Subscription<Substate>
-    {
-        return self._select(selector).skipRepeats()
-    }
-
     /// Provides a subscription that skips certain state updates of the original subscription.
     /// - parameter isRepeat: A closure that determines whether a given state update is a repeat and
     /// thus should be skipped and not forwarded to subscribers.
