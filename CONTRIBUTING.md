@@ -122,11 +122,12 @@ cd ReSwift-gh-pages
 
 ## Pull Request Technicalities
 
-Here are some hard facts for reference:
+You're always welcome to open Pull Requests, even if the result is not quite finished or you need feedback!
 
-* You're always welcome to open Pull Requests, even if the result is not quite finished or you need feedback!
-* Run Swift Lint locally to ensure there are no code-level oddities.
+Here's a checklist for you about what makes Pull Requests to ReSwift shine:
+
+* Run [SwiftLint](https://github.com/realm/SwiftLint) locally to ensure your code-style is consistent with the rest of the codebase.
 * Keep your Pull Requests focused. Rather be opening multiple PRs than making a dozen unrelated but discussion worthy changes in a single PR.
-* Propose to merge with the `master` branch directly. We don't use any complex branching strategies.
-* As a contributor, choose the "squash & merge" strategy to merge PRs with a single commit, keeping the commit history clean. (That's an upside of focused Pull Requests: you don't lose extra information.)
+* You can propose PRs to merge with the `master` branch directly. We don't use any complex branching strategies.
 
+As a contributor, choose the "squash & merge" strategy to merge PRs with a single commit, keeping the commit history clean. (That's an upside of focused Pull Requests: you don't lose extra information.)
