@@ -125,7 +125,11 @@ open class Store<State: StateType>: StoreType {
         subscriber: AnyStoreSubscriber
         ) -> SubscriptionBox<State> {
 
-        return SubscriptionBox(originalSubscription: originalSubscription, transformedSubscription: transformedSubscription, subscriber: subscriber)
+        return SubscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {

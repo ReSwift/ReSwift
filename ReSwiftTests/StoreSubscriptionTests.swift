@@ -193,7 +193,11 @@ fileprivate class TestStore<State: StateType>: Store<State> {
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,
         subscriber: AnyStoreSubscriber) -> SubscriptionBox<State> {
-        return TestSubscriptionBox(originalSubscription: originalSubscription, transformedSubscription: transformedSubscription, subscriber: subscriber)
+        return TestSubscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
     }
 }
 
@@ -216,7 +220,7 @@ extension StoreSubscriptionTests {
 
                 store.subscribe(subscriber)
                 XCTAssertEqual(subscriber.receivedStates.count, 1)
-                let subscriptionBox: TestSubscriptionBox<TestAppState> = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
+                let subscriptionBox = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
                 subscriptionBox.didDeinit = { didDeinit = true }
 
                 store.dispatch(TracerAction())
@@ -227,10 +231,10 @@ extension StoreSubscriptionTests {
             XCTAssertEqual(store.subscriptions.count, 0)
             store.dispatch(TracerAction())
             XCTAssertEqual(subscriber.receivedStates.count, 2)
-            
+
             store = nil
         }
-        
+
         XCTAssertTrue(didDeinit)
     }
 
@@ -253,7 +257,7 @@ extension StoreSubscriptionTests {
                     $0.select({ $0.testValue })
                 })
                 XCTAssertEqual(subscriber.receivedStates.count, 1)
-                let subscriptionBox: TestSubscriptionBox<TestAppState> = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
+                let subscriptionBox = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
                 subscriptionBox.didDeinit = { didDeinit = true }
 
                 store.dispatch(TracerAction())
@@ -264,10 +268,10 @@ extension StoreSubscriptionTests {
             XCTAssertEqual(store.subscriptions.count, 0)
             store.dispatch(TracerAction())
             XCTAssertEqual(subscriber.receivedStates.count, 2)
-            
+
             store = nil
         }
-        
+
         XCTAssertTrue(didDeinit)
     }
 }
