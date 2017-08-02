@@ -39,6 +39,60 @@ class StoreSubscriptionTests: XCTestCase {
         XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 0)
     }
 
+    func testRetainCycle_OriginalSubscription() {
+        struct TracerAction: Action { }
+        class TestSubscriptionBox<S>: SubscriptionBox<S> {
+            override init<T>(
+                originalSubscription: Subscription<S>,
+                transformedSubscription: Subscription<T>?,
+                subscriber: AnyStoreSubscriber
+                ) {
+                super.init(originalSubscription: originalSubscription, transformedSubscription: transformedSubscription, subscriber: subscriber)
+            }
+            var didDeinit: (() -> Void)?
+            deinit {
+                didDeinit?()
+            }
+        }
+        class TestStore<State: StateType>: Store<State> {
+            override func subscriptionBox<T>(originalSubscription: Subscription<State>, transformedSubscription: Subscription<T>?, subscriber: AnyStoreSubscriber) -> SubscriptionBox<State> {
+                return TestSubscriptionBox(originalSubscription: originalSubscription, transformedSubscription: transformedSubscription, subscriber: subscriber)
+            }
+        }
+
+        var didDeinit = false
+
+        autoreleasepool {
+
+            store = TestStore(reducer: reducer.handleAction, state: TestAppState())
+            let subscriber: TestSubscriber = TestSubscriber()
+
+            // Preconditions
+            XCTAssertEqual(subscriber.receivedStates.count, 0)
+            XCTAssertEqual(store.subscriptions.count, 0)
+
+            autoreleasepool {
+
+                store.subscribe(subscriber)
+                XCTAssertEqual(subscriber.receivedStates.count, 1)
+                let subscriptionBox: TestSubscriptionBox<TestAppState> = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
+                subscriptionBox.didDeinit = { didDeinit = true }
+
+                store.dispatch(TracerAction())
+                XCTAssertEqual(subscriber.receivedStates.count, 2)
+                store.unsubscribe(subscriber)
+            }
+
+            XCTAssertEqual(store.subscriptions.count, 0)
+            store.dispatch(TracerAction())
+            XCTAssertEqual(subscriber.receivedStates.count, 2)
+
+            store = nil
+        }
+
+        XCTAssertTrue(didDeinit)
+    }
+
     /**
      it removes deferenced subscribers before notifying state changes
      */
