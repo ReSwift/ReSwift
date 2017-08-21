@@ -9,6 +9,7 @@
 **Other**:
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
+- Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
 
 # 4.0.0
 
