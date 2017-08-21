@@ -106,7 +106,7 @@ open class Store<State: StateType>: StoreType {
         // the subscription, e.g. in order to subselect parts of the store's state.
         let transformedSubscription = transform?(originalSubscription)
 
-        let subscriptionBox = SubscriptionBox(
+        let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
             transformedSubscription: transformedSubscription,
             subscriber: subscriber
@@ -117,6 +117,19 @@ open class Store<State: StateType>: StoreType {
         if let state = self.state {
             originalSubscription.newValues(oldState: nil, newState: state)
         }
+    }
+
+    internal func subscriptionBox<T>(
+        originalSubscription: Subscription<State>,
+        transformedSubscription: Subscription<T>?,
+        subscriber: AnyStoreSubscriber
+        ) -> SubscriptionBox<State> {
+
+        return SubscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
