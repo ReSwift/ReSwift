@@ -16,12 +16,12 @@ env:
 
 matrix:
   include:
-    - osx_image: xcode8.2
+    - osx_image: xcode8.3
       env: SCHEME="macOS"  SDK="macosx10.12"          DESTINATION="arch=x86_64"
-    - osx_image: xcode8.2
-      env: SCHEME="iOS"    SDK="iphonesimulator10.2"  DESTINATION="OS=10.1,name=iPhone 6S Plus"
-    - osx_image: xcode8.2
-      env: SCHEME="tvOS"   SDK="appletvsimulator10.1"  DESTINATION="OS=10.1,name=Apple TV 1080p"
+    - osx_image: xcode8.3
+      env: SCHEME="iOS"    SDK="iphonesimulator10.3"  DESTINATION="OS=10.3.1,name=iPhone 6S Plus"
+    - osx_image: xcode8.3
+      env: SCHEME="tvOS"   SDK="appletvsimulator10.2"  DESTINATION="OS=10.2,name=Apple TV 1080p"
 
 script:
   - set -o pipefail

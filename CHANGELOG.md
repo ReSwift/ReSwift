@@ -1,3 +1,5 @@
+- Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
+
 # 4.0.0
 
 *Work in Progress*
