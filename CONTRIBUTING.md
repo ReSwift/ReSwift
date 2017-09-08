@@ -61,7 +61,7 @@ In particular paying attention to:
 
 See [NSHipster Swift Documentation](http://nshipster.com/swift-documentation/) for a good reference on writing documentation in Swift.
 
-## Generating documentation
+### Generating documentation
 
 The documentation at `reswift.github.io/ReSwift` is generated from by combining the markdown documentation files with generated documentation using [jazzy](https://github.com/realm/jazzy).
 
@@ -120,3 +120,14 @@ cd ReSwift-gh-pages
 # Documentation is ready to be committed.
 ```
 
+## Pull Request Technicalities
+
+You're always welcome to open Pull Requests, even if the result is not quite finished or you need feedback!
+
+Here's a checklist for you about what makes Pull Requests to ReSwift shine:
+
+* Run [SwiftLint](https://github.com/realm/SwiftLint) locally to ensure your code-style is consistent with the rest of the codebase.
+* Keep your Pull Requests focused. Rather be opening multiple PRs than making a dozen unrelated but discussion worthy changes in a single PR.
+* You can propose PRs to merge with the `master` branch directly. We don't use any complex branching strategies.
+
+As a contributor, choose the "squash & merge" strategy to merge PRs with a single commit, keeping the commit history clean. (That's an upside of focused Pull Requests: you don't lose extra information.)
