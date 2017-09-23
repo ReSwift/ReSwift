@@ -218,7 +218,7 @@
 </ul>
 
 <p>See <a href="http://nshipster.com/swift-documentation/">NSHipster Swift Documentation</a> for a good reference on writing documentation in Swift.</p>
-<h2 id='generating-documentation' class='heading'>Generating documentation</h2>
+<h3 id='generating-documentation' class='heading'>Generating documentation</h3>
 
 <p>The documentation at <code>reswift.github.io/ReSwift</code> is generated from by combining the markdown documentation files with generated documentation using <a href="https://github.com/realm/jazzy">jazzy</a>.</p>
 
@@ -286,6 +286,19 @@
 ./build.sh
 <span class="c"># Documentation is ready to be committed.</span>
 </code></pre>
+<h2 id='pull-request-technicalities' class='heading'>Pull Request Technicalities</h2>
+
+<p>You&rsquo;re always welcome to open Pull Requests, even if the result is not quite finished or you need feedback!</p>
+
+<p>Here&rsquo;s a checklist for you about what makes Pull Requests to ReSwift shine:</p>
+
+<ul>
+<li>Run <a href="https://github.com/realm/SwiftLint">SwiftLint</a> locally to ensure your code-style is consistent with the rest of the codebase.</li>
+<li>Keep your Pull Requests focused. Rather be opening multiple PRs than making a dozen unrelated but discussion worthy changes in a single PR.</li>
+<li>You can propose PRs to merge with the <code>master</code> branch directly. We don&rsquo;t use any complex branching strategies.</li>
+</ul>
+
+<p>As a contributor, choose the <q>squash & merge</q> strategy to merge PRs with a single commit, keeping the commit history clean. (That&rsquo;s an upside of focused Pull Requests: you don&rsquo;t lose extra information.)</p>
 
           </div>
         </section>
