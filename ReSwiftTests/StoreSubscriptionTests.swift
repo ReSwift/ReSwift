@@ -28,7 +28,7 @@ class StoreSubscriptionTests: XCTestCase {
     /**
      It does not strongly capture an observer
      */
-    func testStrongCapture() {
+    func testDoesNotCaptureStrongly() {
         store = Store(reducer: reducer.handleAction, state: TestAppState())
         var subscriber: TestSubscriber? = TestSubscriber()
 
@@ -164,5 +164,114 @@ class StoreSubscriptionTests: XCTestCase {
         store.subscribe(subscriber) { $0 }
 
         XCTAssertEqual(store.subscriptions.count, 1)
+    }
+}
+
+// MARK: Retain Cycle Detection
+
+fileprivate struct TracerAction: Action { }
+
+fileprivate class TestSubscriptionBox<S>: SubscriptionBox<S> {
+    override init<T>(
+        originalSubscription: Subscription<S>,
+        transformedSubscription: Subscription<T>?,
+        subscriber: AnyStoreSubscriber
+        ) {
+        super.init(originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription,
+                   subscriber: subscriber)
+    }
+
+    var didDeinit: (() -> Void)?
+    deinit {
+        didDeinit?()
+    }
+}
+
+fileprivate class TestStore<State: StateType>: Store<State> {
+    override func subscriptionBox<T>(
+        originalSubscription: Subscription<State>,
+        transformedSubscription: Subscription<T>?,
+        subscriber: AnyStoreSubscriber) -> SubscriptionBox<State> {
+        return TestSubscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
+    }
+}
+
+extension StoreSubscriptionTests {
+
+    func testRetainCycle_OriginalSubscription() {
+
+        var didDeinit = false
+
+        autoreleasepool {
+
+            store = TestStore(reducer: reducer.handleAction, state: TestAppState())
+            let subscriber: TestSubscriber = TestSubscriber()
+
+            // Preconditions
+            XCTAssertEqual(subscriber.receivedStates.count, 0)
+            XCTAssertEqual(store.subscriptions.count, 0)
+
+            autoreleasepool {
+
+                store.subscribe(subscriber)
+                XCTAssertEqual(subscriber.receivedStates.count, 1)
+                let subscriptionBox = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
+                subscriptionBox.didDeinit = { didDeinit = true }
+
+                store.dispatch(TracerAction())
+                XCTAssertEqual(subscriber.receivedStates.count, 2)
+                store.unsubscribe(subscriber)
+            }
+
+            XCTAssertEqual(store.subscriptions.count, 0)
+            store.dispatch(TracerAction())
+            XCTAssertEqual(subscriber.receivedStates.count, 2)
+
+            store = nil
+        }
+
+        XCTAssertTrue(didDeinit)
+    }
+
+    func testRetainCycle_TransformedSubscription() {
+
+        var didDeinit = false
+
+        autoreleasepool {
+
+            store = TestStore(reducer: reducer.handleAction, state: TestAppState())
+            let subscriber = TestStoreSubscriber<Int?>()
+
+            // Preconditions
+            XCTAssertEqual(subscriber.receivedStates.count, 0)
+            XCTAssertEqual(store.subscriptions.count, 0)
+
+            autoreleasepool {
+
+                store.subscribe(subscriber, transform: {
+                    $0.select({ $0.testValue })
+                })
+                XCTAssertEqual(subscriber.receivedStates.count, 1)
+                let subscriptionBox = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
+                subscriptionBox.didDeinit = { didDeinit = true }
+
+                store.dispatch(TracerAction())
+                XCTAssertEqual(subscriber.receivedStates.count, 2)
+                store.unsubscribe(subscriber)
+            }
+
+            XCTAssertEqual(store.subscriptions.count, 0)
+            store.dispatch(TracerAction())
+            XCTAssertEqual(subscriber.receivedStates.count, 2)
+
+            store = nil
+        }
+
+        XCTAssertTrue(didDeinit)
     }
 }
