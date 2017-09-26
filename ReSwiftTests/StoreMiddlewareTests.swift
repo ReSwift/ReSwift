@@ -9,6 +9,17 @@
 import XCTest
 import ReSwift
 
+var thelog = ""
+let loggingMiddleware: Middlewares = .simple({ action, state in
+    if var action = action as? SetValueStringAction {
+        thelog += action.value
+    }
+    if var state = state as? TestStringAppState {
+        thelog += state.testValue
+    }
+})
+
+
 let firstMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
         return { action in
@@ -124,5 +135,23 @@ class StoreMiddlewareTests: XCTestCase {
         store.dispatch(SetValueStringAction("Action That Won't Go Through"))
 
         XCTAssertEqual(store.state.testValue, "Not OK")
+    }
+
+    /**
+     it can only print stuff out
+     */
+    func testMiddlewareCanOnlyPrint() {
+        let reducer = TestValueStringReducer()
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction,
+                                              state: TestStringAppState(),
+                                              middlewares: [loggingMiddleware, .normal(firstMiddleware)])
+
+        let subscriber = TestStoreSubscriber<TestStringAppState>()
+        store.subscribe(subscriber)
+
+        let action = SetValueStringAction("OK")
+        store.dispatch(action)
+
+        XCTAssertEqual(thelog, "OKInitial")
     }
 }
