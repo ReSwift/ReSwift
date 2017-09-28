@@ -169,9 +169,9 @@ class StoreSubscriptionTests: XCTestCase {
 
 // MARK: Retain Cycle Detection
 
-private struct TracerAction: Action { }
+fileprivate struct TracerAction: Action { }
 
-private class TestSubscriptionBox<S>: SubscriptionBox<S> {
+fileprivate class TestSubscriptionBox<S>: SubscriptionBox<S> {
     override init<T>(
         originalSubscription: Subscription<S>,
         transformedSubscription: Subscription<T>?,
@@ -188,7 +188,7 @@ private class TestSubscriptionBox<S>: SubscriptionBox<S> {
     }
 }
 
-private class TestStore<State: StateType>: Store<State> {
+fileprivate class TestStore<State: StateType>: Store<State> {
     override func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,
