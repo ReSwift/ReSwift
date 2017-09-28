@@ -110,7 +110,7 @@
             <a class='nav-group-name-link' href='State.html'>State</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='State.html#/s:P7ReSwift9StateType'>StateType</a>
+                <a class='nav-group-task-link' href='State.html#/s:7ReSwift9StateTypeP'>StateType</a>
               </li>
             </ul>
           </li>
@@ -118,10 +118,10 @@
             <a class='nav-group-name-link' href='Actions.html'>Actions</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Actions.html#/s:P7ReSwift6Action'>Action</a>
+                <a class='nav-group-task-link' href='Actions.html#/s:7ReSwift6ActionP'>Action</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Actions.html#/s:V7ReSwift11ReSwiftInit'>ReSwiftInit</a>
+                <a class='nav-group-task-link' href='Actions.html#/s:7ReSwift0aB4InitV'>ReSwiftInit</a>
               </li>
             </ul>
           </li>
@@ -156,13 +156,13 @@
         <section class='section'>
           <div class='section-content'>
             <h1>Stores</h1>
-            <p>Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the <code>newState</code> method on them. Subscribers need to conform to the <code>StoreSubscriber</code> protocol:</p>
+            <p>Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the <code>newState</code> method on them. Subscribers need to conform to the <code><a href="Protocols/StoreSubscriber.html">StoreSubscriber</a></code> protocol:</p>
 <pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">StoreSubscriber</span> <span class="p">{</span>
     <span class="kd">func</span> <span class="nf">newState</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StoreSubscriberStateType</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>Most of your <code>StoreSubscriber</code>s will be in the view layer and update their representation whenever they receive a new state.</p>
+<p>Most of your <code><a href="Protocols/StoreSubscriber.html">StoreSubscriber</a></code>s will be in the view layer and update their representation whenever they receive a new state.</p>
 
           </div>
         </section>
@@ -174,9 +174,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:C7ReSwift5Store"></a>
+                    <a name="/s:7ReSwift5StoreC"></a>
                     <a name="//apple_ref/swift/Class/Store" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C7ReSwift5Store">Store</a>
+                    <a class="token" href="#/s:7ReSwift5StoreC">Store</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -195,7 +195,7 @@ argument.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="State.html#/s:P7ReSwift9StateType">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/StoreType.html">StoreType</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="State.html#/s:7ReSwift9StateTypeP">StateType</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                         </div>
                       </div>
@@ -215,9 +215,9 @@ argument.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:P7ReSwift9StoreType"></a>
+                    <a name="/s:7ReSwift9StoreTypeP"></a>
                     <a name="//apple_ref/swift/Protocol/StoreType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P7ReSwift9StoreType">StoreType</a>
+                    <a class="token" href="#/s:7ReSwift9StoreTypeP">StoreType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -255,9 +255,9 @@ Upon every state update a store informs all of its subscribers.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:P7ReSwift15StoreSubscriber"></a>
+                    <a name="/s:7ReSwift15StoreSubscriberP"></a>
                     <a name="//apple_ref/swift/Protocol/StoreSubscriber" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P7ReSwift15StoreSubscriber">StoreSubscriber</a>
+                    <a class="token" href="#/s:7ReSwift15StoreSubscriberP">StoreSubscriber</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -280,9 +280,9 @@ Upon every state update a store informs all of its subscribers.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:P7ReSwift18AnyStoreSubscriber"></a>
+                    <a name="/s:7ReSwift18AnyStoreSubscriberP"></a>
                     <a name="//apple_ref/swift/Protocol/AnyStoreSubscriber" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P7ReSwift18AnyStoreSubscriber">AnyStoreSubscriber</a>
+                    <a class="token" href="#/s:7ReSwift18AnyStoreSubscriberP">AnyStoreSubscriber</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -311,7 +311,7 @@ Upon every state update a store informs all of its subscribers.</p>
     </div>
     <section class='footer'>
       <p>© 2016 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.3</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.8.4</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
