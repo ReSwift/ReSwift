@@ -32,12 +32,13 @@ public extension XCTestCase {
             file: file,
             line: line,
             function: { (caller: @escaping (String) -> Void) -> Void in
-
                 Assertions.fatalErrorClosure = { message, _, _ in caller(message) }
-
-        }, expectedMessage: expectedMessage, testCase: testCase) { _ in
-            Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
-        }
+        },
+            expectedMessage: expectedMessage,
+            testCase: testCase,
+            cleanUp:  {
+                Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
+        })
     }
 
     // MARK: Private Methods
