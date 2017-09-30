@@ -205,3 +205,31 @@ extension Store where State: Equatable {
             _ = subscribe(subscriber, transform: { $0.skipRepeats() })
     }
 }
+
+// MARK: Convenience SideEffectOnlyMiddleware
+
+extension Store {
+
+    public convenience init(
+        reducer: @escaping Reducer<State>,
+        state: State?,
+        middlewares: [Middlewares],
+        automaticallySkipsRepeats: Bool = true
+        ) {
+
+        let mws: [Middleware<State>] = middlewares.map {
+            switch $0 {
+            case .normal(let n):
+                return n
+            case .simple(let s):
+                return makeMiddleware(for: s)
+            }
+        }
+        
+        self.init(reducer: reducer,
+                  state: state,
+                  middleware: mws,
+                  automaticallySkipsRepeats: automaticallySkipsRepeats)
+    }
+
+}
