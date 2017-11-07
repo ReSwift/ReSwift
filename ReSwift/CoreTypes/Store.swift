@@ -204,4 +204,36 @@ extension Store where State: Equatable {
             }
             _ = subscribe(subscriber, transform: { $0.skipRepeats() })
     }
+
+    open func subscribe<SelectedState: Equatable, S: StoreSubscriber>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
+        ) where S.StoreSubscriberStateType == SelectedState
+    {
+        // If the same subscriber is already registered with the store, replace the existing
+        // subscription with the new one.
+        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
+            subscriptions.remove(at: index)
+        }
+
+        // Create a subscription for the new subscriber.
+        let originalSubscription = Subscription<State>()
+        // Call the optional transformation closure. This allows callers to modify
+        // the subscription, e.g. in order to subselect parts of the store's state.
+        var transformedSubscription = transform?(originalSubscription)
+        if subscriptionsAutomaticallySkipRepeats {
+            transformedSubscription = transformedSubscription?.skipRepeats()
+        }
+
+        let subscriptionBox = self.subscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
+
+        subscriptions.append(subscriptionBox)
+
+        if let state = self.state {
+            originalSubscription.newValues(oldState: nil, newState: state)
+        }
+    }
 }
