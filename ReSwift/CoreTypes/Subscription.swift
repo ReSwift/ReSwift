@@ -80,9 +80,9 @@ public class Subscription<State> {
         return self._select(selector)
     }
 
-    public func select<Substate: Equatable>(
+    public func select<Substate>(
         _ selector: @escaping (State) -> Substate
-        ) -> Subscription<Substate>
+        ) -> Subscription<Substate> where Substate: Equatable
     {
         return self._select(selector).skipRepeats()
     }
