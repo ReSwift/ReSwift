@@ -153,29 +153,14 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 
-    func testPassesOnDuplicateSubstateUpdatesByDefault() {
+    func testInheritsSkipEquatableActivationFromStore() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
-        let store = Store(reducer: reducer.handleAction, state: state)
-        let subscriber = TestFilteredSubscriber<String>()
-
-        store.subscription()
-            .select { $0.testValue }
-            .subscribe(subscriber)
-
-        XCTAssertEqual(subscriber.receivedValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
-
-        store.dispatch(SetValueStringAction("Initial"))
-
-        XCTAssertEqual(subscriber.receivedValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
-        }
-
-    func testSkipsStateUpdatesForEquatableStateByDefault() {
-        let reducer = TestValueStringReducer()
-        let state = TestStringAppState()
-        let store = Store(reducer: reducer.handleAction, state: state, middleware: [])
+        let store = Store(
+            reducer: reducer.handleAction,
+            state: state,
+            middleware: [],
+            automaticallySkipsEquatable: true)
         let subscriber = TestFilteredSubscriber<TestStringAppState>()
 
         store.subscription()
@@ -189,10 +174,14 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 
-    func testPassesOnDuplicateStateUpdatesInCustomizedStore() {
+    func testInheritsSkipEquatableDeactivationFromStore() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
-        let store = Store(reducer: reducer.handleAction, state: state, middleware: [], automaticallySkipsRepeats: false)
+        let store = Store(
+            reducer: reducer.handleAction,
+            state: state,
+            middleware: [],
+            automaticallySkipsEquatable: false)
         let subscriber = TestFilteredSubscriber<TestStringAppState>()
 
         store.subscription()

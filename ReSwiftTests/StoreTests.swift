@@ -37,6 +37,27 @@ class StoreTests: XCTestCase {
 
         XCTAssertEqual(deInitCount, 1)
     }
+    
+    func testDefaultInitializerSkipsEquatableStates() {
+        
+        let store = Store<CounterState>(
+            reducer: { _, _ in CounterState() },
+            state: CounterState(),
+            middleware: [])
+        
+        XCTAssertTrue(store.subscriptionsAutomaticallySkipEquatable)
+    }
+    
+    func testInitWithoutSkippingEquatableAffectsProperty() {
+        
+        let store = Store<CounterState>(
+            reducer: { _, _ in CounterState() },
+            state: CounterState(),
+            middleware: [],
+            automaticallySkipsEquatable: false)
+        
+        XCTAssertFalse(store.subscriptionsAutomaticallySkipEquatable)
+    }
 
 }
 
@@ -56,7 +77,7 @@ class DeInitStore<State: StateType>: Store<State> {
                 reducer: reducer,
                 state: state,
                 middleware: [],
-                automaticallySkipsRepeats: false)
+                automaticallySkipsEquatable: false)
             self.deInitAction = deInitAction
     }
 
@@ -64,12 +85,12 @@ class DeInitStore<State: StateType>: Store<State> {
         reducer: @escaping Reducer<State>,
         state: State?,
         middleware: [Middleware<State>],
-        automaticallySkipsRepeats: Bool) {
+        automaticallySkipsEquatable: Bool) {
             super.init(
                 reducer: reducer,
                 state: state,
                 middleware: middleware,
-                automaticallySkipsRepeats: automaticallySkipsRepeats)
+                automaticallySkipsEquatable: automaticallySkipsEquatable)
     }
 }
 

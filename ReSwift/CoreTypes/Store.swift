@@ -43,8 +43,22 @@ open class Store<State: StateType>: StoreType {
 
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
-    fileprivate let subscriptionsAutomaticallySkipRepeats: Bool
+    internal let subscriptionsAutomaticallySkipEquatable: Bool
 
+    @available(*, deprecated: 1.0, renamed: "init(reducer:state:middleware:automaticallySkipsEquatable:)")
+    public convenience init(
+        reducer: @escaping Reducer<State>,
+        state: State?,
+        middleware: [Middleware<State>] = [],
+        automaticallySkipsRepeats: Bool
+        ) {
+        self.init(
+            reducer: reducer,
+            state: state,
+            middleware: middleware,
+            automaticallySkipsEquatable: automaticallySkipsRepeats)
+    }
+    
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     ///
     /// Middleware is applied in the order in which it is passed into this constructor.
@@ -54,16 +68,16 @@ open class Store<State: StateType>: StoreType {
     ///   provided by the reducer in that case.
     /// - parameter middleware: Ordered list of action pre-processors, acting 
     ///   before the root reducer.
-    /// - parameter automaticallySkipsRepeats: If `true`, the store will attempt 
+    /// - parameter automaticallySkipsEquatable: If `true`, the store will attempt
     ///   to skip idempotent state updates when a subscriber's state type 
     ///   implements `Equatable`. Defaults to `true`.
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
         middleware: [Middleware<State>] = [],
-        automaticallySkipsRepeats: Bool = true
+        automaticallySkipsEquatable: Bool = true
     ) {
-        self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
+        self.subscriptionsAutomaticallySkipEquatable = automaticallySkipsEquatable
         self.reducer = reducer
 
         // Wrap the dispatch function with all middlewares
@@ -89,7 +103,7 @@ open class Store<State: StateType>: StoreType {
     open func subscription() -> Subscription<State> {
         let subscription = Subscription<State>(
             getState: { [weak self] in self?.state },
-            automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipRepeats
+            automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipEquatable
         )
         self.subscriptions.append(subscription)
         return subscription
