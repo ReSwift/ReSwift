@@ -30,7 +30,7 @@ public protocol StoreType: DispatchingStoreType {
     /**
      Creates a new subscription to this store.
      */
-    func subscription() -> Subscription<State>
+    func subscription() -> StateChange<State>
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer

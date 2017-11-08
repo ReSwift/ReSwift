@@ -11,25 +11,76 @@ import ReSwift
 
 class StoreSubscriberTests: XCTestCase {
 
+    func testAllowsDirectSubscription() {
+        let reducer = TestReducer()
+        let store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestStoreSubscriber<TestAppState>()
+
+        store.stateChange()
+            .subscribe(subscriber)
+
+        XCTAssertEqual(subscriber.receivedStates.count, 1)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, TestAppState().testValue)
+
+        store.dispatch(SetValueAction(1337))
+
+        XCTAssertEqual(subscriber.receivedStates.count, 2)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, 1337)
+
+        store.dispatch(SetValueAction(nil))
+
+        XCTAssertEqual(subscriber.receivedStates.count, 3)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, nil)
+    }
+
+    func testAllowsSelectRootSubscription() {
+        let reducer = TestReducer()
+        let store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestStoreSubscriber<TestAppState>()
+
+        store.stateChange()
+            .select { $0 }
+            .subscribe(subscriber)
+
+        XCTAssertEqual(subscriber.receivedStates.count, 1)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, TestAppState().testValue)
+
+        store.dispatch(SetValueAction(1337))
+
+        XCTAssertEqual(subscriber.receivedStates.count, 2)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, 1337)
+
+        store.dispatch(SetValueAction(nil))
+
+        XCTAssertEqual(subscriber.receivedStates.count, 3)
+        XCTAssertEqual(subscriber.receivedStates.last?.testValue, nil)
+    }
+
     /**
      it allows to pass a state selector closure
      */
     func testAllowsSelectorClosure() {
         let reducer = TestReducer()
         let store = Store(reducer: reducer.handleAction, state: TestAppState())
-        let subscriber = TestFilteredSubscriber<Int?>()
+        let subscriber = TestStoreSubscriber<Int?>()
 
-        store.subscription()
+        store.stateChange()
             .select { $0.testValue }
             .subscribe(subscriber)
 
+        XCTAssertEqual(subscriber.receivedStates.count, 1)
+        XCTAssertNil(subscriber.receivedStates.last)
+
         store.dispatch(SetValueAction(3))
 
-        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.receivedStates.count, 2)
+        XCTAssertEqual(subscriber.receivedStates.last ?? nil, Optional(3))
 
         store.dispatch(SetValueAction(nil))
 
-        XCTAssertEqual(subscriber.receivedValue, nil)
+        XCTAssertEqual(subscriber.receivedStates.count, 3)
+        XCTAssertNil(subscriber.receivedStates.last)
+
     }
 
     /**
@@ -236,6 +287,7 @@ class StoreSubscriberTests: XCTestCase {
     }
 }
 
+@available(*, deprecated: 1.0)
 class TestFilteredSubscriber<T>: StoreSubscriber {
     var receivedValue: T!
     var newStateCallCount = 0

@@ -17,7 +17,7 @@ import Foundation
  */
 open class Store<State: StateType>: StoreType {
 
-    typealias SubscriptionType = Subscription<State>
+    typealias StateChangeType = StateChange<State>
 
     // swiftlint:disable todo
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
@@ -26,9 +26,8 @@ open class Store<State: StateType>: StoreType {
     /*private (set)*/ public var state: State! {
         didSet {
 //            subscriptions = subscriptions.filter { $0.subscriber != nil }
-            subscriptions.forEach {
-                let notify = $0.notify ?? $0.originalNotify
-                notify(oldValue, state)
+            stateChangeStreams.forEach { stateChange in
+                stateChange.onChange(oldState: oldValue, newState: state)
             }
         }
     }
@@ -37,7 +36,7 @@ open class Store<State: StateType>: StoreType {
 
     private var reducer: Reducer<State>
 
-    var subscriptions: [SubscriptionType] = []
+    var stateChangeStreams: [StateChangeType] = []
 
     private var isDispatching = false
 
@@ -100,12 +99,22 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    open func subscription() -> Subscription<State> {
-        let subscription = Subscription<State>(
+    open func stateChange() -> StateChange<State> {
+        let stateChangeStream = StateChange<State>(
             getState: { [weak self] in self?.state },
             automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipEquatable
         )
-        self.subscriptions.append(subscription)
+        self.stateChangeStreams.append(stateChangeStream)
+        return stateChangeStream
+    }
+
+    @available(*, deprecated: 1.0, renamed: "stateChange()")
+    open func subscription() -> StateChange<State> {
+        let subscription = StateChange<State>(
+            getState: { [weak self] in self?.state },
+            automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipEquatable
+        )
+        self.stateChangeStreams.append(subscription)
         return subscription
     }
 

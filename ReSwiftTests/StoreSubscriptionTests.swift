@@ -33,10 +33,10 @@ class StoreSubscriptionTests: XCTestCase {
         var subscriber: TestSubscriber? = TestSubscriber()
 
         store.subscription().subscribe(subscriber!)
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 1)
+        XCTAssertEqual(store.stateChangeStreams.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 1)
 
         subscriber = nil
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 0)
+        XCTAssertEqual(store.stateChangeStreams.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 0)
     }
 
     /**
@@ -50,18 +50,18 @@ class StoreSubscriptionTests: XCTestCase {
         store.subscription().subscribe(subscriber1!)
         store.subscription().subscribe(subscriber2!)
         store.dispatch(SetValueAction(3))
-        XCTAssertEqual(store.subscriptions.count, 2)
+        XCTAssertEqual(store.stateChangeStreams.count, 2)
         XCTAssertEqual(subscriber1?.receivedStates.last?.testValue, 3)
         XCTAssertEqual(subscriber2?.receivedStates.last?.testValue, 3)
 
         subscriber1 = nil
         store.dispatch(SetValueAction(5))
-        XCTAssertEqual(store.subscriptions.count, 1)
+        XCTAssertEqual(store.stateChangeStreams.count, 1)
         XCTAssertEqual(subscriber2?.receivedStates.last?.testValue, 5)
 
         subscriber2 = nil
         store.dispatch(SetValueAction(8))
-        XCTAssertEqual(store.subscriptions.count, 0)
+        XCTAssertEqual(store.stateChangeStreams.count, 0)
     }
 
     /**
@@ -152,7 +152,7 @@ class StoreSubscriptionTests: XCTestCase {
         store.subscription().subscribe(subscriber)
         store.subscription().subscribe(subscriber)
 
-        XCTAssertEqual(store.subscriptions.count, 1)
+        XCTAssertEqual(store.stateChangeStreams.count, 1)
     }
 
     /**
@@ -169,7 +169,7 @@ class StoreSubscriptionTests: XCTestCase {
             .select { $0 }
             .subscribe(subscriber)
 
-        XCTAssertEqual(store.subscriptions.count, 1)
+        XCTAssertEqual(store.stateChangeStreams.count, 1)
     }
 }
 
