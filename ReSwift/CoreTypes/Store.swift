@@ -85,6 +85,30 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
+    private func _subscribe<SelectedState, S: StoreSubscriber>(
+        _ subscriber: S, original: Subscription<State>,
+        transformed: Subscription<SelectedState>?)
+        where S.StoreSubscriberStateType == SelectedState
+    {
+        // If the same subscriber is already registered with the store, replace the existing
+        // subscription with the new one.
+        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
+            subscriptions.remove(at: index)
+        }
+
+        let subscriptionBox = self.subscriptionBox(
+            originalSubscription: original,
+            transformedSubscription: transformed,
+            subscriber: subscriber
+        )
+
+        subscriptions.append(subscriptionBox)
+
+        if let state = self.state {
+            original.newValues(oldState: nil, newState: state)
+        }
+    }
+
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             _ = subscribe(subscriber, transform: nil)
@@ -94,29 +118,13 @@ open class Store<State: StateType>: StoreType {
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     {
-        // If the same subscriber is already registered with the store, replace the existing
-        // subscription with the new one.
-        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-
         // Create a subscription for the new subscriber.
         let originalSubscription = Subscription<State>()
         // Call the optional transformation closure. This allows callers to modify
         // the subscription, e.g. in order to subselect parts of the store's state.
         let transformedSubscription = transform?(originalSubscription)
 
-        let subscriptionBox = self.subscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
-        )
-
-        subscriptions.append(subscriptionBox)
-
-        if let state = self.state {
-            originalSubscription.newValues(oldState: nil, newState: state)
-        }
+        _subscribe(subscriber, original: originalSubscription, transformed: transformedSubscription)
     }
 
     internal func subscriptionBox<T>(
@@ -209,27 +217,12 @@ extension Store where State: Equatable {
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
     {
-        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-
         let originalSubscription = Subscription<State>()
 
         var transformedSubscription = transform?(originalSubscription)
         if subscriptionsAutomaticallySkipRepeats {
             transformedSubscription = transformedSubscription?.skipRepeats()
         }
-
-        let subscriptionBox = self.subscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
-        )
-
-        subscriptions.append(subscriptionBox)
-
-        if let state = self.state {
-            originalSubscription.newValues(oldState: nil, newState: state)
-        }
+        _subscribe(subscriber, original: originalSubscription, transformed: transformedSubscription)
     }
 }
