@@ -86,8 +86,8 @@ open class Store<State: StateType>: StoreType {
     }
 
     private func _subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, original: Subscription<State>,
-        transformed: Subscription<SelectedState>?)
+        _ subscriber: S, originalSubscription: Subscription<State>,
+        transformedSubscription: Subscription<SelectedState>?)
         where S.StoreSubscriberStateType == SelectedState
     {
         // If the same subscriber is already registered with the store, replace the existing
@@ -97,15 +97,15 @@ open class Store<State: StateType>: StoreType {
         }
 
         let subscriptionBox = self.subscriptionBox(
-            originalSubscription: original,
-            transformedSubscription: transformed,
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
             subscriber: subscriber
         )
 
         subscriptions.append(subscriptionBox)
 
         if let state = self.state {
-            original.newValues(oldState: nil, newState: state)
+            originalSubscription.newValues(oldState: nil, newState: state)
         }
     }
 
@@ -124,7 +124,8 @@ open class Store<State: StateType>: StoreType {
         // the subscription, e.g. in order to subselect parts of the store's state.
         let transformedSubscription = transform?(originalSubscription)
 
-        _subscribe(subscriber, original: originalSubscription, transformed: transformedSubscription)
+        _subscribe(subscriber, originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription)
     }
 
     internal func subscriptionBox<T>(
@@ -223,6 +224,7 @@ extension Store where State: Equatable {
         if subscriptionsAutomaticallySkipRepeats {
             transformedSubscription = transformedSubscription?.skipRepeats()
         }
-        _subscribe(subscriber, original: originalSubscription, transformed: transformedSubscription)
+        _subscribe(subscriber, originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription)
     }
 }
