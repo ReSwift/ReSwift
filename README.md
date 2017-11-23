@@ -102,11 +102,11 @@ class CounterViewController: UIViewController, StoreSubscriber {
 
     @IBOutlet var counterLabel: UILabel!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         mainStore.subscribe(self)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         mainStore.unsubscribe(self)
     }
 
