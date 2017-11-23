@@ -114,13 +114,13 @@ class CounterViewController: UIViewController, StoreSubscriber {
         counterLabel.text = "\(state.counter)"
     }
 
-    @IBAction func increaseButtonTapped(sender: UIButton) {
+    @IBAction func increaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionIncrease()
         )
     }
 
-    @IBAction func decreaseButtonTapped(sender: UIButton) {
+    @IBAction func decreaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionDecrease()
         )
