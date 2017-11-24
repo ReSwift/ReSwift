@@ -102,11 +102,11 @@ class CounterViewController: UIViewController, StoreSubscriber {
 
     @IBOutlet var counterLabel: UILabel!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         mainStore.subscribe(self)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         mainStore.unsubscribe(self)
     }
 
@@ -114,13 +114,13 @@ class CounterViewController: UIViewController, StoreSubscriber {
         counterLabel.text = "\(state.counter)"
     }
 
-    @IBAction func increaseButtonTapped(sender: UIButton) {
+    @IBAction func increaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionIncrease()
         )
     }
 
-    @IBAction func decreaseButtonTapped(sender: UIButton) {
+    @IBAction func decreaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionDecrease()
         )
