@@ -19,9 +19,8 @@ class StoreSubscriberTests: XCTestCase {
         let store = Store(reducer: reducer.handleAction, state: TestAppState())
         let subscriber = TestFilteredSubscriber<Int?>()
 
-        store.subscribe(subscriber) {
-            $0.select { $0.testValue }
-        }
+        store.select { $0.testValue }
+            .subscribe(subscriber)
 
         store.dispatch(SetValueAction(3))
 
@@ -64,13 +63,9 @@ class StoreSubscriberTests: XCTestCase {
         let store = Store(reducer: reducer.handleAction, state: state)
         let subscriber = TestFilteredSubscriber<Int?>()
 
-        store.subscribe(subscriber) {
-            $0.select {
-                $0.testValue
-            }.skipRepeats {
-                return $0 == $1
-            }
-        }
+        store.select { $0.testValue }
+            .skip { $0 == $1 }
+            .subscribe(subscriber)
 
         XCTAssertEqual(subscriber.receivedValue, 3)
 

@@ -85,6 +85,49 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
+    public struct FilteredSubscription<State: StateType, SelectedState> {
+        private let transform: (State) -> SelectedState
+        private let skipWhen: ((SelectedState, SelectedState) -> Bool)?
+        private weak var store: Store<State>?
+
+        fileprivate init(transform: @escaping (State) -> SelectedState, store: Store<State>) {
+            self.transform = transform
+            self.store = store
+            self.skipWhen = nil
+        }
+
+        private init(
+            transform: @escaping (State) -> SelectedState,
+            store: Store<State>?,
+            skipWhen: ((SelectedState, SelectedState) -> Bool)? = nil) {
+            self.transform = transform
+            self.store = store
+            self.skipWhen = skipWhen
+        }
+
+        public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == SelectedState {
+            if let skipWhen = skipWhen {
+                store?.subscribe(subscriber) { $0.select(self.transform).skip(when: skipWhen) }
+            } else {
+                store?.subscribe(subscriber) { $0.select(self.transform) }
+            }
+        }
+
+        public func skip(when: @escaping (_ oldState: SelectedState, _ newState: SelectedState) -> Bool)
+            -> FilteredSubscription<State, SelectedState> {
+                return FilteredSubscription(
+                    transform: transform,
+                    store: store,
+                    skipWhen: when
+                )
+        }
+    }
+
+    open func select<SelectedState>(
+        _ transform: @escaping (State) -> SelectedState) -> FilteredSubscription<State, SelectedState> {
+        return FilteredSubscription(transform: transform, store: self)
+    }
+
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             _ = subscribe(subscriber, transform: nil)
