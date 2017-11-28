@@ -10,6 +10,7 @@
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
+- Fix bug where using skipRepeats with optional substate would not notify when the substate became nil [#55655](https://github.com/ReSwift/ReSwift/commit/55655098889ccb9adb716403544926dea8e79682) - @Ben-G
 
 # 4.0.0
 
