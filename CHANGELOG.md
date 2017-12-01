@@ -1,3 +1,10 @@
+# 4.0.1
+
+**Other:**
+
+- Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
+- Fix bug where using skipRepeats with optional substate would not notify when the substate became nil #55655 - @Ben-G
+
 # 4.0.0
 
 *Released: 4/19/2017*
