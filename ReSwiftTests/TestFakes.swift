@@ -39,7 +39,7 @@ struct TestNonEquatable: StateType {
     }
 }
 
-struct NonEquatable: StateType {
+struct NonEquatable {
     var testValue: String
 
     init() {
