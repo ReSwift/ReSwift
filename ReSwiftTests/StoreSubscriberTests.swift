@@ -82,6 +82,9 @@ class StoreSubscriberTests: XCTestCase {
 
     // TODO: Add tests for splitting after `select`, `skip`, and `only`
 
+    // TODO: Add test for subscribing and splitting (I dont think this works right now)
+    // eg: `let sub = subscription(); sub.subscribe(subscriber); sub.select({ $0.xyz }).subscribe(otherSubscriber)
+
     /**
      it does not notify subscriber for unchanged substate state when using `skipRepeats`.
      */
