@@ -31,6 +31,22 @@ extension TestStringAppState: Equatable {
     }
 }
 
+struct TestNonEquatable: StateType {
+    var testValue: NonEquatable
+
+    init() {
+        testValue = NonEquatable()
+    }
+}
+
+struct NonEquatable {
+    var testValue: String
+
+    init() {
+        testValue = "Initial"
+    }
+}
+
 struct TestCustomAppState: StateType {
     var substate: TestCustomSubstate
 
@@ -79,6 +95,15 @@ struct SetCustomSubstateAction: Action {
     }
 }
 
+struct SetNonEquatableAction: Action {
+    var value: NonEquatable
+    static let type = "SetNonEquatableAction"
+
+    init (_ value: NonEquatable) {
+        self.value = value
+    }
+}
+
 struct TestReducer {
     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
@@ -114,6 +139,21 @@ struct TestCustomAppStateReducer {
         switch action {
         case let action as SetCustomSubstateAction:
             state.substate.value = action.value
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+struct TestNonEquatableReducer {
+    func handleAction(action: Action, state: TestNonEquatable?) ->
+        TestNonEquatable {
+        var state = state ?? TestNonEquatable()
+
+        switch action {
+        case let action as SetNonEquatableAction:
+            state.testValue = action.value
             return state
         default:
             return state
