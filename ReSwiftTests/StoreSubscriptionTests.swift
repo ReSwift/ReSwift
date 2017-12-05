@@ -33,10 +33,10 @@ class StoreSubscriptionTests: XCTestCase {
         var subscriber: TestSubscriber? = TestSubscriber()
 
         store.subscription().subscribe(subscriber!)
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 1)
+        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 1)
 
         subscriber = nil
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 0)
+        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscribers.flatMap { $0.subscriber } }).count, 0)
     }
 
     /**

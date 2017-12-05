@@ -16,14 +16,16 @@ public class Subscription<State> {
 
     private var _initialState: State?
     private let automaticallySkipsEquatable: Bool
-    weak var subscriber: AnyStoreSubscriber?
+    var subscribers: [WeakSubscriberBox] = []
 
     private(set) lazy var notify: (State, State) -> Void = { [unowned self] oldState, newState in
-        self.subscriber?._newState(
-            oldState: oldState,
-            state: newState,
-            automaticallySkipsEquatable: self.automaticallySkipsEquatable
-        )
+        self.subscribers.forEach {
+            $0.subscriber?._newState(
+                oldState: oldState,
+                state: newState,
+                automaticallySkipsEquatable: self.automaticallySkipsEquatable
+            )
+        }
     }
 
     init(initialState: State, automaticallySkipsEquatable: Bool) {
@@ -84,9 +86,12 @@ public class Subscription<State> {
     }
 
     public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State {
-        assert(self.subscriber == nil, "Subscriptions do not support multiple subscribers")
-        self.subscriber = subscriber
+        self.subscribers.append(WeakSubscriberBox(subscriber: subscriber))
         subscriber._initialState(state: initialState())
         _initialState = nil
     }
+}
+
+struct WeakSubscriberBox {
+    weak var subscriber: AnyStoreSubscriber?
 }

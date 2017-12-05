@@ -95,9 +95,9 @@ open class Store<State: StateType>: StoreType {
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
-        if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
+//        if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
+//            subscriptions.remove(at: index)
+//        }
     }
 
     // swiftlint:disable:next identifier_name
