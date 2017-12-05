@@ -90,5 +90,3 @@ public class Subscription<State> {
         _initialState = nil
     }
 }
-
-
