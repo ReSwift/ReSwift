@@ -17,7 +17,7 @@ import Foundation
  */
 open class Store<State: StateType>: StoreType {
 
-    typealias SubscriptionType = SubscriptionBox<State>
+    typealias SubscriptionType = Subscription<State>
 
     // swiftlint:disable todo
     // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
@@ -25,9 +25,9 @@ open class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
-            subscriptions = subscriptions.filter { $0.subscriber != nil }
+//            subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
-                $0.newValues(oldState: oldValue, newState: state)
+                $0.notify(oldValue, state)
             }
         }
     }
@@ -85,94 +85,13 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    public struct FilteredSubscription<State: StateType, SelectedState> {
-        private let transform: (State) -> SelectedState
-        private let skipWhen: ((SelectedState, SelectedState) -> Bool)?
-        private weak var store: Store<State>?
-
-        fileprivate init(transform: @escaping (State) -> SelectedState, store: Store<State>) {
-            self.transform = transform
-            self.store = store
-            self.skipWhen = nil
-        }
-
-        private init(
-            transform: @escaping (State) -> SelectedState,
-            store: Store<State>?,
-            skipWhen: ((SelectedState, SelectedState) -> Bool)? = nil) {
-            self.transform = transform
-            self.store = store
-            self.skipWhen = skipWhen
-        }
-
-        public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == SelectedState {
-            if let skipWhen = skipWhen {
-                store?.subscribe(subscriber) { $0.select(self.transform).skip(when: skipWhen) }
-            } else {
-                store?.subscribe(subscriber) { $0.select(self.transform) }
-            }
-        }
-
-        public func skip(when: @escaping (_ oldState: SelectedState, _ newState: SelectedState) -> Bool)
-            -> FilteredSubscription<State, SelectedState> {
-                return FilteredSubscription(
-                    transform: transform,
-                    store: store,
-                    skipWhen: when
-                )
-        }
-    }
-
-    open func select<SelectedState>(
-        _ transform: @escaping (State) -> SelectedState) -> FilteredSubscription<State, SelectedState> {
-        return FilteredSubscription(transform: transform, store: self)
-    }
-
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            _ = subscribe(subscriber, transform: nil)
-    }
-
-    open func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-    {
-        // If the same subscriber is already registered with the store, replace the existing
-        // subscription with the new one.
-        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-
-        // Create a subscription for the new subscriber.
-        let originalSubscription = Subscription<State>()
-        // Call the optional transformation closure. This allows callers to modify
-        // the subscription, e.g. in order to subselect parts of the store's state.
-        let transformedSubscription = transform?(originalSubscription)
-
-        let subscriptionBox = self.subscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
+    open func subscription() -> Subscription<State> {
+        let subscription = Subscription<State>(
+            initialState: self.state,
+            automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipRepeats
         )
-
-        subscriptions.append(subscriptionBox)
-
-        if let state = self.state {
-            originalSubscription.newValues(oldState: nil, newState: state)
-        }
-    }
-
-    internal func subscriptionBox<T>(
-        originalSubscription: Subscription<State>,
-        transformedSubscription: Subscription<T>?,
-        subscriber: AnyStoreSubscriber
-        ) -> SubscriptionBox<State> {
-
-        return SubscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
-        )
+        self.subscriptions.append(subscription)
+        return subscription
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
@@ -234,17 +153,4 @@ open class Store<State: StateType>: StoreType {
         _ store: Store,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
-}
-
-// MARK: Skip Repeats for Equatable States
-
-extension Store where State: Equatable {
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            guard subscriptionsAutomaticallySkipRepeats else {
-                _ = subscribe(subscriber, transform: nil)
-                return
-            }
-            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
-    }
 }

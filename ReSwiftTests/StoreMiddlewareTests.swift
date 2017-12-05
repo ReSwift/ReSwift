@@ -84,7 +84,7 @@ class StoreMiddlewareTests: XCTestCase {
             middleware: [firstMiddleware, secondMiddleware])
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
-        store.subscribe(subscriber)
+        store.subscription().subscribe(subscriber)
 
         let action = SetValueStringAction("OK")
         store.dispatch(action)
@@ -102,7 +102,7 @@ class StoreMiddlewareTests: XCTestCase {
             middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
-        store.subscribe(subscriber)
+        store.subscription().subscribe(subscriber)
 
         let action = SetValueAction(10)
         store.dispatch(action)
