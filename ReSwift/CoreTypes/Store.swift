@@ -87,7 +87,7 @@ open class Store<State: StateType>: StoreType {
 
     open func subscription() -> Subscription<State> {
         let subscription = Subscription<State>(
-            initialState: self.state,
+            getState: { [weak self] in self?.state },
             automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipRepeats
         )
         self.subscriptions.append(subscription)

@@ -14,7 +14,7 @@ import Foundation
 /// reactive programming libraries.
 public class Subscription<State> {
 
-    private var _initialState: State?
+    private var getState: () -> State?
     private let automaticallySkipsEquatable: Bool
     var subscribers: [WeakSubscriberBox] = []
 
@@ -28,27 +28,15 @@ public class Subscription<State> {
         }
     }
 
-    init(initialState: State, automaticallySkipsEquatable: Bool) {
-        _initialState = initialState
+    init(getState: @escaping () -> State?, automaticallySkipsEquatable: Bool) {
+        self.getState = getState
         self.automaticallySkipsEquatable = automaticallySkipsEquatable
     }
 
-    private func initialState() -> State {
-        guard let initialState = _initialState else {
-            // swiftlint:disable:next line_length
-            fatalError("Subscription requires initial state, this subscription may not have been created from a store, or it has been transformed, and cannot be subscribed to. (Subscribe to the transformed subscription instead.)")
-        }
-
-        // We've now used the initial state to notify, or to pass on to a transformed subscription
-        // So now we nil it out to preserve memory. Accessing this again is a programming error.
-        _initialState = nil
-
-        return initialState
-    }
-
     public func select<SelectedState>(_ selector: @escaping (State) -> SelectedState) -> Subscription<SelectedState> {
+        let getState = self.getState // copy the closure so we're not referencing self
         let subscription = Subscription<SelectedState>(
-            initialState: selector(self.initialState()),
+            getState: { getState().map(selector) },
             automaticallySkipsEquatable: automaticallySkipsEquatable
         )
         notify = { oldState, newState in
@@ -61,7 +49,7 @@ public class Subscription<State> {
 
     public func skip(when skip: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
         let subscription = Subscription<State>(
-            initialState: self.initialState(),
+            getState: self.getState,
             automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
         )
         notify = { oldState, newState in
@@ -74,7 +62,7 @@ public class Subscription<State> {
 
     public func only(when only: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
         let subscription = Subscription<State>(
-            initialState: self.initialState(),
+            getState: self.getState,
             automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
         )
         notify = { oldState, newState in
@@ -87,8 +75,7 @@ public class Subscription<State> {
 
     public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State {
         self.subscribers.append(WeakSubscriberBox(subscriber: subscriber))
-        subscriber._initialState(state: initialState())
-        _initialState = nil
+        subscriber._initialState(state: self.getState() as Any)
     }
 }
 
