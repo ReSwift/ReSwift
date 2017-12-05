@@ -83,6 +83,7 @@
 		73F39F381D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
 		73F39F391D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
 		73F39F3A1D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
+		759801931FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */; };
 		81BCBECE1C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBECF1C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBED01C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
@@ -160,6 +161,7 @@
 		73E545D91D22BCD600D114E8 /* XCTest+Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Assertions.swift"; sourceTree = "<group>"; };
 		73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDispatchTests.swift; sourceTree = "<group>"; };
 		73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSubscriptionTests.swift; sourceTree = "<group>"; };
+		759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticallySkipRepeatsTests.swift; sourceTree = "<group>"; };
 		81BCBECD1C63167A00AA4F03 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.debug.xcconfig"; sourceTree = "<group>"; };
 		B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLintIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +303,7 @@
 				621C068B1C278BEF008029AE /* TypeHelperTests.swift */,
 				73E545D91D22BCD600D114E8 /* XCTest+Assertions.swift */,
 				73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */,
+				759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */,
 			);
 			path = ReSwiftTests;
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 				73F39F381D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */,
+				759801931FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

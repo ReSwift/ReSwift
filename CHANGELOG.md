@@ -4,6 +4,7 @@
 
 - Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
 - Fix bug where using skipRepeats with optional substate would not notify when the substate became nil #55655 - @Ben-G
+- Add automatic skipRepeats for Equatable substate selection (#300) - @JoeCherry
 
 # 4.0.0
 

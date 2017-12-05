@@ -67,26 +67,16 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            _ = subscribe(subscriber, transform: nil)
-    }
-
-    open func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+    fileprivate func _subscribe<SelectedState, S: StoreSubscriber>(
+        _ subscriber: S, originalSubscription: Subscription<State>,
+        transformedSubscription: Subscription<SelectedState>?)
+        where S.StoreSubscriberStateType == SelectedState
     {
         // If the same subscriber is already registered with the store, replace the existing
         // subscription with the new one.
         if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
         }
-
-        // Create a subscription for the new subscriber.
-        let originalSubscription = Subscription<State>()
-        // Call the optional transformation closure. This allows callers to modify
-        // the subscription, e.g. in order to subselect parts of the store's state.
-        let transformedSubscription = transform?(originalSubscription)
 
         let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
@@ -99,6 +89,25 @@ open class Store<State: StateType>: StoreType {
         if let state = self.state {
             originalSubscription.newValues(oldState: nil, newState: state)
         }
+    }
+
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
+            _ = subscribe(subscriber, transform: nil)
+    }
+
+    open func subscribe<SelectedState, S: StoreSubscriber>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState
+    {
+        // Create a subscription for the new subscriber.
+        let originalSubscription = Subscription<State>()
+        // Call the optional transformation closure. This allows callers to modify
+        // the subscription, e.g. in order to subselect parts of the store's state.
+        let transformedSubscription = transform?(originalSubscription)
+
+        _subscribe(subscriber, originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription)
     }
 
     internal func subscriptionBox<T>(
@@ -181,5 +190,19 @@ extension Store where State: Equatable {
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             _ = subscribe(subscriber, transform: { $0.skipRepeats() })
+    }
+
+    open func subscribe<SelectedState: Equatable, S: StoreSubscriber>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
+        ) where S.StoreSubscriberStateType == SelectedState
+    {
+        let originalSubscription = Subscription<State>()
+
+        var transformedSubscription = transform?(originalSubscription)
+        transformedSubscription = transformedSubscription?.skipRepeats()
+
+        _subscribe(subscriber,
+                   originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription)
     }
 }
