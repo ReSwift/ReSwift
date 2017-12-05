@@ -28,28 +28,9 @@ public protocol StoreType: DispatchingStoreType {
     var dispatchFunction: DispatchFunction! { get }
 
     /**
-     Subscribes the provided subscriber to this store.
-     Subscribers will receive a call to `newState` whenever the
-     state in this store changes.
-
-     - parameter subscriber: Subscriber that will receive store updates
+     Creates a new subscription to this store.
      */
-    func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
-
-    /**
-     Subscribes the provided subscriber to this store.
-     Subscribers will receive a call to `newState` whenever the
-     state in this store changes and the subscription decides to forward
-     state update.
-
-     - parameter subscriber: Subscriber that will receive store updates
-     - parameter transform: A closure that receives a simple subscription and can return a
-       transformed subscription. Subscriptions can be transformed to only select a subset of the
-       state, or to skip certain state updates.
-     */
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+    func subscription() -> Subscription<State>
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer

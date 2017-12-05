@@ -73,7 +73,7 @@ class StoreDispatchTests: XCTestCase {
             }
         }
 
-        store.subscribe(subscriber)
+        store.subscription().subscribe(subscriber)
         store.dispatch(asyncActionCreator)
         waitForFutureExpectations(withTimeout: 1) { error in
             if let error = error {
