@@ -84,7 +84,7 @@ public class Subscription<State> {
     }
 
     public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State {
-        assert(self.subscriber == nil, "Subscriptions do not support multiple subscribers")
+        precondition(self.subscriber == nil, "Subscriptions do not support multiple subscribers")
         self.subscriber = subscriber
         subscriber._initialState(state: initialState())
         _initialState = nil
