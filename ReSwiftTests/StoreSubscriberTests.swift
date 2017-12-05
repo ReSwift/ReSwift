@@ -56,6 +56,33 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     /**
+     it supports splitting the subscriber into multiple state selector closures
+     */
+    func testSplittingStateSelector() {
+        let reducer = TestComplexAppStateReducer()
+        let store = Store(reducer: reducer.handleAction, state: TestComplexAppState())
+        let firstSubscriber = TestFilteredSubscriber<Int?>()
+
+        let subscription = store.subscription()
+        subscription.select { $0.testValue }
+            .subscribe(firstSubscriber)
+
+        let secondSubscriber = TestFilteredSubscriber<String?>()
+        subscription.select { $0.otherState?.name }
+            .subscribe(secondSubscriber)
+
+        store.dispatch(SetValueAction(5))
+        store.dispatch(SetOtherStateAction(
+            otherState: OtherState(name: "TestName", age: 99)
+        ))
+
+        XCTAssertEqual(firstSubscriber.receivedValue, 5)
+        XCTAssertEqual(secondSubscriber.receivedValue, "TestName")
+    }
+
+    // TODO: Add tests for splitting after `select`, `skip`, and `only`
+
+    /**
      it does not notify subscriber for unchanged substate state when using `skipRepeats`.
      */
     func testUnchangedStateSelector() {

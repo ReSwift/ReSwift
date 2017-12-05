@@ -18,7 +18,14 @@ public class Subscription<State> {
     private let automaticallySkipsEquatable: Bool
     var subscribers: [WeakSubscriberBox] = []
 
-    private(set) lazy var notify: (State, State) -> Void = { [unowned self] oldState, newState in
+    private(set) var notify: ((State, State) -> Void)?
+
+    init(getState: @escaping () -> State?, automaticallySkipsEquatable: Bool) {
+        self.getState = getState
+        self.automaticallySkipsEquatable = automaticallySkipsEquatable
+    }
+
+    private(set) lazy var originalNotify: (State, State) -> Void = { [unowned self] oldState, newState in
         self.subscribers.forEach {
             $0.subscriber?._newState(
                 oldState: oldState,
@@ -28,21 +35,20 @@ public class Subscription<State> {
         }
     }
 
-    init(getState: @escaping () -> State?, automaticallySkipsEquatable: Bool) {
-        self.getState = getState
-        self.automaticallySkipsEquatable = automaticallySkipsEquatable
-    }
-
     public func select<SelectedState>(_ selector: @escaping (State) -> SelectedState) -> Subscription<SelectedState> {
         let getState = self.getState // copy the closure so we're not referencing self
         let subscription = Subscription<SelectedState>(
             getState: { getState().map(selector) },
             automaticallySkipsEquatable: automaticallySkipsEquatable
         )
+        let previousNotify = notify // Capture the existing notify function to allow splitting
         notify = { oldState, newState in
+            previousNotify?(oldState, newState) // Split the chain if necessary
+
             let newSelected = selector(newState)
             let oldSelected = selector(oldState)
-            subscription.notify(oldSelected, newSelected)
+            let notify = subscription.notify ?? subscription.originalNotify
+            notify(oldSelected, newSelected)
         }
         return subscription
     }
@@ -52,9 +58,13 @@ public class Subscription<State> {
             getState: self.getState,
             automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
         )
+        let previousNotify = notify // Capture the existing notify function to allow splitting
         notify = { oldState, newState in
+            previousNotify?(oldState, newState) // Split the chain if necessary
+
             if !skip(oldState, newState) {
-                subscription.notify(oldState, newState)
+                let notify = subscription.notify ?? subscription.originalNotify
+                notify(oldState, newState)
             }
         }
         return subscription
@@ -65,9 +75,13 @@ public class Subscription<State> {
             getState: self.getState,
             automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
         )
+        let previousNotify = notify // Capture the existing notify function to allow splitting
         notify = { oldState, newState in
+            previousNotify?(oldState, newState) // Split the chain if necessary
+
             if only(oldState, newState) {
-                subscription.notify(oldState, newState)
+                let notify = subscription.notify ?? subscription.originalNotify
+                notify(oldState, newState)
             }
         }
         return subscription

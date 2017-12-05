@@ -27,7 +27,8 @@ open class Store<State: StateType>: StoreType {
         didSet {
 //            subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
-                $0.notify(oldValue, state)
+                let notify = $0.notify ?? $0.originalNotify
+                notify(oldValue, state)
             }
         }
     }
