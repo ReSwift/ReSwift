@@ -10,6 +10,7 @@
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Fix retain cycle in SubscriptionBox (#278) - @mjarvis, @DivineDominion
+- Add automatic skipRepeats for Equatable substate selection (#300) - @JoeCherry
 
 # 4.0.0
 
