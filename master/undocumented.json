@@ -9,15 +9,22 @@
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 142,
+      "line": 151,
       "symbol": "Store._defaultDispatch(action:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 199,
+      "line": 208,
       "symbol": "Store.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 217,
+      "symbol": "Store.subscribe(_:transform:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
