@@ -14,7 +14,7 @@ import Foundation
  Stores receive actions and use reducers combined with these actions, to calculate state changes.
  Upon every state update a store informs all of its subscribers.
  */
-public protocol StoreType: DispatchingStoreType {
+public protocol StoreType: class, DispatchingStoreType {
 
     associatedtype State: StateType
 
@@ -30,7 +30,9 @@ public protocol StoreType: DispatchingStoreType {
     /**
      Creates a new subscription to this store.
      */
-    func subscription() -> Subscription<State>
+    func subscription() -> PendingSubscription<Self, State>
+
+    func addSubscription(_ subscription: Subscription<State>)
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer

@@ -21,57 +21,57 @@ class StoreTests: XCTestCase {
         XCTAssert(reducer.calledWithAction[0] is ReSwiftInit)
     }
 
-    /**
-     it deinitializes when no reference is held
-     */
-    func testDeinit() {
-        var deInitCount = 0
-
-        autoreleasepool {
-            let reducer = TestReducer()
-            _ = DeInitStore(
-                reducer: reducer.handleAction,
-                state: TestAppState(),
-                deInitAction: { deInitCount += 1 })
-        }
-
-        XCTAssertEqual(deInitCount, 1)
-    }
+//    /**
+//     it deinitializes when no reference is held
+//     */
+//    func testDeinit() {
+//        var deInitCount = 0
+//
+//        autoreleasepool {
+//            let reducer = TestReducer()
+//            _ = DeInitStore(
+//                reducer: reducer.handleAction,
+//                state: TestAppState(),
+//                deInitAction: { deInitCount += 1 })
+//        }
+//
+//        XCTAssertEqual(deInitCount, 1)
+//    }
 
 }
 
 // Used for deinitialization test
-class DeInitStore<State: StateType>: Store<State> {
-    var deInitAction: (() -> Void)?
-
-    deinit {
-        deInitAction?()
-    }
-
-    required convenience init(
-        reducer: @escaping Reducer<State>,
-        state: State?,
-        deInitAction: (() -> Void)?) {
-            self.init(
-                reducer: reducer,
-                state: state,
-                middleware: [],
-                automaticallySkipsRepeats: false)
-            self.deInitAction = deInitAction
-    }
-
-    required init(
-        reducer: @escaping Reducer<State>,
-        state: State?,
-        middleware: [Middleware<State>],
-        automaticallySkipsRepeats: Bool) {
-            super.init(
-                reducer: reducer,
-                state: state,
-                middleware: middleware,
-                automaticallySkipsRepeats: automaticallySkipsRepeats)
-    }
-}
+//class DeInitStore<State: StateType>: Store<State> {
+//    var deInitAction: (() -> Void)?
+//
+//    deinit {
+//        deInitAction?()
+//    }
+//
+//    required convenience init(
+//        reducer: @escaping Reducer<State>,
+//        state: State?,
+//        deInitAction: (() -> Void)?) {
+//            self.init(
+//                reducer: reducer,
+//                state: state,
+//                middleware: [],
+//                automaticallySkipsRepeats: false)
+//            self.deInitAction = deInitAction
+//    }
+//
+//    required init(
+//        reducer: @escaping Reducer<State>,
+//        state: State?,
+//        middleware: [Middleware<State>],
+//        automaticallySkipsRepeats: Bool) {
+//            super.init(
+//                reducer: reducer,
+//                state: state,
+//                middleware: middleware,
+//                automaticallySkipsRepeats: automaticallySkipsRepeats)
+//    }
+//}
 
 struct CounterState: StateType {
     var count: Int = 0

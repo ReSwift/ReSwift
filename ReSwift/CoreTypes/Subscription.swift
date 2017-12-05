@@ -8,87 +8,114 @@
 
 import Foundation
 
-/// Represents a subscription of a subscriber to the store. The subscription determines which new
-/// values from the store are forwarded to the subscriber, and how they are transformed.
-/// The subscription acts as a very-light weight signal/observable that you might know from
-/// reactive programming libraries.
-public class Subscription<State> {
+/**
+ Represents a pending subscription of a subscriber to the store. The subscription determines
+ which new values from the store are forwarded to the subscriber, and how they are transformed.
+ The subscription acts as a very-light weight signal/observable that you might know from
+ reactive programming libraries.
+ */
+public class PendingSubscription<S: StoreType, State> {
 
-    private var _initialState: State?
-    private let automaticallySkipsEquatable: Bool
-    weak var subscriber: AnyStoreSubscriber?
+    private weak var store: S?
+    var originalSubscription: PendingSubscription<S, S.State>?
+    private let automaticallySkipEquatable: Bool
 
-    private(set) lazy var notify: (State, State) -> Void = { [unowned self] oldState, newState in
-        self.subscriber?._newState(
-            oldState: oldState,
-            state: newState,
-            automaticallySkipsEquatable: self.automaticallySkipsEquatable
-        )
-    }
-
-    init(initialState: State, automaticallySkipsEquatable: Bool) {
-        _initialState = initialState
-        self.automaticallySkipsEquatable = automaticallySkipsEquatable
-    }
-
-    private func initialState() -> State {
-        guard let initialState = _initialState else {
-            // swiftlint:disable:next line_length
-            fatalError("Subscription requires initial state, this subscription may not have been created from a store, or it has been transformed, and cannot be subscribed to. (Subscribe to the transformed subscription instead.)")
+    private lazy var notify: (State, State) -> (AnyStoreSubscriber) -> Void = { oldState, newState in
+        return { subscriber in
+            subscriber._newState(state: newState)
         }
-
-        // We've now used the initial state to notify, or to pass on to a transformed subscription
-        // So now we nil it out to preserve memory. Accessing this again is a programming error.
-        _initialState = nil
-
-        return initialState
     }
 
-    public func select<SelectedState>(_ selector: @escaping (State) -> SelectedState) -> Subscription<SelectedState> {
-        let subscription = Subscription<SelectedState>(
-            initialState: selector(self.initialState()),
-            automaticallySkipsEquatable: automaticallySkipsEquatable
-        )
-        notify = { oldState, newState in
-            let newSelected = selector(newState)
-            let oldSelected = selector(oldState)
-            subscription.notify(oldSelected, newSelected)
-        }
-        return subscription
+    init(store: S?, automaticallySkipEquatable: Bool) {
+        self.store = store
+        self.automaticallySkipEquatable = automaticallySkipEquatable
     }
 
-    public func skip(when skip: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
-        let subscription = Subscription<State>(
-            initialState: self.initialState(),
-            automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
-        )
-        notify = { oldState, newState in
-            if !skip(oldState, newState) {
-                subscription.notify(oldState, newState)
+    public func select<SelectedState>(_ selector: @escaping (State) -> SelectedState)
+        -> PendingSubscription<S, SelectedState> {
+            let subscription = PendingSubscription<S, SelectedState>(
+                store: self.store,
+                automaticallySkipEquatable: automaticallySkipEquatable
+            )
+            subscription.originalSubscription = self.originalSubscription ?? (self as! PendingSubscription<S, S.State>)
+            notify = { oldState, newState in
+                return { subscriber in
+                    let newSelected = selector(newState)
+                    let oldSelected = selector(oldState)
+                    subscription.notify(oldSelected, newSelected)(subscriber)
+                }
+
             }
-        }
-        return subscription
+            return subscription
     }
 
-    public func only(when only: @escaping (_ oldState: State, _ newState: State) -> Bool) -> Subscription<State> {
-        let subscription = Subscription<State>(
-            initialState: self.initialState(),
-            automaticallySkipsEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
-        )
-        notify = { oldState, newState in
-            if only(oldState, newState) {
-                subscription.notify(oldState, newState)
+    public func skip(when skip: @escaping (_ oldState: State, _ newState: State) -> Bool)
+        -> PendingSubscription<S, State> {
+            let subscription = PendingSubscription<S, State>(
+                store: self.store,
+                automaticallySkipEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
+            )
+            subscription.originalSubscription = self.originalSubscription ?? (self as! PendingSubscription<S, S.State>)
+            notify = { oldState, newState in
+                return { subscriber in
+                    if !skip(oldState, newState) {
+                        subscription.notify(oldState, newState)(subscriber)
+                    }
+                }
             }
-        }
-        return subscription
+            return subscription
     }
 
-    public func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State {
-        precondition(self.subscriber == nil, "Subscriptions do not support multiple subscribers")
-        self.subscriber = subscriber
-        subscriber._initialState(state: initialState())
-        _initialState = nil
+    public func only(when only: @escaping (_ oldState: State, _ newState: State) -> Bool)
+        -> PendingSubscription<S, State> {
+            let subscription = PendingSubscription<S, State>(
+                store: self.store,
+                automaticallySkipEquatable: false // Since we're declaring a skip manually, we can avoid double-skips
+            )
+            subscription.originalSubscription = self.originalSubscription ?? (self as! PendingSubscription<S, S.State>)
+            notify = { oldState, newState in
+                return { subscriber in
+                    if only(oldState, newState) {
+                        subscription.notify(oldState, newState)(subscriber)
+                    }
+                }
+            }
+            return subscription
+    }
+
+    // Subscribe with a transformed subscription
+    public func subscribe<Subscriber: StoreSubscriber>(_ subscriber: Subscriber)
+        where Subscriber.StoreSubscriberStateType == State {
+            guard let originalSubscription = self.originalSubscription else {
+                fatalError("Transformed subscription without an original subscription")
+            }
+            let subscription = Subscription<S.State>(
+                subscriber: subscriber,
+                notify: originalSubscription.notify
+            )
+            self.store?.addSubscription(subscription)
+    }
+
+    // Subscribe with the original subscription
+    public func subscribe<Subscriber: StoreSubscriber>(_ subscriber: Subscriber)
+        where Subscriber.StoreSubscriberStateType == S.State, State == S.State {
+            let subscription = Subscription<S.State>(
+                subscriber: subscriber,
+                notify: self.notify
+            )
+            self.store?.addSubscription(subscription)
     }
 }
 
+open class Subscription<State> {
+    private(set) weak var subscriber: AnyStoreSubscriber?
+    private(set) var notify: (State, State) -> (AnyStoreSubscriber) -> Void
 
+    init(
+        subscriber: AnyStoreSubscriber,
+        notify: @escaping (State, State) -> (AnyStoreSubscriber) -> Void
+        ) {
+        self.subscriber = subscriber
+        self.notify = notify
+    }
+}

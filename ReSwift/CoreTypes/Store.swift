@@ -15,7 +15,7 @@ import Foundation
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-open class Store<State: StateType>: StoreType {
+public final class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = Subscription<State>
 
@@ -25,9 +25,11 @@ open class Store<State: StateType>: StoreType {
 
     /*private (set)*/ public var state: State! {
         didSet {
-//            subscriptions = subscriptions.filter { $0.subscriber != nil }
+            subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
-                $0.notify(oldValue, state)
+                if let subscriber = $0.subscriber {
+                    $0.notify(oldValue, state)(subscriber)
+                }
             }
         }
     }
@@ -40,9 +42,9 @@ open class Store<State: StateType>: StoreType {
 
     private var isDispatching = false
 
-    /// Indicates if new subscriptions attempt to apply `skipRepeats` 
+    /// Indicates if new subscriptions attempt to apply `skip(when: ==)`
     /// by default.
-    fileprivate let subscriptionsAutomaticallySkipRepeats: Bool
+    fileprivate let subscriptionsAutomaticallySkipEquatable: Bool
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     ///
@@ -62,7 +64,7 @@ open class Store<State: StateType>: StoreType {
         middleware: [Middleware<State>] = [],
         automaticallySkipsRepeats: Bool = true
     ) {
-        self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
+        self.subscriptionsAutomaticallySkipEquatable = automaticallySkipsRepeats
         self.reducer = reducer
 
         // Wrap the dispatch function with all middlewares
@@ -85,13 +87,24 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    open func subscription() -> Subscription<State> {
-        let subscription = Subscription<State>(
-            initialState: self.state,
-            automaticallySkipsEquatable: self.subscriptionsAutomaticallySkipRepeats
+    open func subscription() -> PendingSubscription<Store<State>, State> {
+        let subscription = PendingSubscription<Store<State>, State>(
+            store: self,
+            automaticallySkipEquatable: self.subscriptionsAutomaticallySkipEquatable
         )
-        self.subscriptions.append(subscription)
+        subscription.originalSubscription = subscription
         return subscription
+    }
+
+    open func addSubscription(_ subscription: Subscription<State>) {
+        self.subscriptions.append(subscription)
+
+        if let subscriber = subscription.subscriber {
+            // This won't work properly.
+            // `notify` takes `old, new` and in this case we have no old
+            // I'm using `self.state` for both but it won't work for anything with `skip` in its chain
+            subscription.notify(self.state, self.state)(subscriber)
+        }
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {

@@ -70,6 +70,11 @@ class StoreSubscriberTests: XCTestCase {
             .skip(when: ==)
             .subscribe(subscriber)
 
+        guard subscriber.receivedValue != nil else {
+            XCTFail("Subscriber has not received initial value")
+            return
+        }
+
         XCTAssertEqual(subscriber.receivedValue, 3)
 
         store.dispatch(SetValueAction(3))
@@ -114,6 +119,11 @@ class StoreSubscriberTests: XCTestCase {
             .select { $0.substate }
             .skip { $0.value == $1.value }
             .subscribe(subscriber)
+
+        guard subscriber.receivedValue != nil else {
+            XCTFail("Subscriber has not received initial value")
+            return
+        }
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
 
@@ -187,6 +197,11 @@ class StoreSubscriberTests: XCTestCase {
             .skip { $0.value == $1.value }
             .subscribe(subscriber)
 
+        guard subscriber.receivedValue != nil else {
+            XCTFail("Subscriber has not received initial value")
+            return
+        }
+
         XCTAssertEqual(subscriber.receivedValue.value, 5)
 
         store.dispatch(SetCustomSubstateAction(5))
@@ -207,6 +222,11 @@ class StoreSubscriberTests: XCTestCase {
                 $0.value != $1.value
             }
             .subscribe(subscriber)
+
+        guard subscriber.receivedValue != nil else {
+            XCTFail("Subscriber has not received initial value")
+            return
+        }
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
 

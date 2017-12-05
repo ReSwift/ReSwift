@@ -194,7 +194,7 @@ fileprivate struct TracerAction: Action { }
 //    }
 //}
 
-fileprivate class TestStore<State: StateType>: Store<State> {
+//fileprivate class TestStore<State: StateType>: Store<State> {
 //    override func subscriptionBox<T>(
 //        originalSubscription: Subscription<State>,
 //        transformedSubscription: Subscription<T>?,
@@ -205,7 +205,7 @@ fileprivate class TestStore<State: StateType>: Store<State> {
 //            subscriber: subscriber
 //        )
 //    }
-}
+//}
 
 extension StoreSubscriptionTests {
 
