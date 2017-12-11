@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md)
 
-**Supported Swift Version:**: Swift 3.0.1
+**Supported Swift Versions:** Swift 3.2, 4.0
 
 For Swift 2.2 Support use [Release 2.0.0](https://github.com/ReSwift/ReSwift/releases/tag/2.0.0) or earlier.
 
@@ -28,7 +28,6 @@ Check out our [public gitter chat!](https://gitter.im/ReSwift/public)
 - [Why ReSwift?](#why-reswift)
 - [Getting Started Guide](#getting-started-guide)
 - [Installation](#installation)
-- [Testing](#testing)
 - [Checking Out Source Code](#checking-out-source-code)
 - [Demo](#demo)
 - [Extensions](#extensions)
@@ -103,11 +102,11 @@ class CounterViewController: UIViewController, StoreSubscriber {
 
     @IBOutlet var counterLabel: UILabel!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         mainStore.subscribe(self)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         mainStore.unsubscribe(self)
     }
 
@@ -115,13 +114,13 @@ class CounterViewController: UIViewController, StoreSubscriber {
         counterLabel.text = "\(state.counter)"
     }
 
-    @IBAction func increaseButtonTapped(sender: UIButton) {
+    @IBAction func increaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionIncrease()
         )
     }
 
-    @IBAction func decreaseButtonTapped(sender: UIButton) {
+    @IBAction func decreaseButtonTapped(_ sender: UIButton) {
         mainStore.dispatch(
             CounterActionDecrease()
         )
@@ -160,7 +159,7 @@ The ReSwift tooling is still in a very early stage, but aforementioned prospects
 
 # Getting Started Guide
 
-[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html). 
+[A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html).
 
 To get an understanding of the core principles we recommend reading the brilliant [redux documentation](http://redux.js.org/).
 
@@ -222,7 +221,7 @@ This repository contains the core component for ReSwift, the following extension
 
 # Example Projects
 
-- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with ReSwift. 
+- [CounterExample](https://github.com/ReSwift/CounterExample): A very simple counter app implemented with ReSwift.
 - [CounterExample-Navigation-TimeTravel](https://github.com/ReSwift/CounterExample-Navigation-TimeTravel): This example builds on the simple CounterExample app, adding time travel with [ReSwiftRecorder](https://github.com/ReSwift/ReSwift-Recorder) and routing with [ReSwiftRouter](https://github.com/ReSwift/ReSwift-Router).
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.

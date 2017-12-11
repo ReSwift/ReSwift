@@ -15,9 +15,9 @@ let firstMiddleware: Middleware<StateType> = { dispatch, getState in
 
             if var action = action as? SetValueStringAction {
                 action.value += " First Middleware"
-                return next(action)
+                next(action)
             } else {
-                return next(action)
+                next(action)
             }
         }
     }
@@ -29,9 +29,9 @@ let secondMiddleware: Middleware<StateType> = { dispatch, getState in
 
             if var action = action as? SetValueStringAction {
                 action.value += " Second Middleware"
-                return next(action)
+                next(action)
             } else {
-                return next(action)
+                next(action)
             }
         }
     }
@@ -42,10 +42,10 @@ let dispatchingMiddleware: Middleware<StateType> = { dispatch, getState in
         return { action in
 
             if var action = action as? SetValueAction {
-                dispatch(SetValueStringAction("\(action.value)"))
+                dispatch(SetValueStringAction("\(action.value ?? 0)"))
             }
 
-            return next(action)
+            next(action)
         }
     }
 }
@@ -63,10 +63,10 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
                 dispatch(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
-                return next(StandardAction(type: "No-Op-Action"))
+                next(NoOpAction())
+            } else {
+                next(action)
             }
-
-            return next(action)
         }
     }
 }

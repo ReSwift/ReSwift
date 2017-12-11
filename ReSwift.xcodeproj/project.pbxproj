@@ -54,9 +54,6 @@
 		3F13C0EB1E7B3E4000D8442C /* SwiftLintIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */; };
 		3F13C0ED1E7B3E4000D8442C /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
 		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
-		625AA6331C33AFB600FEB431 /* StandardActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* StandardActionTests.swift */; };
-		625AA6341C33AFB700FEB431 /* StandardActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* StandardActionTests.swift */; };
-		625AA6351C33AFB800FEB431 /* StandardActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625AA6311C33AFA600FEB431 /* StandardActionTests.swift */; };
 		625E66871C1FF97E0027C288 /* ReSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* ReSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
 		625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E66A61C1FFA640027C288 /* StoreTests.swift */; };
@@ -83,6 +80,7 @@
 		73F39F381D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
 		73F39F391D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
 		73F39F3A1D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */; };
+		759801931FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */; };
 		81BCBECE1C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBECF1C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
 		81BCBED01C63167A00AA4F03 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BCBECD1C63167A00AA4F03 /* Subscription.swift */; };
@@ -141,7 +139,6 @@
 		3F13C0EC1E7B3E4000D8442C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.release.xcconfig"; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
-		625AA6311C33AFA600FEB431 /* StandardActionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardActionTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		625E66861C1FF97E0027C288 /* ReSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReSwift.h; sourceTree = "<group>"; };
 		625E66881C1FF97E0027C288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,6 +157,7 @@
 		73E545D91D22BCD600D114E8 /* XCTest+Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Assertions.swift"; sourceTree = "<group>"; };
 		73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDispatchTests.swift; sourceTree = "<group>"; };
 		73F39F371D3EE46A00DFFE62 /* StoreSubscriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSubscriptionTests.swift; sourceTree = "<group>"; };
+		759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticallySkipRepeatsTests.swift; sourceTree = "<group>"; };
 		81BCBECD1C63167A00AA4F03 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.debug.xcconfig"; sourceTree = "<group>"; };
 		B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLintIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
-				625AA6311C33AFA600FEB431 /* StandardActionTests.swift */,
 				73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */,
 				259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */,
 				25AB3B7F1C54A79F00A41513 /* StoreSubscriberTests.swift */,
@@ -301,6 +298,7 @@
 				621C068B1C278BEF008029AE /* TypeHelperTests.swift */,
 				73E545D91D22BCD600D114E8 /* XCTest+Assertions.swift */,
 				73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */,
+				759801921FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift */,
 			);
 			path = ReSwiftTests;
 			sourceTree = "<group>";
@@ -530,7 +528,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Benjamin Encz";
 				TargetAttributes = {
 					25DBCF361C30BF2B00D63A58 = {
@@ -544,11 +542,11 @@
 					};
 					25DBCF7A1C30C4AA00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					25DBCF861C30C4DB00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					3F13C0E71E7B3E4000D8442C = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -556,9 +554,11 @@
 					};
 					625E66821C1FF97E0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0900;
 					};
 					625E66991C1FFA3C0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -667,13 +667,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftLintIntegration-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		621C06541C277459008029AE /* SwiftLint */ = {
@@ -770,7 +773,6 @@
 				25DBCF721C30C34000D63A58 /* StoreMiddlewareTests.swift in Sources */,
 				73E545DC1D22BCD600D114E8 /* XCTest+Assertions.swift in Sources */,
 				73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
-				625AA6351C33AFB800FEB431 /* StandardActionTests.swift in Sources */,
 				73F39F3A1D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF741C30C34000D63A58 /* TypeHelperTests.swift in Sources */,
 				25DBCF751C30C34000D63A58 /* TestFakes.swift in Sources */,
@@ -806,7 +808,6 @@
 				25DBCF9D1C30C50000D63A58 /* StoreMiddlewareTests.swift in Sources */,
 				73E545DB1D22BCD600D114E8 /* XCTest+Assertions.swift in Sources */,
 				73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
-				625AA6341C33AFB700FEB431 /* StandardActionTests.swift in Sources */,
 				73F39F391D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */,
 				25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */,
@@ -850,10 +851,10 @@
 				259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */,
 				73E545DA1D22BCD600D114E8 /* XCTest+Assertions.swift in Sources */,
 				73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
-				625AA6331C33AFB600FEB431 /* StandardActionTests.swift in Sources */,
 				73F39F381D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */,
 				259737EA1C2C611600869B8F /* StoreMiddlewareTests.swift in Sources */,
+				759801931FB16D2D006EDE17 /* AutomaticallySkipRepeatsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,6 +1020,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1033,6 +1035,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1048,7 +1051,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.2;
 			};
 			name = Debug;
 		};
@@ -1063,7 +1066,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.2;
 			};
 			name = Release;
 		};
@@ -1075,14 +1078,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1116,7 +1125,8 @@
 				PRODUCT_NAME = ReSwift;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1133,14 +1143,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1167,7 +1183,8 @@
 				PRODUCT_NAME = ReSwift;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
@@ -1219,6 +1236,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1231,6 +1249,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1289,6 +1308,7 @@
 				3F13C0F11E7B3E4000D8442C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		625E667D1C1FF97E0027C288 /* Build configuration list for PBXProject "ReSwift" */ = {
 			isa = XCConfigurationList;

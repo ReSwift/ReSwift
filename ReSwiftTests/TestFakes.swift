@@ -31,6 +31,22 @@ extension TestStringAppState: Equatable {
     }
 }
 
+struct TestNonEquatable: StateType {
+    var testValue: NonEquatable
+
+    init() {
+        testValue = NonEquatable()
+    }
+}
+
+struct NonEquatable {
+    var testValue: String
+
+    init() {
+        testValue = "Initial"
+    }
+}
+
 struct TestCustomAppState: StateType {
     var substate: TestCustomSubstate
 
@@ -47,27 +63,19 @@ struct TestCustomAppState: StateType {
     }
 }
 
-struct SetValueAction: StandardActionConvertible {
+struct NoOpAction: Action {}
 
-    let value: Int
+struct SetValueAction: Action {
+
+    let value: Int?
     static let type = "SetValueAction"
 
-    init (_ value: Int) {
+    init (_ value: Int?) {
         self.value = value
     }
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
-                                isTypedAction: true)
-    }
-
 }
 
-struct SetValueStringAction: StandardActionConvertible {
+struct SetValueStringAction: Action {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -75,20 +83,9 @@ struct SetValueStringAction: StandardActionConvertible {
     init (_ value: String) {
         self.value = value
     }
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! String
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
-    }
-
 }
 
-struct SetCustomSubstateAction: StandardActionConvertible {
+struct SetCustomSubstateAction: Action {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
@@ -96,15 +93,14 @@ struct SetCustomSubstateAction: StandardActionConvertible {
     init (_ value: Int) {
         self.value = value
     }
+}
 
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int
-    }
+struct SetNonEquatableAction: Action {
+    var value: NonEquatable
+    static let type = "SetNonEquatableAction"
 
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
+    init (_ value: NonEquatable) {
+        self.value = value
     }
 }
 
@@ -143,6 +139,21 @@ struct TestCustomAppStateReducer {
         switch action {
         case let action as SetCustomSubstateAction:
             state.substate.value = action.value
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+struct TestNonEquatableReducer {
+    func handleAction(action: Action, state: TestNonEquatable?) ->
+        TestNonEquatable {
+        var state = state ?? TestNonEquatable()
+
+        switch action {
+        case let action as SetNonEquatableAction:
+            state.testValue = action.value
             return state
         default:
             return state
