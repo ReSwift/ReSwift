@@ -85,7 +85,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    private func _subscribe<SelectedState, S: StoreSubscriber>(
+    fileprivate func _subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<SelectedState>?)
         where S.StoreSubscriberStateType == SelectedState
