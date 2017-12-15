@@ -131,3 +131,16 @@ Here's a checklist for you about what makes Pull Requests to ReSwift shine:
 * You can propose PRs to merge with the `master` branch directly. We don't use any complex branching strategies.
 
 As a contributor, choose the "squash & merge" strategy to merge PRs with a single commit, keeping the commit history clean. (That's an upside of focused Pull Requests: you don't lose extra information.)
+
+## Publishing New Releases
+
+Members of the [@ReSwift/releases](https://github.com/orgs/ReSwift/teams/releases) team have the necessary permissions to publish a new version to CocoaPods. If you want a new version of ReSwift to be published you should ping these folks.
+
+To create a new release, create a pull request targeting either `master`, or a separate release branch for hot-fixes, with the following:
+
+- [ ] Bump version number in `ReSwift.podspec` and `Info.plist` (We follow [semver](https://semver.org/) - most importantly any breaking API change should result in a major API version bump)
+- [ ] Add the new version number and the release date to `Changelog.md`
+- [ ] Create a tag off of the relevant branch (`master` for regular release) and add the relevant changelog entries to the [release list on GitHub](https://github.com/ReSwift/ReSwift/releases) 
+- [ ] Publish the new version to the CocoaPods trunk
+- [ ] ✨✨Bonus points ✨✨: for major version`ReSwift` releases, update `ReSwiftRouter` and `GitHubBrowserExample` to use the latest version of `ReSwift`
+
