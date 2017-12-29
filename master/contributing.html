@@ -299,6 +299,19 @@
 </ul>
 
 <p>As a contributor, choose the <q>squash & merge</q> strategy to merge PRs with a single commit, keeping the commit history clean. (That&rsquo;s an upside of focused Pull Requests: you don&rsquo;t lose extra information.)</p>
+<h2 id='publishing-new-releases' class='heading'>Publishing New Releases</h2>
+
+<p>Members of the <a href="https://github.com/orgs/ReSwift/teams/releases">@ReSwift/releases</a> team have the necessary permissions to publish a new version to CocoaPods. If you want a new version of ReSwift to be published you should ping these folks.</p>
+
+<p>To create a new release, create a pull request targeting either <code>master</code>, or a separate release branch for hot-fixes, with the following:</p>
+
+<ul>
+<li>[ ] Bump version number in <code>ReSwift.podspec</code> and <code>Info.plist</code> (We follow <a href="https://semver.org/">semver</a> - most importantly any breaking API change should result in a major API version bump)</li>
+<li>[ ] Add the new version number and the release date to <code>Changelog.md</code></li>
+<li>[ ] Create a tag off of the relevant branch (<code>master</code> for regular release) and add the relevant changelog entries to the <a href="https://github.com/ReSwift/ReSwift/releases">release list on GitHub</a></li>
+<li>[ ] Publish the new version to the CocoaPods trunk</li>
+<li>[ ] ✨✨Bonus points ✨✨: for major version<code>ReSwift</code> releases, update <code>ReSwiftRouter</code> and <code>GitHubBrowserExample</code> to use the latest version of <code>ReSwift</code></li>
+</ul>
 
           </div>
         </section>
