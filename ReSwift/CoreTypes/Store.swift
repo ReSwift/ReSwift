@@ -48,7 +48,7 @@ open class Store<State: StateType>: StoreType {
     ///
     /// Middleware is applied in the order in which it is passed into this constructor.
     ///
-    /// - parameter reducer: Main reducer that processes incomind actions.
+    /// - parameter reducer: Main reducer that processes incoming actions.
     /// - parameter state: Initial state, if any. Can be `nil` and will be 
     ///   provided by the reducer in that case.
     /// - parameter middleware: Ordered list of action pre-processors, acting 
