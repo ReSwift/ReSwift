@@ -159,7 +159,7 @@
             <h1>Subscription</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
@@ -202,7 +202,7 @@ reactive programming libraries.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">selector</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Substate</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">Substate</span><span class="o">&gt;</span></code></pre>
 
@@ -254,7 +254,7 @@ reactive programming libraries.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">(</span><span class="n">_</span> <span class="nv">isRepeat</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">(</span><span class="n">_</span> <span class="nv">isRepeat</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
     <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
@@ -334,7 +334,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skipRepeats</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -371,7 +371,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skip</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">skip</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -448,7 +448,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">only</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">only</span><span class="p">(</span><span class="nv">when</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">oldState</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Subscription</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -512,7 +512,7 @@ the subscriber.</p>
     </div>
     <section class='footer'>
       <p>© 2017 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.0</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
