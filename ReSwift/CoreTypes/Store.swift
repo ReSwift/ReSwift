@@ -36,7 +36,7 @@ open class Store<State: StateType>: StoreType {
 
     private var reducer: Reducer<State>
 
-    var subscriptions: [SubscriptionType] = []
+    var subscriptions: Set<SubscriptionType> = []
 
     private var isDispatching = false
 
@@ -90,19 +90,13 @@ open class Store<State: StateType>: StoreType {
         transformedSubscription: Subscription<SelectedState>?)
         where S.StoreSubscriberStateType == SelectedState
     {
-        // If the same subscriber is already registered with the store, replace the existing
-        // subscription with the new one.
-        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-
         let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
             transformedSubscription: transformedSubscription,
             subscriber: subscriber
         )
 
-        subscriptions.append(subscriptionBox)
+        subscriptions.update(with: subscriptionBox)
 
         if let state = self.state {
             originalSubscription.newValues(oldState: nil, newState: state)
