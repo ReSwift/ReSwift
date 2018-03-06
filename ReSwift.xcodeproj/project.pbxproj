@@ -90,6 +90,9 @@
 		D47D2D571E32C4170064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D581E32C4180064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D591E32C4190064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
+		D490BC43203F291800902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
+		D490BC44203F291900902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
+		D490BC45203F291A00902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +165,7 @@
 		8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.debug.xcconfig"; sourceTree = "<group>"; };
 		B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLintIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchingStoreType.swift; sourceTree = "<group>"; };
+		D490BC41203F27E000902589 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
+				D490BC41203F27E000902589 /* PerformanceTests.swift */,
 				73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */,
 				259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */,
 				25AB3B7F1C54A79F00A41513 /* StoreSubscriberTests.swift */,
@@ -775,6 +780,7 @@
 				73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				73F39F3A1D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF741C30C34000D63A58 /* TypeHelperTests.swift in Sources */,
+				D490BC45203F291A00902589 /* PerformanceTests.swift in Sources */,
 				25DBCF751C30C34000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -810,6 +816,7 @@
 				73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				73F39F391D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */,
+				D490BC44203F291900902589 /* PerformanceTests.swift in Sources */,
 				25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -848,6 +855,7 @@
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
 				73F39F341D3EE3C300DFFE62 /* StoreDispatchTests.swift in Sources */,
 				25AB3B811C54A84500A41513 /* StoreSubscriberTests.swift in Sources */,
+				D490BC43203F291800902589 /* PerformanceTests.swift in Sources */,
 				259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */,
 				73E545DA1D22BCD600D114E8 /* XCTest+Assertions.swift in Sources */,
 				73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
