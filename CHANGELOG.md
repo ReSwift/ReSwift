@@ -10,6 +10,7 @@
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Improve subscription & state update performance (#325) - @mjarvis
+- Enable build settings "Allow app extension API only" (#328) - @oradyvan
 
 # 4.0.1
 
