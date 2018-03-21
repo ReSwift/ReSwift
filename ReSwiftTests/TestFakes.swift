@@ -182,7 +182,6 @@ class BlockSubscriber<S>: StoreSubscriber {
     }
 }
 
-
 class DispatchingSubscriber: StoreSubscriber {
     var store: Store<TestAppState>
 

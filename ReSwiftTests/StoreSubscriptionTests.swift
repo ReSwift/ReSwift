@@ -169,7 +169,9 @@ class StoreSubscriptionTests: XCTestCase {
     func testNewStateModifyingSubscriptionsDoesNotDiscardNewSubscription() {
         // This was built as a failing test due to a bug introduced by #325
         // The bug occured by adding a subscriber during `newState`
-        // The bug was caused by creating a copy of `subscriptions` before calling `newState`, and then assigning that copy back to `subscriptions`, losing the mutation that occured during `newState`
+        // The bug was caused by creating a copy of `subscriptions` before calling
+        // `newState`, and then assigning that copy back to `subscriptions`, losing
+        // the mutation that occured during `newState`
 
         store = Store(reducer: reducer.handleAction, state: TestAppState())
 
