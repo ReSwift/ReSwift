@@ -169,6 +169,20 @@ class TestStoreSubscriber<T>: StoreSubscriber {
     }
 }
 
+class BlockSubscriber<S>: StoreSubscriber {
+    typealias StoreSubscriberStateType = S
+    private let block: (S) -> Void
+
+    init(block: @escaping (S) -> Void) {
+        self.block = block
+    }
+
+    func newState(state: S) {
+        self.block(state)
+    }
+}
+
+
 class DispatchingSubscriber: StoreSubscriber {
     var store: Store<TestAppState>
 
