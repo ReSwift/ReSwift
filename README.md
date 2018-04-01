@@ -226,6 +226,7 @@ This repository contains the core component for ReSwift, the following extension
 - [GitHubBrowserExample](https://github.com/ReSwift/GitHubBrowserExample): A real world example, involving authentication, network requests and navigation. Still WIP but should be the best resource for starting to adapt `ReSwift` in your own app.
 - [ReduxMovieDB](https://github.com/cardoso/ReduxMovieDB): A simple App that queries the tmdb.org API to display the latest movies. Allows searching and viewing details.
 - [Meet](https://github.com/Ben-G/Meet): A real world application being built with ReSwift - currently still very early on. It is not up to date with the latest version of ReSwift, but is the best project for demonstrating time travel.
+- [Redux-Twitter](https://github.com/Goktug/Redux-Twitter): A basic Twitter search implementation built with ReSwift and RxSwift, involing Twitter authentication, network requests and navigation.
 
 ## Production Apps with Open Source Code
 
