@@ -81,7 +81,9 @@ class StoreMiddlewareTests: XCTestCase {
         let reducer = TestValueStringReducer()
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware])
+            middleware: [
+                firstMiddleware as Middleware<TestStringAppState>,
+                secondMiddleware as Middleware<TestStringAppState>])
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -99,7 +101,10 @@ class StoreMiddlewareTests: XCTestCase {
         let reducer = TestValueStringReducer()
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+            middleware: [
+                firstMiddleware as Middleware<TestStringAppState>,
+                secondMiddleware as Middleware<TestStringAppState>,
+                dispatchingMiddleware as Middleware<TestStringAppState>])
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
