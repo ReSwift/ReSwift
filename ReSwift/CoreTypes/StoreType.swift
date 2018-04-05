@@ -33,6 +33,7 @@ public protocol StoreType: DispatchingStoreType {
      state in this store changes.
 
      - parameter subscriber: Subscriber that will receive store updates
+     - note: Subscriptions are not ordered, so an order of state updates cannot be guaranteed.
      */
     func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
 
@@ -46,6 +47,7 @@ public protocol StoreType: DispatchingStoreType {
      - parameter transform: A closure that receives a simple subscription and can return a
        transformed subscription. Subscriptions can be transformed to only select a subset of the
        state, or to skip certain state updates.
+     - note: Subscriptions are not ordered, so an order of state updates cannot be guaranteed.
      */
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
