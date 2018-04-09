@@ -79,9 +79,15 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testDecorateDispatch() {
         let reducer = TestValueStringReducer()
+        // Swift 4.1 fails to cast this from Middleware<StateType> to Middleware<TestStringAppState>
+        // as expected during runtime, see: <https://bugs.swift.org/browse/SR-7362>
+        let middleware: [Middleware<TestStringAppState>] = [
+            firstMiddleware,
+            secondMiddleware
+        ]
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware])
+            middleware: middleware)
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -97,9 +103,16 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testCanDispatch() {
         let reducer = TestValueStringReducer()
+        // Swift 4.1 fails to cast this from Middleware<StateType> to Middleware<TestStringAppState>
+        // as expected during runtime, see: <https://bugs.swift.org/browse/SR-7362>
+        let middleware: [Middleware<TestStringAppState>] = [
+            firstMiddleware,
+            secondMiddleware,
+            dispatchingMiddleware
+        ]
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+            middleware: middleware)
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
