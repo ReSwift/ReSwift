@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (71% documented)
+         (66% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -126,6 +126,14 @@
             </ul>
           </li>
           <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Reducers.html'>Reducers</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Reducers.html#/s:7ReSwift7Reducera'>Reducer</a>
+              </li>
+            </ul>
+          </li>
+          <li class='nav-group-name'>
             <a class='nav-group-name-link' href='Utilities.html'>Utilities</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
@@ -149,6 +157,17 @@
               </li>
             </ul>
           </li>
+          <li class='nav-group-name'>
+            <a class='nav-group-name-link' href='Other Type Aliases.html'>Other Type Aliases</a>
+            <ul class='nav-group-tasks'>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class='main-content'>
@@ -158,7 +177,7 @@
             
             <h1 id='getting-started-with-reswift' class='heading'>Getting Started with ReSwift</h1>
 
-<p>ReSwift provides the infrastructure for <code><a href="Classes/Store.html">Store</a></code>s, <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code>s and <code>Reducer</code>s to enable a unidirectional data flow as shown below.</p>
+<p>ReSwift provides the infrastructure for <code><a href="Classes/Store.html">Store</a></code>s, <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code>s and <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code>s to enable a unidirectional data flow as shown below.</p>
 
 <p><img src="img/reswift_detail.png" alt=""></p>
 
@@ -210,7 +229,7 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>&hellip; where  <code>Reducer&lt;State&gt;</code> is a mere function signature alias:</p>
+<p>&hellip; where  <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer&lt;State&gt;</a></code> is a mere function signature alias:</p>
 <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">Reducer</span><span class="o">&lt;</span><span class="kt">ReducerStateType</span><span class="o">&gt;</span> <span class="o">=</span>
     <span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">ReducerStateType</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">ReducerStateType</span>
 </code></pre>
@@ -294,7 +313,7 @@
 
 <p>Reducers are the only place in which you should modify application state! Reducers take the current application state and an action and return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.</p>
 
-<p>You can do this implementing a top-level reducer that conforms to the <code>Reducer</code> protocol. This reducer will then call individual functions for each different part of the app state.</p>
+<p>You can do this implementing a top-level reducer that conforms to the <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> protocol. This reducer will then call individual functions for each different part of the app state.</p>
 
 <p>Here&rsquo;s an example in which we construct a new state, by calling sub-reducers with different sub-states:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">appReducer</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
@@ -307,7 +326,7 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>The <code>Reducer</code> typealias is a method that takes an <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code> and an <code>State?</code> and returns a <code>State</code>. Typically reducers will be responsible for initializing the application state. When they receive <code>nil</code> as the current state, they should return the initial default value for their portion of the state. In the example above the <code>appReducer</code> delegates all calls to other reducer functions. E.g. the <code>authenticationReducer</code> is responsible for providing the <code>authenticationState</code>.</p>
+<p>The <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> typealias is a method that takes an <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code> and an <code>State?</code> and returns a <code>State</code>. Typically reducers will be responsible for initializing the application state. When they receive <code>nil</code> as the current state, they should return the initial default value for their portion of the state. In the example above the <code>appReducer</code> delegates all calls to other reducer functions. E.g. the <code>authenticationReducer</code> is responsible for providing the <code>authenticationState</code>.</p>
 
 <p>Here&rsquo;s what the <code>authenticationReducer</code> function that is called from the <code>appReducer</code> looks like:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">authenticationReducer</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">AuthenticationState</span><span class="p">?,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AuthenticationState</span> <span class="p">{</span>
@@ -328,7 +347,7 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the <code>Reducer</code> typealias (current state and action in, new state out).</p>
+<p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary method signature, but we recommend that it matches the <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> typealias (current state and action in, new state out).</p>
 
 <p>This sub-reducer first checks if the state provided is <code>nil</code>. If that&rsquo;s the case, it sets the state to the initial default state. Next, the reducer switches over the provided <code>action</code> and checks its type. Depending on the type of action, this reducer will updated the state differently. This specific reducer is very simple, each action only triggers a single property of the state to update.</p>
 

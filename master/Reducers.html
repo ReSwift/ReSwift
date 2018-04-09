@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Checking out Source Code  Reference</title>
+    <title>Reducers  Reference</title>
     <link rel='stylesheet' type='text/css' href='css/jazzy.css' />
     <link rel='stylesheet' type='text/css' href='css/highlight.css' />
     <meta charset='utf-8'>
@@ -11,7 +11,7 @@
   <body>
 
 
-    <a title='Checking out Source Code  Reference'></a>
+    <a title='Reducers  Reference'></a>
 
     <header class='header'>
       <p class='header-col header-col--primary'>
@@ -39,7 +39,7 @@
     <p class='breadcrumbs'>
       <a class='breadcrumb' href='index.html'>ReSwift Reference</a>
       <img class='carat' src='img/carat.png' />
-      Checking out Source Code  Reference
+      Reducers  Reference
     </p>
 
     <div class='content-wrapper'>
@@ -174,14 +174,51 @@
 
         <section class='section'>
           <div class='section-content'>
-            
-            <h1 id='checking-out-source-code' class='heading'>Checking out Source Code</h1>
-
-<p>After checking out the project run <code>pod install</code> to get the latest supported version of <a href="https://github.com/realm/SwiftLint">SwiftLint</a>, which we use to ensure a consistent style in the codebase.</p>
+            <h1>Reducers</h1>
+            <p>This is the only place where you should modify application state! Reducers, just as <code>StoreSubscribers</code> can define the particular slice of the app state that they are interested in by changing the type in their <code>handleAction</code> method. Here&rsquo;s an example of a part of a reducer in an app built with ReSwift:</p>
 
           </div>
         </section>
 
+        <section class='section'>
+          <div class='section-content'>
+            <div class="task-group">
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:7ReSwift7Reducera"></a>
+                    <a name="//apple_ref/swift/Alias/Reducer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ReSwift7Reducera">Reducer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Reducer</span><span class="o">&lt;</span><span class="kt">ReducerStateType</span><span class="o">&gt;</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Reducer.swift#L" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
       </article>
     </div>
