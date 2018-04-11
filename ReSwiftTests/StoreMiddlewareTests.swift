@@ -71,7 +71,6 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
     }
 }
 
-// swiftlint:disable function_body_length
 class StoreMiddlewareTests: XCTestCase {
 
     /**
