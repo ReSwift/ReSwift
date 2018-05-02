@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1E565A2099A42E00959ADB /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E56592099A42E00959ADB /* AtomicBool.swift */; };
+		0E1E565B2099A44100959ADB /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E56592099A42E00959ADB /* AtomicBool.swift */; };
+		0E1E565C2099A44200959ADB /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E56592099A42E00959ADB /* AtomicBool.swift */; };
+		0E1E565D2099A44300959ADB /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E56592099A42E00959ADB /* AtomicBool.swift */; };
 		252982EE1C4FD21400281098 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252982ED1C4FD21400281098 /* StoreType.swift */; };
 		252982EF1C4FD21400281098 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252982ED1C4FD21400281098 /* StoreType.swift */; };
 		252982F01C4FD21400281098 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252982ED1C4FD21400281098 /* StoreType.swift */; };
@@ -127,6 +131,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E1E56592099A42E00959ADB /* AtomicBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
 		252982ED1C4FD21400281098 /* StoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreType.swift; sourceTree = "<group>"; };
 		259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreMiddlewareTests.swift; sourceTree = "<group>"; };
 		259737FA1C2C618A00869B8F /* TestFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFakes.swift; sourceTree = "<group>"; };
@@ -314,6 +319,7 @@
 				73E545D41D22BC3900D114E8 /* Assertions.swift */,
 				625E66B11C1FFC830027C288 /* Coding.swift */,
 				625E66B21C1FFC830027C288 /* TypeHelper.swift */,
+				0E1E56592099A42E00959ADB /* AtomicBool.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -741,6 +747,7 @@
 				252982F11C4FD21400281098 /* StoreType.swift in Sources */,
 				73E545D81D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBED11C63167A00AA4F03 /* Subscription.swift in Sources */,
+				0E1E565D2099A44300959ADB /* AtomicBool.swift in Sources */,
 				25DBCF451C30C16000D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF461C30C16000D63A58 /* Middleware.swift in Sources */,
 				25DBCF471C30C16000D63A58 /* Coding.swift in Sources */,
@@ -760,6 +767,7 @@
 				252982F01C4FD21400281098 /* StoreType.swift in Sources */,
 				73E545D71D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBED01C63167A00AA4F03 /* Subscription.swift in Sources */,
+				0E1E565C2099A44200959ADB /* AtomicBool.swift in Sources */,
 				25DBCF5C1C30C19500D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF5D1C30C19500D63A58 /* Middleware.swift in Sources */,
 				25DBCF5E1C30C19500D63A58 /* Coding.swift in Sources */,
@@ -796,6 +804,7 @@
 				252982EF1C4FD21400281098 /* StoreType.swift in Sources */,
 				73E545D61D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBECF1C63167A00AA4F03 /* Subscription.swift in Sources */,
+				0E1E565B2099A44100959ADB /* AtomicBool.swift in Sources */,
 				25DBCF981C30C4F000D63A58 /* StoreSubscriber.swift in Sources */,
 				25DBCF991C30C4F000D63A58 /* Middleware.swift in Sources */,
 				25DBCF9A1C30C4F000D63A58 /* Coding.swift in Sources */,
@@ -840,6 +849,7 @@
 				259737FD1C2C661100869B8F /* Middleware.swift in Sources */,
 				252982EE1C4FD21400281098 /* StoreType.swift in Sources */,
 				73E545D51D22BC3900D114E8 /* Assertions.swift in Sources */,
+				0E1E565A2099A42E00959ADB /* AtomicBool.swift in Sources */,
 				81BCBECE1C63167A00AA4F03 /* Subscription.swift in Sources */,
 				625E66BE1C1FFC880027C288 /* Reducer.swift in Sources */,
 				625E66B41C1FFC830027C288 /* TypeHelper.swift in Sources */,

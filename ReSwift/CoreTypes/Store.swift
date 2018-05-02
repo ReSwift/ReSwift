@@ -41,7 +41,7 @@ open class Store<State: StateType>: StoreType {
 
     var subscriptions: Set<SubscriptionType> = []
 
-    private var isDispatching = false
+    private var isDispatching = AtomicBool()
 
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
@@ -147,7 +147,7 @@ open class Store<State: StateType>: StoreType {
 
     // swiftlint:disable:next identifier_name
     open func _defaultDispatch(action: Action) {
-        guard !isDispatching else {
+        guard !isDispatching.value else {
             raiseFatalError(
                 "ReSwift:ConcurrentMutationError- Action has been dispatched while" +
                 " a previous action is action is being processed. A reducer" +
@@ -156,9 +156,9 @@ open class Store<State: StateType>: StoreType {
             )
         }
 
-        isDispatching = true
+        isDispatching.value = true
         let newState = reducer(action, state)
-        isDispatching = false
+        isDispatching.value = false
 
         state = newState
     }
