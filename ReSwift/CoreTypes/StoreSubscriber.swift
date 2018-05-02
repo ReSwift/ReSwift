@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol AnyStoreSubscriber: class {
+public protocol AnyStoreSubscriber: AnyObject {
     // swiftlint:disable:next identifier_name
     func _newState(state: Any)
 }
