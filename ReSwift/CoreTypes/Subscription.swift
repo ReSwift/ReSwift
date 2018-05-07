@@ -121,7 +121,7 @@ public class Subscription<State> {
 
     /// Initializes a subscription with a sink closure. The closure provides a way to send
     /// new values over this subscription.
-    private init(sink: @escaping (@escaping (State?, State) -> Void) -> Void) {
+    private init(sink: (@escaping (State?, State) -> Void) -> Void) {
         // Provide the caller with a closure that will forward all values
         // to observers of this subscription.
         sink { old, new in
