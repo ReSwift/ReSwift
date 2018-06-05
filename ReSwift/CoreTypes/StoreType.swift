@@ -18,9 +18,6 @@ public protocol StoreType: DispatchingStoreType {
 
     associatedtype State: StateType
 
-    /// The current state stored in the store.
-    var state: State! { get }
-
     /**
      The main dispatch function that is used by all convenience `dispatch` methods.
      This dispatch function can be extended by providing middlewares.
