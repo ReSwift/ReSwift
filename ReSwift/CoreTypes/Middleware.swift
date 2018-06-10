@@ -6,8 +6,6 @@
 //  Copyright © 2015 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-
 public typealias DispatchFunction = (Action) -> Void
 public typealias Middleware<State> = (@escaping DispatchFunction, @escaping () -> State?)
     -> (@escaping DispatchFunction) -> DispatchFunction

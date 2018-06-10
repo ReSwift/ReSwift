@@ -6,6 +6,4 @@
 //  Copyright © 2015 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-
 public protocol StateType { }
