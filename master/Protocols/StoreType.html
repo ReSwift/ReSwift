@@ -178,7 +178,7 @@
             <h1>StoreType</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DispatchingStoreType.html">DispatchingStoreType</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StoreType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DispatchingStoreType.html">DispatchingStoreType</a></span></code></pre>
 
                 </div>
               </div>
@@ -214,7 +214,7 @@ Upon every state update a store informs all of its subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">State</span><span class="p">:</span> <span class="kt"><a href="../State.html#/s:7ReSwift9StateTypeP">StateType</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">State</span> <span class="p">:</span> <span class="kt"><a href="../State.html#/s:7ReSwift9StateTypeP">StateType</a></span></code></pre>
 
                         </div>
                       </div>
@@ -245,13 +245,13 @@ Upon every state update a store informs all of its subscribers.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L22" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L20" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -277,13 +277,13 @@ This dispatch function can be extended by providing middlewares.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt"><a href="../Other Typealiases.html#/s:7ReSwift16DispatchFunctiona">DispatchFunction</a></span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt"><a href="../Other Typealiases.html#/s:7ReSwift16DispatchFunctiona">DispatchFunction</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L28" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L26" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -315,7 +315,7 @@ state in this store changes.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="k">where</span> <span class="kt">S</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span> <span class="o">==</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span></code></pre>
 
                         </div>
                       </div>
@@ -340,7 +340,7 @@ state in this store changes.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L38" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L36" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -373,7 +373,7 @@ state update.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="p">,</span> <span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="o">&gt;</span><span class="p">)?)</span> <span class="k">where</span> <span class="kt">SelectedState</span> <span class="o">==</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span><span class="p">,</span> <span class="kt">S</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span></code></pre>
 
                         </div>
                       </div>
@@ -412,7 +412,7 @@ state, or to skip certain state updates.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L52" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L50" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -463,7 +463,7 @@ receive state updates from this store.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L62" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L60" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -522,7 +522,7 @@ return type, e.g. to return promises</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L97" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L95" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -554,7 +554,7 @@ action creator asynchronously.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L103" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L101" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -596,7 +596,7 @@ be called
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L116" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L114" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -625,13 +625,13 @@ deviates slighlty from the unidirectional data flow principal.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">DispatchCallback</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">DispatchCallback</span> <span class="o">=</span> <span class="p">(</span><span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L125" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L123" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -670,13 +670,13 @@ create an action.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">ActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">StoreType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Actions.html#/s:7ReSwift6ActionP">Action</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">ActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="p">,</span> <span class="kt">StoreType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Actions.html#/s:7ReSwift6ActionP">Action</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L147" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L145" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -701,13 +701,13 @@ create an action.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">AsyncActionCreator</span> <span class="o">=</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">AsyncActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP5State">State</a></span><span class="p">,</span> <span class="kt">StoreType</span><span class="p">,</span> <span class="p">(</span><span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/StoreType.html#/s:7ReSwift9StoreTypeP13ActionCreator">ActionCreator</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L150" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/StoreType.swift#L148" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -721,7 +721,7 @@ create an action.</p>
     </div>
     <section class='footer'>
       <p>© 2017 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.3</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
