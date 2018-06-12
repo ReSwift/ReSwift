@@ -6,8 +6,6 @@
 //  Copyright © 2015 DigiTales. All rights reserved.
 //
 
-import Foundation
-
 public protocol Coding {
     init?(dictionary: [String: AnyObject])
     var dictionaryRepresentation: [String: AnyObject] { get }

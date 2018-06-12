@@ -6,7 +6,5 @@
 //  Copyright © 2015 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-
 public typealias Reducer<ReducerStateType> =
     (_ action: Action, _ state: ReducerStateType?) -> ReducerStateType
