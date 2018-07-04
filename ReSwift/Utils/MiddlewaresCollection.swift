@@ -10,18 +10,16 @@ class MiddlewareExecutor<T: StateType> {
      @param DispatchFunction callback function conform type alias DispatchFunction
      @return Action return an action, if return nil the queue will stop
      */
-    func execute(action: Action, state: T?, nextDispatcher: @escaping DispatchFunction) -> Action?{
+    func execute(action: Action, state: T?, nextDispatcher: @escaping DispatchFunction) -> Action? {
         return action
     }
 }
 
 class MiddlewaresCollection<T: StateType> {
     private var _middlewares: [Middleware<T>]
-    
-    init(){
+    init() {
         self._middlewares = []
     }
-    
     /**
      Concat other MiddlewaresCollection with this
      
@@ -32,7 +30,6 @@ class MiddlewaresCollection<T: StateType> {
         self._middlewares = _middlewares + withCollection.middlewares
         return self
     }
-    
     /**
      Method to add an executor in middleware collection
      
@@ -44,7 +41,7 @@ class MiddlewaresCollection<T: StateType> {
             self._middlewares.append ({ (_, state) -> (@escaping DispatchFunction) -> DispatchFunction in
                 return { next in
                     return { action in
-                        if let nextAction = item.execute(action: action, state: state(), nextDispatcher: next){
+                        if let nextAction = item.execute(action: action, state: state(), nextDispatcher: next) {
                             next(nextAction)
                         }
                     }
@@ -53,7 +50,6 @@ class MiddlewaresCollection<T: StateType> {
         }
         return self
     }
-    
     /**
      List of middlewares to store
      */
