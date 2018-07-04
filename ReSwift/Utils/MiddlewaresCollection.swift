@@ -16,12 +16,10 @@ class MiddlewaresCollection<T: StateType> {
     
     func concact(withCollection: MiddlewaresCollection) -> MiddlewaresCollection {
         self._middlewares = _middlewares + withCollection.middlewares
-        
         return self
     }
     
     func add(_ middlewareItens: MiddlewareExecutor<T>...) -> MiddlewaresCollection {
-        
         for item in middlewareItens {
             self._middlewares.append ({ (_, state) -> (@escaping DispatchFunction) -> DispatchFunction in
                 return { next in
@@ -33,7 +31,6 @@ class MiddlewaresCollection<T: StateType> {
                 }
             })
         }
-    
         return self
     }
     
