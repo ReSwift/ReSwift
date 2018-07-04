@@ -20,7 +20,7 @@ class MiddlewaresCollection<T:StateType>{
     
     func add(_ middlewareItens:MiddlewareExecutor<T>...)->MiddlewaresCollection{
         for item in middlewareItens {
-            self._middlewares.append ({ (dispatch, state) -> (@escaping DispatchFunction) -> DispatchFunction in
+            self._middlewares.append ({ (_, state) -> (@escaping DispatchFunction) -> DispatchFunction in
                 return { next in
                     return { action in
                         if let nextAction = item.execute(action: action, state: state(), nextDispatcher: next){
