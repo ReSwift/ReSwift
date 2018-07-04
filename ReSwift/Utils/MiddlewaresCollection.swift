@@ -3,19 +3,19 @@ import ReSwift
 
 class MiddlewareExecutor<T:StateType>{
     func execute(action:Action, state:T?, nextDispatcher:@escaping DispatchFunction) -> Action?{
-        return nil;
+        return nil
     }
 }
 
 class MiddlewaresCollection<T:StateType>{
-    private var _middlewares:[Middleware<T>];
+    private var _middlewares:[Middleware<T>]
     init(){
-        self._middlewares = [];
+        self._middlewares = []
     }
     
     func concact(withCollection:MiddlewaresCollection)->MiddlewaresCollection{
-        self._middlewares = _middlewares + withCollection.middlewares;
-        return self;
+        self._middlewares = _middlewares + withCollection.middlewares
+        return self
     }
     
     func add(_ middlewareItens:MiddlewareExecutor<T>...)->MiddlewaresCollection{
@@ -24,17 +24,17 @@ class MiddlewaresCollection<T:StateType>{
                 return { next in
                     return { action in
                         if let nextAction = item.execute(action: action, state: state(), nextDispatcher: next){
-                            next(nextAction);
+                            next(nextAction)
                         }
                     }
                 }
-            });
+            })
         }
     
-        return self;
+        return self
     }
     
     public var middlewares:[Middleware<T>]{
-        return self._middlewares;
+        return self._middlewares
     }
 }
