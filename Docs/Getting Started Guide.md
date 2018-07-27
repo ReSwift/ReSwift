@@ -58,7 +58,7 @@ class Store<State: StateType>: StoreType {
 
 ```swift
 typealias Reducer<ReducerStateType> =
-    (_ action: Action, _ state: ReducerStateType?) -> ReducerStateType
+    (action: Action, state: ReducerStateType?) -> ReducerStateType
 ```
 
 To find out more about how to implement the concrete types and satisfy their requirements, read on. To get a look at the source of these few core types that make up ReSwift, [check out the code on GitHub](https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes).
@@ -77,7 +77,7 @@ struct AppState: StateType {
 // This action does not have state and is a mere marker of "X happened":
 struct AddAction: Action { }
 
-func appReducer(_ action: Action, _ state: AppState?) -> AppState {
+func appReducer(action: Action, state: AppState?) -> AppState {
     var state = state ?? AppState()
 
     switch action {
@@ -142,7 +142,7 @@ struct SetOAuthURL: Action {
 
 Reducers are the **only place** in which you should **modify** application state. Reducers take the current application state and an action then return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.
 
-You can do this by implementing a top-level reducer that conforms to the `Reducer` protocol. This reducer will then call individual reducer functions for each different part of the app state, according to their areas of responsibility.
+You can do this by implementing a top-level function that matches the `Reducer` signature. This reducer will then call individual reducer functions for each different part of the app state, according to their areas of responsibility.
 
 Here's an example in which we construct a new state by calling sub-reducers with different sub-states:
 
@@ -162,7 +162,7 @@ The `Reducer` typealias is a function that takes an `Action` and a `State?` then
 For example, `authenticationReducer` is responsible for providing the `authenticationState`. Here's what the `authenticationReducer` function might look like:
 
 ```swift
-func authenticationReducer(_ state: AuthenticationState?, _ action: Action) -> AuthenticationState {
+func authenticationReducer(action: Action, state: AuthenticationState?) -> AuthenticationState {
     var state = state ?? initialAuthenticationState()
 
     switch action {
@@ -180,7 +180,9 @@ func authenticationReducer(_ state: AuthenticationState?, _ action: Action) -> A
 }
 ```
 
-You can see that the `authenticationReducer` function is a free function. You can define it with any arbitrary signature but we recommend that it matches the `Reducer` typealias (action and current state in, new state out).
+You can see that the `authenticationReducer` function is a free function. You can define it with any arbitrary signature but we recommend that it resembles the `Reducer` typealias (action and current state in, new state out). 
+
+**Note:** *The typealias uses unnamed parameters because Swift does not allow parameter names in this case so we say we recommend it "resembles" the signature defined in the typealias while our examples use named `action` and `state` parameters for clarity.*
 
 This sub-reducer first checks if the state provided is `nil`. If that's the case, it sets the state to the initial default state. Next, the reducer switches over the provided `action` and checks its type. Depending on the type of action, this reducer will update the state differently. This specific reducer is very simple: each action only triggers a single property of the state to update. Once the state update is complete, the reducer function returns the new state.
 
@@ -273,7 +275,7 @@ store.subscribe(self) { subcription in
 Conceptually asynchronous operations can simply be treated as state updates that occur at a later point in time. Here's a simple example of how to tie an asynchronous network request to a `ReSwift` state update:
 
 ```swift
-func fetchGitHubRepositories(_ state: State, _ store: Store<State>) -> Action? {
+func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
     guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
 
     Octokit(configuration).repositories { response in
@@ -303,11 +305,11 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
     Octokit(configuration).repositories { response in
         dispatch_async(dispatch_get_main_queue()) {
-            store.dispatch(SetRepostories(repositories: .Repositories(response)))
+            store.dispatch(SetRepostories(repositories: .repositories(response)))
         }
     }
 
-    return SetRepositories(repositories: .Loading)
+    return SetRepositories(repositories: .loading)
 }
 ```
 
@@ -315,9 +317,9 @@ In the example above we're using an `enum` to represent the different states of 
 
 ```swift
 enum GitHubFetchRequestState {
-    case Loading
-    case Repositories(Response<[Repository]>) // the OctoKit response provided to the `repositories` closure
-    case NetworkError(Error)
+    case loading
+    case repositories(Response<[Repository]>) // the OctoKit response provided to the `repositories` closure
+    case networkError(Error)
 }
 ```
 
@@ -334,13 +336,13 @@ Just like an `Action`, an `ActionCreator` function can be dispatched to the stor
 An `ActionCreator` has the following type signature:
 
 ```swift
-typealias ActionCreator = (_ state: State, _ store: StoreType) -> Action?
+typealias ActionCreator = (state: State, store: StoreType) -> Action?
 ```
 
 A very simple example of an `ActionCreator` might be:
 
 ```swift
-func doubleValueIfSmall(_ state: TestAppState, _ store: Store<TestAppState>) -> Action? {
+func doubleValueIfSmall(state: TestAppState, store: Store<TestAppState>) -> Action? {
 	if state.testValue < 5 {
 		return SetValueAction(state.testValue! * 2)
 	} else {
