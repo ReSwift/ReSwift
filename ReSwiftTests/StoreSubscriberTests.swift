@@ -81,7 +81,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueAction(3))
 
         XCTAssertEqual(subscriber.receivedValue, 3)
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 
     /**
@@ -103,7 +103,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 
     /**
@@ -125,7 +125,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetCustomSubstateAction(5))
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 
     func testPassesOnDuplicateSubstateUpdatesByDefault() {
@@ -143,7 +143,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetNonEquatableAction(NonEquatable()))
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 2)
+        XCTAssertEqual(subscriber.applyStateCallCount, 2)
     }
 
     func testPassesOnDuplicateSubstateWhenSkipsFalse() {
@@ -161,7 +161,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 2)
+        XCTAssertEqual(subscriber.applyStateCallCount, 2)
     }
 
     func testSkipsStateUpdatesForEquatableStateByDefault() {
@@ -177,7 +177,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 
     func testPassesOnDuplicateStateUpdatesInCustomizedStore() {
@@ -193,7 +193,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 2)
+        XCTAssertEqual(subscriber.applyStateCallCount, 2)
     }
 
     func testSkipWhen() {
@@ -212,7 +212,7 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetCustomSubstateAction(5))
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 
     func testOnlyWhen() {
@@ -231,29 +231,29 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetCustomSubstateAction(5))
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.applyStateCallCount, 1)
     }
 }
 
 class TestFilteredSubscriber<T>: StoreSubscriber {
     var receivedValue: T!
-    var newStateCallCount = 0
+    var applyStateCallCount = 0
 
-    func newState(state: T) {
+    func apply(state: T) {
         receivedValue = state
-        newStateCallCount += 1
+        applyStateCallCount += 1
     }
 
 }
 
 /**
  Example of how you can select a substate. The return value from
- `selectSubstate` and the argument for `newState` need to match up.
+ `selectSubstate` and the argument for `apply(state:)` need to match up.
  */
 class TestSelectiveSubscriber: StoreSubscriber {
     var receivedValue: (Int?, String?)
 
-    func newState(state: (Int?, String?)) {
+    func apply(state: (Int?, String?)) {
         receivedValue = state
     }
 }

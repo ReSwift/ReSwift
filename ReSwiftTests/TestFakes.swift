@@ -164,7 +164,7 @@ struct TestNonEquatableReducer {
 class TestStoreSubscriber<T>: StoreSubscriber {
     var receivedStates: [T] = []
 
-    func newState(state: T) {
+    func apply(state: T) {
         receivedStates.append(state)
     }
 }
@@ -177,7 +177,7 @@ class BlockSubscriber<S>: StoreSubscriber {
         self.block = block
     }
 
-    func newState(state: S) {
+    func apply(state: S) {
         self.block(state)
     }
 }
@@ -189,7 +189,7 @@ class DispatchingSubscriber: StoreSubscriber {
         self.store = store
     }
 
-    func newState(state: TestAppState) {
+    func apply(state: TestAppState) {
         // Test if we've already dispatched this action to
         // avoid endless recursion
         if state.testValue != 5 {
@@ -206,7 +206,7 @@ class CallbackStoreSubscriber<T>: StoreSubscriber {
         self.handler = handler
     }
 
-    func newState(state: T) {
+    func apply(state: T) {
         handler(state)
     }
 }

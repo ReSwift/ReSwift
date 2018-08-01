@@ -179,12 +179,12 @@ class StoreSubscriptionTests: XCTestCase {
         XCTAssertEqual(store.subscriptions.count, 1)
     }
 
-    func testNewStateModifyingSubscriptionsDoesNotDiscardNewSubscription() {
+    func testApplyStateModifyingSubscriptionsDoesNotDiscardNewSubscription() {
         // This was built as a failing test due to a bug introduced by #325
         // The bug occured by adding a subscriber during `newState`
         // The bug was caused by creating a copy of `subscriptions` before calling
-        // `newState`, and then assigning that copy back to `subscriptions`, losing
-        // the mutation that occured during `newState`
+        // `apply(state:)`, and then assigning that copy back to `subscriptions`, losing
+        // the mutation that occured during `apply(state:)`
 
         store = Store(reducer: reducer.handleAction, state: TestAppState())
 
@@ -222,8 +222,8 @@ class StoreSubscriptionTests: XCTestCase {
         }))
 
         // Have a subscriber (#1)
-        // #1 adds sub #2 in newState
-        // #1 dispatches in newState
+        // #1 adds sub #2 in apply(state:)
+        // #1 dispatches in apply(state:)
         // Test that store.subscribers == [#1, #2] // this should fail
     }
 }

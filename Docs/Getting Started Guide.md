@@ -200,11 +200,11 @@ After the `appReducer` has called all of the sub-reducer functions, we have a ne
 
 ## Store Subscribers
 
-Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the `newState` method on them. Subscribers need to conform to the `StoreSubscriber` protocol:
+Store subscribers are types that are interested in receiving state updates from a store. Whenever the store updates its state it will notify all subscribers by calling the `apply(state:)` method on them. Subscribers need to conform to the `StoreSubscriber` protocol:
 
 ```swift
 protocol StoreSubscriber {
-    func newState(state: StoreSubscriberStateType)
+    func apply(state: StoreSubscriberStateType)
 }
 ```
 
@@ -232,7 +232,7 @@ override func viewWillDisappear(animated: Bool) {
 }
 
 // The `state` argument needs to match the selected substate
-func newState(state: Response<[Repository]>?) {
+func apply(state: Response<[Repository]>?) {
     if case let .Success(repositories) = state {
         dataSource?.array = repositories
         tableView.reloadData()
@@ -241,9 +241,9 @@ func newState(state: Response<[Repository]>?) {
 ```
 In the example above we only select a single property from the overall application state: a network `Response` with a list of repositories.
 
-When selecting a substate as part of calling the `subscribe` method, you need to make sure that the argument of the `newState` method has the same type as whatever you return from the state subselection in the `subscribe` method.
+When selecting a substate as part of calling the `subscribe` method, you need to make sure that the argument of the `apply(state:)` method has the same type as whatever you return from the state subselection in the `subscribe` method.
 
-When subscribing within a ViewController you will typically update the view from within the `newState` method.
+When subscribing within a ViewController you will typically update the view from within the `apply(state:)` method.
 
 ## Example With Skipping Identical State Update
 

@@ -27,7 +27,7 @@ public protocol StoreType: DispatchingStoreType {
 
     /**
      Subscribes the provided subscriber to this store.
-     Subscribers will receive a call to `newState` whenever the
+     Subscribers will receive a call to `apply(state:)` whenever the
      state in this store changes.
 
      - parameter subscriber: Subscriber that will receive store updates
@@ -37,7 +37,7 @@ public protocol StoreType: DispatchingStoreType {
 
     /**
      Subscribes the provided subscriber to this store.
-     Subscribers will receive a call to `newState` whenever the
+     Subscribers will receive a call to `apply(state:)` whenever the
      state in this store changes and the subscription decides to forward
      state update.
 

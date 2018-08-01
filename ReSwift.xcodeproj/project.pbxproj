@@ -476,8 +476,6 @@
 				3F13C0E41E7B3E4000D8442C /* Sources */,
 				3F13C0E51E7B3E4000D8442C /* Frameworks */,
 				3F13C0E61E7B3E4000D8442C /* Resources */,
-				C6C5ED535A5FCEB5648419A2 /* [CP] Embed Pods Frameworks */,
-				3BED8D2D43A452D599C2F312 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -651,21 +649,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3BED8D2D43A452D599C2F312 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6012A4D4990919B303E1357A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -711,21 +694,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
-		};
-		C6C5ED535A5FCEB5648419A2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

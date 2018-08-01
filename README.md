@@ -110,7 +110,7 @@ class CounterViewController: UIViewController, StoreSubscriber {
         mainStore.unsubscribe(self)
     }
 
-    func newState(state: AppState) {
+    func apply(state: AppState) {
         counterLabel.text = "\(state.counter)"
     }
 
@@ -129,7 +129,7 @@ class CounterViewController: UIViewController, StoreSubscriber {
 }
 ```
 
-The `newState` method will be called by the `Store` whenever a new app state is available, this is where we need to adjust our view to reflect the latest app state.
+The `apply(state:)` method will be called by the `Store` whenever a new app state is available, this is where we need to adjust our view to reflect the latest app state.
 
 Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.
 

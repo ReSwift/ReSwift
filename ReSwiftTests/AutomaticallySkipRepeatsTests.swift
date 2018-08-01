@@ -49,7 +49,7 @@ class AutomaticallySkipRepeatsTests: XCTestCase {
 }
 
 extension AutomaticallySkipRepeatsTests: StoreSubscriber {
-    func newState(state: String) {
+    func apply(state: String) {
         subscriptionUpdates += 1
     }
 }

@@ -13,7 +13,7 @@ final class PerformanceTests: XCTestCase {
     )
 
     class MockSubscriber: StoreSubscriber {
-        func newState(state: MockState) {
+        func apply(state: MockState) {
             // Do nothing
         }
     }
