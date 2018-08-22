@@ -145,6 +145,28 @@ extension Subscription where State: Equatable {
     }
 }
 
+public protocol OptionalProtocol {
+    associatedtype Wrapped
+    var value: Wrapped? { get }
+}
+
+extension Optional: OptionalProtocol {
+    public var value: Wrapped? { return self }
+}
+
+extension Subscription where State: OptionalProtocol {
+    public func skipNil() -> Subscription<State.Wrapped> {
+        return Subscription<State.Wrapped> { sink in
+            self.observe { oldState, newState in
+                guard let newValue = newState.value else {
+                    return
+                }
+                sink(oldState?.value, newValue)
+            }
+        }
+    }
+}
+
 /// Subscription skipping convenience methods
 extension Subscription {
 

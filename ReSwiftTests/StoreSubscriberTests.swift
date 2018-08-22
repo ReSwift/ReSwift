@@ -37,6 +37,30 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     /**
+     it skips nil newState when requested
+     */
+    func testSkipNil() {
+        let reducer = TestReducer()
+        let store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestFilteredSubscriber<Int>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.testValue }
+                .skipNil()
+        }
+
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+
+        store.dispatch(SetValueAction(nil))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    /**
      it supports complex state selector closures
      */
     func testComplexStateSelector() {
