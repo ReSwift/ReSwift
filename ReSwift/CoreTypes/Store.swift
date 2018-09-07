@@ -164,38 +164,6 @@ open class Store<State: StateType>: StoreType {
     open func dispatch(_ action: Action) {
         dispatchFunction(action)
     }
-
-    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
-        if let action = actionCreatorProvider(state, self) {
-            dispatch(action)
-        }
-    }
-
-    open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
-        dispatch(asyncActionCreatorProvider, callback: nil)
-    }
-
-    open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
-                       callback: DispatchCallback?) {
-        actionCreatorProvider(state, self) { actionProvider in
-            let action = actionProvider(self.state, self)
-
-            if let action = action {
-                self.dispatch(action)
-                callback?(self.state)
-            }
-        }
-    }
-
-    public typealias DispatchCallback = (State) -> Void
-
-    public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: State,
-        _ store: Store,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-    ) -> Void
 }
 
 // MARK: Skip Repeats for Equatable States
