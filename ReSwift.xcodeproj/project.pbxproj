@@ -71,7 +71,6 @@
 		658958172141A17800BB05D1 /* ThunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658958162141A17800BB05D1 /* ThunksTests.swift */; };
 		658958182141A17800BB05D1 /* ThunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658958162141A17800BB05D1 /* ThunksTests.swift */; };
 		658958192141A17800BB05D1 /* ThunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658958162141A17800BB05D1 /* ThunksTests.swift */; };
-		6589581A2141A17800BB05D1 /* ThunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658958162141A17800BB05D1 /* ThunksTests.swift */; };
 		73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
 		73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
 		73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73723E031D30AEF3006139F0 /* XCTest+Compatibility.swift */; };
@@ -843,7 +842,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F13C0EB1E7B3E4000D8442C /* SwiftLintIntegration.swift in Sources */,
-				6589581A2141A17800BB05D1 /* ThunksTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
