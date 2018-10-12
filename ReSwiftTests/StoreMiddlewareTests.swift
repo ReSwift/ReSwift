@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ReSwift
+@testable import ReSwift
 
 let firstMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
