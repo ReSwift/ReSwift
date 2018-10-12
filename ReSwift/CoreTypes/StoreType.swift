@@ -6,8 +6,6 @@
 //  Copyright © 2015 DigiTales. All rights reserved.
 //
 
-import Foundation
-
 /**
  Defines the interface of Stores in ReSwift. `Store` is the default implementation of this
  interface. Applications have a single store that stores the entire application state.

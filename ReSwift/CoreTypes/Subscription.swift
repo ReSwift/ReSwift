@@ -6,8 +6,6 @@
 //  Copyright © 2016 Benjamin Encz. All rights reserved.
 //
 
-import Foundation
-
 /// A box around subscriptions and subscribers.
 ///
 /// Acts as a type-erasing wrapper around a subscription and its transformed subscription.

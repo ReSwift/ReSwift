@@ -6,8 +6,6 @@
 //  Copyright © 2015 DigiTales. All rights reserved.
 //
 
-import Foundation
-
 /**
  This class is the default implementation of the `Store` protocol. You will use this store in most
  of your applications. You shouldn't need to implement your own store.
