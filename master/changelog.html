@@ -187,6 +187,12 @@
 <li>The existence of <code>StandardAction</code> and <code>StandardActionConvertible</code> is somewhat confusing to new users, and does not have a direct use case within the core ReSwift library. Therefore, it has been moved to <a href="https://github.com/ReSwift/ReSwift-Recorder">ReSwift-Recorder</a> where it belongs.</li>
 <li>If you&rsquo;re using <code>StandardAction</code> in your project without <code>ReSwift-Recorder</code>, you can copy the old implementation into your project as a middle ground while you migrate away from its usage.</li>
 </ul></li>
+<li><p>Make Store&rsquo;s state setter private (#354) - @mokagio</p>
+
+<ul>
+<li>Removes the ability to directly set <code>state</code> by making it <code>private(set)</code>. This prevents users from bypassing reducers and middleware. All mutation of the state must occur through the normal <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code> &amp; <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> methods.</li>
+<li>This deprecates the usage of <code>ReSwift-Recorder</code>. Changes may be made to that library in the future in order to support this change.</li>
+</ul></li>
 </ul>
 
 <p><strong>Other</strong>:</p>
