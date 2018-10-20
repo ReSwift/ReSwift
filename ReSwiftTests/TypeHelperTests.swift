@@ -8,7 +8,7 @@
 
 import XCTest
 /**
- @testable import for internal testing of `withSpecificTypes`
+ @testable import for testing of `withSpecificTypes`
  */
 @testable import ReSwift
 

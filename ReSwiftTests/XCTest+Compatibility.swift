@@ -1,21 +1,21 @@
 import XCTest
 
-internal func dispatchAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
+func dispatchAsync(execute work: @escaping @convention(block) () -> Swift.Void) {
     DispatchQueue.global(qos: .default).async(execute: work)
 }
 
-internal func dispatchUserInitiatedAsync
+func dispatchUserInitiatedAsync
     (execute work: @escaping @convention(block) () -> Swift.Void) {
     DispatchQueue.global(qos: .userInitiated).async(execute: work)
 }
 
 extension XCTestCase {
 
-    internal func futureExpectation(withDescription description: String) -> XCTestExpectation {
+    func futureExpectation(withDescription description: String) -> XCTestExpectation {
         return expectation(description: description)
     }
 
-    internal func waitForFutureExpectations(
+    func waitForFutureExpectations(
         withTimeout timeout: TimeInterval,
         handler: XCWaitCompletionHandler? = nil) {
 

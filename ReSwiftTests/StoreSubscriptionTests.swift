@@ -8,7 +8,7 @@
 
 import XCTest
 /**
- @testable import for internal testing of `Store.subscriptions`
+ @testable import for testing of `Store.subscriptions`
  */
 @testable import ReSwift
 
