@@ -120,7 +120,7 @@ open class Store<State: StateType>: StoreType {
                    transformedSubscription: transformedSubscription)
     }
 
-    internal func subscriptionBox<T>(
+    func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,
         subscriber: AnyStoreSubscriber
