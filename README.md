@@ -216,6 +216,7 @@ Using this library you can implement apps that have an explicit, reproducible st
 
 This repository contains the core component for ReSwift, the following extensions are available:
 
+- [ReSwift-Thunk](https://github.com/ReSwift/ReSwift-Thunk): Provides a ReSwift middleware that lets you dispatch thunks (action creators) to encapsulate processes like API callbacks.
 - [ReSwift-Router](https://github.com/ReSwift/ReSwift-Router): Provides a ReSwift compatible Router that allows declarative routing in iOS applications
 - [ReSwift-Recorder](https://github.com/ReSwift/ReSwift-Recorder): Provides a `Store` implementation that records all `Action`s and allows for hot-reloading and time travel
 
