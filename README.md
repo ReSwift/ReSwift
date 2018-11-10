@@ -167,7 +167,7 @@ To get an understanding of the core principles we recommend reading the brillian
 
 ## CocoaPods
 
-You can install ReSwift via [CocoaPods](https://cocoapods.org/) by adding it to your `Podfile`:
+You can install ReSwift via [CocoaPods](https://cocoapods.org/pods/ReSwift) by adding it to your `Podfile`:
 ```
 use_frameworks!
 
