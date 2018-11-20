@@ -16,6 +16,7 @@
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Improve subscription & state update performance (#325) - @mjarvis
 - Enable build settings "Allow app extension API only" (#328) - @oradyvan
+- Open `Subscription<State>` to allow external extensions (#383) - @mjarvis
 
 # 4.0.1
 
