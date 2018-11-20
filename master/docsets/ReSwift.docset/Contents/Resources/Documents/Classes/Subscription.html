@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (66% documented)
+         (67% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -204,6 +204,38 @@ reactive programming libraries.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
+                    <a name="/s:7ReSwift12SubscriptionC4sinkACyxGyyxSg_xtcc_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(sink:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ReSwift12SubscriptionC4sinkACyxGyyxSg_xtcc_tcfc">init(sink:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a subscription with a sink closure. The closure provides a way to send
+new values over this subscription.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">sink</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kd">@escaping</span> <span class="p">(</span><span class="kt">State</span><span class="p">?,</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L84-L90" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
                     <a name="/s:7ReSwift12SubscriptionC6selectyACyqd__Gqd__xclF"></a>
                     <a name="//apple_ref/swift/Method/select(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:7ReSwift12SubscriptionC6selectyACyqd__Gqd__xclF">select(_:)</a>
@@ -248,7 +280,7 @@ reactive programming libraries.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L84-L89" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L94-L99" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -324,7 +356,39 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L96-L112" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L106-L122" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:7ReSwift12SubscriptionC8observeryxSg_xtcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/observer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ReSwift12SubscriptionC8observeryxSg_xtcSgvp">observer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The closure called with changes from the store.
+This closure can be written to for use in extensions to Subscription similar to <code>skipRepeats</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">observer</span><span class="p">:</span> <span class="p">((</span><span class="kt">State</span><span class="p">?,</span> <span class="kt">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L126" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -359,7 +423,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L143-L145" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L139-L141" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -440,7 +504,7 @@ thus should be skipped and not forwarded to subscribers.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L158-L160" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L154-L156" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -517,7 +581,7 @@ the subscriber.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L169-L173" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Subscription.swift#L165-L169" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

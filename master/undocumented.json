@@ -107,7 +107,7 @@
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Subscription.swift",
-      "line": 143,
+      "line": 139,
       "symbol": "Subscription.skipRepeats()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
