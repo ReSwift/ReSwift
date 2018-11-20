@@ -36,13 +36,13 @@ class SubscriptionBox<State>: Hashable {
         // If we received a transformed subscription, we subscribe to that subscription
         // and forward all new values to the subscriber.
         if let transformedSubscription = transformedSubscription {
-            transformedSubscription.observe { [unowned self] _, newState in
+            transformedSubscription.observer = { [unowned self] _, newState in
                 self.subscriber?._newState(state: newState as Any)
             }
         // If we haven't received a transformed subscription, we forward all values
         // from the original subscription.
         } else {
-            originalSubscription.observe { [unowned self] _, newState in
+            originalSubscription.observer = { [unowned self] _, newState in
                 self.subscriber?._newState(state: newState as Any)
             }
         }
@@ -71,13 +71,23 @@ public class Subscription<State> {
         ) -> Subscription<Substate>
     {
         return Subscription<Substate> { sink in
-            self.observe { oldState, newState in
+            self.observer = { oldState, newState in
                 sink(oldState.map(selector) ?? nil, selector(newState))
             }
         }
     }
 
     // MARK: Public Interface
+
+    /// Initializes a subscription with a sink closure. The closure provides a way to send
+    /// new values over this subscription.
+    public init(sink: @escaping (@escaping (State?, State) -> Void) -> Void) {
+        // Provide the caller with a closure that will forward all values
+        // to observers of this subscription.
+        sink { old, new in
+            self.newValues(oldState: old, newState: new)
+        }
+    }
 
     /// Provides a subscription that selects a substate of the state of the original subscription.
     /// - parameter selector: A closure that maps a state to a selected substate
@@ -96,7 +106,7 @@ public class Subscription<State> {
     public func skipRepeats(_ isRepeat: @escaping (_ oldState: State, _ newState: State) -> Bool)
         -> Subscription<State> {
         return Subscription<State> { sink in
-            self.observe { oldState, newState in
+            self.observer = { oldState, newState in
                 switch (oldState, newState) {
                 case let (old?, new):
                     if !isRepeat(old, new) {
@@ -111,31 +121,17 @@ public class Subscription<State> {
         }
     }
 
+    /// The closure called with changes from the store.
+    /// This closure can be written to for use in extensions to Subscription similar to `skipRepeats`
+    public var observer: ((State?, State) -> Void)?
+
     // MARK: Internals
 
-    var observer: ((State?, State) -> Void)?
-
     init() {}
-
-    /// Initializes a subscription with a sink closure. The closure provides a way to send
-    /// new values over this subscription.
-    private init(sink: @escaping (@escaping (State?, State) -> Void) -> Void) {
-        // Provide the caller with a closure that will forward all values
-        // to observers of this subscription.
-        sink { old, new in
-            self.newValues(oldState: old, newState: new)
-        }
-    }
 
     /// Sends new values over this subscription. Observers will be notified of these new values.
     func newValues(oldState: State?, newState: State) {
         self.observer?(oldState, newState)
-    }
-
-    /// A caller can observe new values of this subscription through the provided closure.
-    /// - Note: subscriptions only support a single observer.
-    fileprivate func observe(observer: @escaping (State?, State) -> Void) {
-        self.observer = observer
     }
 }
 
