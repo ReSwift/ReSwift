@@ -279,7 +279,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
     guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
 
     Octokit(configuration).repositories { response in
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             store.dispatch(SetRepostories(repositories: response))
         }
     }
@@ -290,7 +290,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
 
 In this example we're using the `Octokit` library to perform a network request that fetches a user's repositories. Within the callback block of the function we dispatch a state update that injects the received repositories into the app state. This will trigger all subscribers to be informed about the new state.
 
-Note that the callback block from the network request arrives on a background thread, therefore we're using `dispatch_async(dispatch_get_main_queue())` to perform the state update on the main thread. `ReSwift` will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but `ReSwift` does not enforce this recommendation. ReSwift *will* enforce that all Dispatches, Store Subscribes and Store Unsubscribes are on the same thread or serial Grand Central Dispatch queue. Therefore the main dispatch queue works, however the global dispatch queue, being concurrent, will fail.
+Note that the callback block from the network request arrives on a background thread, therefore we're using `DispatchQueue.main.async` to perform the state update on the main thread. `ReSwift` will call reducers and subscribers on whatever thread you have dispatched an action from. We recommend to always dispatch from the main thread, but `ReSwift` does not enforce this recommendation. ReSwift *will* enforce that all Dispatches, Store Subscribes and Store Unsubscribes are on the same thread or serial Grand Central Dispatch queue. Therefore the main dispatch queue works, however the global dispatch queue, being concurrent, will fail.
 
 In many cases your asynchronous tasks will consist of two separate steps:
 
@@ -304,7 +304,7 @@ func fetchGitHubRepositories(state: State, store: Store<State>) -> Action? {
     guard case let .LoggedIn(configuration) = state.authenticationState.loggedInState  else { return nil }
 
     Octokit(configuration).repositories { response in
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             store.dispatch(SetRepostories(repositories: .repositories(response)))
         }
     }
