@@ -88,9 +88,6 @@ public protocol StoreType: DispatchingStoreType {
      ```
      store.dispatch( noteActionCreatore.deleteNote(3) )
      ```
-
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
      */
     func dispatch(_ actionCreator: ActionCreator)
 
