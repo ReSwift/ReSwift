@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 
-struct TestAppState: StateType {
+struct TestAppState {
     var testValue: Int?
 
     init() {
@@ -17,7 +17,7 @@ struct TestAppState: StateType {
     }
 }
 
-struct TestStringAppState: StateType {
+struct TestStringAppState {
     var testValue: String
 
     init() {
@@ -31,7 +31,7 @@ extension TestStringAppState: Equatable {
     }
 }
 
-struct TestNonEquatable: StateType {
+struct TestNonEquatable {
     var testValue: NonEquatable
 
     init() {
@@ -47,7 +47,7 @@ struct NonEquatable {
     }
 }
 
-struct TestCustomAppState: StateType {
+struct TestCustomAppState {
     var substate: TestCustomSubstate
 
     init(substate: TestCustomSubstate) {

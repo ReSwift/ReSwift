@@ -1,10 +1,12 @@
-<!--
 # Upcoming
 
 **Breaking API Changes:**
+
 **API Changes:**
+- Deprecate `StateType` protocol requirement (#462) - @mjarvis
+
 **Other:**
--->
+
 
 # 6.0.0
 

@@ -41,7 +41,7 @@ class StoreTests: XCTestCase {
 }
 
 // Used for deinitialization test
-class DeInitStore<State: StateType>: Store<State> {
+class DeInitStore<State>: Store<State> {
     var deInitAction: (() -> Void)?
 
     deinit {
@@ -73,7 +73,7 @@ class DeInitStore<State: StateType>: Store<State> {
     }
 }
 
-struct CounterState: StateType {
+struct CounterState {
     var count: Int = 0
 }
 

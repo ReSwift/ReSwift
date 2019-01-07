@@ -455,7 +455,7 @@ class TestSelectiveSubscriber: StoreSubscriber {
     }
 }
 
-struct TestComplexAppState: StateType {
+struct TestComplexAppState {
     var testValue: Int?
     var otherState: OtherState?
 }
