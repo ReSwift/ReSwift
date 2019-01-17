@@ -7,7 +7,7 @@
 import Foundation
 import XCTest
 /**
- @testable import for internal testing of `Assertions.fatalErrorClosure`
+ @testable import for testing of `Assertions.fatalErrorClosure`
  */
 @testable import ReSwift
 

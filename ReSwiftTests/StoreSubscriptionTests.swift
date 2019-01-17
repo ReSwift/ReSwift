@@ -8,7 +8,7 @@
 
 import XCTest
 /**
- @testable import for internal testing of `Store.subscriptions`
+ @testable import for testing of `Store.subscriptions`
  */
 @testable import ReSwift
 
@@ -28,6 +28,18 @@ class StoreSubscriptionTests: XCTestCase {
     /**
      It does not strongly capture an observer
      */
+    #if swift(>=4.1)
+    func testDoesNotCaptureStrongly() {
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
+        var subscriber: TestSubscriber? = TestSubscriber()
+
+        store.subscribe(subscriber!)
+        XCTAssertEqual(store.subscriptions.compactMap({ $0.subscriber }).count, 1)
+
+        subscriber = nil
+        XCTAssertEqual(store.subscriptions.compactMap({ $0.subscriber }).count, 0)
+    }
+    #else
     func testDoesNotCaptureStrongly() {
         store = Store(reducer: reducer.handleAction, state: TestAppState())
         var subscriber: TestSubscriber? = TestSubscriber()
@@ -38,6 +50,7 @@ class StoreSubscriptionTests: XCTestCase {
         subscriber = nil
         XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 0)
     }
+    #endif
 
     /**
      it removes deferenced subscribers before notifying state changes
@@ -165,13 +178,61 @@ class StoreSubscriptionTests: XCTestCase {
 
         XCTAssertEqual(store.subscriptions.count, 1)
     }
+
+    func testNewStateModifyingSubscriptionsDoesNotDiscardNewSubscription() {
+        // This was built as a failing test due to a bug introduced by #325
+        // The bug occured by adding a subscriber during `newState`
+        // The bug was caused by creating a copy of `subscriptions` before calling
+        // `newState`, and then assigning that copy back to `subscriptions`, losing
+        // the mutation that occured during `newState`
+
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
+
+        let subscriber2 = BlockSubscriber<TestAppState> { _ in
+            self.store.dispatch(SetValueAction(2))
+        }
+
+        let subscriber1 = BlockSubscriber<TestAppState> { [unowned self] state in
+            if state.testValue == 1 {
+                self.store.subscribe(subscriber2) {
+                    $0.skip(when: { _, _ in return true })
+                }
+            }
+        }
+
+        store.subscribe(subscriber1) {
+            $0.only(when: { _, new in new.testValue.map { $0 == 1 } ?? false })
+        }
+
+        store.dispatch(SetValueAction(1))
+
+        XCTAssertTrue(store.subscriptions.contains(where: {
+            guard let subscriber = $0.subscriber else {
+                XCTFail("expecting non-nil subscriber")
+                return false
+            }
+            return subscriber === subscriber1
+        }))
+        XCTAssertTrue(store.subscriptions.contains(where: {
+            guard let subscriber = $0.subscriber else {
+                XCTFail("expecting non-nil subscriber")
+                return false
+            }
+            return subscriber === subscriber2
+        }))
+
+        // Have a subscriber (#1)
+        // #1 adds sub #2 in newState
+        // #1 dispatches in newState
+        // Test that store.subscribers == [#1, #2] // this should fail
+    }
 }
 
 // MARK: Retain Cycle Detection
 
-fileprivate struct TracerAction: Action { }
+private struct TracerAction: Action { }
 
-fileprivate class TestSubscriptionBox<S>: SubscriptionBox<S> {
+private class TestSubscriptionBox<S>: SubscriptionBox<S> {
     override init<T>(
         originalSubscription: Subscription<S>,
         transformedSubscription: Subscription<T>?,
@@ -188,7 +249,7 @@ fileprivate class TestSubscriptionBox<S>: SubscriptionBox<S> {
     }
 }
 
-fileprivate class TestStore<State: StateType>: Store<State> {
+private class TestStore<State: StateType>: Store<State> {
     override func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,

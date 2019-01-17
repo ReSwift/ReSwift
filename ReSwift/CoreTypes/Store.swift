@@ -6,8 +6,6 @@
 //  Copyright © 2015 DigiTales. All rights reserved.
 //
 
-import Foundation
-
 /**
  This class is the default implementation of the `Store` protocol. You will use this store in most
  of your applications. You shouldn't need to implement your own store.
@@ -19,15 +17,14 @@ open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = SubscriptionBox<State>
 
-    // swiftlint:disable todo
-    // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
-    // swiftlint:enable todo
-
-    /*private (set)*/ public var state: State! {
+    private(set) public var state: State! {
         didSet {
-            subscriptions = subscriptions.filter { $0.subscriber != nil }
             subscriptions.forEach {
-                $0.newValues(oldState: oldValue, newState: state)
+                if $0.subscriber == nil {
+                    subscriptions.remove($0)
+                } else {
+                    $0.newValues(oldState: oldValue, newState: state)
+                }
             }
         }
     }
@@ -36,7 +33,7 @@ open class Store<State: StateType>: StoreType {
 
     private var reducer: Reducer<State>
 
-    var subscriptions: [SubscriptionType] = []
+    var subscriptions: Set<SubscriptionType> = []
 
     private var isDispatching = false
 
@@ -48,7 +45,7 @@ open class Store<State: StateType>: StoreType {
     ///
     /// Middleware is applied in the order in which it is passed into this constructor.
     ///
-    /// - parameter reducer: Main reducer that processes incomind actions.
+    /// - parameter reducer: Main reducer that processes incoming actions.
     /// - parameter state: Initial state, if any. Can be `nil` and will be 
     ///   provided by the reducer in that case.
     /// - parameter middleware: Ordered list of action pre-processors, acting 
@@ -68,15 +65,16 @@ open class Store<State: StateType>: StoreType {
         // Wrap the dispatch function with all middlewares
         self.dispatchFunction = middleware
             .reversed()
-            .reduce({ [unowned self] action in
-                self._defaultDispatch(action: action)
-            }) { dispatchFunction, middleware in
-                // If the store get's deinitialized before the middleware is complete; drop
-                // the action without dispatching.
-                let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
-                let getState = { [weak self] in self?.state }
-                return middleware(dispatch, getState)(dispatchFunction)
-        }
+            .reduce(
+                { [unowned self] action in
+                    self._defaultDispatch(action: action) },
+                { dispatchFunction, middleware in
+                    // If the store get's deinitialized before the middleware is complete; drop
+                    // the action without dispatching.
+                    let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
+                    let getState = { [weak self] in self?.state }
+                    return middleware(dispatch, getState)(dispatchFunction)
+            })
 
         if let state = state {
             self.state = state
@@ -85,24 +83,18 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    private func _subscribe<SelectedState, S: StoreSubscriber>(
+    fileprivate func _subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<SelectedState>?)
         where S.StoreSubscriberStateType == SelectedState
     {
-        // If the same subscriber is already registered with the store, replace the existing
-        // subscription with the new one.
-        if let index = subscriptions.index(where: { $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-
         let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
             transformedSubscription: transformedSubscription,
             subscriber: subscriber
         )
 
-        subscriptions.append(subscriptionBox)
+        subscriptions.update(with: subscriptionBox)
 
         if let state = self.state {
             originalSubscription.newValues(oldState: nil, newState: state)
@@ -128,7 +120,7 @@ open class Store<State: StateType>: StoreType {
                    transformedSubscription: transformedSubscription)
     }
 
-    internal func subscriptionBox<T>(
+    func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,
         subscriber: AnyStoreSubscriber

@@ -90,6 +90,9 @@
 		D47D2D571E32C4170064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D581E32C4180064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
 		D47D2D591E32C4190064769E /* DispatchingStoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */; };
+		D490BC43203F291800902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
+		D490BC44203F291900902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
+		D490BC45203F291A00902589 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BC41203F27E000902589 /* PerformanceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +165,7 @@
 		8DA430622E3D093002316DB5 /* Pods-SwiftLintIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.debug.xcconfig"; sourceTree = "<group>"; };
 		B5C08F1806830A13C9006A27 /* libPods-SwiftLintIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLintIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47D2D551E32C3F50064769E /* DispatchingStoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchingStoreType.swift; sourceTree = "<group>"; };
+		D490BC41203F27E000902589 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				625E669E1C1FFA3C0027C288 /* Info.plist */,
+				D490BC41203F27E000902589 /* PerformanceTests.swift */,
 				73F39F331D3EE3C300DFFE62 /* StoreDispatchTests.swift */,
 				259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */,
 				25AB3B7F1C54A79F00A41513 /* StoreSubscriberTests.swift */,
@@ -527,8 +532,6 @@
 		625E667A1C1FF97E0027C288 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Benjamin Encz";
 				TargetAttributes = {
 					25DBCF361C30BF2B00D63A58 = {
@@ -542,23 +545,19 @@
 					};
 					25DBCF7A1C30C4AA00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0900;
 					};
 					25DBCF861C30C4DB00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0900;
 					};
 					3F13C0E71E7B3E4000D8442C = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
 					};
 					625E66821C1FF97E0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0900;
 					};
 					625E66991C1FFA3C0027C288 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -775,6 +774,7 @@
 				73723E061D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				73F39F3A1D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF741C30C34000D63A58 /* TypeHelperTests.swift in Sources */,
+				D490BC45203F291A00902589 /* PerformanceTests.swift in Sources */,
 				25DBCF751C30C34000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -810,6 +810,7 @@
 				73723E051D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
 				73F39F391D3EE46A00DFFE62 /* StoreSubscriptionTests.swift in Sources */,
 				25DBCF9F1C30C50000D63A58 /* TypeHelperTests.swift in Sources */,
+				D490BC44203F291900902589 /* PerformanceTests.swift in Sources */,
 				25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -848,6 +849,7 @@
 				625E66A71C1FFA640027C288 /* StoreTests.swift in Sources */,
 				73F39F341D3EE3C300DFFE62 /* StoreDispatchTests.swift in Sources */,
 				25AB3B811C54A84500A41513 /* StoreSubscriberTests.swift in Sources */,
+				D490BC43203F291800902589 /* PerformanceTests.swift in Sources */,
 				259737FB1C2C618A00869B8F /* TestFakes.swift in Sources */,
 				73E545DA1D22BCD600D114E8 /* XCTest+Assertions.swift in Sources */,
 				73723E041D30AEF3006139F0 /* XCTest+Compatibility.swift in Sources */,
@@ -1020,7 +1022,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1035,7 +1036,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "reswift.github.io.ReSwift-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1051,7 +1051,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.2;
 			};
 			name = Debug;
 		};
@@ -1066,7 +1065,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwift.SwiftLintIntegration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.2;
 			};
 			name = Release;
 		};
@@ -1082,12 +1080,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1126,7 +1126,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1147,12 +1147,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1184,7 +1186,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
@@ -1197,6 +1199,7 @@
 		625E668C1C1FF97E0027C288 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -1213,6 +1216,7 @@
 		625E668D1C1FF97E0027C288 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -1236,7 +1240,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1249,7 +1252,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = reswift.github.io.ReSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
