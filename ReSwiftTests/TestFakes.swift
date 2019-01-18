@@ -223,7 +223,7 @@ struct CustomEquatable: Equatable {
     }
 }
 
-struct TestCustomEquatableAppState: StateType {
+struct TestCustomEquatableAppState: StateType, Equatable {
     var testValue: CustomEquatable = CustomEquatable()
 }
 
@@ -232,7 +232,7 @@ func testCustomEquatableReducer(action: Action, state: TestCustomEquatableAppSta
 
     switch action {
     case let action as SetValueAction:
-        state.testValue.value = action.value
+        state.testValue.value = action.value ?? 0
         return state
     default:
         return state
