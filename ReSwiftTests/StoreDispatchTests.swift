@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ReSwift
+import ReSwift
 
 class StoreDispatchTests: XCTestCase {
 
