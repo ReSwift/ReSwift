@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 /**
  This is ReSwift's built in action type, it is the only built in type that conforms to the
  `Action` protocol. `StandardAction` can be serialized and can therefore be used with developer
@@ -19,6 +20,7 @@ import Foundation
  to serialize your custom action types, you can implement `StandardActionConvertible` which will
  make it possible to generate a `StandardAction` from your typed action - the best of both worlds!
 */
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 public struct StandardAction: Action {
     /// A String that identifies the type of this `StandardAction`
     public let type: String
@@ -49,6 +51,7 @@ private let payloadKey = "payload"
 private let isTypedActionKey = "isTypedAction"
 let reSwiftNull = "ReSwift_Null"
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 extension StandardAction: Coding {
 
     public init?(dictionary: [String: AnyObject]) {
@@ -72,6 +75,7 @@ extension StandardAction: Coding {
 /// serializable.
 /// - Note: We are working on a tool to automatically generate the implementation of this protocol
 ///     for your custom action types.
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 public protocol StandardActionConvertible: Action {
     /**
      Within this initializer you need to use the payload from the `StandardAction` to configure the

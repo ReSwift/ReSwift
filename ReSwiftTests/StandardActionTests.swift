@@ -9,6 +9,7 @@
 import XCTest
 import ReSwift
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 class StandardActionInitTests: XCTestCase {
 
     /**
@@ -34,6 +35,7 @@ class StandardActionInitTests: XCTestCase {
 
 }
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 class StandardActionInitSerializationTests: XCTestCase {
 
     /**
@@ -141,6 +143,7 @@ class StandardActionInitSerializationTests: XCTestCase {
     }
 }
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 class StandardActionConvertibleInit: XCTestCase {
 
     /**
@@ -162,6 +165,7 @@ class StandardActionConvertibleInit: XCTestCase {
 
 }
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
 class StandardActionConvertibleTests: XCTestCase {
 
     /**

@@ -65,7 +65,7 @@ struct TestCustomAppState: StateType {
 
 struct NoOpAction: Action {}
 
-struct SetValueAction: StandardActionConvertible {
+struct SetValueAction {
 
     let value: Int?
     static let type = "SetValueAction"
@@ -73,19 +73,21 @@ struct SetValueAction: StandardActionConvertible {
     init (_ value: Int?) {
         self.value = value
     }
+}
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueAction: StandardActionConvertible {
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! Int?
     }
 
     func toStandardAction() -> StandardAction {
         return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
-                                isTypedAction: true)
+                              isTypedAction: true)
     }
-
 }
 
-struct SetValueStringAction: StandardActionConvertible {
+struct SetValueStringAction {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -94,6 +96,10 @@ struct SetValueStringAction: StandardActionConvertible {
         self.value = value
     }
 
+}
+
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueStringAction: StandardActionConvertible {
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! String
     }
@@ -106,7 +112,7 @@ struct SetValueStringAction: StandardActionConvertible {
 
 }
 
-struct SetCustomSubstateAction: StandardActionConvertible {
+struct SetCustomSubstateAction {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
@@ -114,6 +120,11 @@ struct SetCustomSubstateAction: StandardActionConvertible {
     init (_ value: Int) {
         self.value = value
     }
+
+}
+
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetCustomSubstateAction: StandardActionConvertible {
 
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! Int

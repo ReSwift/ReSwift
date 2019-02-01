@@ -1,5 +1,10 @@
 # Upcoming
 
+**API Changes:**
+- Deprecate `StandardAction` and `StandardActionConvertible` - @mjarvis
+    
+    - These have been moved to https://github.com/ReSwift/ReSwift-Recorder since they are unnecessary for the base use of ReSwift
+
 **Other**:
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion

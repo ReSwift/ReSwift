@@ -28,7 +28,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: AppState1(), function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: AppState1(), function: reducerFunction)
 
         XCTAssertTrue(called)
     }
@@ -44,7 +44,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: nil, function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: nil, function: reducerFunction)
 
         XCTAssertTrue(called)
     }
@@ -60,7 +60,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: AppState2(), function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: AppState2(), function: reducerFunction)
 
         XCTAssertFalse(called)
     }
