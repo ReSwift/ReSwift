@@ -5,6 +5,10 @@
     
     - These have been moved to https://github.com/ReSwift/ReSwift-Recorder since they are unnecessary for the base use of ReSwift
 
+- Deprecate `ActionCreator` and `AsyncActionCreator` (#391) - @mjarvis
+
+    - These are deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk
+
 **Other**:
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
