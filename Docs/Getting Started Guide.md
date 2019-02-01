@@ -130,13 +130,37 @@ Note that you don't need to store derived state inside of your app state. The ap
 
 Actions are used to express intended state changes. Actions don't contain functions. Instead, they provide information about the intended state change. For example, the user to be deleted in a `DeleteUser` action. In your ReSwift app you will define actions for every possible state change that can happen. Reducers handle these actions and implement state changes based on the information the actions provide. All actions in ReSwift conform to the `Action` protocol, which currently is just a marker protocol.
 
+You can either provide custom types as actions, or you can use the built in `StandardAction`.
+
+The `StandardAction` has the following structure:
+
+```swift
+struct StandardAction: Action {
+    // identifies the action
+    let type: String
+    // provides information that is relevant to processing this action
+    // e.g. details about which post should be favorited
+    let payload: [String : AnyObject]?
+    // this flag is used for serialization when working with ReSwift Recorder
+    let isTypedAction: Bool
+}
+```
+**For most applications it is recommended to create your own types for actions instead of using `StandardAction`, as this allows you to take advantage of Swift's type system**.
+
 To provide your own action, simply create a type that conforms to the `Action` protocol:
 
 ```swift
-struct SetOAuthURL: Action {
-    let oAuthUrl: URL
+struct LikePostAction: Action {
+    let post: Post
+    let userLikingPost: User
 }
 ```
+
+The advantage of using a `StandardAction` is that it can be serialized; this is required for using the features provided by [ReSwift Recorder](https://github.com/ReSwift/ReSwift-Recorder); such as persisting the application state between app launches.
+
+If you want to use custom types for actions, but still want to be able to make use of the features provided by ReSwift Recorder, you can implement the `StandardActionConvertible` protocol. This will allow ReSwift to convert your typed actions to standard actions that can then be serialized.
+
+Once ReSwift Recorder's implementation is further along, you will find detailed information  on all of this in its documentation.
 
 ## Reducers
 
