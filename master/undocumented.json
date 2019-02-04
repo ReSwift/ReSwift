@@ -37,14 +37,14 @@
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 200,
+      "line": 205,
       "symbol": "Store.subscribe(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 209,
+      "line": 214,
       "symbol": "Store.subscribe(_:transform:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
