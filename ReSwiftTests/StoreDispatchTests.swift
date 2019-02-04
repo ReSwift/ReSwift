@@ -37,6 +37,7 @@ class StoreDispatchTests: XCTestCase {
     /**
      it accepts action creators
      */
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     func testAcceptsActionCreators() {
         store.dispatch(SetValueAction(5))
 
@@ -52,6 +53,7 @@ class StoreDispatchTests: XCTestCase {
     /**
      it accepts async action creators
      */
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     func testAcceptsAsyncActionCreators() {
 
         let asyncExpectation = futureExpectation(
@@ -85,6 +87,7 @@ class StoreDispatchTests: XCTestCase {
     /**
      it calls the callback once state update from async action is complete
      */
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     func testCallsCalbackOnce() {
         let asyncExpectation = futureExpectation(withDescription:
             "It calls the callback once state update from async action is complete")

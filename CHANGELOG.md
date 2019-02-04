@@ -11,6 +11,10 @@
     - Removes the ability to directly set `state` by making it `private(set)`. This prevents users from bypassing reducers and middleware. All mutation of the state must occur through the normal `Action` & `Reducer` methods.
     - This deprecates the usage of `ReSwift-Recorder`. Changes may be made to that library in the future in order to support this change.
 
+- Deprecate `ActionCreator` and `AsyncActionCreator` (#391) - @mjarvis
+
+    - These are deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk
+
 **Other**:
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
