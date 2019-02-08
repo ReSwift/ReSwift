@@ -180,6 +180,36 @@ class StoreSubscriberTests: XCTestCase {
         XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 
+    /**
+     It avoids default skipRepeats when custom skipRepeats is implemented.
+     */
+    func testCallsEquatableOnceForStateChange() {
+        let reducer = testCustomEquatableReducer
+        let state = TestCustomEquatableAppState()
+        let store = Store(reducer: reducer, state: state)
+        let subscriber = TestFilteredSubscriber<CustomEquatable>()
+        customEquatableCount = 0
+        var customSkipCount = 0
+
+        store.subscribe(subscriber) {
+            $0.select { $0.testValue }.skipRepeats {
+                customSkipCount += 1
+                return $0.value == $1.value
+            }
+        }
+
+        XCTAssertEqual(customEquatableCount, 0)
+        XCTAssertEqual(subscriber.receivedValue.value, 0)
+        XCTAssertEqual(customSkipCount, 0)
+
+        store.dispatch(SetValueAction(1))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 1)
+        XCTAssertEqual(subscriber.newStateCallCount, 2)
+        XCTAssertEqual(customEquatableCount, 0)
+        XCTAssertEqual(customSkipCount, 1)
+    }
+
     func testPassesOnDuplicateStateUpdatesInCustomizedStore() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
