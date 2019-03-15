@@ -25,8 +25,8 @@ public extension XCTestCase {
      - parameter testCase:        The test case to be executed that expected to fire the assertion
      method.
      */
-    public func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
-                                 line: UInt = #line, testCase: @escaping () -> Void) {
+    func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
+                          line: UInt = #line, testCase: @escaping () -> Void) {
         expectAssertionNoReturnFunction(
             functionName: "fatalError",
             file: file,
