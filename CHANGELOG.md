@@ -21,6 +21,7 @@
 - Improve subscription & state update performance (#325) - @mjarvis
 - Enable build settings "Allow app extension API only" (#328) - @oradyvan
 - Open `Subscription<State>` to allow external extensions (#383) - @mjarvis
+- Resolve Xcode 10.2 warnings with Swift 4.2.2 and 5.0 (#397) - @mjarvis
 
 # 4.0.1
 
