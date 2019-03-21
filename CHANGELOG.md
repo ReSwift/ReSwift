@@ -5,6 +5,7 @@
 **API Changes:**
 
 **Other**
+- Fix 4.1.0 regression with `automaticallySkipsRepeats` when selecting Equatable state in Non-Equatable root state (#399) - @djtech42
 
 # 4.1.0
 
