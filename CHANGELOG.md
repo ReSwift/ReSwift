@@ -1,5 +1,15 @@
 # Upcoming
 
+**Breaking API Changes:**
+
+**API Changes:**
+
+**Other**
+
+# 4.1.0
+
+*Released: 03/21/2019*
+
 **API Changes:**
 - Deprecate `StandardAction` and `StandardActionConvertible` - @mjarvis
     
@@ -9,7 +19,7 @@
 
     - These are deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk
 
-**Other**:
+**Other**
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Improve subscription & state update performance (#325) - @mjarvis
