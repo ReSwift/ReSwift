@@ -11,17 +11,28 @@
     - Removes the ability to directly set `state` by making it `private(set)`. This prevents users from bypassing reducers and middleware. All mutation of the state must occur through the normal `Action` & `Reducer` methods.
     - This deprecates the usage of `ReSwift-Recorder`. Changes may be made to that library in the future in order to support this change.
 
+**Other**
+
+# 4.1.0
+
+*Released: 03/21/2019*
+
+**API Changes:**
+- Deprecate `StandardAction` and `StandardActionConvertible` - @mjarvis
+    
+    - These have been moved to https://github.com/ReSwift/ReSwift-Recorder since they are unnecessary for the base use of ReSwift
+
 - Deprecate `ActionCreator` and `AsyncActionCreator` (#391) - @mjarvis
 
     - These are deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk
 
-**Other**:
+**Other**
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Improve subscription & state update performance (#325) - @mjarvis
 - Enable build settings "Allow app extension API only" (#328) - @oradyvan
 - Open `Subscription<State>` to allow external extensions (#383) - @mjarvis
-- Fix 4.1.0 regression with `automaticallySkipsRepeats` when selecting Equatable state in Non-Equatable root state (#399) - @djtech42
+- Update project to Swift 4.2 (#256, #335, #374) - @mjarvis, @DivineDominion
 
 # 4.0.1
 
