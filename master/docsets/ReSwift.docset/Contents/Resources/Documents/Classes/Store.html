@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (67% documented)
+         (68% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -701,6 +701,50 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
+                    <a name="/s:7ReSwift5StoreC9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF"></a>
+                    <a name="//apple_ref/swift/Method/subscribe(_:transform:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ReSwift5StoreC9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF">subscribe(_:transform:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="o">&gt;</span><span class="p">)?</span>
+    <span class="p">)</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">SelectedState</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L205-L217" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Skip%20Repeats%20for%20Equatable%20States2"></a>
+                <a name="//apple_ref/swift/Section/Skip Repeats for Equatable States" class="dashAnchor"></a>
+                <a href="#/Skip%20Repeats%20for%20Equatable%20States2">
+                  <h3 class="section-name">Skip Repeats for Equatable States</h3>
+                </a>
+              </div>
+              <ul class='item-container'>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
                     <a name="/s:7ReSwift5StoreCAASQRzrlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:7ReSwift5StoreCAASQRzrlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF">subscribe(_:)</a>
@@ -725,40 +769,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L205-L212" class="button">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:7ReSwift5StoreCAASQRzrlE9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF"></a>
-                    <a name="//apple_ref/swift/Method/subscribe(_:transform:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ReSwift5StoreCAASQRzrlE9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF">subscribe(_:transform:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">S</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreSubscriber.html">StoreSubscriber</a></span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Subscription.html">Subscription</a></span><span class="o">&lt;</span><span class="kt">SelectedState</span><span class="o">&gt;</span><span class="p">)?</span>
-    <span class="p">)</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">StoreSubscriberStateType</span> <span class="o">==</span> <span class="kt">SelectedState</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L214-L226" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L221-L228" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
