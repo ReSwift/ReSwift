@@ -13,6 +13,12 @@
 
 **Other**
 
+# 4.1.1
+
+*Released: 03/21/2019*
+
+- Fix 4.1.0 regression with `automaticallySkipsRepeats` when selecting Equatable state in Non-Equatable root state (#399) - @djtech42
+
 # 4.1.0
 
 *Released: 03/21/2019*
