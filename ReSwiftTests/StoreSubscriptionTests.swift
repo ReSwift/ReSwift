@@ -305,7 +305,7 @@ extension StoreSubscriptionTests {
 
         autoreleasepool {
 
-            store = TestStore(reducer: reducer.handleAction, state: TestAppState())
+            store = TestStore(reducer: reducer.handleAction, state: TestAppState(), automaticallySkipsRepeats: false)
             let subscriber = TestStoreSubscriber<Int?>()
 
             // Preconditions
