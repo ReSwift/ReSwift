@@ -21,6 +21,7 @@
 - Improve subscription & state update performance (#325) - @mjarvis
 - Enable build settings "Allow app extension API only" (#328) - @oradyvan
 - Open `Subscription<State>` to allow external extensions (#383) - @mjarvis
+- Fix 4.1.0 regression with `automaticallySkipsRepeats` when selecting Equatable state in Non-Equatable root state (#399) - @djtech42
 
 # 4.0.1
 
