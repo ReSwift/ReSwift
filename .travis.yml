@@ -28,6 +28,10 @@ matrix:
       env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=4.0,name=Apple Watch - 42mm" SWIFT_VERSION="4.2" ACTION="build"
     - osx_image: xcode10.1
       env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=12.0,name=Apple TV 4K"       SWIFT_VERSION="4.2" ACTION="test"
+    - osx_image: xcode10.2
+      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.2" ACTION="test"
+    - osx_image: xcode10.2
+      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
 
 script:
   - set -o pipefail
