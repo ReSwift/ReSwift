@@ -193,6 +193,28 @@
 <li>Removes the ability to directly set <code>state</code> by making it <code>private(set)</code>. This prevents users from bypassing reducers and middleware. All mutation of the state must occur through the normal <code><a href="Actions.html#/s:7ReSwift6ActionP">Action</a></code> &amp; <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> methods.</li>
 <li>This deprecates the usage of <code>ReSwift-Recorder</code>. Changes may be made to that library in the future in order to support this change.</li>
 </ul></li>
+</ul>
+
+<p><strong>Other:</strong></p>
+<h1 id='4-1-1' class='heading'>4.1.1</h1>
+
+<p><em>Released: 03/21/2019</em></p>
+
+<ul>
+<li>Fix 4.1.0 regression with <code>automaticallySkipsRepeats</code> when selecting Equatable state in Non-Equatable root state (#399) - @djtech42</li>
+</ul>
+<h1 id='4-1-0' class='heading'>4.1.0</h1>
+
+<p><em>Released: 03/21/2019</em></p>
+
+<p><strong>API Changes:</strong></p>
+
+<ul>
+<li><p>Deprecate <code>StandardAction</code> and <code>StandardActionConvertible</code> - @mjarvis</p>
+
+<ul>
+<li>These have been moved to <a href="https://github.com/ReSwift/ReSwift-Recorder">https://github.com/ReSwift/ReSwift-Recorder</a> since they are unnecessary for the base use of ReSwift</li>
+</ul></li>
 <li><p>Deprecate <code>ActionCreator</code> and <code>AsyncActionCreator</code> (#391) - @mjarvis</p>
 
 <ul>
@@ -200,7 +222,7 @@
 </ul></li>
 </ul>
 
-<p><strong>Other</strong>:</p>
+<p><strong>Other:</strong></p>
 
 <ul>
 <li>Add Subscription <code>skip(when:)</code> and <code>only(when:)</code> (#242) - @mjarvis</li>
@@ -208,7 +230,7 @@
 <li>Improve subscription &amp; state update performance (#325) - @mjarvis</li>
 <li>Enable build settings <q>Allow app extension API only</q> (#328) - @oradyvan</li>
 <li>Open <code><a href="Classes/Subscription.html">Subscription&lt;State&gt;</a></code> to allow external extensions (#383) - @mjarvis</li>
-<li>Fix 4.1.0 regression with <code>automaticallySkipsRepeats</code> when selecting Equatable state in Non-Equatable root state (#399) - @djtech42</li>
+<li>Update project to Swift 4.2 (#256, #335, #374) - @mjarvis, @DivineDominion</li>
 </ul>
 <h1 id='4-0-1' class='heading'>4.0.1</h1>
 
@@ -314,7 +336,7 @@
 <li>Mark <code><a href="Classes/Store.html">Store</a></code> as <code>open</code>, this reverts a previously accidental breaking API Change (#157) - @Ben-G</li>
 </ul>
 
-<p><strong>Other</strong>:</p>
+<p><strong>Other:</strong>:</p>
 
 <ul>
 <li>Update to Swift 3.0.1 - @Cristiam, @Ben-G</li>
@@ -324,7 +346,7 @@
 
 <p><em>Released: 09/15/2016</em></p>
 
-<p><strong>Other</strong>:</p>
+<p><strong>Other:</strong></p>
 
 <ul>
 <li>Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) - @agentk</li>
@@ -337,13 +359,13 @@
 
 <p><em>Released: 06/27/2016</em></p>
 
-<p><strong>Breaking API Changes</strong>:</p>
+<p><strong>Breaking API Changes:</strong>:</p>
 
 <ul>
 <li>Significant Improvements to Serialization Code for <code>StandardAction</code> (relevant for recording tools) - @okla</li>
 </ul>
 
-<p><strong>Other</strong>:</p>
+<p><strong>Other:</strong>:</p>
 
 <ul>
 <li>Swift 2.3 Updates - @agentk</li>
@@ -404,7 +426,7 @@
 <li><code><a href="Classes/Store.html">Store</a></code> can now be initialized with an empty state, allowing reducers to hydrate the store - @Ben-G</li>
 </ul>
 
-<p><strong>Bugfixes</strong></p>
+<p><strong>Bugfixes:</strong></p>
 
 <ul>
 <li>Break retain cycle when using middelware - @sendyhalim</li>
