@@ -36,7 +36,7 @@ public extension XCTestCase {
         },
             expectedMessage: expectedMessage,
             testCase: testCase,
-            cleanUp:  {
+            cleanUp: {
                 Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
         })
     }
@@ -54,7 +54,7 @@ public extension XCTestCase {
         cleanUp: @escaping () -> Void) {
 
         let asyncExpectation = futureExpectation(withDescription: funcName + "-Expectation")
-        var assertionMessage: String? = nil
+        var assertionMessage: String?
 
         function { (message) -> Void in
             assertionMessage = message
