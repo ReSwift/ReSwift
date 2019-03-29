@@ -135,7 +135,27 @@ Button taps result in dispatched actions that will be handled by the store and i
 
 This is a very basic example that only shows a subset of ReSwift's features, read the Getting Started Guide to see how you can build entire apps with this architecture. For a complete implementation of this example see the [CounterExample](https://github.com/ReSwift/CounterExample) project.
 
-[You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
+### Create a subscription of several substates combined
+
+Just create a struct representing the data model needed in the subscriber class, with a constructor that takes the whole app state as a param. Consider this constructor as a mapper/selector from the app state to the subscriber state. Being `MySubState` a struct and conforming to `Equatable`, ReSwift (by default) will not notify the subscriber if the computed output hasn't changed. Also, Swift will be able to infer the type of the subscription.
+
+```swift
+struct MySubState: Equatable {
+    // Combined substate derived from the app state.
+    
+    init(state: AppState) {
+        // Compute here the substate needed.
+    }
+}
+```
+
+```swift
+store.subscribe(self) { $0.select(MySubState.init) }
+    
+func newState(state: MySubState) {
+    // Profit!
+}
+```
 
 # Why ReSwift?
 
@@ -156,6 +176,8 @@ This architecture provides further benefits beyond improving your code base:
 - Maybe recorded actions can be used to build UI and integration tests?
 
 The ReSwift tooling is still in a very early stage, but aforementioned prospects excite me and hopefully others in the community as well!
+
+[You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
 
 # Getting Started Guide
 
