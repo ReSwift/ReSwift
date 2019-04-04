@@ -187,7 +187,7 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 github "ReSwift/ReSwift"
 ```
 
-### Accio
+## Accio
 
 You can install ReSwift via [Accio](https://github.com/JamitLabs/Accio) by adding the following line to your `Package.swift`:
 
