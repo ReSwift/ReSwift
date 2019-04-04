@@ -187,6 +187,27 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 github "ReSwift/ReSwift"
 ```
 
+### Accio
+
+You can install ReSwift via [Accio](https://github.com/JamitLabs/Accio) by adding the following line to your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "4.1.1")),
+```
+
+Next, add `ReSwift` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "ReSwift",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ## Swift Package Manager
 
 You can install ReSwift via [Swift Package Manager](https://swift.org/package-manager/) by adding the following line to your `Package.swift`:
