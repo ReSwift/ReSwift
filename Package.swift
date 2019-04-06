@@ -1,10 +1,13 @@
+// swift-tools-version:4.2
+
 import PackageDescription
 
 let package = Package(
     name: "ReSwift",
-    exclude: [
-      "ReSwiftTests",
-      "Carthage",
-      "Docs"
+    products: [
+      .library(name: "ReSwift", targets: ["ReSwift"])
+    ],
+    targets: [
+      .target(name: "ReSwift", path: "ReSwift")
     ]
 )
