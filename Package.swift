@@ -11,6 +11,11 @@ let package = Package(
         .target(
             name: "ReSwift",
             path: "ReSwift"
+        ),
+        .testTarget(
+            name: "ReSwiftTests",
+            dependencies: ["ReSwift"],
+            path: "ReSwiftTests"
         )
     ]
 )
