@@ -28,22 +28,28 @@ matrix:
       env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=4.0,name=Apple Watch - 42mm" SWIFT_VERSION="4.2" ACTION="build"
     - osx_image: xcode10.1
       env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=12.0,name=Apple TV 4K"       SWIFT_VERSION="4.2" ACTION="test"
+    - osx_image: xcode10.2
+      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true"
 
 script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild
-    "$ACTION"
-    -project "$FRAMEWORK_NAME.xcodeproj"
-    -scheme "$FRAMEWORK_NAME-$SCHEME"
-    -sdk "$SDK"
-    -destination "$DESTINATION"
-    -configuration Debug
-    ONLY_ACTIVE_ARCH=YES
-    GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
-    GCC_GENERATE_TEST_COVERAGE_FILES=YES
-    SWIFT_VERSION=$SWIFT_VERSION
+  - if [ -z "$TEST_SWIFTPM" ]; then
+      xcodebuild
+      "$ACTION"
+      -project "$FRAMEWORK_NAME.xcodeproj"
+      -scheme "$FRAMEWORK_NAME-$SCHEME"
+      -sdk "$SDK"
+      -destination "$DESTINATION"
+      -configuration Debug
+      ONLY_ACTIVE_ARCH=YES
+      GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+      GCC_GENERATE_TEST_COVERAGE_FILES=YES
+      SWIFT_VERSION=$SWIFT_VERSION
+    else
+      swift test
+    fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J ReSwift
