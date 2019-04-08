@@ -46,9 +46,9 @@ script:
       ONLY_ACTIVE_ARCH=YES
       GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
       GCC_GENERATE_TEST_COVERAGE_FILES=YES
-      SWIFT_VERSION=$SWIFT_VERSION
+      SWIFT_VERSION=$SWIFT_VERSION;
     else
-      swift test
+      swift test;
     fi
 
 after_success:
