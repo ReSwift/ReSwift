@@ -12,6 +12,7 @@
     - This deprecates the usage of `ReSwift-Recorder`. Changes may be made to that library in the future in order to support this change.
 
 **Other:**
+- Update Swift Package Manager support (#403) - @Dschee
 
 # 4.1.1
 
