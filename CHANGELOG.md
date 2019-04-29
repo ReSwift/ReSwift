@@ -12,6 +12,7 @@
     - This deprecates the usage of `ReSwift-Recorder`. Changes may be made to that library in the future in order to support this change.
 
 **Other:**
+- Resolve Xcode 10.2 warnings with Swift 4.2.2 and 5.0 (#397) - @mjarvis
 - Update Swift Package Manager support (#403) - @Dschee
 
 # 4.1.1

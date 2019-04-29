@@ -20,9 +20,25 @@ class SubscriptionBox<State>: Hashable {
     weak var subscriber: AnyStoreSubscriber?
     private let objectIdentifier: ObjectIdentifier
 
-    var hashValue: Int {
-        return self.objectIdentifier.hashValue
-    }
+    #if swift(>=5.0)
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(self.objectIdentifier)
+        }
+    #elseif swift(>=4.2)
+        #if compiler(>=5.0)
+            func hash(into hasher: inout Hasher) {
+                hasher.combine(self.objectIdentifier)
+            }
+        #else
+            var hashValue: Int {
+                return self.objectIdentifier.hashValue
+            }
+        #endif
+    #else
+        var hashValue: Int {
+            return self.objectIdentifier.hashValue
+        }
+    #endif
 
     init<T>(
         originalSubscription: Subscription<State>,

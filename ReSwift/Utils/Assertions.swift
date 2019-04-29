@@ -16,7 +16,7 @@ import Foundation
  - parameter line:    Calling line
  */
 func raiseFatalError(_ message: @autoclosure () -> String = "",
-                              file: StaticString = #file, line: UInt = #line) -> Never {
+                     file: StaticString = #file, line: UInt = #line) -> Never {
     Assertions.fatalErrorClosure(message(), file, line)
     repeat {
         RunLoop.current.run()
