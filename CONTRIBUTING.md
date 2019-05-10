@@ -95,8 +95,6 @@ The processing of each file can include:
 - Replacing \{\{version\}\} with the current version
 - Ad-hoc string replacements (found in .jazzy.json under "string-replacements")
 
-A forked version of Jazzy is currently used to support individual Markdown sections and injecting Markdown into API section headers. It can be installed from [https://github.com/agentk/jazzy/](https://github.com/agentk/jazzy/tree/integrated-markdown).
-
 The documentation is hosted by GitHub pages under the [ReSwift gh-pages](https://github.com/ReSwift/ReSwift/tree/gh-pages) branch. The `build.sh` script in the `gh-pages` branch, installs / updates jazzy, checks out the latest master branch of ReSwift, and calls the `generated_docs.sh` script to generate docs into the master folder. Docs changes can then be committed and pushed to the `gh-pages` branch.
 
 The custom jazzy theme is located in: `Docs/jazzy-theme`.
