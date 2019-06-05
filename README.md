@@ -218,7 +218,7 @@ import PackageDescription
 let package = Package(
     [...]
     dependencies: [
-        .Package(url: "https://github.com/ReSwift/ReSwift.git", majorVersion: XYZ)
+        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "4.1.1"),
     ]
 )
 ```
