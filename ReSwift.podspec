@@ -8,7 +8,12 @@ Pod::Spec.new do |s|
                         DESC
   s.homepage         = "https://github.com/ReSwift/ReSwift"
   s.license          = { :type => "MIT", :file => "LICENSE.md" }
-  s.author           = { "Benjamin Encz" => "me@benjamin-encz.de" }
+  s.author           = {
+    "Benjamin Encz" => "me@benjamin-encz.de",
+    "Karl Bowden" => "karl@karlbowden.com",
+    "Malcolm Jarvis" => "malcolm@boolable.ca",
+    "Christian Tietze" => "me@christiantietze.de"
+  }
   s.documentation_url = "http://reswift.github.io/ReSwift/"
   s.social_media_url = "http://twitter.com/benjaminencz"
   s.source           = { :git => "https://github.com/ReSwift/ReSwift.git", :tag => s.version.to_s }
