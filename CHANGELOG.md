@@ -1,4 +1,6 @@
-# Upcoming
+# 5.0.0
+
+*Released: 2019-06-30* 
 
 **Breaking API Changes:**
 - Remove `StandardAction` and `StandardActionConvertible` (#270) - @mjarvis
