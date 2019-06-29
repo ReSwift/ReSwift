@@ -192,7 +192,7 @@ github "ReSwift/ReSwift"
 You can install ReSwift via [Accio](https://github.com/JamitLabs/Accio) by adding the following line to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "4.1.1")),
+.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "5.0.0")),
 ```
 
 Next, add `ReSwift` to your App targets dependencies like so:
@@ -218,7 +218,7 @@ import PackageDescription
 let package = Package(
     [...]
     dependencies: [
-        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "4.1.1"),
+        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "5.0.0"),
     ]
 )
 ```
