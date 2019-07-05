@@ -6,6 +6,9 @@
 //  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
+import Combine
+import SwiftUI
+
 /**
  This class is the default implementation of the `StoreType` protocol. You will use this store in most
  of your applications. You shouldn't need to implement your own store.
@@ -13,33 +16,21 @@
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-open class Store<State: StateType>: StoreType {
+open class Store<State: StateType>: StoreType, BindableObject {
 
-    typealias SubscriptionType = SubscriptionBox<State>
-
-    private(set) public var state: State! {
-        didSet {
-            subscriptions.forEach {
-                if $0.subscriber == nil {
-                    subscriptions.remove($0)
-                } else {
-                    $0.newValues(oldState: oldValue, newState: state)
-                }
-            }
+    public var didChange: Published<State>.Publisher {
+        get {
+            return $state
         }
     }
+
+    @Published private(set) public var state: State
 
     public lazy var dispatchFunction: DispatchFunction! = createDispatchFunction()
 
     private var reducer: Reducer<State>
 
-    var subscriptions: Set<SubscriptionType> = []
-
     private var isDispatching = Synchronized<Bool>(false)
-
-    /// Indicates if new subscriptions attempt to apply `skipRepeats` 
-    /// by default.
-    fileprivate let subscriptionsAutomaticallySkipRepeats: Bool
 
     public var middleware: [Middleware<State>] {
         didSet {
@@ -61,19 +52,12 @@ open class Store<State: StateType>: StoreType {
     ///   implements `Equatable`. Defaults to `true`.
     public required init(
         reducer: @escaping Reducer<State>,
-        state: State?,
-        middleware: [Middleware<State>] = [],
-        automaticallySkipsRepeats: Bool = true
+        state: State,
+        middleware: [Middleware<State>] = []
     ) {
-        self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
         self.reducer = reducer
         self.middleware = middleware
-
-        if let state = state {
-            self.state = state
-        } else {
-            dispatch(ReSwiftInit())
-        }
+        self.state = state
     }
 
     private func createDispatchFunction() -> DispatchFunction! {
@@ -90,68 +74,6 @@ open class Store<State: StateType>: StoreType {
                     let getState = { [weak self] in self?.state }
                     return middleware(dispatch, getState)(dispatchFunction)
             })
-    }
-
-    fileprivate func _subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, originalSubscription: Subscription<State>,
-        transformedSubscription: Subscription<SelectedState>?)
-        where S.StoreSubscriberStateType == SelectedState
-    {
-        let subscriptionBox = self.subscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
-        )
-
-        subscriptions.update(with: subscriptionBox)
-
-        if let state = self.state {
-            originalSubscription.newValues(oldState: nil, newState: state)
-        }
-    }
-
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            subscribe(subscriber, transform: nil)
-    }
-
-    open func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-    {
-        // Create a subscription for the new subscriber.
-        let originalSubscription = Subscription<State>()
-        // Call the optional transformation closure. This allows callers to modify
-        // the subscription, e.g. in order to subselect parts of the store's state.
-        let transformedSubscription = transform?(originalSubscription)
-
-        _subscribe(subscriber, originalSubscription: originalSubscription,
-                   transformedSubscription: transformedSubscription)
-    }
-
-    func subscriptionBox<T>(
-        originalSubscription: Subscription<State>,
-        transformedSubscription: Subscription<T>?,
-        subscriber: AnyStoreSubscriber
-        ) -> SubscriptionBox<State> {
-
-        return SubscriptionBox(
-            originalSubscription: originalSubscription,
-            transformedSubscription: transformedSubscription,
-            subscriber: subscriber
-        )
-    }
-
-    open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
-        #if swift(>=5.0)
-        if let index = subscriptions.firstIndex(where: { return $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-        #else
-        if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
-            subscriptions.remove(at: index)
-        }
-        #endif
     }
 
     // swiftlint:disable:next identifier_name
@@ -174,71 +96,5 @@ open class Store<State: StateType>: StoreType {
 
     open func dispatch(_ action: Action) {
         dispatchFunction(action)
-    }
-
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
-        if let action = actionCreatorProvider(state, self) {
-            dispatch(action)
-        }
-    }
-
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
-        dispatch(asyncActionCreatorProvider, callback: nil)
-    }
-
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
-                       callback: DispatchCallback?) {
-        actionCreatorProvider(state, self) { actionProvider in
-            let action = actionProvider(self.state, self)
-
-            if let action = action {
-                self.dispatch(action)
-                callback?(self.state)
-            }
-        }
-    }
-
-    public typealias DispatchCallback = (State) -> Void
-
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
-
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    public typealias AsyncActionCreator = (
-        _ state: State,
-        _ store: Store,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-    ) -> Void
-}
-
-// MARK: Skip Repeats for Equatable States
-
-extension Store {
-    open func subscribe<SelectedState: Equatable, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
-    {
-        let originalSubscription = Subscription<State>()
-
-        var transformedSubscription = transform?(originalSubscription)
-        if subscriptionsAutomaticallySkipRepeats {
-            transformedSubscription = transformedSubscription?.skipRepeats()
-        }
-        _subscribe(subscriber, originalSubscription: originalSubscription,
-                   transformedSubscription: transformedSubscription)
-    }
-}
-
-extension Store where State: Equatable {
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            guard subscriptionsAutomaticallySkipRepeats else {
-                subscribe(subscriber, transform: nil)
-                return
-            }
-            subscribe(subscriber, transform: { $0.skipRepeats() })
     }
 }

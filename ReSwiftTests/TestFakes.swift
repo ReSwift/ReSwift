@@ -161,7 +161,7 @@ struct TestNonEquatableReducer {
     }
 }
 
-class TestStoreSubscriber<T>: StoreSubscriber {
+class TestStoreSubscriber<T> {
     var receivedStates: [T] = []
 
     func newState(state: T) {
@@ -169,7 +169,7 @@ class TestStoreSubscriber<T>: StoreSubscriber {
     }
 }
 
-class BlockSubscriber<S>: StoreSubscriber {
+class BlockSubscriber<S> {
     typealias StoreSubscriberStateType = S
     private let block: (S) -> Void
 
@@ -182,7 +182,7 @@ class BlockSubscriber<S>: StoreSubscriber {
     }
 }
 
-class DispatchingSubscriber: StoreSubscriber {
+class DispatchingSubscriber {
     var store: Store<TestAppState>
 
     init(store: Store<TestAppState>) {
@@ -198,7 +198,7 @@ class DispatchingSubscriber: StoreSubscriber {
     }
 }
 
-class CallbackStoreSubscriber<T>: StoreSubscriber {
+class CallbackStoreSubscriber<T> {
 
     let handler: (T) -> Void
 

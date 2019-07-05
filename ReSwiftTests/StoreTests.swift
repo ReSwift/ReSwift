@@ -12,13 +12,13 @@ import XCTest
 class StoreTests: XCTestCase {
 
     /**
-     it dispatches an Init action when it doesn't receive an initial state
+     it does not dispatch an init action
      */
     func testInit() {
         let reducer = MockReducer()
-        _ = Store<CounterState>(reducer: reducer.handleAction, state: nil)
+        _ = Store<CounterState>(reducer: reducer.handleAction, state: CounterState())
 
-        XCTAssert(reducer.calledWithAction[0] is ReSwiftInit)
+        XCTAssertTrue(reducer.calledWithAction.isEmpty)
     }
 
     /**
@@ -50,26 +50,23 @@ class DeInitStore<State: StateType>: Store<State> {
 
     required convenience init(
         reducer: @escaping Reducer<State>,
-        state: State?,
+        state: State,
         deInitAction: (() -> Void)?) {
             self.init(
                 reducer: reducer,
                 state: state,
-                middleware: [],
-                automaticallySkipsRepeats: false)
+                middleware: [])
             self.deInitAction = deInitAction
     }
 
     required init(
         reducer: @escaping Reducer<State>,
-        state: State?,
-        middleware: [Middleware<State>],
-        automaticallySkipsRepeats: Bool) {
+        state: State,
+        middleware: [Middleware<State>]) {
             super.init(
                 reducer: reducer,
                 state: state,
-                middleware: middleware,
-                automaticallySkipsRepeats: automaticallySkipsRepeats)
+                middleware: middleware)
     }
 }
 
@@ -81,10 +78,10 @@ class MockReducer {
 
     var calledWithAction: [Action] = []
 
-    func handleAction(action: Action, state: CounterState?) -> CounterState {
+    func handleAction(action: Action, state: CounterState) -> CounterState {
         calledWithAction.append(action)
 
-        return state ?? CounterState()
+        return state
     }
 
 }

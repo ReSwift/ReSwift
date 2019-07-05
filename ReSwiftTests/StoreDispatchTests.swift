@@ -11,9 +11,6 @@ import XCTest
 
 class StoreDispatchTests: XCTestCase {
 
-    typealias TestSubscriber = TestStoreSubscriber<TestAppState>
-    typealias CallbackSubscriber = CallbackStoreSubscriber<TestAppState>
-
     var store: Store<TestAppState>!
     var reducer: TestReducer!
 
@@ -32,87 +29,6 @@ class StoreDispatchTests: XCTestCase {
         store = Store(reducer: reducer.handleAction, state: TestAppState())
         reducer.store = store
         store.dispatch(SetValueAction(10))
-    }
-
-    /**
-     it accepts action creators
-     */
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    func testAcceptsActionCreators() {
-        store.dispatch(SetValueAction(5))
-
-        let doubleValueActionCreator: Store<TestAppState>.ActionCreator = { state, store in
-            return SetValueAction(state.testValue! * 2)
-        }
-
-        store.dispatch(doubleValueActionCreator)
-
-        XCTAssertEqual(store.state.testValue, 10)
-    }
-
-    /**
-     it accepts async action creators
-     */
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    func testAcceptsAsyncActionCreators() {
-
-        let asyncExpectation = futureExpectation(
-            withDescription: "It accepts async action creators")
-
-        let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
-            dispatchAsync {
-                // Provide the callback with an action creator
-                callback { _, _ in
-                    return SetValueAction(5)
-                }
-            }
-        }
-
-        let subscriber = CallbackSubscriber { [unowned self] state in
-            if self.store.state.testValue != nil {
-                XCTAssertEqual(self.store.state.testValue, 5)
-                asyncExpectation.fulfill()
-            }
-        }
-
-        store.subscribe(subscriber)
-        store.dispatch(asyncActionCreator)
-        waitForFutureExpectations(withTimeout: 1) { error in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
-    }
-
-    /**
-     it calls the callback once state update from async action is complete
-     */
-    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    func testCallsCalbackOnce() {
-        let asyncExpectation = futureExpectation(withDescription:
-            "It calls the callback once state update from async action is complete")
-
-        let asyncActionCreator: Store<TestAppState>.AsyncActionCreator = { _, _, callback in
-            dispatchAsync {
-                // Provide the callback with an action creator
-                callback { _, _ in
-                    return SetValueAction(5)
-                }
-            }
-        }
-
-        store.dispatch(asyncActionCreator) { newState in
-            XCTAssertEqual(self.store.state.testValue, 5)
-            if newState.testValue == 5 {
-                asyncExpectation.fulfill()
-            }
-        }
-
-        waitForFutureExpectations(withTimeout: 1) { error in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
     }
 }
 
