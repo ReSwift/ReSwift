@@ -139,7 +139,7 @@ open class Store<State: StateType>: StoreType {
             subscriptions.remove(at: index)
         }
         #else
-        if let index = subscriptions.firstIndex(where: { return $0.subscriber === subscriber }) {
+        if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
         }
         #endif
