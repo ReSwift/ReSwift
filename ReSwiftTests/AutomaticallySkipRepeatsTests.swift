@@ -28,19 +28,19 @@ class AutomaticallySkipRepeatsTests: XCTestCase {
     }
 
     func testInitialSubscription() {
-        store.subscribe(self) { $0.select { $0.name } }
+        store.subscribe(self) { $0.select(\.name) }
         XCTAssertEqual(self.subscriptionUpdates, 1)
     }
 
     func testDispatchUnrelatedActionWithExplicitSkipRepeats() {
-        store.subscribe(self) { $0.select { $0.name }.skipRepeats() }
+        store.subscribe(self) { $0.select(\.name).skipRepeats() }
         XCTAssertEqual(self.subscriptionUpdates, 1)
         store.dispatch(ChangeAge(newAge: 30))
         XCTAssertEqual(self.subscriptionUpdates, 1)
     }
 
     func testDispatchUnrelatedActionWithoutExplicitSkipRepeats() {
-        store.subscribe(self) { $0.select { $0.name } }
+        store.subscribe(self) { $0.select(\.name) }
         XCTAssertEqual(self.subscriptionUpdates, 1)
         store.dispatch(ChangeAge(newAge: 30))
         XCTAssertEqual(self.subscriptionUpdates, 1)

@@ -37,6 +37,31 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     /**
+     it allows to pass a state selector key path
+     */
+    func testAllowsSelectorKeyPath() {
+        let reducer = TestReducer()
+        let store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestFilteredSubscriber<Int?>()
+
+        store.subscribe(subscriber) {
+            $0.select(\.testValue)
+        }
+
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+
+        store.dispatch(SetValueAction(nil))
+
+        #if swift(>=4.1)
+            XCTAssertEqual(subscriber.receivedValue, .some(.none))
+        #else
+            XCTAssertEqual(subscriber.receivedValue, nil)
+        #endif
+    }
+
+    /**
      it supports complex state selector closures
      */
     func testComplexStateSelector() {
@@ -69,11 +94,9 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<Int?>()
 
         store.subscribe(subscriber) {
-            $0.select {
-                $0.testValue
-            }.skipRepeats {
-                return $0 == $1
-            }
+            $0
+            .select(\.testValue)
+            .skipRepeats { $0 == $1 }
         }
 
         XCTAssertEqual(subscriber.receivedValue, 3)
@@ -95,7 +118,9 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<String>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.testValue }.skipRepeats()
+            $0
+            .select(\.testValue)
+            .skipRepeats()
         }
 
         XCTAssertEqual(subscriber.receivedValue, "Initial")
@@ -116,8 +141,9 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.substate }
-                .skipRepeats { $0.value == $1.value }
+            $0
+            .select(\.substate)
+            .skipRepeats { $0.value == $1.value }
         }
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
@@ -135,7 +161,7 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<NonEquatable>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.testValue }
+            $0.select(\.testValue)
         }
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
@@ -153,7 +179,7 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<String>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.testValue }
+            $0.select(\.testValue)
         }
 
         XCTAssertEqual(subscriber.receivedValue, "Initial")
@@ -187,7 +213,7 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<String>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.testValue.testValue }
+            $0.select(\.testValue.testValue)
         }
 
         XCTAssertEqual(subscriber.receivedValue, "Initial")
@@ -221,8 +247,9 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.substate }
-                .skip { $0.value == $1.value }
+            $0
+            .select(\.substate)
+            .skip { $0.value == $1.value }
         }
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)
@@ -240,8 +267,9 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
 
         store.subscribe(subscriber) {
-            $0.select { $0.substate }
-                .only { $0.value != $1.value }
+            $0
+            .select(\.substate)
+            .only { $0.value != $1.value }
         }
 
         XCTAssertEqual(subscriber.receivedValue.value, 5)

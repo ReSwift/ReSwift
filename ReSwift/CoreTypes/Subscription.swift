@@ -114,6 +114,15 @@ public class Subscription<State> {
         return self._select(selector)
     }
 
+    /// Provides a subscription that selects a substate of the state of the original subscription.
+    /// - parameter keyPath: A key path from a state to a substate
+    public func select<Substate>(
+        _ keyPath: KeyPath<State, Substate>
+        ) -> Subscription<Substate>
+    {
+        return self._select { $0[keyPath: keyPath] }
+    }
+
     /// Provides a subscription that skips certain state updates of the original subscription.
     /// - parameter isRepeat: A closure that determines whether a given state update is a repeat and
     /// thus should be skipped and not forwarded to subscribers.

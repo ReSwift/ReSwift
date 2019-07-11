@@ -315,7 +315,7 @@ extension StoreSubscriptionTests {
             autoreleasepool {
 
                 store.subscribe(subscriber, transform: {
-                    $0.select({ $0.testValue })
+                    $0.select(\.testValue)
                 })
                 XCTAssertEqual(subscriber.receivedStates.count, 1)
                 let subscriptionBox = store.subscriptions.first! as! TestSubscriptionBox<TestAppState>
