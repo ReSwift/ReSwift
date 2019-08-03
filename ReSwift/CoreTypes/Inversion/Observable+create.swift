@@ -8,13 +8,13 @@
 
 extension Observable {
     /// Starting point of events, aka state updates.
-    internal static func create(_ subscribe: @escaping (AnyObserver<Element>) -> Disposable) -> Observable<Element> {
+    internal static func create(_ subscribe: @escaping (AnyObserver<Substate>) -> Disposable) -> Observable<Substate> {
         return AnonymousObservable(subscribe)
     }
 }
 
-final private class AnonymousObservable<Element>: Producer<Element> {
-    typealias Handler = (AnyObserver<Element>) -> Disposable
+final private class AnonymousObservable<Substate>: Producer<Substate> {
+    typealias Handler = (AnyObserver<Substate>) -> Disposable
 
     let handler: Handler
 
@@ -22,7 +22,7 @@ final private class AnonymousObservable<Element>: Producer<Element> {
         self.handler = handler
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Element == Element {
+    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == Substate {
         let sink = AnonymousObservableSink(observer: observer, cancel: cancel)
         let subscription = sink.run(self)
         return (sink, subscription)
@@ -30,14 +30,14 @@ final private class AnonymousObservable<Element>: Producer<Element> {
 }
 
 final private class AnonymousObservableSink<Observer: ObserverType>: Sink<Observer>, ObserverType {
-    typealias Element = Observer.Element
-    typealias Parent = AnonymousObservable<Element>
+    typealias Substate = Observer.Substate
+    typealias Parent = AnonymousObservable<Substate>
 
     override init(observer: Observer, cancel: Cancelable) {
         super.init(observer: observer, cancel: cancel)
     }
 
-    func on(_ state: Element) {
+    func on(_ state: Substate) {
         self.observer.on(state)
     }
 

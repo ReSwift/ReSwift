@@ -17,7 +17,7 @@ internal class Sink<Observer: ObserverType>: Disposable {
         self.cancel = cancel
     }
 
-    final func forward(state: Observer.Element) {
+    final func forward(state: Observer.Substate) {
         guard !isDisposed else { return }
         self.observer.on(state)
     }

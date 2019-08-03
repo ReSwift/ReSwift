@@ -8,8 +8,8 @@
 
 /// Receives a state update.
 protocol ObserverType {
-    associatedtype Element
-    func on(_ state: Element)
+    associatedtype Substate
+    func on(_ state: Substate)
 }
 
 
@@ -20,7 +20,7 @@ internal struct AnyObserver<Substate>: ObserverType {
         self.actionHandler = actionHandler
     }
 
-    init<Observer: ObserverType>(_ observer: Observer) where Observer.Element == Substate {
+    init<Observer: ObserverType>(_ observer: Observer) where Observer.Substate == Substate {
         self.actionHandler = observer.on
     }
 

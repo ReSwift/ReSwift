@@ -17,7 +17,7 @@ final private class Filter<Substate>: Producer<Substate> {
         self.predicate = predicate
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Element == Substate  {
+    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == Substate  {
         let sink = FilterSink(predicate: self.predicate, observer: observer, cancel: cancel)
         let subscription = self.source.subscribe(sink)
         return (sink, subscription)
@@ -25,7 +25,7 @@ final private class Filter<Substate>: Producer<Substate> {
 }
 
 final private class FilterSink<Observer: ObserverType>: Sink<Observer>, ObserverType {
-    typealias Substate = Observer.Element
+    typealias Substate = Observer.Substate
     typealias Predicate = (Substate) -> Bool
 
     private let predicate: Predicate
@@ -40,4 +40,3 @@ final private class FilterSink<Observer: ObserverType>: Sink<Observer>, Observer
         self.forward(state: state)
     }
 }
-

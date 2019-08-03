@@ -8,7 +8,7 @@
 
 /// Override `run` as a callback hook on events coming in.
 internal class Producer<Element>: Observable<Element> {
-    internal override func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element {
+    internal override func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Substate == Substate {
         // The SinkDisposer is returned to manage resources: if it is disposed, its managed resources are disposed, too.
         let disposer = SinkDisposer()
         let sinkAndSubscription = self.run(observer, cancel: disposer)

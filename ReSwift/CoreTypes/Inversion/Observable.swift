@@ -8,8 +8,8 @@
 
 /// Represents a push style state update sequence.
 protocol ObservableType {
-    associatedtype Element
-    func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element
+    associatedtype Substate
+    func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Substate == Substate
 }
 
 extension ObservableType {
@@ -20,7 +20,7 @@ extension ObservableType {
 }
 
 extension ObservableType {
-    func asObservable() -> Observable<Element> {
+    func asObservable() -> Observable<Substate> {
         return Observable.create { observer in
             return self.subscribe(observer)
         }
@@ -30,7 +30,7 @@ extension ObservableType {
 /// Type-erased `ObervableType`.
 ///
 /// You can only get `Observable` instances through the `create` static factory, as used by the `Store`.
-open class Observable<Element>: ObservableType {
+open class Observable<Substate>: ObservableType {
     internal init() {
         // no-op
     }
@@ -40,11 +40,11 @@ open class Observable<Element>: ObservableType {
     }
 
     /// Optimization hook for multiple `select` calls in succession. Is overwritten by the `Select` type.
-    internal func composeMap<Substate>(_ transform: @escaping (Element) -> Substate) -> Observable<Substate> {
+    internal func composeSelect<SelectedSubstate>(_ transform: @escaping (Substate) -> SelectedSubstate) -> Observable<SelectedSubstate> {
         return ReSwift.select(source: self, transform: transform)
     }
 
-    public func asObservable() -> Observable<Element> {
+    public func asObservable() -> Observable<Substate> {
         return self
     }
 }

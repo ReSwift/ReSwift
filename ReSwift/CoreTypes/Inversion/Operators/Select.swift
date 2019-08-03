@@ -7,8 +7,8 @@
 //
 
 extension ObservableType {
-    public func select<Substate>(_ transform: @escaping (Element) -> Substate) -> Observable<Substate> {
-        return self.asObservable().composeMap(transform)
+    public func select<SelectSubstate>(_ transform: @escaping (Substate) -> SelectSubstate) -> Observable<SelectSubstate> {
+        return self.asObservable().composeSelect(transform)
     }
 }
 
@@ -28,14 +28,14 @@ final private class Select<FromState, ToState>: Producer<ToState> {
         self.transform = transform
     }
 
-    override func composeMap<Substate>(_ outerTransform: @escaping (ToState) -> Substate) -> Observable<Substate> {
+    override func composeSelect<Substate>(_ outerTransform: @escaping (ToState) -> Substate) -> Observable<Substate> {
         let innerTransform = self.transform
         return Select<FromState, Substate>(source: self.source) { (original: FromState) -> Substate in
             return outerTransform(innerTransform(original))
         }
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Element == ToState {
+    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == ToState {
         let sink = SelectSink(transform: self.transform, observer: observer, cancel: cancel)
         let subscription = source.subscribe(sink)
         return (sink, subscription)
@@ -44,7 +44,7 @@ final private class Select<FromState, ToState>: Producer<ToState> {
 
 final private class SelectSink<FromState, Observer: ObserverType>: Sink<Observer>, ObserverType {
     typealias Element = FromState
-    typealias ToState = Observer.Element
+    typealias ToState = Observer.Substate
     typealias Transform = (FromState) -> ToState
 
     private let transform: Transform
