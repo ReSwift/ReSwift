@@ -53,6 +53,42 @@
 		25DBCFA01C30C50000D63A58 /* TestFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259737FA1C2C618A00869B8F /* TestFakes.swift */; };
 		3F13C0EB1E7B3E4000D8442C /* SwiftLintIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */; };
 		3F13C0ED1E7B3E4000D8442C /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
+		50F87AD522F5B5610064BEFA /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD422F5B5610064BEFA /* Select.swift */; };
+		50F87AD622F5B5610064BEFA /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD422F5B5610064BEFA /* Select.swift */; };
+		50F87AD722F5B5610064BEFA /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD422F5B5610064BEFA /* Select.swift */; };
+		50F87AD822F5B5610064BEFA /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD422F5B5610064BEFA /* Select.swift */; };
+		50F87ADA22F5B8010064BEFA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD922F5B8010064BEFA /* Observable.swift */; };
+		50F87ADB22F5B8010064BEFA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD922F5B8010064BEFA /* Observable.swift */; };
+		50F87ADC22F5B8010064BEFA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD922F5B8010064BEFA /* Observable.swift */; };
+		50F87ADD22F5B8010064BEFA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD922F5B8010064BEFA /* Observable.swift */; };
+		50F87ADF22F5B82A0064BEFA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87ADE22F5B82A0064BEFA /* Producer.swift */; };
+		50F87AE022F5B82A0064BEFA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87ADE22F5B82A0064BEFA /* Producer.swift */; };
+		50F87AE122F5B82A0064BEFA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87ADE22F5B82A0064BEFA /* Producer.swift */; };
+		50F87AE222F5B82A0064BEFA /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87ADE22F5B82A0064BEFA /* Producer.swift */; };
+		50F87AE422F5B8930064BEFA /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE322F5B8930064BEFA /* Disposable.swift */; };
+		50F87AE522F5B8930064BEFA /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE322F5B8930064BEFA /* Disposable.swift */; };
+		50F87AE622F5B8930064BEFA /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE322F5B8930064BEFA /* Disposable.swift */; };
+		50F87AE722F5B8930064BEFA /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE322F5B8930064BEFA /* Disposable.swift */; };
+		50F87AE922F5B8AC0064BEFA /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE822F5B8AC0064BEFA /* Observer.swift */; };
+		50F87AEA22F5B8AC0064BEFA /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE822F5B8AC0064BEFA /* Observer.swift */; };
+		50F87AEB22F5B8AC0064BEFA /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE822F5B8AC0064BEFA /* Observer.swift */; };
+		50F87AEC22F5B8AC0064BEFA /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AE822F5B8AC0064BEFA /* Observer.swift */; };
+		50F87AEF22F5B8E80064BEFA /* Sink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AEE22F5B8E80064BEFA /* Sink.swift */; };
+		50F87AF022F5B8E80064BEFA /* Sink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AEE22F5B8E80064BEFA /* Sink.swift */; };
+		50F87AF122F5B8E80064BEFA /* Sink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AEE22F5B8E80064BEFA /* Sink.swift */; };
+		50F87AF222F5B8E80064BEFA /* Sink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AEE22F5B8E80064BEFA /* Sink.swift */; };
+		50F87AF422F5B9220064BEFA /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF322F5B9220064BEFA /* Cancelable.swift */; };
+		50F87AF522F5B9220064BEFA /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF322F5B9220064BEFA /* Cancelable.swift */; };
+		50F87AF622F5B9220064BEFA /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF322F5B9220064BEFA /* Cancelable.swift */; };
+		50F87AF722F5B9220064BEFA /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF322F5B9220064BEFA /* Cancelable.swift */; };
+		50F87AF922F5B9520064BEFA /* Observable+create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF822F5B9520064BEFA /* Observable+create.swift */; };
+		50F87AFA22F5B9520064BEFA /* Observable+create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF822F5B9520064BEFA /* Observable+create.swift */; };
+		50F87AFB22F5B9520064BEFA /* Observable+create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF822F5B9520064BEFA /* Observable+create.swift */; };
+		50F87AFC22F5B9520064BEFA /* Observable+create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AF822F5B9520064BEFA /* Observable+create.swift */; };
+		50F87AFE22F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
+		50F87AFF22F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
+		50F87B0022F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
+		50F87B0122F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
 		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
 		625E66871C1FF97E0027C288 /* ReSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* ReSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
@@ -140,6 +176,15 @@
 		3F13C0E81E7B3E4000D8442C /* SwiftLintIntegration.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLintIntegration.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F13C0EA1E7B3E4000D8442C /* SwiftLintIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLintIntegration.swift; sourceTree = "<group>"; };
 		3F13C0EC1E7B3E4000D8442C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50F87AD322F5B5380064BEFA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		50F87AD422F5B5610064BEFA /* Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Select.swift; sourceTree = "<group>"; };
+		50F87AD922F5B8010064BEFA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		50F87ADE22F5B82A0064BEFA /* Producer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Producer.swift; sourceTree = "<group>"; };
+		50F87AE322F5B8930064BEFA /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		50F87AE822F5B8AC0064BEFA /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		50F87AEE22F5B8E80064BEFA /* Sink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sink.swift; sourceTree = "<group>"; };
+		50F87AF322F5B9220064BEFA /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
+		50F87AF822F5B9520064BEFA /* Observable+create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+create.swift"; sourceTree = "<group>"; };
 		5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.release.xcconfig"; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +296,30 @@
 			path = SwiftLintIntegration;
 			sourceTree = "<group>";
 		};
+		50F87AED22F5B8D70064BEFA /* Inversion */ = {
+			isa = PBXGroup;
+			children = (
+				50F87AD922F5B8010064BEFA /* Observable.swift */,
+				50F87AF822F5B9520064BEFA /* Observable+create.swift */,
+				50F87AE822F5B8AC0064BEFA /* Observer.swift */,
+				50F87AE322F5B8930064BEFA /* Disposable.swift */,
+				50F87AF322F5B9220064BEFA /* Cancelable.swift */,
+				50F87ADE22F5B82A0064BEFA /* Producer.swift */,
+				50F87AEE22F5B8E80064BEFA /* Sink.swift */,
+				50F87AFD22F5BA7A0064BEFA /* Operators */,
+			);
+			path = Inversion;
+			sourceTree = "<group>";
+		};
+		50F87AFD22F5BA7A0064BEFA /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				50F87AD422F5B5610064BEFA /* Select.swift */,
+				50F87AD322F5B5380064BEFA /* Filter.swift */,
+			);
+			path = Operators;
+			sourceTree = "<group>";
+		};
 		625E66791C1FF97E0027C288 = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +399,7 @@
 				625E66BB1C1FFC880027C288 /* StoreSubscriber.swift */,
 				252982ED1C4FD21400281098 /* StoreType.swift */,
 				81BCBECD1C63167A00AA4F03 /* Subscription.swift */,
+				50F87AED22F5B8D70064BEFA /* Inversion */,
 			);
 			path = CoreTypes;
 			sourceTree = "<group>";
@@ -706,15 +776,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF401C30C16000D63A58 /* Action.swift in Sources */,
+				50F87AEC22F5B8AC0064BEFA /* Observer.swift in Sources */,
+				50F87ADD22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF411C30C16000D63A58 /* Store.swift in Sources */,
+				50F87AFC22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF421C30C16000D63A58 /* Reducer.swift in Sources */,
+				50F87AE722F5B8930064BEFA /* Disposable.swift in Sources */,
+				50F87AFE22F5BA870064BEFA /* Filter.swift in Sources */,
 				25DBCF431C30C16000D63A58 /* State.swift in Sources */,
 				252982F11C4FD21400281098 /* StoreType.swift in Sources */,
+				50F87AF222F5B8E80064BEFA /* Sink.swift in Sources */,
+				50F87AD822F5B5610064BEFA /* Select.swift in Sources */,
 				73E545D81D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBED11C63167A00AA4F03 /* Subscription.swift in Sources */,
 				25DBCF451C30C16000D63A58 /* StoreSubscriber.swift in Sources */,
+				50F87AF722F5B9220064BEFA /* Cancelable.swift in Sources */,
 				25DBCF461C30C16000D63A58 /* Middleware.swift in Sources */,
 				25DBCF471C30C16000D63A58 /* Coding.swift in Sources */,
+				50F87AE222F5B82A0064BEFA /* Producer.swift in Sources */,
 				D47D2D591E32C4190064769E /* DispatchingStoreType.swift in Sources */,
 				25DBCF481C30C16000D63A58 /* TypeHelper.swift in Sources */,
 			);
@@ -725,15 +804,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF571C30C19500D63A58 /* Action.swift in Sources */,
+				50F87AEB22F5B8AC0064BEFA /* Observer.swift in Sources */,
+				50F87ADC22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF581C30C19500D63A58 /* Store.swift in Sources */,
+				50F87AFB22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF591C30C19500D63A58 /* Reducer.swift in Sources */,
+				50F87AE622F5B8930064BEFA /* Disposable.swift in Sources */,
+				50F87B0122F5BA870064BEFA /* Filter.swift in Sources */,
 				25DBCF5A1C30C19500D63A58 /* State.swift in Sources */,
 				252982F01C4FD21400281098 /* StoreType.swift in Sources */,
+				50F87AF122F5B8E80064BEFA /* Sink.swift in Sources */,
+				50F87AD722F5B5610064BEFA /* Select.swift in Sources */,
 				73E545D71D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBED01C63167A00AA4F03 /* Subscription.swift in Sources */,
 				25DBCF5C1C30C19500D63A58 /* StoreSubscriber.swift in Sources */,
+				50F87AF622F5B9220064BEFA /* Cancelable.swift in Sources */,
 				25DBCF5D1C30C19500D63A58 /* Middleware.swift in Sources */,
 				25DBCF5E1C30C19500D63A58 /* Coding.swift in Sources */,
+				50F87AE122F5B82A0064BEFA /* Producer.swift in Sources */,
 				D47D2D581E32C4180064769E /* DispatchingStoreType.swift in Sources */,
 				25DBCF5F1C30C19500D63A58 /* TypeHelper.swift in Sources */,
 			);
@@ -761,15 +849,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				25DBCF931C30C4F000D63A58 /* Action.swift in Sources */,
+				50F87AEA22F5B8AC0064BEFA /* Observer.swift in Sources */,
+				50F87ADB22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF941C30C4F000D63A58 /* Store.swift in Sources */,
+				50F87AFA22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF951C30C4F000D63A58 /* Reducer.swift in Sources */,
+				50F87AE522F5B8930064BEFA /* Disposable.swift in Sources */,
+				50F87AFF22F5BA870064BEFA /* Filter.swift in Sources */,
 				25DBCF961C30C4F000D63A58 /* State.swift in Sources */,
 				252982EF1C4FD21400281098 /* StoreType.swift in Sources */,
+				50F87AF022F5B8E80064BEFA /* Sink.swift in Sources */,
+				50F87AD622F5B5610064BEFA /* Select.swift in Sources */,
 				73E545D61D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBECF1C63167A00AA4F03 /* Subscription.swift in Sources */,
 				25DBCF981C30C4F000D63A58 /* StoreSubscriber.swift in Sources */,
+				50F87AF522F5B9220064BEFA /* Cancelable.swift in Sources */,
 				25DBCF991C30C4F000D63A58 /* Middleware.swift in Sources */,
 				25DBCF9A1C30C4F000D63A58 /* Coding.swift in Sources */,
+				50F87AE022F5B82A0064BEFA /* Producer.swift in Sources */,
 				D47D2D571E32C4170064769E /* DispatchingStoreType.swift in Sources */,
 				25DBCF9B1C30C4F000D63A58 /* TypeHelper.swift in Sources */,
 			);
@@ -805,15 +902,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E66C11C1FFC880027C288 /* StoreSubscriber.swift in Sources */,
+				50F87AE922F5B8AC0064BEFA /* Observer.swift in Sources */,
+				50F87ADA22F5B8010064BEFA /* Observable.swift in Sources */,
 				625E66BD1C1FFC880027C288 /* Store.swift in Sources */,
+				50F87AF922F5B9520064BEFA /* Observable+create.swift in Sources */,
 				625E66B31C1FFC830027C288 /* Coding.swift in Sources */,
+				50F87AE422F5B8930064BEFA /* Disposable.swift in Sources */,
+				50F87B0022F5BA870064BEFA /* Filter.swift in Sources */,
 				625E66BC1C1FFC880027C288 /* Action.swift in Sources */,
 				259737FD1C2C661100869B8F /* Middleware.swift in Sources */,
+				50F87AEF22F5B8E80064BEFA /* Sink.swift in Sources */,
+				50F87AD522F5B5610064BEFA /* Select.swift in Sources */,
 				252982EE1C4FD21400281098 /* StoreType.swift in Sources */,
 				73E545D51D22BC3900D114E8 /* Assertions.swift in Sources */,
 				81BCBECE1C63167A00AA4F03 /* Subscription.swift in Sources */,
+				50F87AF422F5B9220064BEFA /* Cancelable.swift in Sources */,
 				625E66BE1C1FFC880027C288 /* Reducer.swift in Sources */,
 				625E66B41C1FFC830027C288 /* TypeHelper.swift in Sources */,
+				50F87ADF22F5B82A0064BEFA /* Producer.swift in Sources */,
 				D47D2D561E32C3F50064769E /* DispatchingStoreType.swift in Sources */,
 				625E66BF1C1FFC880027C288 /* State.swift in Sources */,
 			);
