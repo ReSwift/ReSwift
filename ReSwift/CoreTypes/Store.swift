@@ -133,6 +133,10 @@ open class Store<State: StateType>: StoreType {
         )
     }
 
+    public func subscription() -> IncompleteSubscription<State, State> {
+        return IncompleteSubscription(store: self, observable: self.asObservable())
+    }
+
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
         #if swift(>=5.0)
         if let index = subscriptions.firstIndex(where: { return $0.subscriber === subscriber }) {

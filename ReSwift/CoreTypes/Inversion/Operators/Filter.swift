@@ -6,6 +6,12 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
+extension ObservableType {
+    public func filter(_ predicate: @escaping (Substate) -> Bool) -> Observable<Substate> {
+        return Filter(source: self.asObservable(), predicate: predicate)
+    }
+}
+
 final private class Filter<Substate>: Producer<Substate> {
     typealias Predicate = (Substate) -> Bool
 

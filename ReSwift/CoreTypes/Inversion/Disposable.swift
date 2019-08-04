@@ -16,12 +16,32 @@ func createDisposable() -> Disposable {
     return NullDisposable.noOp
 }
 
-private struct NullDisposable : Disposable {
+func createDisposable(with action: @escaping () -> Void) -> Disposable {
+    return AnonymousDisposable(action: action)
+}
+
+private struct NullDisposable: Disposable {
     fileprivate static let noOp: Disposable = NullDisposable()
 
-    private init() {}
+    init() {}
 
-    public func dispose() {
+    func dispose() {
         // no-op
+    }
+}
+
+private final class AnonymousDisposable: Disposable {
+    public typealias DisposeAction = () -> Void
+
+    private var disposeAction: DisposeAction?
+
+    init(action: @escaping DisposeAction) {
+        self.disposeAction = action
+    }
+
+    func dispose() {
+        guard let action = self.disposeAction else { return }
+        self.disposeAction = nil
+        action()
     }
 }

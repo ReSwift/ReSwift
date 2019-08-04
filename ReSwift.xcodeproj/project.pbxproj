@@ -89,6 +89,10 @@
 		50F87AFF22F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
 		50F87B0022F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
 		50F87B0122F5BA870064BEFA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87AD322F5B5380064BEFA /* Filter.swift */; };
+		50F87B1222F6E3120064BEFA /* IncompleteSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */; };
+		50F87B1322F6E3120064BEFA /* IncompleteSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */; };
+		50F87B1422F6E3120064BEFA /* IncompleteSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */; };
+		50F87B1522F6E3120064BEFA /* IncompleteSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */; };
 		621C068C1C278BEF008029AE /* TypeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C068B1C278BEF008029AE /* TypeHelperTests.swift */; };
 		625E66871C1FF97E0027C288 /* ReSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 625E66861C1FF97E0027C288 /* ReSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625E669F1C1FFA3C0027C288 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E66831C1FF97E0027C288 /* ReSwift.framework */; };
@@ -185,6 +189,7 @@
 		50F87AEE22F5B8E80064BEFA /* Sink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sink.swift; sourceTree = "<group>"; };
 		50F87AF322F5B9220064BEFA /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
 		50F87AF822F5B9520064BEFA /* Observable+create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+create.swift"; sourceTree = "<group>"; };
+		50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteSubscription.swift; sourceTree = "<group>"; };
 		5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.release.xcconfig"; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
 		625E66831C1FF97E0027C288 /* ReSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +304,7 @@
 		50F87AED22F5B8D70064BEFA /* Inversion */ = {
 			isa = PBXGroup;
 			children = (
+				50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */,
 				50F87AD922F5B8010064BEFA /* Observable.swift */,
 				50F87AF822F5B9520064BEFA /* Observable+create.swift */,
 				50F87AE822F5B8AC0064BEFA /* Observer.swift */,
@@ -783,6 +789,7 @@
 				25DBCF421C30C16000D63A58 /* Reducer.swift in Sources */,
 				50F87AE722F5B8930064BEFA /* Disposable.swift in Sources */,
 				50F87AFE22F5BA870064BEFA /* Filter.swift in Sources */,
+				50F87B1522F6E3120064BEFA /* IncompleteSubscription.swift in Sources */,
 				25DBCF431C30C16000D63A58 /* State.swift in Sources */,
 				252982F11C4FD21400281098 /* StoreType.swift in Sources */,
 				50F87AF222F5B8E80064BEFA /* Sink.swift in Sources */,
@@ -811,6 +818,7 @@
 				25DBCF591C30C19500D63A58 /* Reducer.swift in Sources */,
 				50F87AE622F5B8930064BEFA /* Disposable.swift in Sources */,
 				50F87B0122F5BA870064BEFA /* Filter.swift in Sources */,
+				50F87B1422F6E3120064BEFA /* IncompleteSubscription.swift in Sources */,
 				25DBCF5A1C30C19500D63A58 /* State.swift in Sources */,
 				252982F01C4FD21400281098 /* StoreType.swift in Sources */,
 				50F87AF122F5B8E80064BEFA /* Sink.swift in Sources */,
@@ -856,6 +864,7 @@
 				25DBCF951C30C4F000D63A58 /* Reducer.swift in Sources */,
 				50F87AE522F5B8930064BEFA /* Disposable.swift in Sources */,
 				50F87AFF22F5BA870064BEFA /* Filter.swift in Sources */,
+				50F87B1322F6E3120064BEFA /* IncompleteSubscription.swift in Sources */,
 				25DBCF961C30C4F000D63A58 /* State.swift in Sources */,
 				252982EF1C4FD21400281098 /* StoreType.swift in Sources */,
 				50F87AF022F5B8E80064BEFA /* Sink.swift in Sources */,
@@ -909,6 +918,7 @@
 				625E66B31C1FFC830027C288 /* Coding.swift in Sources */,
 				50F87AE422F5B8930064BEFA /* Disposable.swift in Sources */,
 				50F87B0022F5BA870064BEFA /* Filter.swift in Sources */,
+				50F87B1222F6E3120064BEFA /* IncompleteSubscription.swift in Sources */,
 				625E66BC1C1FFC880027C288 /* Action.swift in Sources */,
 				259737FD1C2C661100869B8F /* Middleware.swift in Sources */,
 				50F87AEF22F5B8E80064BEFA /* Sink.swift in Sources */,
