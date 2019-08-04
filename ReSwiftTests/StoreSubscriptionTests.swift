@@ -38,7 +38,7 @@ class StoreSubscriptionTests: XCTestCase {
         subscriber = nil
         XCTAssertEqual(store.subscriptions.compactMap({ $0.subscriber }).count, 0)
     }
-    
+
     /**
      it removes deferenced subscribers before notifying state changes
      */
