@@ -34,6 +34,7 @@ open class Store<State: StateType>: StoreType {
     private var reducer: Reducer<State>
 
     var subscriptions: Set<SubscriptionType> = []
+    var subscriptionTokens: Set<SubscriptionToken> = []
 
     private var isDispatching = false
 
@@ -139,6 +140,7 @@ open class Store<State: StateType>: StoreType {
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
         removeSubscription(subscriber: subscriber)
+        removeAllSubscriptionTokens(subscriber: subscriber)
     }
 
     private func removeSubscription(subscriber: AnyStoreSubscriber) {
@@ -151,6 +153,14 @@ open class Store<State: StateType>: StoreType {
             subscriptions.remove(at: index)
         }
         #endif
+    }
+
+    private func removeAllSubscriptionTokens(subscriber: AnyStoreSubscriber) {
+        let matchingTokens = subscriptionTokens
+            .filter { $0.isRepresenting(subscriber: subscriber) }
+        for matchingToken in matchingTokens {
+            subscriptionTokens.remove(matchingToken)
+        }
     }
 
     // swiftlint:disable:next identifier_name

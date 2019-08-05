@@ -99,6 +99,10 @@
 		50F87B1B22F823110064BEFA /* DisposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1A22F823110064BEFA /* DisposableTests.swift */; };
 		50F87B1C22F823110064BEFA /* DisposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1A22F823110064BEFA /* DisposableTests.swift */; };
 		50F87B1D22F823110064BEFA /* DisposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1A22F823110064BEFA /* DisposableTests.swift */; };
+		50F87B1F22F832FF0064BEFA /* SubscriptionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */; };
+		50F87B2022F832FF0064BEFA /* SubscriptionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */; };
+		50F87B2122F832FF0064BEFA /* SubscriptionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */; };
+		50F87B2222F832FF0064BEFA /* SubscriptionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */; };
 		50F87B2422F8350E0064BEFA /* BlockSubscriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B2322F8350E0064BEFA /* BlockSubscriberTests.swift */; };
 		50F87B2522F8350E0064BEFA /* BlockSubscriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B2322F8350E0064BEFA /* BlockSubscriberTests.swift */; };
 		50F87B2622F8350E0064BEFA /* BlockSubscriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F87B2322F8350E0064BEFA /* BlockSubscriberTests.swift */; };
@@ -201,6 +205,7 @@
 		50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteSubscription.swift; sourceTree = "<group>"; };
 		50F87B1622F80D3E0064BEFA /* IncompleteSubscriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteSubscriptionTests.swift; sourceTree = "<group>"; };
 		50F87B1A22F823110064BEFA /* DisposableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposableTests.swift; sourceTree = "<group>"; };
+		50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionToken.swift; sourceTree = "<group>"; };
 		50F87B2322F8350E0064BEFA /* BlockSubscriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSubscriberTests.swift; sourceTree = "<group>"; };
 		5FA6CE811A62136B33F7E836 /* Pods-SwiftLintIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLintIntegration.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftLintIntegration/Pods-SwiftLintIntegration.release.xcconfig"; sourceTree = "<group>"; };
 		621C068B1C278BEF008029AE /* TypeHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHelperTests.swift; sourceTree = "<group>"; };
@@ -317,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				50F87B1122F6E3120064BEFA /* IncompleteSubscription.swift */,
+				50F87B1E22F832FF0064BEFA /* SubscriptionToken.swift */,
 				50F87AD922F5B8010064BEFA /* Observable.swift */,
 				50F87AF822F5B9520064BEFA /* Observable+create.swift */,
 				50F87AE822F5B8AC0064BEFA /* Observer.swift */,
@@ -800,6 +806,7 @@
 				50F87AEC22F5B8AC0064BEFA /* Observer.swift in Sources */,
 				50F87ADD22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF411C30C16000D63A58 /* Store.swift in Sources */,
+				50F87B2222F832FF0064BEFA /* SubscriptionToken.swift in Sources */,
 				50F87AFC22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF421C30C16000D63A58 /* Reducer.swift in Sources */,
 				50F87AE722F5B8930064BEFA /* Disposable.swift in Sources */,
@@ -829,6 +836,7 @@
 				50F87AEB22F5B8AC0064BEFA /* Observer.swift in Sources */,
 				50F87ADC22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF581C30C19500D63A58 /* Store.swift in Sources */,
+				50F87B2122F832FF0064BEFA /* SubscriptionToken.swift in Sources */,
 				50F87AFB22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF591C30C19500D63A58 /* Reducer.swift in Sources */,
 				50F87AE622F5B8930064BEFA /* Disposable.swift in Sources */,
@@ -878,6 +886,7 @@
 				50F87AEA22F5B8AC0064BEFA /* Observer.swift in Sources */,
 				50F87ADB22F5B8010064BEFA /* Observable.swift in Sources */,
 				25DBCF941C30C4F000D63A58 /* Store.swift in Sources */,
+				50F87B2022F832FF0064BEFA /* SubscriptionToken.swift in Sources */,
 				50F87AFA22F5B9520064BEFA /* Observable+create.swift in Sources */,
 				25DBCF951C30C4F000D63A58 /* Reducer.swift in Sources */,
 				50F87AE522F5B8930064BEFA /* Disposable.swift in Sources */,
@@ -935,6 +944,7 @@
 				50F87AE922F5B8AC0064BEFA /* Observer.swift in Sources */,
 				50F87ADA22F5B8010064BEFA /* Observable.swift in Sources */,
 				625E66BD1C1FFC880027C288 /* Store.swift in Sources */,
+				50F87B1F22F832FF0064BEFA /* SubscriptionToken.swift in Sources */,
 				50F87AF922F5B9520064BEFA /* Observable+create.swift in Sources */,
 				625E66B31C1FFC830027C288 /* Coding.swift in Sources */,
 				50F87AE422F5B8930064BEFA /* Disposable.swift in Sources */,
