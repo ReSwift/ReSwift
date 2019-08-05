@@ -138,6 +138,10 @@ open class Store<State: StateType>: StoreType {
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
+        removeSubscription(subscriber: subscriber)
+    }
+
+    private func removeSubscription(subscriber: AnyStoreSubscriber) {
         #if swift(>=5.0)
         if let index = subscriptions.firstIndex(where: { return $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
