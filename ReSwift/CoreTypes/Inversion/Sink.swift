@@ -6,8 +6,19 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
-/// It's a thing that can be disposed and forwards events to observers.
-/// When disposed, it will not forward future events.
+/// A Sink represents a disposable connection to an observer. Think of it as a cancelable
+/// wrapper that forwards events.
+///
+/// - `observer` receives events as long as `isDisposed == false`.
+/// - `dispose` forwards resource cleanup commands to the `cancel` handler.
+///
+/// ## Subclassing Notes
+///
+/// Subclass `Sink` for operators to inherit the resource cleanup.
+/// Call `forward(state:)` to pass on events to eventual observers.
+///
+/// You could also delegate to a `Sink` instance instead of subclassing, but
+/// the convenience of inheriting `Disposable` would then be lost.
 internal class Sink<Observer: ObserverType>: Disposable {
     internal let observer: Observer
     internal let cancel: Cancelable
@@ -26,6 +37,7 @@ internal class Sink<Observer: ObserverType>: Disposable {
     private var isDisposed: Bool = false
 
     func dispose() {
+        guard !isDisposed else { return }
         self.isDisposed = true
         cancel.dispose()
     }

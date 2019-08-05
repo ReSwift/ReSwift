@@ -30,12 +30,12 @@ extension ObservableType {
 /// Type-erased `ObervableType`.
 ///
 /// You can only get `Observable` instances through the `create` static factory, as used by the `Store`.
-open class Observable<Substate>: ObservableType {
+internal class Observable<Substate>: ObservableType {
     internal init() {
         // no-op
     }
 
-    public func subscribe<Observer>(_ observer: Observer) -> Disposable {
+    func subscribe<Observer>(_ observer: Observer) -> Disposable {
         fatalError("Method not implemented: \(#function)")
     }
 
@@ -44,7 +44,7 @@ open class Observable<Substate>: ObservableType {
         return ReSwift.select(source: self, transform: transform)
     }
 
-    public func asObservable() -> Observable<Substate> {
+    func asObservable() -> Observable<Substate> {
         return self
     }
 }

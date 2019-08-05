@@ -6,7 +6,7 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
-public protocol Disposable {
+internal protocol Disposable {
     /// Dispose resource callback.
     func dispose()
 }
