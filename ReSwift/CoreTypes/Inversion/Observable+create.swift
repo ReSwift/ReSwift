@@ -8,6 +8,9 @@
 
 extension Observable {
     /// Starting point of events, aka state updates.
+    ///
+    /// The `producer` block is first invoked when an actual connection is made.
+    /// Until you finish the subscription, no callbacks are being made.
     internal static func create(_ producer: @escaping (AnyObserver<Substate>) -> Disposable) -> Observable<Substate> {
         return ObservableEventSource(producer: producer)
     }
@@ -23,7 +26,7 @@ extension Observable {
 final private class ObservableEventSource<Substate>: Producer<Substate> {
     typealias EventProducer = (_ consumer: AnyObserver<Substate>) -> Disposable
 
-    let producer: EventProducer
+    internal let producer: EventProducer
 
     init(producer: @escaping EventProducer) {
         self.producer = producer
@@ -36,6 +39,14 @@ final private class ObservableEventSource<Substate>: Producer<Substate> {
     }
 }
 
+/// In short, objects of this type are adapters between `ObservableEventSource.EventProducer`
+/// and an a compatible `ObserverType` that perform no additional actions; their sole
+/// reason to exist is memory management of the `observer` and `cancel` associated with `Sink`s.
+///
+/// Since this type is a `Sink`, it keeps a strong reference to both its `observer`
+/// and `cancel` handler. It will be released when the connection itself is released.
+/// The connection from event source to observer will be released when `cancel` is disposed,
+/// which ultimately is a `Producer`'s `SinkDisposer`.
 final private class ObservableEventSourceSink<Observer: ObserverType>: Sink<Observer>, ObserverType {
     typealias Substate = Observer.Substate
 

@@ -12,19 +12,19 @@ protocol ObserverType {
     func on(_ state: Substate)
 }
 
-
-internal struct AnyObserver<Substate>: ObserverType {
-    private let actionHandler: (Substate) -> Void
+/// Type-erased `ObserverType` that forwards events.
+internal final class AnyObserver<Substate>: ObserverType {
+    private let observer: (Substate) -> Void
 
     init(actionHandler: @escaping (Substate) -> Void) {
-        self.actionHandler = actionHandler
+        self.observer = actionHandler
     }
 
     init<Observer: ObserverType>(_ observer: Observer) where Observer.Substate == Substate {
-        self.actionHandler = observer.on
+        self.observer = observer.on
     }
 
     func on(_ substate: Substate) {
-        self.actionHandler(substate)
+        self.observer(substate)
     }
 }
