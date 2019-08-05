@@ -8,30 +8,36 @@
 
 extension Observable {
     /// Starting point of events, aka state updates.
-    internal static func create(_ subscribe: @escaping (AnyObserver<Substate>) -> Disposable) -> Observable<Substate> {
-        return AnonymousObservable(subscribe)
+    internal static func create(_ producer: @escaping (AnyObserver<Substate>) -> Disposable) -> Observable<Substate> {
+        return ObservableEventSource(producer: producer)
     }
 }
 
-final private class AnonymousObservable<Substate>: Producer<Substate> {
-    typealias Handler = (AnyObserver<Substate>) -> Disposable
+/// The source of an event sequence that all operators will eventually delegate to.
+///
+/// Overrides the abstract `Producer.run` to actually connect the event creation sequence to an
+/// observer.
+///
+/// `ObservableEventSource.producer` is a closure that is configured upon creation to produce `.on`
+/// events; they are passed to the observer that is eventually set via `subscribe`.
+final private class ObservableEventSource<Substate>: Producer<Substate> {
+    typealias EventProducer = (_ consumer: AnyObserver<Substate>) -> Disposable
 
-    let handler: Handler
+    let producer: EventProducer
 
-    init(_ handler: @escaping Handler) {
-        self.handler = handler
+    init(producer: @escaping EventProducer) {
+        self.producer = producer
     }
 
     override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == Substate {
-        let sink = AnonymousObservableSink(observer: observer, cancel: cancel)
-        let subscription = sink.run(self)
+        let sink = ObservableEventSourceSink(observer: observer, cancel: cancel)
+        let subscription = sink.subscribeObserver(self)
         return (sink, subscription)
     }
 }
 
-final private class AnonymousObservableSink<Observer: ObserverType>: Sink<Observer>, ObserverType {
+final private class ObservableEventSourceSink<Observer: ObserverType>: Sink<Observer>, ObserverType {
     typealias Substate = Observer.Substate
-    typealias Parent = AnonymousObservable<Substate>
 
     override init(observer: Observer, cancel: Cancelable) {
         super.init(observer: observer, cancel: cancel)
@@ -41,7 +47,8 @@ final private class AnonymousObservableSink<Observer: ObserverType>: Sink<Observ
         self.observer.on(state)
     }
 
-    func run(_ parent: Parent) -> Disposable {
-        return parent.handler(AnyObserver(self))
+    func subscribeObserver(_ eventSource: ObservableEventSource<Substate>) -> Disposable {
+        let erasedObserver = AnyObserver(self)
+        return eventSource.producer(erasedObserver)
     }
 }
