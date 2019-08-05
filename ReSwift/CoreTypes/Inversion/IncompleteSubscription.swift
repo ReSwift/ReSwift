@@ -6,24 +6,25 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
-class BlockSubscription<Substate>: StoreSubscriber {
-    let callback: (Substate) -> Void
+internal final class BlockSubscriber<S>: StoreSubscriber {
+    typealias StoreSubscriberStateType = S
+    private let block: (S) -> Void
 
-    init(callback: @escaping (Substate) -> Void) {
-        self.callback = callback
+    init(block: @escaping (S) -> Void) {
+        self.block = block
     }
 
-    func newState(state: Substate) {
-        self.callback(state)
+    func newState(state: S) {
+        self.block(state)
     }
 }
 
 extension Store {
     func asObservable() -> Observable<State> {
         return Observable.create { [weak self] observer -> Disposable in
-            let subscription = BlockSubscription(callback: { (state: State) in
+            let subscription = BlockSubscriber { (state: State) in
                 observer.on(state)
-            })
+            }
 
             self?.subscribe(subscription)
 
