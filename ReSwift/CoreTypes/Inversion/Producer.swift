@@ -16,7 +16,7 @@
 ///    an event sequence. This is the root of all subscriptions.
 /// - Operators like `Select` take an existing sequence and connect their transformers to it
 ///   in `run(_:)`, *producing* a resulting sequence.
-internal class Producer<Element>: Observable<Element> {
+internal class Producer<Substate>: Observable<Substate> {
     internal override func subscribe<Observer: ObserverType>(_ observer: Observer)
         -> Disposable where Observer.Substate == Substate
     {

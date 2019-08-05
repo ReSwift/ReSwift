@@ -16,8 +16,8 @@ protocol ObserverType {
 internal final class AnyObserver<Substate>: ObserverType {
     private let observer: (Substate) -> Void
 
-    init(actionHandler: @escaping (Substate) -> Void) {
-        self.observer = actionHandler
+    init(observer: @escaping (Substate) -> Void) {
+        self.observer = observer
     }
 
     init<Observer: ObserverType>(_ observer: Observer) where Observer.Substate == Substate {

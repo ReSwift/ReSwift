@@ -13,8 +13,8 @@ protocol ObservableType {
 }
 
 extension ObservableType {
-    func subscribe(_ actionHandler: @escaping (Action) -> Void) -> Disposable {
-        let observer = AnyObserver(actionHandler: actionHandler)
+    func subscribe(_ observer: @escaping (Substate) -> Void) -> Disposable {
+        let observer = AnyObserver(observer: observer)
         return self.asObservable().subscribe(observer)
     }
 }
@@ -35,7 +35,7 @@ internal class Observable<Substate>: ObservableType {
         // no-op
     }
 
-    func subscribe<Observer>(_ observer: Observer) -> Disposable {
+    func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Substate == Substate {
         fatalError("Method not implemented: \(#function)")
     }
 
