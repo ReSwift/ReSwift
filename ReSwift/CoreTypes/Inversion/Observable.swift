@@ -40,7 +40,10 @@ internal class Observable<Substate>: ObservableType {
     }
 
     /// Optimization hook for multiple `select` calls in succession. Is overwritten by the `Select` type.
-    internal func composeSelect<SelectedSubstate>(_ transform: @escaping (Substate) -> SelectedSubstate) -> Observable<SelectedSubstate> {
+    internal func composeSelect<SelectedSubstate>(
+        _ transform: @escaping (Substate) -> SelectedSubstate
+        ) -> Observable<SelectedSubstate>
+    {
         return ReSwift.select(source: self, transform: transform)
     }
 

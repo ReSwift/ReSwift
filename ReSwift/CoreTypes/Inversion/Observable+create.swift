@@ -32,7 +32,12 @@ final private class ObservableEventSource<Substate>: Producer<Substate> {
         self.producer = producer
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == Substate {
+    override func run<Observer: ObserverType>(
+        _ observer: Observer,
+        cancel: Cancelable
+        ) -> (sink: Disposable, subscription: Disposable)
+        where Observer.Substate == Substate
+    {
         let sink = ObservableEventSourceSink(observer: observer, cancel: cancel)
         let subscription = sink.subscribeObserver(self)
         return (sink, subscription)

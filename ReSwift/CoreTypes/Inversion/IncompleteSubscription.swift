@@ -52,29 +52,3 @@ public final class IncompleteSubscription<RootStoreState: StateType, Substate> {
         self.store.subscribe(bridge)
     }
 }
-
-extension IncompleteSubscription {
-    public func select<SelectedSubstate>(_ transform: @escaping (Substate) -> SelectedSubstate) -> IncompleteSubscription<RootStoreState, SelectedSubstate> {
-        return IncompleteSubscription<RootStoreState, SelectedSubstate>(
-            store: self.store,
-            observable: self.observable.select(transform))
-    }
-
-    public func filter(_ predicate: @escaping (Substate) -> Bool) -> IncompleteSubscription<RootStoreState, Substate> {
-        return IncompleteSubscription<RootStoreState, Substate>(
-            store: self.store,
-            observable: self.observable.filter(predicate))
-    }
-}
-
-private final class Bridge<RootStoreState: StateType, Substate>: StoreSubscriber {
-    private let base: AnyStoreSubscriber
-
-    init<Subscriber: StoreSubscriber>(subscriber: Subscriber) where Subscriber.StoreSubscriberStateType == Substate {
-        self.base = subscriber
-    }
-
-    func newState(state: RootStoreState) {
-        self.base._newState(state: state)
-    }
-}

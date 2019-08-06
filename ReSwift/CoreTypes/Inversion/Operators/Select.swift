@@ -6,13 +6,28 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
+extension IncompleteSubscription {
+    public func select<SelectedSubstate>(
+        _ transform: @escaping (Substate) -> SelectedSubstate
+        ) -> IncompleteSubscription<RootStoreState, SelectedSubstate>
+    {
+        return IncompleteSubscription<RootStoreState, SelectedSubstate>(
+            store: self.store,
+            observable: self.observable.select(transform))
+    }
+}
+
 extension ObservableType {
-    public func select<SelectSubstate>(_ transform: @escaping (Substate) -> SelectSubstate) -> Observable<SelectSubstate> {
+    func select<SelectSubstate>(_ transform: @escaping (Substate) -> SelectSubstate) -> Observable<SelectSubstate> {
         return self.asObservable().composeSelect(transform)
     }
 }
 
-internal func select<FromState, ToState>(source: Observable<FromState>, transform: @escaping (FromState) -> ToState) -> Observable<ToState> {
+internal func select<FromState, ToState>(
+    source: Observable<FromState>,
+    transform: @escaping (FromState) -> ToState
+    ) -> Observable<ToState>
+{
     return Select(source: source, transform: transform)
 }
 
@@ -35,7 +50,12 @@ final private class Select<FromState, ToState>: Producer<ToState> {
         }
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == ToState {
+    override func run<Observer: ObserverType>(
+        _ observer: Observer,
+        cancel: Cancelable
+        ) -> (sink: Disposable, subscription: Disposable)
+        where Observer.Substate == ToState
+    {
         let sink = SelectSink(transform: self.transform, observer: observer, cancel: cancel)
         let subscription = source.subscribe(sink)
         return (sink, subscription)

@@ -6,8 +6,16 @@
 //  Copyright © 2019 ReSwift. All rights reserved.
 //
 
+extension IncompleteSubscription {
+    public func filter(_ predicate: @escaping (Substate) -> Bool) -> IncompleteSubscription<RootStoreState, Substate> {
+        return IncompleteSubscription<RootStoreState, Substate>(
+            store: self.store,
+            observable: self.observable.filter(predicate))
+    }
+}
+
 extension ObservableType {
-    public func filter(_ predicate: @escaping (Substate) -> Bool) -> Observable<Substate> {
+    func filter(_ predicate: @escaping (Substate) -> Bool) -> Observable<Substate> {
         return Filter(source: self.asObservable(), predicate: predicate)
     }
 }
@@ -23,7 +31,12 @@ final private class Filter<Substate>: Producer<Substate> {
         self.predicate = predicate
     }
 
-    override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Substate == Substate  {
+    override func run<Observer: ObserverType>(
+        _ observer: Observer,
+        cancel: Cancelable
+        ) -> (sink: Disposable, subscription: Disposable)
+        where Observer.Substate == Substate
+    {
         let sink = FilterSink(predicate: self.predicate, observer: observer, cancel: cancel)
         let subscription = self.source.subscribe(sink)
         return (sink, subscription)
