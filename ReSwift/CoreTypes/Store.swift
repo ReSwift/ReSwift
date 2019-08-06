@@ -138,6 +138,29 @@ open class Store<State: StateType>: StoreType {
         return IncompleteSubscription(store: self, observable: self.asObservable())
     }
 
+    internal func subscribe<Substate, Subscriber: StoreSubscriber>(
+        subscription: IncompleteSubscription<State, Substate>,
+        subscriber: Subscriber
+        ) -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        let observable = subscription.asObservable()
+        return _subscribe(observable: observable, subscriber: subscriber)
+    }
+
+    fileprivate func _subscribe<Substate, Subscriber: StoreSubscriber>(
+        observable: Observable<Substate>,
+        subscriber: Subscriber
+        ) -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        let adapter = StoreSubscriberObserver(subscriber: subscriber)
+        let disposable = observable.subscribe(adapter)
+        let token = SubscriptionToken(subscriber: adapter, disposable: disposable)
+        subscriptionTokens.insert(token)
+        return token
+    }
+
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
         removeSubscription(subscriber: subscriber)
         removeAllSubscriptionTokens(subscriber: subscriber)
@@ -239,6 +262,18 @@ extension Store {
         _subscribe(subscriber, originalSubscription: originalSubscription,
                    transformedSubscription: transformedSubscription)
     }
+
+    internal func subscribe<Substate: Equatable, Subscriber: StoreSubscriber>(
+        subscription: IncompleteSubscription<State, Substate>,
+        subscriber: Subscriber
+        ) -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        let observable: Observable<Substate> = subscriptionsAutomaticallySkipRepeats
+            ? subscription.asObservable().skipRepeats()
+            : subscription.asObservable()
+        return _subscribe(observable: observable, subscriber: subscriber)
+    }
 }
 
 extension Store where State: Equatable {
@@ -249,5 +284,48 @@ extension Store where State: Equatable {
                 return
             }
             _ = subscribe(subscriber, transform: { $0.skipRepeats() })
+    }
+
+    internal func subscribe<Subscriber: StoreSubscriber>(
+        subscription: IncompleteSubscription<State, State>,
+        subscriber: Subscriber
+        ) -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == State
+    {
+        let observable: Observable<State> = subscriptionsAutomaticallySkipRepeats
+            ? subscription.asObservable().skipRepeats()
+            : subscription.asObservable()
+        return _subscribe(observable: observable, subscriber: subscriber)
+    }
+}
+
+/// Adapter from `ObserverType` to regular `StoreSubscriberStateType`.
+private final class StoreSubscriberObserver<Substate>: ObserverType {
+    private let base: AnyStoreSubscriber
+
+    init<Subscriber: StoreSubscriber>(subscriber: Subscriber)
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        self.base = subscriber
+    }
+
+    func on(_ state: Substate) {
+        self.base._newState(state: state)
+    }
+}
+
+extension Store {
+    func asObservable() -> Observable<State> {
+        return Observable.create { [weak self] observer -> Disposable in
+            let subscription = BlockSubscriber { (state: State) in
+                observer.on(state)
+            }
+
+            self?.subscribe(subscription)
+
+            return createDisposable {
+                self?.unsubscribe(subscription)
+            }
+        }
     }
 }

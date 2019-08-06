@@ -19,22 +19,6 @@ internal final class BlockSubscriber<S>: StoreSubscriber {
     }
 }
 
-extension Store {
-    func asObservable() -> Observable<State> {
-        return Observable.create { [weak self] observer -> Disposable in
-            let subscription = BlockSubscriber { (state: State) in
-                observer.on(state)
-            }
-
-            self?.subscribe(subscription)
-
-            return createDisposable {
-                self?.unsubscribe(subscription)
-            }
-        }
-    }
-}
-
 public final class IncompleteSubscription<RootStoreState: StateType, Substate> {
     typealias CompatibleStore = Store<RootStoreState>
 
@@ -47,8 +31,27 @@ public final class IncompleteSubscription<RootStoreState: StateType, Substate> {
         self.observable = observable
     }
 
-    public func subscribe<Subscriber: StoreSubscriber>(_ subscriber: Subscriber) where Subscriber.StoreSubscriberStateType == Substate {
-        let bridge = Bridge<RootStoreState, Substate>(subscriber: subscriber)
-        self.store.subscribe(bridge)
+    func asObservable() -> Observable<Substate> {
+        return observable
+    }
+}
+
+extension IncompleteSubscription {
+    @discardableResult
+    public func subscribe<Subscriber: StoreSubscriber>(_ subscriber: Subscriber)
+        -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        return self.store.subscribe(subscription: self, subscriber: subscriber)
+    }
+}
+
+extension IncompleteSubscription where Substate: Equatable {
+    @discardableResult
+    public func subscribe<Subscriber: StoreSubscriber>(_ subscriber: Subscriber)
+        -> SubscriptionToken
+        where Subscriber.StoreSubscriberStateType == Substate
+    {
+        return self.store.subscribe(subscription: self, subscriber: subscriber)
     }
 }

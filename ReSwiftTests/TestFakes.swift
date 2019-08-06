@@ -20,8 +20,8 @@ struct TestAppState: StateType {
 struct TestStringAppState: StateType {
     var testValue: String
 
-    init() {
-        testValue = "Initial"
+    init(testValue: String = "Initial") {
+        self.testValue = testValue
     }
 }
 

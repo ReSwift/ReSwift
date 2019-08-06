@@ -13,7 +13,7 @@ class IncompleteSubscriptionTests: XCTestCase {
 
     func testPassesOnRootState() {
         let reducer = TestValueStringReducer()
-        let state = TestStringAppState()
+        let state = TestStringAppState(testValue: "Initial")
         let store = Store(reducer: reducer.handleAction, state: state, middleware: [])
         let subscriber = TestFilteredSubscriber<TestStringAppState>()
 
@@ -22,31 +22,91 @@ class IncompleteSubscriptionTests: XCTestCase {
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
 
-        store.dispatch(SetValueStringAction("Initial"))
+        store.dispatch(SetValueStringAction("New"))
 
-        XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
-        XCTAssertEqual(subscriber.newStateCallCount, 1)
+        XCTAssertEqual(subscriber.receivedValue.testValue, "New")
     }
 
-    func testPassesOnSelectedSubstate() {
-        let reducer = TestReducer()
-        let store = Store(reducer: reducer.handleAction, state: TestAppState())
-        let subscriber = TestFilteredSubscriber<Int?>()
+    func testPassesOnRootStateChange() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState(testValue: "Initial")
+        let store = Store(reducer: reducer.handleAction, state: state, middleware: [])
+        let subscriber = TestFilteredSubscriber<TestStringAppState>()
+
+        store.subscription()
+            .subscribe(subscriber)
+        store.dispatch(SetValueStringAction("New"))
+
+        XCTAssertEqual(subscriber.receivedValue.testValue, "New")
+    }
+
+    func testPassesOnSelectedSubstate_AutomaticallySkipsRepeats() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState(testValue: "Initial")
+        let store = Store(
+            reducer: reducer.handleAction,
+            state: state,
+            middleware: [],
+            automaticallySkipsRepeats: true)
+        let subscriber = TestFilteredSubscriber<String>()
 
         store.subscription()
             .select { $0.testValue }
             .subscribe(subscriber)
 
-        store.dispatch(SetValueAction(3))
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
 
-        XCTAssertEqual(subscriber.receivedValue, 3)
+        store.dispatch(SetValueStringAction("Initial"))
 
-        store.dispatch(SetValueAction(nil))
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
 
-        #if swift(>=4.1)
-        XCTAssertEqual(subscriber.receivedValue, .some(.none))
-        #else
-        XCTAssertEqual(subscriber.receivedValue, nil)
-        #endif
+    func testPassesOnSelectedSubstate_NotAutomaticallySkippingRepeats() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState(testValue: "Initial")
+        let store = Store(
+            reducer: reducer.handleAction,
+            state: state,
+            middleware: [],
+            automaticallySkipsRepeats: false)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscription()
+            .select { $0.testValue }
+            .subscribe(subscriber)
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 2)
+    }
+
+    func testPassesOnSelectedSubstate_NotAutomaticallyButManuallySkippingRepeats() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState(testValue: "Initial")
+        let store = Store(
+            reducer: reducer.handleAction,
+            state: state,
+            middleware: [],
+            automaticallySkipsRepeats: false)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscription()
+            .select { $0.testValue }
+            .skipRepeats()
+            .subscribe(subscriber)
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 }
