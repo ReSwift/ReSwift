@@ -6,8 +6,6 @@
 //  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
-import Foundation
-
 public protocol AnyStoreSubscriber: AnyObject {
     // swiftlint:disable:next identifier_name
     func _newState(state: Any)

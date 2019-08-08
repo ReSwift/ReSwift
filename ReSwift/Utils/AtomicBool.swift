@@ -3,11 +3,10 @@
 //  ReSwift-iOS
 //
 //  Created by 钟武 on 2018/5/2.
-//  Copyright © 2018年 Benjamin Encz. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import Foundation
-
 /**
  Struct is only used internally in ReSwift to implements atomic bool operation.
  */

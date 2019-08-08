@@ -131,7 +131,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E1E56592099A42E00959ADB /* AtomicBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
+		0E1E56592099A42E00959ADB /* AtomicBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
 		252982ED1C4FD21400281098 /* StoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreType.swift; sourceTree = "<group>"; };
 		259737E91C2C611600869B8F /* StoreMiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreMiddlewareTests.swift; sourceTree = "<group>"; };
 		259737FA1C2C618A00869B8F /* TestFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFakes.swift; sourceTree = "<group>"; };
@@ -688,7 +688,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"\n";
 		};
 		73E545D31D22B0D600D114E8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
