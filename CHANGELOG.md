@@ -1,4 +1,6 @@
-# Upcoming
+# 5.0.0
+
+*Released: 2019-06-30* 
 
 **Breaking API Changes:**
 - Remove `StandardAction` and `StandardActionConvertible` (#270) - @mjarvis
@@ -6,11 +8,41 @@
     - The existence of `StandardAction` and `StandardActionConvertible` is somewhat confusing to new users, and does not have a direct use case within the core ReSwift library. Therefore, it has been moved to [ReSwift-Recorder](https://github.com/ReSwift/ReSwift-Recorder) where it belongs.
     - If you're using `StandardAction` in your project without `ReSwift-Recorder`, you can copy the old implementation into your project as a middle ground while you migrate away from its usage.
 
-**Other**:
+- Make Store's state setter private (#354) - @mokagio
+
+    - Removes the ability to directly set `state` by making it `private(set)`. This prevents users from bypassing reducers and middleware. All mutation of the state must occur through the normal `Action` & `Reducer` methods.
+    - This deprecates the usage of `ReSwift-Recorder`. Changes may be made to that library in the future in order to support this change.
+
+**Other:**
+- Resolve Xcode 10.2 warnings with Swift 4.2.2 and 5.0 (#397) - @mjarvis
+- Update Swift Package Manager support (#403, #411) - @Dschee, @hoemoon
+
+# 4.1.1
+
+*Released: 03/21/2019*
+
+- Fix 4.1.0 regression with `automaticallySkipsRepeats` when selecting Equatable state in Non-Equatable root state (#399) - @djtech42
+
+# 4.1.0
+
+*Released: 03/21/2019*
+
+**API Changes:**
+- Deprecate `StandardAction` and `StandardActionConvertible` - @mjarvis
+    
+    - These have been moved to https://github.com/ReSwift/ReSwift-Recorder since they are unnecessary for the base use of ReSwift
+
+- Deprecate `ActionCreator` and `AsyncActionCreator` (#391) - @mjarvis
+
+    - These are deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk
+
+**Other:**
 - Add Subscription `skip(when:)` and `only(when:)` (#242) - @mjarvis
 - Add `automaticallySkipsRepeats` configuration option to Store initializer (#262) - @DivineDominion
 - Improve subscription & state update performance (#325) - @mjarvis
 - Enable build settings "Allow app extension API only" (#328) - @oradyvan
+- Open `Subscription<State>` to allow external extensions (#383) - @mjarvis
+- Update project to Swift 4.2 (#256, #335, #374) - @mjarvis, @DivineDominion
 
 # 4.0.1
 
@@ -111,7 +143,7 @@
 **API Changes:**
 - Mark `Store` as `open`, this reverts a previously accidental breaking API Change (#157) - @Ben-G
 
-**Other**:
+**Other:**:
 - Update to Swift 3.0.1 - @Cristiam, @Ben-G
 - Documentation changes - @vkotovv
 
@@ -119,7 +151,7 @@
 
 *Released: 09/15/2016*
 
-**Other**:
+**Other:**
 
 - Swift 3 preview compatibility, maintaining Swift 2 naming - (#126) - @agentk
 - Xcode 8 GM Swift 3 Updates (#149) - @tkersey
@@ -131,11 +163,11 @@
 
 *Released: 06/27/2016*
 
-**Breaking API Changes**:
+**Breaking API Changes:**:
 
 - Significant Improvements to Serialization Code for `StandardAction` (relevant for recording tools) - @okla
 
-**Other**:
+**Other:**:
 
 - Swift 2.3 Updates - @agentk
 - Documentation Updates & Fixes - @okla, @gregpardo, @tomj, @askielboe, @mitsuse, @esttorhe, @RyanCCollins, @thomaspaulmann, @jlampa
@@ -185,7 +217,7 @@
 - Pass typed store reference into `ActionCreator`. `ActionCreator` can now access `Store`s state without the need for typecasts - @Ben-G
 - `Store` can now be initialized with an empty state, allowing reducers to hydrate the store - @Ben-G
 
-**Bugfixes**
+**Bugfixes:**
 
 - Break retain cycle when using middelware - @sendyhalim
 

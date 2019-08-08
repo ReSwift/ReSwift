@@ -1,8 +1,8 @@
 # ReSwift
 
-[![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg?style=flat-square)](https://houndci.com)
 
-**Supported Swift Versions:** Swift 3.2, 4.0
+**Supported Swift Versions:** Swift 3.2, 4.0, 4.2, 5.0
 
 For Swift 2.2 Support use [Release 2.0.0](https://github.com/ReSwift/ReSwift/releases/tag/2.0.0) or earlier.
 
@@ -135,7 +135,27 @@ Button taps result in dispatched actions that will be handled by the store and i
 
 This is a very basic example that only shows a subset of ReSwift's features, read the Getting Started Guide to see how you can build entire apps with this architecture. For a complete implementation of this example see the [CounterExample](https://github.com/ReSwift/CounterExample) project.
 
-[You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
+### Create a subscription of several substates combined
+
+Just create a struct representing the data model needed in the subscriber class, with a constructor that takes the whole app state as a param. Consider this constructor as a mapper/selector from the app state to the subscriber state. Being `MySubState` a struct and conforming to `Equatable`, ReSwift (by default) will not notify the subscriber if the computed output hasn't changed. Also, Swift will be able to infer the type of the subscription.
+
+```swift
+struct MySubState: Equatable {
+    // Combined substate derived from the app state.
+    
+    init(state: AppState) {
+        // Compute here the substate needed.
+    }
+}
+```
+
+```swift
+store.subscribe(self) { $0.select(MySubState.init) }
+    
+func newState(state: MySubState) {
+    // Profit!
+}
+```
 
 # Why ReSwift?
 
@@ -157,6 +177,8 @@ This architecture provides further benefits beyond improving your code base:
 
 The ReSwift tooling is still in a very early stage, but aforementioned prospects excite me and hopefully others in the community as well!
 
+[You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
+
 # Getting Started Guide
 
 [A Getting Started Guide that describes the core components of apps built with ReSwift lives here](http://reswift.github.io/ReSwift/master/getting-started-guide.html).
@@ -167,7 +189,7 @@ To get an understanding of the core principles we recommend reading the brillian
 
 ## CocoaPods
 
-You can install ReSwift via CocoaPods by adding it to your `Podfile`:
+You can install ReSwift via [CocoaPods](https://cocoapods.org/) by adding it to your `Podfile`:
 ```
 use_frameworks!
 
@@ -187,6 +209,27 @@ You can install ReSwift via [Carthage](https://github.com/Carthage/Carthage) by 
 github "ReSwift/ReSwift"
 ```
 
+## Accio
+
+You can install ReSwift via [Accio](https://github.com/JamitLabs/Accio) by adding the following line to your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "5.0.0")),
+```
+
+Next, add `ReSwift` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "ReSwift",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ## Swift Package Manager
 
 You can install ReSwift via [Swift Package Manager](https://swift.org/package-manager/) by adding the following line to your `Package.swift`:
@@ -197,7 +240,7 @@ import PackageDescription
 let package = Package(
     [...]
     dependencies: [
-        .Package(url: "https://github.com/ReSwift/ReSwift.git", majorVersion: XYZ)
+        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "5.0.0"),
     ]
 )
 ```
@@ -216,6 +259,7 @@ Using this library you can implement apps that have an explicit, reproducible st
 
 This repository contains the core component for ReSwift, the following extensions are available:
 
+- [ReSwift-Thunk](https://github.com/ReSwift/ReSwift-Thunk): Provides a ReSwift middleware that lets you dispatch thunks (action creators) to encapsulate processes like API callbacks.
 - [ReSwift-Router](https://github.com/ReSwift/ReSwift-Router): Provides a ReSwift compatible Router that allows declarative routing in iOS applications
 - [ReSwift-Recorder](https://github.com/ReSwift/ReSwift-Recorder): Provides a `Store` implementation that records all `Action`s and allows for hot-reloading and time travel
 

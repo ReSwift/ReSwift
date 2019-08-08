@@ -3,10 +3,8 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/28/15.
-//  Copyright © 2015 DigiTales. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
-
-import Foundation
 
 /**
  Defines the interface of Stores in ReSwift. `Store` is the default implementation of this
@@ -90,9 +88,6 @@ public protocol StoreType: DispatchingStoreType {
      ```
      store.dispatch( noteActionCreatore.deleteNote(3) )
      ```
-
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
      */
     func dispatch(_ actionCreator: ActionCreator)
 

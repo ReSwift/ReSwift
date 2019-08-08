@@ -2,8 +2,8 @@
 //  StoreSubscriberTests.swift
 //  ReSwift
 //
-//  Created by Benji Encz on 1/23/16.
-//  Copyright © 2016 Benjamin Encz. All rights reserved.
+//  Created by Benjamin Encz on 1/23/16.
+//  Copyright © 2016 ReSwift Community. All rights reserved.
 //
 
 import XCTest
@@ -177,6 +177,24 @@ class StoreSubscriberTests: XCTestCase {
         store.dispatch(SetValueStringAction("Initial"))
 
         XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testSkipsStateUpdatesForEquatableSubStateByDefault() {
+        let reducer = TestNonEquatableReducer()
+        let state = TestNonEquatable()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.testValue.testValue }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
         XCTAssertEqual(subscriber.newStateCallCount, 1)
     }
 

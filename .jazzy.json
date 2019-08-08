@@ -43,16 +43,12 @@
         "name": "Actions",
         "children": [
             "Action",
-            "StandardAction",
-            "StandardActionConvertible",
             "ReSwiftInit"
         ]
     }, {
         "name": "Reducers",
         "children": [
-            "Reducer",
-            "AnyReducer",
-            "CombinedReducer"
+            "Reducer"
         ]
     }, {
         "name": "Utilities",

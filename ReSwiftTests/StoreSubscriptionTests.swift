@@ -3,12 +3,12 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/27/15.
-//  Copyright © 2015 DigiTales. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import XCTest
 /**
- @testable import for internal testing of `Store.subscriptions`
+ @testable import for testing of `Store.subscriptions`
  */
 @testable import ReSwift
 
@@ -305,7 +305,7 @@ extension StoreSubscriptionTests {
 
         autoreleasepool {
 
-            store = TestStore(reducer: reducer.handleAction, state: TestAppState())
+            store = TestStore(reducer: reducer.handleAction, state: TestAppState(), automaticallySkipsRepeats: false)
             let subscriber = TestStoreSubscriber<Int?>()
 
             // Preconditions

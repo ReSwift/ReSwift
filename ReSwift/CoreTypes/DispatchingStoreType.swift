@@ -1,3 +1,5 @@
+//  Copyright © 2019 ReSwift Community. All rights reserved.
+
 import Foundation
 
 /**
@@ -17,8 +19,6 @@ public protocol DispatchingStoreType {
      ```
 
      - parameter action: The action that is being dispatched to the store
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
      */
     func dispatch(_ action: Action)
 }

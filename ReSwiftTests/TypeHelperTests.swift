@@ -3,12 +3,12 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 12/20/15.
-//  Copyright © 2015 Benjamin Encz. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import XCTest
 /**
- @testable import for internal testing of `withSpecificTypes`
+ @testable import for testing of `withSpecificTypes`
  */
 @testable import ReSwift
 

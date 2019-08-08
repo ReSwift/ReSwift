@@ -3,10 +3,8 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/11/15.
-//  Copyright © 2015 DigiTales. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
-
-import Foundation
 
 /**
  This class is the default implementation of the `StoreType` protocol. You will use this store in most
@@ -19,11 +17,7 @@ open class Store<State: StateType>: StoreType {
 
     typealias SubscriptionType = SubscriptionBox<State>
 
-    // swiftlint:disable todo
-    // TODO: Setter should not be public; need way for store enhancers to modify appState anyway
-    // swiftlint:enable todo
-
-    /*private (set)*/ public var state: State! {
+    private(set) public var state: State! {
         didSet {
             subscriptions.forEach {
                 if $0.subscriber == nil {
@@ -126,7 +120,7 @@ open class Store<State: StateType>: StoreType {
                    transformedSubscription: transformedSubscription)
     }
 
-    internal func subscriptionBox<T>(
+    func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,
         subscriber: AnyStoreSubscriber
@@ -140,9 +134,15 @@ open class Store<State: StateType>: StoreType {
     }
 
     open func unsubscribe(_ subscriber: AnyStoreSubscriber) {
+        #if swift(>=5.0)
+        if let index = subscriptions.firstIndex(where: { return $0.subscriber === subscriber }) {
+            subscriptions.remove(at: index)
+        }
+        #else
         if let index = subscriptions.index(where: { return $0.subscriber === subscriber }) {
             subscriptions.remove(at: index)
         }
+        #endif
     }
 
     // swiftlint:disable:next identifier_name
@@ -167,16 +167,19 @@ open class Store<State: StateType>: StoreType {
         dispatchFunction(action)
     }
 
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     open func dispatch(_ actionCreatorProvider: @escaping ActionCreator) {
         if let action = actionCreatorProvider(state, self) {
             dispatch(action)
         }
     }
 
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     open func dispatch(_ asyncActionCreatorProvider: @escaping AsyncActionCreator) {
         dispatch(asyncActionCreatorProvider, callback: nil)
     }
 
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     open func dispatch(_ actionCreatorProvider: @escaping AsyncActionCreator,
                        callback: DispatchCallback?) {
         actionCreatorProvider(state, self) { actionProvider in
@@ -191,8 +194,10 @@ open class Store<State: StateType>: StoreType {
 
     public typealias DispatchCallback = (State) -> Void
 
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     public typealias ActionCreator = (_ state: State, _ store: Store) -> Action?
 
+    @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
     public typealias AsyncActionCreator = (
         _ state: State,
         _ store: Store,
@@ -202,16 +207,7 @@ open class Store<State: StateType>: StoreType {
 
 // MARK: Skip Repeats for Equatable States
 
-extension Store where State: Equatable {
-    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
-        where S.StoreSubscriberStateType == State {
-            guard subscriptionsAutomaticallySkipRepeats else {
-                _ = subscribe(subscriber, transform: nil)
-                return
-            }
-            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
-    }
-
+extension Store {
     open func subscribe<SelectedState: Equatable, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
@@ -224,5 +220,16 @@ extension Store where State: Equatable {
         }
         _subscribe(subscriber, originalSubscription: originalSubscription,
                    transformedSubscription: transformedSubscription)
+    }
+}
+
+extension Store where State: Equatable {
+    open func subscribe<S: StoreSubscriber>(_ subscriber: S)
+        where S.StoreSubscriberStateType == State {
+            guard subscriptionsAutomaticallySkipRepeats else {
+                _ = subscribe(subscriber, transform: nil)
+                return
+            }
+            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
     }
 }

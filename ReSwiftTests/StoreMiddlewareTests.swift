@@ -2,12 +2,12 @@
 //  StoreMiddlewareTests.swift
 //  ReSwift
 //
-//  Created by Benji Encz on 12/24/15.
-//  Copyright © 2015 Benjamin Encz. All rights reserved.
+//  Created by Benjamin Encz on 12/24/15.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import XCTest
-import ReSwift
+@testable import ReSwift
 
 let firstMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
