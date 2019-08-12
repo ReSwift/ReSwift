@@ -2,8 +2,8 @@
 //  StoreSubscriberTests.swift
 //  ReSwift
 //
-//  Created by Benji Encz on 1/23/16.
-//  Copyright © 2016 Benjamin Encz. All rights reserved.
+//  Created by Benjamin Encz on 1/23/16.
+//  Copyright © 2016 ReSwift Community. All rights reserved.
 //
 
 import XCTest

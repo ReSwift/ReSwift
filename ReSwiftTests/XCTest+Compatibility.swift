@@ -1,3 +1,5 @@
+//  Copyright © 2019 ReSwift Community. All rights reserved.
+
 import XCTest
 
 func dispatchAsync(execute work: @escaping @convention(block) () -> Swift.Void) {

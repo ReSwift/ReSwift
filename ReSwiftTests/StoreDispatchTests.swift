@@ -3,7 +3,7 @@
 //  ReSwift
 //
 //  Created by Karl Bowden on 20/07/2016.
-//  Copyright © 2016 Benjamin Encz. All rights reserved.
+//  Copyright © 2016 ReSwift Community. All rights reserved.
 //
 
 import XCTest

@@ -531,7 +531,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "Benjamin Encz";
+				ORGANIZATIONNAME = "ReSwift Community";
 				TargetAttributes = {
 					25DBCF361C30BF2B00D63A58 = {
 						CreatedOnToolsVersion = 7.2;
