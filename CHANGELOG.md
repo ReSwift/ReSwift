@@ -1,3 +1,6 @@
+**Other:**
+- Add key paths to subscription select (#415) - @djtech42
+
 # 5.0.0
 
 *Released: 2019-06-30* 
