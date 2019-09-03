@@ -274,7 +274,8 @@ This repository contains the core component for ReSwift, the following extension
 
 ## Production Apps with Open Source Code
 
-- [Product Hunt for OS X](https://github.com/producthunt/producthunt-osx) Official Product Hunt client for OS X.
+- [Persephone](https://github.com/danbee/persephone), a MPD music player daemon controller for macOS
+- [Product Hunt for OS X](https://github.com/producthunt/producthunt-osx) Official Product Hunt client for macOS
 
 # Contributing
 
