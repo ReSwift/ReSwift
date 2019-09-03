@@ -6,6 +6,7 @@ branches:
 
 install:
   - gem install xcpretty
+  - gem update cocoapods
 
 env:
   global:
