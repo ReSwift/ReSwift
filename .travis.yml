@@ -33,7 +33,7 @@ matrix:
     - osx_image: xcode10.2
       env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
     - osx_image: xcode10.2
-      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true"
+      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true" POD_LINT="YES"
 
 script:
   - set -o pipefail
@@ -53,6 +53,9 @@ script:
       SWIFT_VERSION=$SWIFT_VERSION;
     else
       swift test;
+    fi
+  - if [ $POD_LINT == "YES" ]; then
+      pod lib lint --verbose;
     fi
 
 after_success:
