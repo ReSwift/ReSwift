@@ -4,9 +4,11 @@ branches:
   except:
     - gh-pages
 
+before_install:
+  - gem install cocoapods -v '1.7.5'
+
 install:
   - gem install xcpretty
-  - gem update cocoapods
 
 env:
   global:
