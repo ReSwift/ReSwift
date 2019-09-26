@@ -1,3 +1,8 @@
+# Upcoming
+
+**API Changes:**
+- Add capability to mutate `Middleware` after store creation. (#) - @mjarvis
+
 # 5.0.0
 
 *Released: 2019-06-30* 

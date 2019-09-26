@@ -29,7 +29,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    public var dispatchFunction: DispatchFunction!
+    public lazy var dispatchFunction: DispatchFunction! = createDispatchFunction()
 
     private var reducer: Reducer<State>
 
@@ -40,6 +40,12 @@ open class Store<State: StateType>: StoreType {
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
     fileprivate let subscriptionsAutomaticallySkipRepeats: Bool
+
+    public var middleware: [Middleware<State>] {
+        didSet {
+            dispatchFunction = createDispatchFunction()
+        }
+    }
 
     /// Initializes the store with a reducer, an initial state and a list of middleware.
     ///
@@ -61,9 +67,18 @@ open class Store<State: StateType>: StoreType {
     ) {
         self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
         self.reducer = reducer
+        self.middleware = middleware
 
+        if let state = state {
+            self.state = state
+        } else {
+            dispatch(ReSwiftInit())
+        }
+    }
+
+    private func createDispatchFunction() -> DispatchFunction {
         // Wrap the dispatch function with all middlewares
-        self.dispatchFunction = middleware
+        return middleware
             .reversed()
             .reduce(
                 { [unowned self] action in
@@ -75,12 +90,6 @@ open class Store<State: StateType>: StoreType {
                     let getState = { [weak self] in self?.state }
                     return middleware(dispatch, getState)(dispatchFunction)
             })
-
-        if let state = state {
-            self.state = state
-        } else {
-            dispatch(ReSwiftInit())
-        }
     }
 
     fileprivate func _subscribe<SelectedState, S: StoreSubscriber>(
