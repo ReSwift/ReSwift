@@ -3,10 +3,10 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 12/14/15.
-//  Copyright © 2015 Benjamin Encz. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
-public protocol AnyStoreSubscriber: class {
+public protocol AnyStoreSubscriber: AnyObject {
     // swiftlint:disable:next identifier_name
     func _newState(state: Any)
 }
