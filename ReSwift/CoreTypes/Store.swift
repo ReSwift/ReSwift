@@ -3,11 +3,11 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/11/15.
-//  Copyright © 2015 DigiTales. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 /**
- This class is the default implementation of the `Store` protocol. You will use this store in most
+ This class is the default implementation of the `StoreType` protocol. You will use this store in most
  of your applications. You shouldn't need to implement your own store.
  You initialize the store with a reducer and an initial application state. If your app has multiple
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
@@ -35,7 +35,7 @@ open class Store<State: StateType>: StoreType {
 
     var subscriptions: Set<SubscriptionType> = []
 
-    private var isDispatching = false
+    private var isDispatching = AtomicBool()
 
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
@@ -156,7 +156,7 @@ open class Store<State: StateType>: StoreType {
 
     // swiftlint:disable:next identifier_name
     open func _defaultDispatch(action: Action) {
-        guard !isDispatching else {
+        guard !isDispatching.value else {
             raiseFatalError(
                 "ReSwift:ConcurrentMutationError- Action has been dispatched while" +
                 " a previous action is action is being processed. A reducer" +
@@ -165,9 +165,9 @@ open class Store<State: StateType>: StoreType {
             )
         }
 
-        isDispatching = true
+        isDispatching.value = true
         let newState = reducer(action, state)
-        isDispatching = false
+        isDispatching.value = false
 
         state = newState
     }

@@ -3,6 +3,9 @@
 **API Changes:**
 - Add capability to mutate `Middleware` after store creation. (#) - @mjarvis
 
+**Other:**
+- Make isDispatching of Store atomic (#341) - @zhongwuzw
+
 # 5.0.0
 
 *Released: 2019-06-30* 
