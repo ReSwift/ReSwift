@@ -76,7 +76,7 @@ open class Store<State: StateType>: StoreType {
         }
     }
 
-    private func createDispatchFunction() -> DispatchFunction {
+    private func createDispatchFunction() -> DispatchFunction! {
         // Wrap the dispatch function with all middlewares
         return middleware
             .reversed()
