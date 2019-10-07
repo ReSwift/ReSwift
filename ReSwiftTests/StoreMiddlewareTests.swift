@@ -71,6 +71,16 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
     }
 }
 
+func middleware(executing block: @escaping () -> Void) -> Middleware<StateType> {
+    return { dispatch, getState in
+        return { next in
+            return { action in
+                block()
+            }
+        }
+    }
+}
+
 class StoreMiddlewareTests: XCTestCase {
 
     /**
@@ -136,5 +146,25 @@ class StoreMiddlewareTests: XCTestCase {
         store.dispatch(SetValueStringAction("Action That Won't Go Through"))
 
         XCTAssertEqual(store.state.testValue, "Not OK")
+    }
+
+    func testCanMutateMiddlewareAfterInit() {
+
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState()
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction, state: state,
+            middleware: [])
+
+        // Adding
+        var added = false
+        store.middleware.append(middleware(executing: { added = true }))
+        store.dispatch(SetValueStringAction(""))
+        XCTAssertTrue(added)
+
+        // Removing
+        added = false
+        store.middleware = []
+        store.dispatch(SetValueStringAction(""))
+        XCTAssertFalse(added)
     }
 }
