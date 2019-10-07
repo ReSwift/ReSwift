@@ -19,10 +19,6 @@ env:
 
 matrix:
   include:
-    - osx_image: xcode9
-      env: SCHEME="macOS"    SDK="macosx10.13"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="3.2" ACTION="test"
-    - osx_image: xcode9.3
-      env: SCHEME="macOS"    SDK="macosx10.13"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.1" ACTION="test"
     - osx_image: xcode10.1
       env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.2" ACTION="test"
     - osx_image: xcode10.2

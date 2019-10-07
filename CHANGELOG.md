@@ -1,3 +1,6 @@
+**Breaking API Changes:**
+- Drop support for Swift 3.2, 4.0, and 4.1. (#418) - @DivineDominion
+
 **Other:**
 - Make isDispatching of Store atomic (#341) - @zhongwuzw
 
