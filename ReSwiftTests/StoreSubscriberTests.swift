@@ -91,6 +91,27 @@ class StoreSubscriberTests: XCTestCase {
 
         store.subscribe(subscriber) {
             $0
+            .select { $0.testValue }
+            .skipRepeats { $0 == $1 }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+
+        store.dispatch(SetValueAction(3))
+
+        XCTAssertEqual(subscriber.receivedValue, 3)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testUnchangedStateKeyPath() {
+        let reducer = TestReducer()
+        var state = TestAppState()
+        state.testValue = 3
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<Int?>()
+
+        store.subscribe(subscriber) {
+            $0
             .select(\.testValue)
             .skipRepeats { $0 == $1 }
         }
@@ -108,6 +129,26 @@ class StoreSubscriberTests: XCTestCase {
      `skipRepeats` implementation.
      */
     func testUnchangedStateSelectorDefaultSkipRepeats() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscribe(subscriber) {
+            $0
+            .select { $0.testValue }
+            .skipRepeats()
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testUnchangedStateKeyPathDefaultSkipRepeats() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
         let store = Store(reducer: reducer.handleAction, state: state)
@@ -138,6 +179,26 @@ class StoreSubscriberTests: XCTestCase {
 
         store.subscribe(subscriber) {
             $0
+            .select { $0.substate }
+            .skipRepeats { $0.value == $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testSkipsStateUpdatesForCustomEqualityChecksKeyPath() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0
             .select(\.substate)
             .skipRepeats { $0.value == $1.value }
         }
@@ -157,6 +218,24 @@ class StoreSubscriberTests: XCTestCase {
         let subscriber = TestFilteredSubscriber<NonEquatable>()
 
         store.subscribe(subscriber) {
+            $0.select { $0.testValue }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
+
+        store.dispatch(SetNonEquatableAction(NonEquatable()))
+
+        XCTAssertEqual(subscriber.receivedValue.testValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 2)
+    }
+
+    func testPassesOnDuplicateSubstateUpdatesByDefaultKeyPath() {
+        let reducer = TestNonEquatableReducer()
+        let state = TestNonEquatable()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<NonEquatable>()
+
+        store.subscribe(subscriber) {
             $0.select(\.testValue)
         }
 
@@ -169,6 +248,24 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     func testPassesOnDuplicateSubstateWhenSkipsFalse() {
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState()
+        let store = Store(reducer: reducer.handleAction, state: state, middleware: [], automaticallySkipsRepeats: false)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.testValue }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 2)
+    }
+
+    func testPassesOnDuplicateSubstateWhenSkipsFalseKeyPath() {
         let reducer = TestValueStringReducer()
         let state = TestStringAppState()
         let store = Store(reducer: reducer.handleAction, state: state, middleware: [], automaticallySkipsRepeats: false)
@@ -203,6 +300,24 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     func testSkipsStateUpdatesForEquatableSubStateByDefault() {
+        let reducer = TestNonEquatableReducer()
+        let state = TestNonEquatable()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<String>()
+
+        store.subscribe(subscriber) {
+            $0.select { $0.testValue.testValue }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+
+        store.dispatch(SetValueStringAction("Initial"))
+
+        XCTAssertEqual(subscriber.receivedValue, "Initial")
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testSkipsStateUpdatesForEquatableSubStateByDefaultKeyPath() {
         let reducer = TestNonEquatableReducer()
         let state = TestNonEquatable()
         let store = Store(reducer: reducer.handleAction, state: state)
@@ -244,6 +359,26 @@ class StoreSubscriberTests: XCTestCase {
 
         store.subscribe(subscriber) {
             $0
+            .select { $0.substate }
+            .skip { $0.value == $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testSkipWhenKeyPath() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0
             .select(\.substate)
             .skip { $0.value == $1.value }
         }
@@ -257,6 +392,26 @@ class StoreSubscriberTests: XCTestCase {
     }
 
     func testOnlyWhen() {
+        let reducer = TestCustomAppStateReducer()
+        let state = TestCustomAppState(substateValue: 5)
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestFilteredSubscriber<TestCustomAppState.TestCustomSubstate>()
+
+        store.subscribe(subscriber) {
+            $0
+            .select { $0.substate }
+            .only { $0.value != $1.value }
+        }
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+
+        store.dispatch(SetCustomSubstateAction(5))
+
+        XCTAssertEqual(subscriber.receivedValue.value, 5)
+        XCTAssertEqual(subscriber.newStateCallCount, 1)
+    }
+
+    func testOnlyWhenKeyPath() {
         let reducer = TestCustomAppStateReducer()
         let state = TestCustomAppState(substateValue: 5)
         let store = Store(reducer: reducer.handleAction, state: state)
