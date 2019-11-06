@@ -29,11 +29,7 @@ class StoreSubscriberTests: XCTestCase {
 
         store.dispatch(SetValueAction(nil))
 
-        #if swift(>=4.1)
-            XCTAssertEqual(subscriber.receivedValue, .some(.none))
-        #else
-            XCTAssertEqual(subscriber.receivedValue, nil)
-        #endif
+        XCTAssertEqual(subscriber.receivedValue, .some(.none))
     }
 
     /**

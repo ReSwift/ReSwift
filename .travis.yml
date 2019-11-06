@@ -4,6 +4,9 @@ branches:
   except:
     - gh-pages
 
+before_install:
+  - gem install cocoapods -v '1.7.5'
+
 install:
   - gem install xcpretty
 
@@ -16,10 +19,6 @@ env:
 
 matrix:
   include:
-    - osx_image: xcode9
-      env: SCHEME="macOS"    SDK="macosx10.13"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="3.2" ACTION="test"
-    - osx_image: xcode9.3
-      env: SCHEME="macOS"    SDK="macosx10.13"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.1" ACTION="test"
     - osx_image: xcode10.1
       env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.2" ACTION="test"
     - osx_image: xcode10.2
@@ -33,7 +32,7 @@ matrix:
     - osx_image: xcode10.2
       env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
     - osx_image: xcode10.2
-      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true"
+      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true" POD_LINT="YES"
 
 script:
   - set -o pipefail
@@ -53,6 +52,9 @@ script:
       SWIFT_VERSION=$SWIFT_VERSION;
     else
       swift test;
+    fi
+  - if [ $POD_LINT == "YES" ]; then
+      pod lib lint --verbose;
     fi
 
 after_success:

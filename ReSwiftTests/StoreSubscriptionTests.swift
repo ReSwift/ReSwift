@@ -28,7 +28,6 @@ class StoreSubscriptionTests: XCTestCase {
     /**
      It does not strongly capture an observer
      */
-    #if swift(>=4.1)
     func testDoesNotCaptureStrongly() {
         store = Store(reducer: reducer.handleAction, state: TestAppState())
         var subscriber: TestSubscriber? = TestSubscriber()
@@ -39,18 +38,6 @@ class StoreSubscriptionTests: XCTestCase {
         subscriber = nil
         XCTAssertEqual(store.subscriptions.compactMap({ $0.subscriber }).count, 0)
     }
-    #else
-    func testDoesNotCaptureStrongly() {
-        store = Store(reducer: reducer.handleAction, state: TestAppState())
-        var subscriber: TestSubscriber? = TestSubscriber()
-
-        store.subscribe(subscriber!)
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 1)
-
-        subscriber = nil
-        XCTAssertEqual(store.subscriptions.flatMap({ $0.subscriber }).count, 0)
-    }
-    #endif
 
     /**
      it removes deferenced subscribers before notifying state changes
