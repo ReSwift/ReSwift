@@ -1,5 +1,10 @@
+# Upcoming
+
 **Breaking API Changes:**
 - Drop support for Swift 3.2, 4.0, and 4.1. (#418) - @DivineDominion
+
+**API Changes:**
+- Add capability to mutate `Middleware` after store creation. (#427) - @mjarvis
 
 **Other:**
 - Add key paths to subscription select (#415) - @djtech42
