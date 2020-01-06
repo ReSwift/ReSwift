@@ -20,8 +20,8 @@ struct TestAppState: StateType {
 struct TestStringAppState: StateType {
     var testValue: String
 
-    init() {
-        testValue = "Initial"
+    init(testValue: String = "Initial") {
+        self.testValue = testValue
     }
 }
 
@@ -166,19 +166,6 @@ class TestStoreSubscriber<T>: StoreSubscriber {
 
     func newState(state: T) {
         receivedStates.append(state)
-    }
-}
-
-class BlockSubscriber<S>: StoreSubscriber {
-    typealias StoreSubscriberStateType = S
-    private let block: (S) -> Void
-
-    init(block: @escaping (S) -> Void) {
-        self.block = block
-    }
-
-    func newState(state: S) {
-        self.block(state)
     }
 }
 
