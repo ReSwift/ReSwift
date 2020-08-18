@@ -54,7 +54,7 @@ extension SynchronizedTests {
         measure {
             temp.value { $0 = 0 } // Reset
             DispatchQueue.concurrentPerform(iterations: iterations) {
-                guard $0.isMultiple(of: writeMultipleOf) else { return }
+                guard $0 % writeMultipleOf != 0 else { return }
                 temp.value { $0 += 1 }
             }
             XCTAssertGreaterThanOrEqual(temp.value, iterations / writeMultipleOf)

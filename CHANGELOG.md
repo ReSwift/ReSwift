@@ -8,7 +8,7 @@
 
 **Other:**
 - Add key paths to subscription select (#415) - @djtech42
-- Make isDispatching of Store atomic (#341) - @zhongwuzw
+- Make isDispatching of Store atomic (#341, #446) - @zhongwuzw, @basememara
 
 # 5.0.0
 
