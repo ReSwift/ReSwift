@@ -27,7 +27,7 @@ extension SynchronizedTests {
         static let shared = Database()
         private var data = Synchronized<[String: Any]>([:])
         func get(key: String) -> Any? {
-            data.value { $0[key] }
+            return data.value { $0[key] }
         }
         func set(key: String, value: Any) {
             data.value { $0[key] = value }
