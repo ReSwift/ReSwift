@@ -16,13 +16,7 @@ import SwiftUI
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-open class Store<State: StateType>: StoreType, BindableObject {
-
-    public var didChange: Published<State>.Publisher {
-        get {
-            return $state
-        }
-    }
+open class Store<State: StateType>: StoreType, ObservableObject {
 
     @Published private(set) public var state: State
 
@@ -47,9 +41,6 @@ open class Store<State: StateType>: StoreType, BindableObject {
     ///   provided by the reducer in that case.
     /// - parameter middleware: Ordered list of action pre-processors, acting 
     ///   before the root reducer.
-    /// - parameter automaticallySkipsRepeats: If `true`, the store will attempt 
-    ///   to skip idempotent state updates when a subscriber's state type 
-    ///   implements `Equatable`. Defaults to `true`.
     public required init(
         reducer: @escaping Reducer<State>,
         state: State,
