@@ -35,7 +35,7 @@ open class Store<State: StateType>: StoreType {
 
     var subscriptions: Set<SubscriptionType> = []
 
-    private var isDispatching = AtomicBool()
+    private var isDispatching = Synchronized<Bool>(false)
 
     /// Indicates if new subscriptions attempt to apply `skipRepeats` 
     /// by default.
@@ -165,9 +165,9 @@ open class Store<State: StateType>: StoreType {
             )
         }
 
-        isDispatching.value = true
+        isDispatching.value { $0 = true }
         let newState = reducer(action, state)
-        isDispatching.value = false
+        isDispatching.value { $0 = false }
 
         state = newState
     }
