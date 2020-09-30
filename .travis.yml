@@ -24,9 +24,9 @@ matrix:
     - osx_image: xcode11.6
       env: SCHEME="macOS"    SDK="macosx10.15"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
     - osx_image: xcode12
-      env: SCHEME="iOS"      SDK="iphonesimulator"    DESTINATION="OS=14.0,name=iPhone X"          SWIFT_VERSION="5.2" ACTION="test"
+      env: SCHEME="iOS"      SDK="iphonesimulator"    DESTINATION="OS=14.0,name=iPhone 11 Pro Max" SWIFT_VERSION="5.2" ACTION="test"
     - osx_image: xcode12
-      env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=7.0,name=Apple Watch Series 4 - 44mm" SWIFT_VERSION="5.2" ACTION="build"
+      env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=7.0,name=Apple Watch Series 6 - 44mm" SWIFT_VERSION="5.2" ACTION="build"
     - osx_image: xcode12
       env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=14.0,name=Apple TV 4K"       SWIFT_VERSION="5.2" ACTION="test"
     - osx_image: xcode12
