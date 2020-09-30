@@ -29,8 +29,8 @@ matrix:
       env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=7.0,name=Apple Watch Series 6 - 44mm" SWIFT_VERSION="5.2" ACTION="build"
     - osx_image: xcode12
       env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=14.0,name=Apple TV 4K"       SWIFT_VERSION="5.2" ACTION="test"
-    - osx_image: xcode12u
-      env: SCHEME="macOS"    SDK="macosx11"           DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.2" ACTION="test"
+    - osx_image: xcode12
+      env: SCHEME="macOS"    SDK="macosx10.15"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.2" ACTION="test"
     - osx_image: xcode12
       env: TEST_SWIFTPM="true" POD_LINT="YES"
 
