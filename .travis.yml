@@ -5,7 +5,7 @@ branches:
     - gh-pages
 
 before_install:
-  - gem install cocoapods -v '1.7.5'
+  - gem install cocoapods -v '1.9.3'
 
 install:
   - gem install xcpretty
@@ -21,18 +21,18 @@ matrix:
   include:
     - osx_image: xcode10.1
       env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.2" ACTION="test"
-    - osx_image: xcode10.2
-      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="4.2" ACTION="test"
-    - osx_image: xcode10.2
-      env: SCHEME="iOS"      SDK="iphonesimulator"    DESTINATION="OS=12.2,name=iPhone 8"          SWIFT_VERSION="4.2" ACTION="test"
-    - osx_image: xcode10.2
-      env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=5.2,name=Apple Watch Series 4 - 44mm" SWIFT_VERSION="4.2" ACTION="build"
-    - osx_image: xcode10.2
-      env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=12.2,name=Apple TV 4K"       SWIFT_VERSION="4.2" ACTION="test"
-    - osx_image: xcode10.2
-      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
-    - osx_image: xcode10.2
-      env: SCHEME="macOS"    SDK="macosx10.14"        DESTINATION="arch=x86_64"                    TEST_SWIFTPM="true" POD_LINT="YES"
+    - osx_image: xcode11.6
+      env: SCHEME="macOS"    SDK="macosx10.15"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.0" ACTION="test"
+    - osx_image: xcode12
+      env: SCHEME="iOS"      SDK="iphonesimulator"    DESTINATION="OS=14.0,name=iPhone 11 Pro Max" SWIFT_VERSION="5.2" ACTION="test"
+    - osx_image: xcode12
+      env: SCHEME="watchOS"  SDK="watchsimulator"     DESTINATION="OS=7.0,name=Apple Watch Series 6 - 44mm" SWIFT_VERSION="5.2" ACTION="build"
+    - osx_image: xcode12
+      env: SCHEME="tvOS"     SDK="appletvsimulator"   DESTINATION="OS=14.0,name=Apple TV 4K"       SWIFT_VERSION="5.2" ACTION="test"
+    - osx_image: xcode12
+      env: SCHEME="macOS"    SDK="macosx10.15"        DESTINATION="arch=x86_64"                    SWIFT_VERSION="5.2" ACTION="test"
+    - osx_image: xcode12
+      env: TEST_SWIFTPM="true" POD_LINT="YES"
 
 script:
   - set -o pipefail

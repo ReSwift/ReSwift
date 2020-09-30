@@ -1,7 +1,18 @@
+<!--
 # Upcoming
 
 **Breaking API Changes:**
+**API Changes:**
+**Other:**
+-->
+
+# 6.0.0
+
+*Released: 2020-10-01*
+
+**Breaking API Changes:**
 - Drop support for Swift 3.2, 4.0, and 4.1. (#418) - @DivineDominion
+- Drop support for iOS 8 (#447) - @DominicSchiller-IBM-CIC
 
 **API Changes:**
 - Add capability to mutate `Middleware` after store creation. (#427) - @mjarvis
