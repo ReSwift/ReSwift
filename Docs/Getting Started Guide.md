@@ -199,6 +199,7 @@ func authenticationReducer(action: Action, state: AuthenticationState?) -> Authe
         return state
     }
 
+    switch action {
     case let .setOAuthURL(oAuthUrl):
         state.oAuthURL = oAuthUrl
     case let .updateLoggedInState(loggedInState):
