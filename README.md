@@ -61,9 +61,21 @@ struct CounterActionIncrease: Action {}
 struct CounterActionDecrease: Action {}
 ```
 
+Or you can define your actions as an enum if you prefer:
+
+```swift
+enum CounterAction: Action {
+
+    case .increase
+    case .decrease
+
+}
+```
+
 Your reducer needs to respond to these different action types, that can be done by switching over the type of action:
 
 ```swift
+// A reducer for actions represented in structs
 func counterReducer(action: Action, state: AppState?) -> AppState {
     var state = state ?? AppState()
 
@@ -78,7 +90,24 @@ func counterReducer(action: Action, state: AppState?) -> AppState {
 
     return state
 }
+
+// The same reducer for actions represented in enums
+func counterReducer(action: Action, state: AppState?) -> AppState {
+    var state = state ?? AppState()
+
+    switch action {
+    case CounterAction.counterActionIncrease:
+        state.counter += 1
+    case CounterAction.counterActionDecrease:
+        state.counter -= 1
+    default:
+        break
+    }
+
+    return state
+}
 ```
+
 In order to have a predictable app state, it is important that the reducer is always free of side effects, it receives the current app state and an action and returns the new app state.
 
 To maintain our state and delegate the actions to the reducers, we need a store. Let's call it `mainStore` and define it as a global constant, for example in the app delegate file:
@@ -95,10 +124,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-
 Lastly, your view layer, in this case a view controller, needs to tie into this system by subscribing to store updates and emitting actions whenever the app state needs to be changed:
 
 ```swift
+// for actions represented in structs
 class CounterViewController: UIViewController, StoreSubscriber {
 
     @IBOutlet var counterLabel: UILabel!
@@ -125,6 +154,21 @@ class CounterViewController: UIViewController, StoreSubscriber {
         mainStore.dispatch(
             CounterActionDecrease()
         )
+    }
+
+}
+
+// for actions represented in enums
+class CounterViewController: UIViewController, StoreSubscriber {
+
+    [...]
+
+    @IBAction func increaseButtonTapped(_ sender: UIButton) {
+        mainStore.dispatch(CounterAction.increase)
+    }
+
+    @IBAction func decreaseButtonTapped(_ sender: UIButton) {
+        mainStore.dispatch(CounterAction.decrease)
     }
 
 }

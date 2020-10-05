@@ -138,6 +138,15 @@ struct SetOAuthURL: Action {
 }
 ```
 
+Or you can combine related actions into an enum type:
+
+```swift
+enum AuthenticationAction: Action {
+    case setOAuthURL(oAuthUrl: URL)
+    case updateLoggedInState(loggedInState: Bool)
+}
+```
+
 ## Reducers
 
 Reducers are the **only place** in which you should **modify** application state. Reducers take the current application state and an action then return the new transformed application state. We recommend to provide many small reducers that each handle a subset of your application state.
@@ -157,7 +166,7 @@ func appReducer(action: Action, state: State?) -> State {
 }
 ```
 
-The `Reducer` typealias is a function that takes an `Action` and a `State?` then returns a `State`. Typically reducers will be responsible for initializing the application state. When they receive `nil` as the current state, they should return the initial default value for their portion of the state. In the example above the `appReducer` delegates all calls to other reducer functions. 
+The `Reducer` typealias is a function that takes an `Action` and a `State?` then returns a `State`. Typically reducers will be responsible for initializing the application state. When they receive `nil` as the current state, they should return the initial default value for their portion of the state. In the example above the `appReducer` delegates all calls to other reducer functions.
 
 For example, `authenticationReducer` is responsible for providing the `authenticationState`. Here's what the `authenticationReducer` function might look like:
 
@@ -171,6 +180,28 @@ func authenticationReducer(action: Action, state: AuthenticationState?) -> Authe
     case let action as SetOAuthURL:
         state.oAuthURL = action.oAuthUrl
     case let action as UpdateLoggedInState:
+        state.loggedInState = action.loggedInState
+    default:
+        break
+    }
+
+    return state
+}
+```
+
+Or it might look like this if you define your actions as an enum:
+
+```swift
+func authenticationReducer(action: Action, state: AuthenticationState?) -> AuthenticationState {
+    var state = state ?? initialAuthenticationState()
+
+    guard let action = action as? AuthenticationAction else {
+        return state
+    }
+
+    case let .setOAuthURL(oAuthUrl):
+        state.oAuthURL = oAuthUrl
+    case let .updateLoggedInState(loggedInState):
         state.loggedInState = action.loggedInState
     default:
         break
