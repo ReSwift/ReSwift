@@ -6,6 +6,8 @@
 //  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
+import Combine
+
 /**
  Defines the interface of Stores in ReSwift. `Store` is the default implementation of this
  interface. Applications have a single store that stores the entire application state.
@@ -23,5 +25,5 @@ public protocol StoreType: DispatchingStoreType, ObservableObject {
      The main dispatch function that is used by all convenience `dispatch` methods.
      This dispatch function can be extended by providing middlewares.
      */
-    var dispatchFunction: DispatchFunction! { get }
+    var dispatchFunction: DispatchFunction { get }
 }

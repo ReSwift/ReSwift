@@ -99,9 +99,6 @@ class StoreMiddlewareTests: XCTestCase {
             state: TestStringAppState(),
             middleware: middleware)
 
-        let subscriber = TestStoreSubscriber<TestStringAppState>()
-        _ = store.didChange.sink(receiveValue: subscriber.newState)
-
         let action = SetValueStringAction("OK")
         store.dispatch(action)
 
@@ -123,11 +120,6 @@ class StoreMiddlewareTests: XCTestCase {
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
             middleware: middleware)
-
-        let subscriber = TestStoreSubscriber<TestStringAppState>()
-        _ = store.didChange.sink(receiveValue: subscriber.newState)
-
-//        store[\.state.testValue]
 
         let action = SetValueAction(10)
         store.dispatch(action)

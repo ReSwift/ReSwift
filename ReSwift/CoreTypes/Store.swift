@@ -7,7 +7,6 @@
 //
 
 import Combine
-import SwiftUI
 
 /**
  This class is the default implementation of the `StoreType` protocol. You will use this store in most
@@ -20,7 +19,7 @@ open class Store<State: StateType>: StoreType, ObservableObject {
 
     @Published private(set) public var state: State
 
-    public lazy var dispatchFunction: DispatchFunction! = createDispatchFunction()
+    public lazy var dispatchFunction: DispatchFunction = createDispatchFunction()
 
     private var reducer: Reducer<State>
 
@@ -51,7 +50,7 @@ open class Store<State: StateType>: StoreType, ObservableObject {
         self.state = state
     }
 
-    private func createDispatchFunction() -> DispatchFunction! {
+    private func createDispatchFunction() -> DispatchFunction {
         // Wrap the dispatch function with all middlewares
         return middleware
             .reversed()

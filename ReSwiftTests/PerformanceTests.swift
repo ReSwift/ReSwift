@@ -16,14 +16,13 @@ final class PerformanceTests: XCTestCase {
     )
 
     class MockSubscriber {
-        func newState(state: MockState) {
+        func sink() {
             // Do nothing
         }
     }
 
     func testNotify() {
-        self.subscribers.forEach { _ = store.didChange.sink(receiveValue: $0.newState) }
-//        store.didChange.tryRemoveDuplicates(by: <#T##(PerformanceTests.MockState, PerformanceTests.MockState) throws -> Bool#>)
+        self.subscribers.forEach { _ = store.objectWillChange.sink(receiveValue: $0.sink) }
         self.measure {
             self.store.dispatch(MockAction())
         }
@@ -31,7 +30,7 @@ final class PerformanceTests: XCTestCase {
 
     func testSubscribe() {
         self.measure {
-            self.subscribers.forEach { _ = store.didChange.sink(receiveValue: $0.newState) }
+            self.subscribers.forEach { _ = store.objectWillChange.sink(receiveValue: $0.sink) }
         }
     }
 }
