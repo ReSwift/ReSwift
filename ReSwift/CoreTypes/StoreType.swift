@@ -12,7 +12,7 @@
  Stores receive actions and use reducers combined with these actions, to calculate state changes.
  Upon every state update a store informs all of its subscribers.
  */
-public protocol StoreType: DispatchingStoreType {
+public protocol StoreType: DispatchingStoreType, ObservableObject {
 
     associatedtype State: StateType
 
