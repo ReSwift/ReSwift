@@ -34,7 +34,6 @@ class StoreSubscriptionTests: XCTestCase {
 
         store.subscribe(subscriber!)
         XCTAssertEqual(store.subscriptions.compactMap({ $0.subscriber }).count, 1)
-        
         // Ensure `subscriber` is accessed at least once to prevent it being optimised
         // away when tests are built using 'release' scheme. #459 refers.
         XCTAssertNotNil(subscriber)
