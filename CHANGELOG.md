@@ -1,10 +1,10 @@
-<!--
 # Upcoming
 
 **Breaking API Changes:**
 **API Changes:**
+
 **Other:**
--->
+- Fix bug where automaticallySkipsRepeats is ignored when subscribing on generic `S: StateType` (#463) - @mjarvis
 
 # 6.0.0
 
