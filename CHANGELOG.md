@@ -1,10 +1,12 @@
 # Upcoming
 
 **Breaking API Changes:**
+
 **API Changes:**
+- Deprecate `StateType` protocol requirement (#462) - @mjarvis
 
 **Other:**
-- Fix bug where automaticallySkipsRepeats is ignored when subscribing on generic `S: StateType` (#463) - @mjarvis
+- Fix bug where automaticallySkipsRepeats is ignored when subscribing on generic `S: StoreType` (#463) - @mjarvis
 
 # 6.0.0
 

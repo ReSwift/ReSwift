@@ -239,7 +239,7 @@ private class TestSubscriptionBox<S>: SubscriptionBox<S> {
     }
 }
 
-private class TestStore<State: StateType>: Store<State> {
+private class TestStore<State>: Store<State> {
     override func subscriptionBox<T>(
         originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<T>?,

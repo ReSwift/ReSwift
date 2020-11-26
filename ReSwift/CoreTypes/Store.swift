@@ -13,7 +13,7 @@
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-open class Store<State: StateType>: StoreType {
+open class Store<State>: StoreType {
 
     typealias SubscriptionType = SubscriptionBox<State>
 
@@ -87,7 +87,7 @@ open class Store<State: StateType>: StoreType {
                     // If the store get's deinitialized before the middleware is complete; drop
                     // the action without dispatching.
                     let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
-                    let getState = { [weak self] in self?.state }
+                    let getState: () -> State? = { [weak self] in self?.state }
                     return middleware(dispatch, getState)(dispatchFunction)
             })
     }

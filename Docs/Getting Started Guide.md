@@ -14,12 +14,12 @@ This section will show you how to set up the core ReSwift components in your app
 
 ## High-Level Overview
 
-To get the infrastructure up and running you need to set up a `Store` for a root app state type. The type requirement is `ReSwift.Store<State: ReSwift.StateType>`. You set it up like this:
+To get the infrastructure up and running you need to set up a `Store` for a root app state type. The type requirement is `ReSwift.Store<State>`. You set it up like this:
 
 ```swift
 import ReSwift
 
-struct AppState: StateType {
+struct AppState {
     // ... app state properties here ...
 }
 
@@ -45,7 +45,7 @@ The process of implementing then works like this:
 For reference, the store's initializer and the initializer's type requirements all together look like this:
 
 ```swift
-class Store<State: StateType>: StoreType {
+class Store<State>: StoreType {
     public required init(
         reducer: @escaping Reducer<State>,
         state: State?,
@@ -70,7 +70,7 @@ If you want to see how you can fill in the gaps we left above, take a look at th
 ```swift
 import ReSwift
 
-struct AppState: StateType {
+struct AppState {
     var count = 0
 }
 
@@ -111,16 +111,13 @@ The application state is defined in a single data structure, which should be a `
 Here's an example of a state struct as defined in the [Counter Example](https://github.com/ReSwift/CounterExample-Navigation-TimeTravel):
 
 ```swift
-struct AppState: StateType {
+struct AppState {
     var counter: Int = 0
     var navigationState = NavigationState()
 }
 ```
 
-There are multiple things to note:
-
-1. Your app state struct needs to conform to the `StateType` protocol, currently this is just a marker protocol.
-2. If you are including `ReSwiftRouter` in your project, your app state needs to contain a property of type `NavigationState`. This is the sub-state the router will use to store the current route.
+If you are including `ReSwiftRouter` in your project, your app state needs to contain a property of type `NavigationState`. This is the sub-state the router will use to store the current route.
 
 ### Derived State
 

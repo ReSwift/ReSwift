@@ -19,16 +19,16 @@
 @discardableResult
 func withSpecificTypes<SpecificStateType, Action>(
         _ action: Action,
-        state genericStateType: StateType?,
+        state genericStateType: Any?,
         function: (_ action: Action, _ state: SpecificStateType?) -> SpecificStateType
-    ) -> StateType {
+    ) -> Any {
         guard let genericStateType = genericStateType else {
-            return function(action, nil) as! StateType
+            return function(action, nil) as Any
         }
 
         guard let specificStateType = genericStateType as? SpecificStateType else {
             return genericStateType
         }
 
-        return function(action, specificStateType) as! StateType
+        return function(action, specificStateType) as Any
 }

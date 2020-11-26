@@ -4,7 +4,7 @@ import XCTest
 import ReSwift
 
 final class PerformanceTests: XCTestCase {
-    struct MockState: StateType {}
+    struct MockState {}
     struct MockAction: Action {}
 
     let subscribers: [MockSubscriber] = (0..<3000).map { _ in MockSubscriber() }

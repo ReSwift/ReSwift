@@ -73,7 +73,7 @@ extension AutomaticallySkipRepeatsTests: StoreSubscriber {
     }
 }
 
-private struct State: StateType {
+private struct State {
     let age: Int
     let name: String
 }
