@@ -52,6 +52,25 @@ public protocol StoreType: DispatchingStoreType {
     ) where S.StoreSubscriberStateType == SelectedState
 
     /**
+     Subscribes the provided subscriber to this store.
+     Subscribers will receive a call to `newState` whenever the
+     state in this store changes and the subscription decides to forward
+     state update.
+
+     This variation is used when substate conforms to `Equatable` and
+     `automaticallySkipsRepeats` is enabled on the store.
+
+     - parameter subscriber: Subscriber that will receive store updates
+     - parameter transform: A closure that receives a simple subscription and can return a
+       transformed subscription. Subscriptions can be transformed to only select a subset of the
+       state, or to skip certain state updates.
+     - note: Subscriptions are not ordered, so an order of state updates cannot be guaranteed.
+     */
+    func subscribe<SelectedState: Equatable, S: StoreSubscriber>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState
+
+    /**
      Unsubscribes the provided subscriber. The subscriber will no longer
      receive state updates from this store.
 
