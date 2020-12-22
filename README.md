@@ -49,7 +49,7 @@ ReSwift relies on a few principles:
 For a very simple app, that maintains a counter that can be increased and decreased, you can define the app state as following:
 
 ```swift
-struct AppState {
+struct AppState: StateType {
     var counter: Int = 0
 }
 ```
