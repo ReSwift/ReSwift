@@ -7,6 +7,7 @@
 
 **Other:**
 - Fix bug where automaticallySkipsRepeats is ignored when subscribing on generic `S: StoreType` (#463) - @mjarvis
+- Fix typo in error messaging (#470) - @hkellaway
 
 # 6.0.0
 

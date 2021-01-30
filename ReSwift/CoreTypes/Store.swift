@@ -159,7 +159,7 @@ open class Store<State>: StoreType {
         guard !isDispatching.value else {
             raiseFatalError(
                 "ReSwift:ConcurrentMutationError- Action has been dispatched while" +
-                " a previous action is action is being processed. A reducer" +
+                " a previous action is being processed. A reducer" +
                 " is dispatching an action, or ReSwift is used in a concurrent context" +
                 " (e.g. from multiple threads)."
             )
