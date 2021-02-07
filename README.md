@@ -178,7 +178,7 @@ This architecture provides further benefits beyond improving your code base:
 
 The ReSwift tooling is still in a very early stage, but aforementioned prospects excite me and hopefully others in the community as well!
 
-[You can also watch this talk on the motivation behind ReSwift](https://realm.io/news/benji-encz-unidirectional-data-flow-swift/).
+[You can also watch this talk on the motivation behind ReSwift](https://academy.realm.io/posts/benji-encz-unidirectional-data-flow-swift/).
 
 # Getting Started Guide
 
