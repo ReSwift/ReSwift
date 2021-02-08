@@ -54,7 +54,7 @@ script:
       swift test;
     fi
   - if [ $POD_LINT == "YES" ]; then
-      pod lib lint --verbose;
+      pod lib lint --verbose --allow-warnings;
     fi
 
 after_success:
