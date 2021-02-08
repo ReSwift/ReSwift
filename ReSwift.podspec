@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
     "Malcolm Jarvis" => "malcolm@boolable.ca",
     "Christian Tietze" => "me@christiantietze.de"
   }
-  s.documentation_url = "http://reswift.github.io/ReSwift/"
-  s.social_media_url  = "http://twitter.com/benjaminencz"
+  s.documentation_url = "https://reswift.github.io/ReSwift/"
+  s.social_media_url  = "https://twitter.com/benjaminencz"
   s.source            = {
     :git => "https://github.com/ReSwift/ReSwift.git",
     :tag => s.version.to_s
