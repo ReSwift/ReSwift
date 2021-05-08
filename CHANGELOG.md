@@ -3,6 +3,14 @@
 **Breaking API Changes:**
 
 **API Changes:**
+
+**Other:**
+
+# 6.1.0
+
+*Released: 2021-05-09*
+
+**API Changes:**
 - Deprecate `StateType` protocol requirement (#462) - @mjarvis
 
 **Other:**
