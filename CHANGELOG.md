@@ -26,11 +26,11 @@
 
 # 5.0.0
 
-*Released: 2019-06-30* 
+*Released: 2019-06-30*
 
 **Breaking API Changes:**
 - Remove `StandardAction` and `StandardActionConvertible` (#270) - @mjarvis
-    
+
     - The existence of `StandardAction` and `StandardActionConvertible` is somewhat confusing to new users, and does not have a direct use case within the core ReSwift library. Therefore, it has been moved to [ReSwift-Recorder](https://github.com/ReSwift/ReSwift-Recorder) where it belongs.
     - If you're using `StandardAction` in your project without `ReSwift-Recorder`, you can copy the old implementation into your project as a middle ground while you migrate away from its usage.
 
@@ -55,7 +55,7 @@
 
 **API Changes:**
 - Deprecate `StandardAction` and `StandardActionConvertible` - @mjarvis
-    
+
     - These have been moved to https://github.com/ReSwift/ReSwift-Recorder since they are unnecessary for the base use of ReSwift
 
 - Deprecate `ActionCreator` and `AsyncActionCreator` (#391) - @mjarvis
