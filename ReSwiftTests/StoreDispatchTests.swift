@@ -88,7 +88,7 @@ class StoreDispatchTests: XCTestCase {
      it calls the callback once state update from async action is complete
      */
     @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
-    func testCallsCalbackOnce() {
+    func testCallsCallbackOnce() {
         let asyncExpectation = futureExpectation(withDescription:
             "It calls the callback once state update from async action is complete")
 

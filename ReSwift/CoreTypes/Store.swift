@@ -10,7 +10,7 @@
  This class is the default implementation of the `StoreType` protocol. You will use this store in most
  of your applications. You shouldn't need to implement your own store.
  You initialize the store with a reducer and an initial application state. If your app has multiple
- reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
+ reducers you can combine them by initializing a `MainReducer` with all of your reducers as an
  argument.
  */
 open class Store<State>: StoreType {
