@@ -152,7 +152,7 @@
 
 - `dispatch` functions now return `Void` instead of `Any` (#187) - @Qata
 
-  - The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fullfilled when a dispatched action is processed. While it's generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a `dispatch` overload that takes a `callback` argument and serves this purpose.
+  - The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fulfilled when a dispatched action is processed. While it's generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a `dispatch` overload that takes a `callback` argument and serves this purpose.
 
 - Make `dispatch` argument in middleware non-optional (#225) -  @dimazen, @mjarvis, @Ben-G
 
@@ -233,7 +233,7 @@
 **Fixes:**
 
 - Fix retain cycle caused by middleware (issue: #66) - @Ben-G
-- Store now holds weak references to subscribers to avoid unexpected memory managegement behavior (issue: #62) - @vfn
+- Store now holds weak references to subscribers to avoid unexpected memory management behavior (issue: #62) - @vfn
 - Documentation Fixes - @victorpimentel, @vfn, @juggernate, @raheelahmad
 
 **Other:**

@@ -61,7 +61,7 @@ public extension XCTestCase {
             asyncExpectation.fulfill()
         }
 
-        // act, perform on separate thead because a call to function runs forever
+        // act, perform on separate thread because a call to function runs forever
         dispatchUserInitiatedAsync(execute: testCase)
 
         waitForFutureExpectations(withTimeout: noReturnFailureWaitTime) { _ in

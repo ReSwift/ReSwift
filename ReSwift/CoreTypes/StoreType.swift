@@ -105,7 +105,7 @@ public protocol StoreType: DispatchingStoreType {
      This action creator can then be dispatched as following:
 
      ```
-     store.dispatch( noteActionCreatore.deleteNote(3) )
+     store.dispatch( noteActionCreator.deleteNote(3) )
      ```
      */
     func dispatch(_ actionCreator: ActionCreator)
@@ -122,7 +122,7 @@ public protocol StoreType: DispatchingStoreType {
      triggered by the asynchronously generated action creator.
 
      This overloaded version of `dispatch` calls the provided `callback` as soon as the
-     asynchronoously dispatched action has caused a new state calculation.
+     asynchronously dispatched action has caused a new state calculation.
 
      - Note: If the ActionCreator does not dispatch an action, the callback block will never
      be called
@@ -134,7 +134,7 @@ public protocol StoreType: DispatchingStoreType {
      This callback will be called when the dispatched action triggers a new state calculation.
      This is useful when you need to wait on a state change, triggered by an action (e.g. wait on
      a successful login). However, you should try to use this callback very seldom as it
-     deviates slighlty from the unidirectional data flow principal.
+     deviates slightly from the unidirectional data flow principal.
      */
     associatedtype DispatchCallback = (State) -> Void
 
