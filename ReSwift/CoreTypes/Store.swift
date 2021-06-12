@@ -17,17 +17,19 @@ open class Store<State>: StoreType {
 
     typealias SubscriptionType = SubscriptionBox<State>
 
-    private(set) public var state: State! {
+    private(set) var _state: Synchronized<State?> {
         didSet {
             subscriptions.forEach {
                 if $0.subscriber == nil {
                     subscriptions.remove($0)
                 } else {
-                    $0.newValues(oldState: oldValue, newState: state)
+                    $0.newValues(oldState: oldValue.value!, newState: _state.value!)
                 }
             }
         }
     }
+
+    public var state: State! { _state.value }
 
     public lazy var dispatchFunction: DispatchFunction! = createDispatchFunction()
 
@@ -68,10 +70,9 @@ open class Store<State>: StoreType {
         self.subscriptionsAutomaticallySkipRepeats = automaticallySkipsRepeats
         self.reducer = reducer
         self.middleware = middleware
+        self._state = .init(state)
 
-        if let state = state {
-            self.state = state
-        } else {
+        if state == nil {
             dispatch(ReSwiftInit())
         }
     }
@@ -166,10 +167,10 @@ open class Store<State>: StoreType {
         }
 
         isDispatching.value { $0 = true }
-        let newState = reducer(action, state)
+        let newState = reducer(action, _state.value)
         isDispatching.value { $0 = false }
 
-        state = newState
+        _state.value { $0 = newState }
     }
 
     open func dispatch(_ action: Action) {
