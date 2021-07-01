@@ -15,6 +15,8 @@ import Combine
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
+@available(watchOS 6.0, *)
+@available(iOS 13.0, *)
 open class Store<State: StateType>: StoreType, ObservableObject {
 
     @Published private(set) public var state: State
