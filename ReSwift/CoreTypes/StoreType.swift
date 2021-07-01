@@ -14,6 +14,9 @@ import Combine
  Stores receive actions and use reducers combined with these actions, to calculate state changes.
  Upon every state update a store informs all of its subscribers.
  */
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
+@available(macOS 10.15, *)
 public protocol StoreType: DispatchingStoreType, ObservableObject {
 
     associatedtype State: StateType
