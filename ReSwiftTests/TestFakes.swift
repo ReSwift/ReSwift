@@ -12,8 +12,8 @@ import ReSwift
 struct TestAppState {
     var testValue: Int?
 
-    init() {
-        testValue = nil
+    init(testValue: Int? = nil) {
+        self.testValue = testValue
     }
 }
 
