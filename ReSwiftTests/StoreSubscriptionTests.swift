@@ -117,6 +117,21 @@ class StoreSubscriptionTests: XCTestCase {
     }
 
     /**
+     it dispatches initial value upon subscription and subsequent state changes
+     */
+    func testDispatchInitialStateAfterStateChange() {
+        store = Store(reducer: reducer.handleAction, state: TestAppState())
+        let subscriber = TestSubscriber()
+
+        // Change state first ...
+        store.dispatch(SetValueAction(13))
+        // ... and then subscribe to receive the current state.
+        store.subscribe(subscriber)
+
+        XCTAssertEqual(subscriber.receivedStates.map(\.testValue), [13])
+    }
+
+    /**
      it allows dispatching from within an observer
      */
     func testAllowDispatchWithinObserver() {
