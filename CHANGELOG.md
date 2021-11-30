@@ -5,6 +5,7 @@
 **API Changes:**
 
 **Other:**
+- Add tests to clarify initial state dispatch (#485) - @DivineDominion
 
 # 6.1.0
 
