@@ -42,7 +42,7 @@ jobs:
         run: |
           xcodebuild ${{ matrix.action }} \
             -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
-            -scheme "${{ env.FRAMEWORK_NAME }} ${{ matrix.scheme }}" \
+            -scheme "${{ env.FRAMEWORK_NAME }}-${{ matrix.scheme }}" \
             -sdk "${{ matrix.sdk }}" \
             -destination "${{ matrix.destination }}" \
             -configuration Debug \
