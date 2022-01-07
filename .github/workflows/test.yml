@@ -48,28 +48,59 @@ jobs:
     runs-on: macos-11
     timeout-minutes: 10
     
+    env:
+      LC_CTYPE: en_US.UTF-8
+      LANG: en_US.UTF-8
+      FRAMEWORK_NAME: "ReSwift"
+      LATEST_XCODE: "13.2.1"
+    
     strategy:
       matrix:
         include:
         
+        # Latest MacOS Build, with Codecov
         - scheme: macOS
+          xcode: ${{ env.LATEST_XCODE }}
           sdk: "macosx12.1"
           destination: "platform=macOS"
           swift_version: "5.5"
           action: test
           update_codecov: true
           
+        # Latest iOS Build
         - scheme: iOS
+          xcode: ${{ env.LATEST_XCODE }}
           sdk: "iphonesimulator"
           destination: "platform=iOS Simulator,OS=15.2,name=iPhone 12 Pro Max"
           swift_version: "5.5"
           action: test
           update_codecov: false
-    
-    env:
-      LC_CTYPE: en_US.UTF-8
-      LANG: en_US.UTF-8
-      FRAMEWORK_NAME: "ReSwift"
+          
+        # Latest watchOS Build
+        - scheme: watchOS
+          xcode: ${{ env.LATEST_XCODE }}
+          sdk: "watchsimulator"
+          destination: "OS=8.3,name=Apple Watch Series 6 - 44mm"
+          swift_version: "5.5"
+          action: build
+          update_codecov: false
+        
+        # Latest tvOS Build
+        - scheme: tvOS
+          xcode: ${{ env.LATEST_XCODE }}
+          sdk: "appletvsimulator"
+          destination: "OS=15.2,name=Apple TV 4K"
+          swift_version: "5.5"
+          action: test
+
+        # Swift 5.2 for backwards compatibility
+        - scheme: macOS
+          xcode: "11.7"
+          sdk: "macosx10.15"
+          destination: "platform=macOS"
+          swift_version: "5.2"
+          action: test
+          update_codecov: true
     
     steps:
     
@@ -79,7 +110,7 @@ jobs:
       - name: Select Xcode
         uses: devbotsxyz/xcode-select@v1.1.0
         with:
-          version: "13.2.1"
+          version: matrix.xcode
       
       - name: Build and Test
         run: |
