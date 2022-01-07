@@ -45,7 +45,7 @@ jobs:
           version: "13.2.1"
       
       - name: Build and Test
-        if: ${{ matrix.test_swiftpm != "true" }}
+        if: matrix.test_swiftpm != "true"
         run: |
           xcodebuild ${{ matrix.action }} \
             -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
@@ -59,11 +59,11 @@ jobs:
             SWIFT_VERSION=${{ matrix.SWIFT_VERSION }}
       
       - name: SwiftPM Test
-        if: ${{ matrix.test_swiftpm == "true" }}
+        if: matrix.test_swiftpm == "true"
         run: swift test
       
       - name: Pod Lint
-        if: ${{ matrix.pod_lint == "true" }}
+        if: matrix.pod_lint == "true"
         run: pod lib lint --verbose --allow-warnings
       
       - name: Codecov
