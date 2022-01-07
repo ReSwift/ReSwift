@@ -48,7 +48,6 @@ jobs:
       LC_CTYPE: en_US.UTF-8
       LANG: en_US.UTF-8
       FRAMEWORK_NAME: "ReSwift"
-      LATEST_XCODE: "13.2.1"
     
     strategy:
       matrix:
@@ -56,7 +55,7 @@ jobs:
         
         # Latest MacOS Build, with Codecov
         - scheme: macOS
-          xcode: ${{ env.LATEST_XCODE }}
+          xcode: "13.2.1"
           sdk: "macosx12.1"
           destination: "platform=macOS"
           swift_version: "5.5"
@@ -65,7 +64,7 @@ jobs:
           
         # Latest iOS Build
         - scheme: iOS
-          xcode: ${{ env.LATEST_XCODE }}
+          xcode: "13.2.1"
           sdk: "iphonesimulator"
           destination: "platform=iOS Simulator,OS=15.2,name=iPhone 12 Pro Max"
           swift_version: "5.5"
@@ -74,7 +73,7 @@ jobs:
           
         # Latest watchOS Build
         - scheme: watchOS
-          xcode: ${{ env.LATEST_XCODE }}
+          xcode: "13.2.1"
           sdk: "watchsimulator"
           destination: "OS=8.3,name=Apple Watch Series 6 - 44mm"
           swift_version: "5.5"
@@ -83,7 +82,7 @@ jobs:
         
         # Latest tvOS Build
         - scheme: tvOS
-          xcode: ${{ env.LATEST_XCODE }}
+          xcode: "13.2.1"
           sdk: "appletvsimulator"
           destination: "OS=15.2,name=Apple TV 4K"
           swift_version: "5.5"
