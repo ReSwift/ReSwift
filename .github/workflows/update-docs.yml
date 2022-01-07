@@ -5,6 +5,7 @@ on:
   branches:
     - master
 
+jobs:
   update-docs:
     runs-on: macos-11
     
