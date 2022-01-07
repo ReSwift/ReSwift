@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - master
+    branches-ignore:
+      - gh-pages
   pull_request:
     branches:
       - master
+    branches-ignore:
+      - gh-pages
 
 jobs:
 
@@ -72,8 +76,6 @@ jobs:
           swift_version: "5.5"
           action: test
           update_codecov: false
-          
-
     
     env:
       LC_CTYPE: en_US.UTF-8
