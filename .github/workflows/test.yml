@@ -1,0 +1,57 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: macos-11
+    timeout-minutes: 10
+    
+    strategy:
+      matrix:
+        include:
+        - scheme: macOS
+          sdk: "macosx12.1"
+          destination: "platform=macOS"
+          arch: x86_64
+          swift_version: "5.5"
+          action: test
+    
+    env:
+      LC_CTYPE: en_US.UTF-8
+      LANG: en_US.UTF-8
+      FRAMEWORK_NAME: "ReSwift"
+    
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Select Xcode
+        uses: devbotsxyz/xcode-select@v1.1.0
+        with:
+          version: "13.2.1"
+      
+      - name: Build and Test
+        run: |
+          xcodebuild ${{ matrix.action }} \
+            -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
+            -scheme "${{ env.FRAMEWORK_NAME }} ${{ matrix.scheme }}" \
+            -sdk "${{ matrix.sdk }}" \
+            -destination "${{ matrix.destination }}" \
+            -configuration Debug \
+            ONLY_ACTIVE_ARCH=YES \
+            GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
+            GCC_GENERATE_TEST_COVERAGE_FILES=YES \
+            SWIFT_VERSION=${{ matrix.SWIFT_VERSION }}
+      
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          name: ${{ env.FRAMEWORK_NAME }}
