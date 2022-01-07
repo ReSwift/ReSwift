@@ -53,5 +53,3 @@ jobs:
       
       - name: Codecov
         uses: codecov/codecov-action@v2
-        with:
-          name: ${{ env.FRAMEWORK_NAME }}
