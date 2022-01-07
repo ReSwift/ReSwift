@@ -43,17 +43,6 @@ jobs:
       
       - name: Pod Lint
         run: pod lib lint --verbose --allow-warnings
-  
-  update-docs:
-    runs-on: macos-11
-    if: github.event_name != 'pull_request' && github.branch == 'master'
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Update Documentation
-        run: ./scripts/update-gh-pages
 
   test:
     runs-on: macos-11
