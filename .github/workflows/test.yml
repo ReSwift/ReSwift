@@ -70,6 +70,6 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash) -J ReSwift
       
       - name: Update Documentation
-        if: ${{ github.event_name != 'pull_request && github.branch == "master" && env.UPDATE_DOCS == "true" }}
+        if: ${{ github.event_name != 'pull_request' && github.branch == 'master' && env.UPDATE_DOCS == 'true' }}
         run: ./scripts/update-gh-pages
       
