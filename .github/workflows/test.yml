@@ -90,7 +90,8 @@ jobs:
         with:
           version: "13.2.1"
       
-      - name: Build and Test        run: |
+      - name: Build and Test
+        run: |
           xcodebuild ${{ matrix.action }} \
             -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
             -scheme "${{ env.FRAMEWORK_NAME }}-${{ matrix.scheme }}" \
