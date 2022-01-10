@@ -37,7 +37,7 @@ if [ "$GITHUB_REF_NAME" == "" ]; then exit; fi
 
 pushd "$CHECKOUT_PATH"
 
-    git config --global user.name "GitHub Actions"
+    git config --global user.name "github-actions"
     git config --global user.email ""
 
     # Exit if there are no changes to the documentation
@@ -61,7 +61,7 @@ pushd "$CHECKOUT_PATH"
     git commit -m "[$BRANCH $SHA] Regenerate documentation"
     
     echo " ==> Push changes -> '$REPO'"
-    git push -q origin gh-pages-test
+    git push -q "https://github-actions:$GITHUB_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages-test
 
     echo " <== All done 👊"
 popd

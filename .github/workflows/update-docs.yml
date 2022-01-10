@@ -5,6 +5,9 @@ on:
   branches:
     - mjarvis/github-actions
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   update-docs:
     runs-on: macos-11
