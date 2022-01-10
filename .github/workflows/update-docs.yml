@@ -1,9 +1,9 @@
 name: Update Docs
 
-on:
- push:
-  branches:
-    - master
+#on:
+# push:
+#  branches:
+#    - master
 
 jobs:
   update-docs:
@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Update Documentation
-        run: ./scripts/update-gh-pages
+        run: .scripts/update-gh-pages
