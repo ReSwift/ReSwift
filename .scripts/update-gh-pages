@@ -21,10 +21,10 @@ echo " ==> Updating documentation for '$BRANCH' branch"
 
 if [ -d "$CHECKOUT_PATH" ]; then
     echo " ==> Update: gh-pages -> $CHECKOUT_PATH"
-    git -C "$CHECKOUT_PATH" pull origin gh-pages-test
+    git -C "$CHECKOUT_PATH" pull origin gh-pages
 else
     echo " ==> Checkout: gh-pages -> $CHECKOUT_PATH"
-    git clone --branch gh-pages-test "$REPO" "$CHECKOUT_PATH"
+    git clone --branch gh-pages "$REPO" "$CHECKOUT_PATH"
 fi
 
 echo " ==> Generate documentation"
@@ -61,7 +61,7 @@ pushd "$CHECKOUT_PATH"
     git commit -m "[$BRANCH $SHA] Regenerate documentation"
     
     echo " ==> Push changes -> '$REPO'"
-    git push -q "https://github-actions:$GITHUB_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages-test
+    git push -q "https://github-actions:$GITHUB_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages
 
     echo " <== All done 👊"
 popd

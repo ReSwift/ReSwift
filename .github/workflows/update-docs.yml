@@ -3,7 +3,7 @@ name: Update Docs
 on:
  push:
   branches:
-    - mjarvis/github-actions
+    - master
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
