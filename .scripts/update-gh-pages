@@ -32,7 +32,6 @@ echo " ==> Generate documentation"
 
 # Exit if not running from CI
 if [ "$GITHUB_REF_NAME" == "" ]; then exit; fi
-if [ "$SCHEME" != "iOS" ]; then exit; fi
 
 pushd "$CHECKOUT_PATH"
 
