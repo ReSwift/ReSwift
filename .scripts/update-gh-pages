@@ -25,11 +25,6 @@ else
     git clone --branch gh-pages-test "$REPO" "$CHECKOUT_PATH"
 fi
 
-if [ "$GITHUB_REF_NAME" != "" ]; then
-    echo " ==> Install: jazzy"
-    gem install --no-rdoc --no-ri jazzy
-fi
-
 echo " ==> Generate documentation"
 .scripts/generate-docs "$BRANCH" "$OUTPUT_PATH"
 
