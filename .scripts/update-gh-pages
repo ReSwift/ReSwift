@@ -1,21 +1,12 @@
 #!/bin/bash
 
-# ----- Early exit check
-
-if [ "$TRAVIS_BRANCH" != "" ]; then
-    # Exit if we are running inside travis but not on the iOS scheme
-    if [ "$SCHEME" != "iOS" ]; then
-        echo " <== Early exit - SCHEME='$SCHEME'"
-        exit 0
-    fi
-fi
-
+set -e
 
 # ----- Configuration
 
 ORGANISATION=ReSwift
 NAME=ReSwift
-BRANCH=$([ "$TRAVIS_BRANCH" == "" ] && echo "master" || echo "$TRAVIS_BRANCH")
+BRANCH=$([ "$GITHUB_REF_NAME" == "" ] && echo "master" || echo "$GITHUB_REF_NAME")
 SHA=`git rev-parse --verify HEAD --short`
 REPO=`git config remote.origin.url`
 
@@ -36,24 +27,18 @@ else
     git clone --branch gh-pages "$REPO" "$CHECKOUT_PATH"
 fi
 
-if [ "$TRAVIS_BRANCH" != "" ]; then
-    echo " ==> Install: jazzy"
-    gem install --no-rdoc --no-ri jazzy
-fi
-
 echo " ==> Generate documentation"
 .scripts/generate-docs "$BRANCH" "$OUTPUT_PATH"
 
-# ----- Travis Documentation updater
+# ----- GitHub Actions Documentation updater
 
-# Exit if not running from travis
-if [ "$TRAVIS_BRANCH" == "" ]; then exit; fi
-if [ "$SCHEME" != "iOS" ]; then exit; fi
+# Exit if not running from CI
+if [ "$GITHUB_REF_NAME" == "" ]; then exit; fi
 
 pushd "$CHECKOUT_PATH"
 
-    git config user.name "Travis CI"
-    git config user.email "$COMMIT_AUTHOR_EMAIL"
+    git config --global user.name "github-actions"
+    git config --global user.email ""
 
     # Exit if there are no changes to the documentation
     echo " ==> Check for documentation changes"
@@ -71,12 +56,12 @@ pushd "$CHECKOUT_PATH"
 
     echo " ==> Stage changes"
     git add -A "$BRANCH"
-
+    
     echo " ==> Commit changes"
     git commit -m "[$BRANCH $SHA] Regenerate documentation"
-
+    
     echo " ==> Push changes -> '$REPO'"
-    git push -q "https://$GITHUB_PAGES_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages
+    git push -q "https://github-actions:$GITHUB_TOKEN@github.com/$ORGANISATION/$NAME.git" gh-pages
 
     echo " <== All done 👊"
 popd

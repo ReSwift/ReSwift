@@ -1,0 +1,20 @@
+name: Update Docs
+
+on:
+ push:
+  branches:
+    - master
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update-docs:
+    runs-on: macos-11
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Update Documentation
+        run: .scripts/update-gh-pages

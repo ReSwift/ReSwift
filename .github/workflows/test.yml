@@ -1,0 +1,134 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+
+  swiftpm:
+    runs-on: macos-11
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Select Xcode
+        uses: devbotsxyz/xcode-select@v1.1.0
+        with:
+          version: "13.2.1"
+      
+      - name: SwiftPM Test
+        run: swift test
+  
+  pod-lint:
+    runs-on: macos-11
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Select Xcode
+        uses: devbotsxyz/xcode-select@v1.1.0
+        with:
+          version: "13.2.1"
+      
+      - name: Pod Lint
+        run: pod lib lint --verbose --allow-warnings
+
+  test:
+    runs-on: macos-11
+    timeout-minutes: 10
+    
+    env:
+      LC_CTYPE: en_US.UTF-8
+      LANG: en_US.UTF-8
+      FRAMEWORK_NAME: "ReSwift"
+    
+    strategy:
+      matrix:
+        include:
+        
+        # Latest MacOS Build, with Codecov
+        - scheme: macOS
+          xcode: "13.2.1"
+          sdk: "macosx12.1"
+          destination: "platform=macOS"
+          swift_version: "5.5"
+          action: test
+          update_codecov: true
+          
+        # Latest iOS Build
+        - scheme: iOS
+          xcode: "13.2.1"
+          sdk: "iphonesimulator"
+          destination: "platform=iOS Simulator,OS=15.2,name=iPhone 12 Pro Max"
+          swift_version: "5.5"
+          action: test
+          update_codecov: false
+          
+        # Latest watchOS Build
+        - scheme: watchOS
+          xcode: "13.2.1"
+          sdk: "watchsimulator"
+          destination: "OS=8.3,name=Apple Watch Series 6 - 44mm"
+          swift_version: "5.5"
+          action: build
+          update_codecov: false
+        
+        # Latest tvOS Build
+        - scheme: tvOS
+          xcode: "13.2.1"
+          sdk: "appletvsimulator"
+          destination: "OS=15.2,name=Apple TV 4K"
+          swift_version: "5.5"
+          action: test
+
+        # Swift 5.2 for backwards compatibility
+        - scheme: macOS
+          xcode: "11.7"
+          sdk: "macosx10.15"
+          destination: "platform=macOS"
+          swift_version: "5.2"
+          action: test
+          update_codecov: true
+    
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Select Xcode
+        uses: devbotsxyz/xcode-select@v1.1.0
+        with:
+          version: "${{ matrix.xcode }}"
+      
+      - name: Build and Test
+        run: |
+          xcodebuild ${{ matrix.action }} \
+            -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
+            -scheme "${{ env.FRAMEWORK_NAME }}-${{ matrix.scheme }}" \
+            -sdk "${{ matrix.sdk }}" \
+            -destination "${{ matrix.destination }}" \
+            -configuration Debug \
+            ONLY_ACTIVE_ARCH=YES \
+            GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
+            GCC_GENERATE_TEST_COVERAGE_FILES=YES \
+            SWIFT_VERSION=${{ matrix.SWIFT_VERSION }}
+            
+      - name: Convert code coverage
+        if: matrix.update_codecov == true
+        uses: sersoft-gmbh/xcode-coverage-action@v1.0.0
+        id: xcode-cov
+      
+      - name: Codecov
+        if: matrix.update_codecov == true
+        uses: codecov/codecov-action@v2
+        with:
+          files: ${{join(fromJSON(steps.xcode-cov.outputs.files), ',')}}
+          fail_ci_if_error: true
+          verbose: true
