@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (68% documented)
+         (69% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -29,7 +29,7 @@
         </p>
     
         <p class='header-col header-col--secondary'>
-          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fmaster%2Fdocsets%2FReSwift%2Exml'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift.github.io%2FReSwift%2Fmaster%2Fdocsets%2FReSwift.xml'>
             <img class='header-icon' src='img/dash.png'/>
             Install in Dash
           </a>
@@ -161,10 +161,10 @@
             <a class='nav-group-name-link' href='Other Type Aliases.html'>Other Type Aliases</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
               </li>
             </ul>
           </li>
@@ -177,6 +177,58 @@
             
             <h1 id='changelog' class='heading'>Changelog</h1>
 <h1 id='upcoming' class='heading'>Upcoming</h1>
+
+<p><strong>Breaking API Changes:</strong></p>
+
+<p><strong>API Changes:</strong></p>
+
+<p><strong>Other:</strong></p>
+
+<ul>
+<li>Add tests to clarify initial state dispatch (#485) - @DivineDominion</li>
+</ul>
+<h1 id='6-1-0' class='heading'>6.1.0</h1>
+
+<p><em>Released: 2021-05-09</em></p>
+
+<p><strong>API Changes:</strong></p>
+
+<ul>
+<li>Deprecate <code><a href="State.html#/s:7ReSwift9StateTypeP">StateType</a></code> protocol requirement (#462) - @mjarvis</li>
+</ul>
+
+<p><strong>Other:</strong></p>
+
+<ul>
+<li>Fix bug where automaticallySkipsRepeats is ignored when subscribing on generic <code>S: StoreType</code> (#463) - @mjarvis</li>
+<li>Fix typo in error messaging (#470) - @hkellaway</li>
+</ul>
+<h1 id='6-0-0' class='heading'>6.0.0</h1>
+
+<p><em>Released: 2020-10-01</em></p>
+
+<p><strong>Breaking API Changes:</strong></p>
+
+<ul>
+<li>Drop support for Swift 3.2, 4.0, and 4.1. (#418) - @DivineDominion</li>
+<li>Drop support for iOS 8 (#447) - @DominicSchiller-IBM-CIC</li>
+</ul>
+
+<p><strong>API Changes:</strong></p>
+
+<ul>
+<li>Add capability to mutate <code><a href="Other%20Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></code> after store creation. (#427) - @mjarvis</li>
+</ul>
+
+<p><strong>Other:</strong></p>
+
+<ul>
+<li>Add key paths to subscription select (#415) - @djtech42</li>
+<li>Make isDispatching of Store atomic (#341, #446) - @zhongwuzw, @basememara</li>
+</ul>
+<h1 id='5-0-0' class='heading'>5.0.0</h1>
+
+<p><em>Released: 2019-06-30</em></p>
 
 <p><strong>Breaking API Changes:</strong></p>
 
@@ -198,7 +250,8 @@
 <p><strong>Other:</strong></p>
 
 <ul>
-<li>Update Swift Package Manager support (#403) - @Dschee</li>
+<li>Resolve Xcode 10.2 warnings with Swift 4.2.2 and 5.0 (#397) - @mjarvis</li>
+<li>Update Swift Package Manager support (#403, #411) - @Dschee, @hoemoon</li>
 </ul>
 <h1 id='4-1-1' class='heading'>4.1.1</h1>
 
@@ -232,7 +285,7 @@
 <li>Add Subscription <code>skip(when:)</code> and <code>only(when:)</code> (#242) - @mjarvis</li>
 <li>Add <code>automaticallySkipsRepeats</code> configuration option to Store initializer (#262) - @DivineDominion</li>
 <li>Improve subscription &amp; state update performance (#325) - @mjarvis</li>
-<li>Enable build settings <q>Allow app extension API only</q> (#328) - @oradyvan</li>
+<li>Enable build settings &ldquo;Allow app extension API only&rdquo; (#328) - @oradyvan</li>
 <li>Open <code><a href="Classes/Subscription.html">Subscription&lt;State&gt;</a></code> to allow external extensions (#383) - @mjarvis</li>
 <li>Update project to Swift 4.2 (#256, #335, #374) - @mjarvis, @DivineDominion</li>
 </ul>
@@ -309,10 +362,10 @@
 <li><p><code>dispatch</code> functions now return <code>Void</code> instead of <code>Any</code> (#187) - @Qata</p>
 
 <ul>
-<li>The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fullfilled when a dispatched action is processed. While it&rsquo;s generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a <code>dispatch</code> overload that takes a <code>callback</code> argument and serves this purpose.</li>
+<li>The return type has been removed without any replacement, since the core team did not find any use cases of it. A common usage of the return type in redux is returning a promise that is fulfilled when a dispatched action is processed. While it&rsquo;s generally discouraged to disrupt the unidirectional data flow using this mechanism we do provide a <code>dispatch</code> overload that takes a <code>callback</code> argument and serves this purpose.</li>
 </ul></li>
 <li><p>Make <code>dispatch</code> argument in middleware non-optional (#225) -  @dimazen, @mjarvis, @Ben-G</p></li>
-<li><p><code><a href="Other Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></code> now has a generic type parameter that is used for the <code>getState</code> method and matches the Store&rsquo;s <code>State</code> type. This allows accessing the state in middleware code without type casting (#226) - @mjarvis</p></li>
+<li><p><code><a href="Other%20Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></code> now has a generic type parameter that is used for the <code>getState</code> method and matches the Store&rsquo;s <code>State</code> type. This allows accessing the state in middleware code without type casting (#226) - @mjarvis</p></li>
 </ul>
 
 <p><strong>Other:</strong></p>
@@ -408,7 +461,7 @@
 
 <ul>
 <li>Fix retain cycle caused by middleware (issue: #66) - @Ben-G</li>
-<li>Store now holds weak references to subscribers to avoid unexpected memory managegement behavior (issue: #62) - @vfn</li>
+<li>Store now holds weak references to subscribers to avoid unexpected memory management behavior (issue: #62) - @vfn</li>
 <li>Documentation Fixes - @victorpimentel, @vfn, @juggernate, @raheelahmad</li>
 </ul>
 
@@ -452,7 +505,7 @@
     </div>
     <section class='footer'>
       <p>© 2018 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.6</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.14.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

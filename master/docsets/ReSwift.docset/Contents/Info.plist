@@ -16,5 +16,7 @@
       <true/>
     <key>DashDocSetFamily</key>
       <string>dashtoc</string>
+    <key>DashDocSetFallbackURL</key>
+      <string>http://ReSwift.github.io/ReSwift/master/</string>
   </dict>
 </plist>

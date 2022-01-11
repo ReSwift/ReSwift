@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (68% documented)
+         (69% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -29,7 +29,7 @@
         </p>
     
         <p class='header-col header-col--secondary'>
-          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fmaster%2Fdocsets%2FReSwift%2Exml'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift.github.io%2FReSwift%2Fmaster%2Fdocsets%2FReSwift.xml'>
             <img class='header-icon' src='img/dash.png'/>
             Install in Dash
           </a>
@@ -161,10 +161,10 @@
             <a class='nav-group-name-link' href='Other Type Aliases.html'>Other Type Aliases</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
               </li>
             </ul>
           </li>
@@ -189,10 +189,10 @@
 <p>This section will show you how to set up the core ReSwift components in your app. It is intended to provide a quick start to get the ball rolling.</p>
 <h2 id='high-level-overview' class='heading'>High-Level Overview</h2>
 
-<p>To get the infrastructure up and running you need to set up a <code><a href="Classes/Store.html">Store</a></code> for a root app state type. The type requirement is <code>ReSwift.Store&lt;State: ReSwift.StateType&gt;</code>. You set it up like this:</p>
+<p>To get the infrastructure up and running you need to set up a <code><a href="Classes/Store.html">Store</a></code> for a root app state type. The type requirement is <code>ReSwift.Store&lt;State&gt;</code>. You set it up like this:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ReSwift</span>
 
-<span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
+<span class="kd">struct</span> <span class="kt">AppState</span> <span class="p">{</span>
     <span class="c1">// ... app state properties here ...</span>
 <span class="p">}</span>
 
@@ -218,7 +218,7 @@
 </ol>
 
 <p>For reference, the store&rsquo;s initializer and the initializer&rsquo;s type requirements all together look like this:</p>
-<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="p">:</span> <span class="kt">StateType</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">StoreType</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">StoreType</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span>
         <span class="nv">reducer</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Reducer</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span>
@@ -238,7 +238,7 @@
 <p>If you want to see how you can fill in the gaps we left above, take a look at the following example:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ReSwift</span>
 
-<span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
+<span class="kd">struct</span> <span class="kt">AppState</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">}</span>
 
@@ -273,18 +273,13 @@
 <p>The application state is defined in a single data structure, which should be a <code>struct</code>. This struct can have other structs as members, which allows you to add different sub-states as your app grows. The state struct should store your entire application state. This includes the UI state, navigation state and the state of your model layer.</p>
 
 <p>Here&rsquo;s an example of a state struct as defined in the <a href="https://github.com/ReSwift/CounterExample-Navigation-TimeTravel">Counter Example</a>:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">var</span> <span class="nv">navigationState</span> <span class="o">=</span> <span class="kt">NavigationState</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>There are multiple things to note:</p>
-
-<ol>
-<li>Your app state struct needs to conform to the <code><a href="State.html#/s:7ReSwift9StateTypeP">StateType</a></code> protocol, currently this is just a marker protocol.</li>
-<li>If you are including <code>ReSwiftRouter</code> in your project, your app state needs to contain a property of type <code>NavigationState</code>. This is the sub-state the router will use to store the current route.</li>
-</ol>
+<p>If you are including <code>ReSwiftRouter</code> in your project, your app state needs to contain a property of type <code>NavigationState</code>. This is the sub-state the router will use to store the current route.</p>
 <h3 id='derived-state' class='heading'>Derived State</h3>
 
 <p>Note that you don&rsquo;t need to store derived state inside of your app state. The app state should store all the information that uniquely identifies the current state and allows it to be reconstructed, but none that can be easily derived. For example, instead of directly storing a <code>UIImage</code> you should store a URL that can be used to fetch the image from a cache or a download.</p>
@@ -337,7 +332,7 @@
 
 <p>You can see that the <code>authenticationReducer</code> function is a free function. You can define it with any arbitrary signature but we recommend that it resembles the <code><a href="Reducers.html#/s:7ReSwift7Reducera">Reducer</a></code> typealias (action and current state in, new state out). </p>
 
-<p><strong>Note:</strong> <em>The typealias uses unnamed parameters because Swift does not allow parameter names in this case so we say we recommend it <q>resembles</q> the signature defined in the typealias while our examples use named <code>action</code> and <code>state</code> parameters for clarity.</em></p>
+<p><strong>Note:</strong> <em>The typealias uses unnamed parameters because Swift does not allow parameter names in this case so we say we recommend it &ldquo;resembles&rdquo; the signature defined in the typealias while our examples use named <code>action</code> and <code>state</code> parameters for clarity.</em></p>
 
 <p>This sub-reducer first checks if the state provided is <code>nil</code>. If that&rsquo;s the case, it sets the state to the initial default state. Next, the reducer switches over the provided <code>action</code> and checks its type. Depending on the type of action, this reducer will update the state differently. This specific reducer is very simple: each action only triggers a single property of the state to update. Once the state update is complete, the reducer function returns the new state.</p>
 
@@ -419,7 +414,7 @@
     <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">LoggedIn</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">loggedInState</span>  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
 
     <span class="kt">Octokit</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="n">repositories</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
             <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="n">response</span><span class="p">))</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -444,7 +439,7 @@
     <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="kt">LoggedIn</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">authenticationState</span><span class="o">.</span><span class="n">loggedInState</span>  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
 
     <span class="kt">Octokit</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="n">repositories</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
             <span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="kt">SetRepostories</span><span class="p">(</span><span class="nv">repositories</span><span class="p">:</span> <span class="o">.</span><span class="nf">repositories</span><span class="p">(</span><span class="n">response</span><span class="p">)))</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -518,7 +513,7 @@
     </div>
     <section class='footer'>
       <p>© 2018 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.6</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.14.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

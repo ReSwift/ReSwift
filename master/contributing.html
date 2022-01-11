@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (68% documented)
+         (69% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -29,7 +29,7 @@
         </p>
     
         <p class='header-col header-col--secondary'>
-          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fmaster%2Fdocsets%2FReSwift%2Exml'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift.github.io%2FReSwift%2Fmaster%2Fdocsets%2FReSwift.xml'>
             <img class='header-icon' src='img/dash.png'/>
             Install in Dash
           </a>
@@ -161,10 +161,10 @@
             <a class='nav-group-name-link' href='Other Type Aliases.html'>Other Type Aliases</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
               </li>
             </ul>
           </li>
@@ -239,9 +239,9 @@
 <p>See <a href="http://nshipster.com/swift-documentation/">NSHipster Swift Documentation</a> for a good reference on writing documentation in Swift.</p>
 <h3 id='generating-documentation' class='heading'>Generating documentation</h3>
 
-<p>The documentation at <code>reswift.github.io/ReSwift</code> is generated from by combining the markdown documentation files with generated documentation using <a href="https://github.com/realm/jazzy">jazzy</a>.</p>
+<p>The documentation at <code>reswift.github.io/ReSwift</code> is generated from by combining the Markdown documentation files with generated documentation using <a href="https://github.com/realm/jazzy">jazzy</a>.</p>
 
-<p>The markdown files used to generated documentation are:</p>
+<p>The Markdown files used to generated documentation are:</p>
 
 <ul>
 <li>README.md</li>
@@ -275,7 +275,7 @@
 </ul></li>
 </ul>
 
-<p>Each of the markdown files are processed by the <code>generate_docs.sh</code> script and saved into <code>Docs/tmp/</code> ready for jazzy to generate the final documentation.</p>
+<p>Each of the Markdown files are processed by the <code>generate_docs.sh</code> script and saved into <code>Docs/tmp/</code> ready for jazzy to generate the final documentation.</p>
 
 <p>The processing of each file can include:</p>
 
@@ -283,10 +283,8 @@
 <li>Extracting a single section (ie, for splitting up README.md)</li>
 <li>Adding a title</li>
 <li>Replacing {{version}} with the current version</li>
-<li>Ad-hoc string replacements (found in .jazzy.json under <q>string-replacements</q>)</li>
+<li>Ad-hoc string replacements (found in .jazzy.json under &ldquo;string-replacements&rdquo;)</li>
 </ul>
-
-<p>A forked version of Jazzy is currently used to support individual markdown sections and injecting markdown into API section headers. It can be installed from <a href="https://github.com/agentk/jazzy/tree/integrated-markdown">https://github.com/agentk/jazzy/</a>.</p>
 
 <p>The documentation is hosted by GitHub pages under the <a href="https://github.com/ReSwift/ReSwift/tree/gh-pages">ReSwift gh-pages</a> branch. The <code>build.sh</code> script in the <code>gh-pages</code> branch, installs / updates jazzy, checks out the latest master branch of ReSwift, and calls the <code>generated_docs.sh</code> script to generate docs into the master folder. Docs changes can then be committed and pushed to the <code>gh-pages</code> branch.</p>
 
@@ -317,7 +315,7 @@
 <li>You can propose PRs to merge with the <code>master</code> branch directly. We don&rsquo;t use any complex branching strategies.</li>
 </ul>
 
-<p>As a contributor, choose the <q>squash & merge</q> strategy to merge PRs with a single commit, keeping the commit history clean. (That&rsquo;s an upside of focused Pull Requests: you don&rsquo;t lose extra information.)</p>
+<p>As a contributor, choose the &ldquo;squash &amp; merge&rdquo; strategy to merge PRs with a single commit, keeping the commit history clean. (That&rsquo;s an upside of focused Pull Requests: you don&rsquo;t lose extra information.)</p>
 <h2 id='publishing-new-releases' class='heading'>Publishing New Releases</h2>
 
 <p>Members of the <a href="https://github.com/orgs/ReSwift/teams/releases">@ReSwift/releases</a> team have the necessary permissions to publish a new version to CocoaPods. If you want a new version of ReSwift to be published you should ping these folks.</p>
@@ -340,7 +338,7 @@
     </div>
     <section class='footer'>
       <p>© 2018 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.6</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.14.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

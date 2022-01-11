@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           ReSwift Docs
         </a>
-         (68% documented)
+         (69% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -30,7 +30,7 @@
         </p>
     
         <p class='header-col header-col--secondary'>
-          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fmaster%2Fdocsets%2FReSwift%2Exml'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift.github.io%2FReSwift%2Fmaster%2Fdocsets%2FReSwift.xml'>
             <img class='header-icon' src='../img/dash.png'/>
             Install in Dash
           </a>
@@ -162,10 +162,10 @@
             <a class='nav-group-name-link' href='../Other Type Aliases.html'>Other Type Aliases</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+                <a class='nav-group-task-link' href='../Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='../Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+                <a class='nav-group-task-link' href='../Other%20Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
               </li>
             </ul>
           </li>
@@ -178,14 +178,14 @@
             <h1>Store</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span> <span class="k">where</span> <span class="kt">State</span> <span class="p">:</span> <span class="kt"><a href="../State.html#/s:7ReSwift9StateTypeP">StateType</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
 
                 </div>
               </div>
-            <p>This class is the default implementation of the <code>Store</code> protocol. You will use this store in most
+            <p>This class is the default implementation of the <code><a href="../Protocols/StoreType.html">StoreType</a></code> protocol. You will use this store in most
 of your applications. You shouldn&rsquo;t need to implement your own store.
 You initialize the store with a reducer and an initial application state. If your app has multiple
-reducers you can combine them by initializng a <code>MainReducer</code> with all of your reducers as an
+reducers you can combine them by initializing a <code>MainReducer</code> with all of your reducers as an
 argument.</p>
 
           </div>
@@ -244,13 +244,44 @@ argument.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt"><a href="../Other Typealiases.html#/s:7ReSwift16DispatchFunctiona">DispatchFunction</a></span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">dispatchFunction</span><span class="p">:</span> <span class="kt"><a href="../Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona">DispatchFunction</a></span><span class="o">!</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
                           <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L26" class="button">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:7ReSwift5StoreC10middlewareSayyAA6Action_pcyAaE_pccyAaE_pc_xSgyctcGvp"></a>
+                    <a name="//apple_ref/swift/Property/middleware" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7ReSwift5StoreC10middlewareSayyAA6Action_pcyAaE_pccyAaE_pc_xSgyctcGvp">middleware</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L44-L48" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -280,7 +311,7 @@ argument.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">reducer</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Reducers.html#/s:7ReSwift7Reducera">Reducer</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">?,</span>
-    <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nv">middleware</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7ReSwift10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
     <span class="nv">automaticallySkipsRepeats</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
 <span class="p">)</span></code></pre>
 
@@ -347,7 +378,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L56-L84" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L62-L77" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -378,7 +409,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L104-L107" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L113-L116" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -410,7 +441,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L109-L121" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L118-L130" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -440,7 +471,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L136-L140" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L145-L155" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -471,7 +502,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L143-L158" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L158-L173" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -501,7 +532,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L160-L162" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L175-L177" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -531,7 +562,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L165-L169" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L180-L184" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -561,7 +592,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L172-L174" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L187-L189" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -592,7 +623,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L177-L187" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L192-L202" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -622,7 +653,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L120" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L139" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -652,7 +683,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L142" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L161" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -676,13 +707,17 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">AsyncActionCreator</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span> <span class="n">_</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="p">,</span> <span class="n">_</span> <span class="nv">actionCreatorCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt"><a href="../Classes/Store.html#/s:7ReSwift9StoreTypeP13ActionCreatorQa">ActionCreator</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">AsyncActionCreator</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">State</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">store</span><span class="p">:</span> <span class="kt">Store</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">actionCreatorCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt"><a href="../Classes/Store.html#/s:7ReSwift9StoreTypeP13ActionCreatorQa">ActionCreator</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L145" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L164" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -701,9 +736,9 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:7ReSwift5StoreC9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF"></a>
+                    <a name="/s:7ReSwift9StoreTypeP9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGy5StateQzGcSgtSQRd__0c10SubscriberhD0Qyd_0_Rsd__AA0cI0Rd_0_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:transform:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ReSwift5StoreC9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGyxGcSgtSQRd__0C19SubscriberStateTypeQyd_0_Rsd__AA0cG0Rd_0_r0_lF">subscribe(_:transform:)</a>
+                    <a class="token" href="#/s:7ReSwift9StoreTypeP9subscribe_9transformyqd_0__AA12SubscriptionCyqd__GAGy5StateQzGcSgtSQRd__0c10SubscriberhD0Qyd_0_Rsd__AA0cI0Rd_0_r0_lF">subscribe(_:transform:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -711,8 +746,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
@@ -726,7 +760,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L205-L217" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L220-L232" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -735,19 +769,19 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Skip%20Repeats%20for%20Equatable%20States2"></a>
-                <a name="//apple_ref/swift/Section/Skip Repeats for Equatable States" class="dashAnchor"></a>
-                <a href="#/Skip%20Repeats%20for%20Equatable%20States2">
-                  <h3 class="section-name">Skip Repeats for Equatable States</h3>
+                <a name="/Available%20where%20%60State%60%3A%20%60Equatable%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `State`: `Equatable`" class="dashAnchor"></a>
+                <a href="#/Available%20where%20%60State%60%3A%20%60Equatable%60">
+                  <h3 class="section-name">Available where `State`: `Equatable`</h3>
                 </a>
               </div>
               <ul class='item-container'>
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:7ReSwift5StoreCAASQRzrlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF"></a>
+                    <a name="/s:7ReSwift5StoreCAASQRzlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7ReSwift5StoreCAASQRzrlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF">subscribe(_:)</a>
+                    <a class="token" href="#/s:7ReSwift5StoreCAASQRzlE9subscribeyyqd__0C19SubscriberStateTypeQyd__RszAA0cE0Rd__lF">subscribe(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -769,7 +803,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
                       </div>
                       <div class="slightly-smaller">
                         
-                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L221-L228" class="button">Show on GitHub</a>
+                          <a href="https://github.com/ReSwift/ReSwift/tree/master/ReSwift/CoreTypes/Store.swift#L236-L243" class="button">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -783,7 +817,7 @@ implements <code>Equatable</code>. Defaults to <code>true</code>.</p>
     </div>
     <section class='footer'>
       <p>© 2018 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.6</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.14.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>

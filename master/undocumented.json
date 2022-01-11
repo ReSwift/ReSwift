@@ -1,138 +1,138 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Middleware.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Middleware.swift",
       "line": 9,
       "symbol": "DispatchFunction",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Middleware.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Middleware.swift",
       "line": 10,
       "symbol": "Middleware",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Reducer.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Reducer.swift",
       "line": 9,
       "symbol": "Reducer",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/State.swift",
-      "line": 9,
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/State.swift",
+      "line": 12,
       "symbol": "StateType",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 143,
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 44,
+      "symbol": "Store.middleware",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 158,
       "symbol": "Store._defaultDispatch(action:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 205,
-      "symbol": "Store.subscribe(_:transform:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
-      "line": 221,
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Store.swift",
+      "line": 236,
       "symbol": "Store.subscribe(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
-      "line": null,
-      "symbol": "StoreSubscriber",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 9,
       "symbol": "AnyStoreSubscriber",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 11,
       "symbol": "AnyStoreSubscriber._newState(state:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 14,
       "symbol": "StoreSubscriber",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 15,
       "symbol": "StoreSubscriber.StoreSubscriberStateType",
       "symbol_kind": "source.lang.swift.decl.associatedtype",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 17,
       "symbol": "StoreSubscriber.newState(state:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
+      "line": 20,
+      "symbol": "StoreSubscriber",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreSubscriber.swift",
       "line": 22,
       "symbol": "StoreSubscriber._newState(state:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/StoreType.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/StoreType.swift",
       "line": 17,
       "symbol": "StoreType.State",
       "symbol_kind": "source.lang.swift.decl.associatedtype",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/CoreTypes/Subscription.swift",
-      "line": 139,
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/CoreTypes/Subscription.swift",
+      "line": 164,
       "symbol": "Subscription.skipRepeats()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
       "line": 9,
       "symbol": "Coding",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
       "line": 10,
       "symbol": "Coding.init(dictionary:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
+      "file": "/Users/runner/work/ReSwift/ReSwift/ReSwift/Utils/Coding.swift",
       "line": 11,
       "symbol": "Coding.dictionaryRepresentation",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/ReSwift/ReSwift"
+  "source_directory": "/Users/runner/work/ReSwift/ReSwift"
 }

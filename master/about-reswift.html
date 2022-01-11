@@ -18,7 +18,7 @@
         <a class='header-link' href='index.html'>
           ReSwift Docs
         </a>
-         (68% documented)
+         (69% documented)
       </p>
     
         <p class='header-col header-col--secondary'>
@@ -29,7 +29,7 @@
         </p>
     
         <p class='header-col header-col--secondary'>
-          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift%2Egithub%2Eio%2FReSwift%2Fmaster%2Fdocsets%2FReSwift%2Exml'>
+          <a class='header-link' href='dash-feed://http%3A%2F%2FReSwift.github.io%2FReSwift%2Fmaster%2Fdocsets%2FReSwift.xml'>
             <img class='header-icon' src='img/dash.png'/>
             Install in Dash
           </a>
@@ -161,10 +161,10 @@
             <a class='nav-group-name-link' href='Other Type Aliases.html'>Other Type Aliases</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift16DispatchFunctiona'>DispatchFunction</a>
               </li>
               <li class='nav-group-task'>
-                <a class='nav-group-task-link' href='Other Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
+                <a class='nav-group-task-link' href='Other%20Typealiases.html#/s:7ReSwift10Middlewarea'>Middleware</a>
               </li>
             </ul>
           </li>
@@ -188,7 +188,7 @@
 <p><img src="img/reswift_concept.png" alt=""></p>
 
 <p>For a very simple app, that maintains a counter that can be increased and decreased, you can define the app state as following:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span><span class="p">:</span> <span class="kt">StateType</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">AppState</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">}</span>
 </code></pre>
@@ -266,8 +266,23 @@
 <p>Button taps result in dispatched actions that will be handled by the store and its reducers, resulting in a new app state.</p>
 
 <p>This is a very basic example that only shows a subset of ReSwift&rsquo;s features, read the Getting Started Guide to see how you can build entire apps with this architecture. For a complete implementation of this example see the <a href="https://github.com/ReSwift/CounterExample">CounterExample</a> project.</p>
+<h3 id='create-a-subscription-of-several-substates-combined' class='heading'>Create a subscription of several substates combined</h3>
 
-<p><a href="https://realm.io/news/benji-encz-unidirectional-data-flow-swift/">You can also watch this talk on the motivation behind ReSwift</a>.</p>
+<p>Just create a struct representing the data model needed in the subscriber class, with a constructor that takes the whole app state as a param. Consider this constructor as a mapper/selector from the app state to the subscriber state. Being <code>MySubState</code> a struct and conforming to <code>Equatable</code>, ReSwift (by default) will not notify the subscriber if the computed output hasn&rsquo;t changed. Also, Swift will be able to infer the type of the subscription.</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">MySubState</span><span class="p">:</span> <span class="kt">Equatable</span> <span class="p">{</span>
+    <span class="c1">// Combined substate derived from the app state.</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">AppState</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Compute here the substate needed.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">select</span><span class="p">(</span><span class="kt">MySubState</span><span class="o">.</span><span class="kd">init</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">newState</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">MySubState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Profit!</span>
+<span class="p">}</span>
+</code></pre>
 
           </div>
         </section>
@@ -277,7 +292,7 @@
     </div>
     <section class='footer'>
       <p>© 2018 <a class="link" href="https://github.com/ReSwift/ReSwift" target="_blank" rel="external">ReSwift</a>. All rights reserved.</p>
-      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.9.6</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
+      <p>Generated by <a class='link' href='https://github.com/realm/jazzy' target='_blank' rel='external'>jazzy ♪♫ v0.14.1</a>, a <a class='link' href='http://realm.io' target='_blank' rel='external'>Realm</a> project.</p>
     </section>
   </body>
 </div>
