@@ -5,6 +5,7 @@
 **API Changes:**
 
 **Other:**
+- Replaced open func subscribe<SelectedState: Equatable, S: StoreSubscriber> with public func subscribe<SelectedState: Equatable, S: StoreSubscriber> and open func subscribe<S: StoreSubscriber>(_ subscriber: S) with public func subscribe<S: StoreSubscriber>(_ subscriber: S) since non-'@objc' instance method in extensions cannot be overridden, should use 'public' instead (#491) - @maksimgromov
 - Add tests to clarify initial state dispatch (#485) - @DivineDominion
 
 # 6.1.0
