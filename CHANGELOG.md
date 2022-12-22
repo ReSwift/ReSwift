@@ -5,6 +5,10 @@
 **API Changes:**
 
 **Other:**
+
+# 6.2.0
+
+**Other:**
 - Replaced `open func` with `public func` in extensions to `Store` because they cannot be overridden anyway (#491) - @maksimgromov
 - Add tests to clarify initial state dispatch (#485) - @DivineDominion
 
