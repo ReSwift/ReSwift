@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ReSwift"
-  s.version          = "6.2.0"
+  s.version          = "6.1.1"
   s.summary          = "Unidirectional Data Flow in Swift"
   s.description      = <<-DESC
                         ReSwift is a Redux-like implementation of the unidirectional data flow architecture in Swift.

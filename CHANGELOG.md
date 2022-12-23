@@ -6,7 +6,7 @@
 
 **Other:**
 
-# 6.2.0
+# 6.1.1
 
 **Other:**
 - Replaced `open func` with `public func` in extensions to `Store` because they cannot be overridden anyway (#491) - @maksimgromov
