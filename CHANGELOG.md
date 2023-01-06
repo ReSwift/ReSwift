@@ -8,6 +8,8 @@
 
 # 6.1.1
 
+*Released: 2023-01-06*
+
 **Other:**
 - Replaced `open func` with `public func` in extensions to `Store` because they cannot be overridden anyway (#491) - @maksimgromov
 - Add tests to clarify initial state dispatch (#485) - @DivineDominion
