@@ -326,8 +326,17 @@
 <li>[ ] Bump version number in <code>ReSwift.podspec</code> and <code>Info.plist</code> (We follow <a href="https://semver.org/">semver</a> - most importantly any breaking API change should result in a major API version bump)</li>
 <li>[ ] Add the new version number and the release date to <code>Changelog.md</code></li>
 <li>[ ] Create a tag off of the relevant branch (<code>master</code> for regular release) and add the relevant changelog entries to the <a href="https://github.com/ReSwift/ReSwift/releases">release list on GitHub</a></li>
-<li>[ ] Publish the new version to the CocoaPods trunk</li>
-<li>[ ] ✨✨Bonus points ✨✨: for major version<code>ReSwift</code> releases, update <code>ReSwiftRouter</code> and <code>GitHubBrowserExample</code> to use the latest version of <code>ReSwift</code></li>
+<li><p>[ ] Attach a Carthage-built binary release.</p>
+
+<p>With <code>.xcframework</code>s <code>carthage archive</code> doesn&rsquo;t work anymore, so you need to zip the whole clean build folder:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>rm -rf Carthage/
+<span class="gp">$ </span>carthage build --no-skip-current --use-xcframeworks
+<span class="gp">$ </span>ditto -c -k --sequesterRsrc --keepParent Carthage ReSwift.framework.zip
+</code></pre>
+
+<p>Note that the naming convention of <code>.framework.zip</code> doesn&rsquo;t change. Otherwise, Carthage won&rsquo;t recognize the binary.</p></li>
+<li><p>[ ] Publish the new version to the CocoaPods trunk</p></li>
+<li><p>[ ] ✨✨Bonus points ✨✨: for major version<code>ReSwift</code> releases, update <code>ReSwiftRouter</code> and <code>GitHubBrowserExample</code> to use the latest version of <code>ReSwift</code></p></li>
 </ul>
 
           </div>
