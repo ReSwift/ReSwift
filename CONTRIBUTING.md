@@ -138,7 +138,17 @@ To create a new release, create a pull request targeting either `master`, or a s
 
 - [ ] Bump version number in `ReSwift.podspec` and `Info.plist` (We follow [semver](https://semver.org/) - most importantly any breaking API change should result in a major API version bump)
 - [ ] Add the new version number and the release date to `Changelog.md`
-- [ ] Create a tag off of the relevant branch (`master` for regular release) and add the relevant changelog entries to the [release list on GitHub](https://github.com/ReSwift/ReSwift/releases) 
+- [ ] Create a tag off of the relevant branch (`master` for regular release) and add the relevant changelog entries to the [release list on GitHub](https://github.com/ReSwift/ReSwift/releases)
+- [ ] Attach a Carthage-built binary release.
+
+    With `.xcframework`s `carthage archive` doesn't work anymore, so you need to zip the whole clean build folder:
+
+    ```sh
+    $ rm -rf Carthage/
+    $ carthage build --no-skip-current --use-xcframeworks
+    $ ditto -c -k --sequesterRsrc --keepParent Carthage ReSwift.framework.zip
+    ```
+
+    Note that the naming convention of `.framework.zip` doesn't change. Otherwise, Carthage won't recognize the binary.
 - [ ] Publish the new version to the CocoaPods trunk
 - [ ] ✨✨Bonus points ✨✨: for major version`ReSwift` releases, update `ReSwiftRouter` and `GitHubBrowserExample` to use the latest version of `ReSwift`
-
