@@ -145,6 +145,20 @@ public class Subscription<State> {
             }
         }
     }
+    
+    /// Allows skipping when oldState is nil
+    public func skipFirstState() -> Subscription<State> {
+        Subscription<State> { sink in
+            self.observer = { oldState, newState in
+                switch (oldState, newState) {
+                case (.none, _):
+                    return
+                default:
+                    sink(oldState, newState)
+                }
+            }
+        }
+    }
 
     /// The closure called with changes from the store.
     /// This closure can be written to for use in extensions to Subscription similar to `skipRepeats`

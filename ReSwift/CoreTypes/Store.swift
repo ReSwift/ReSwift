@@ -242,3 +242,42 @@ extension Store where State: Equatable {
             subscribe(subscriber, transform: { $0.skipRepeats() })
     }
 }
+
+// MARK: Allow subscriptions using Any, so State not strongly typed
+
+extension Store {
+    
+   public func subscribeAny<S: AnyStoreSubscriber, SelectedState: Equatable>(
+    _ subscriber: S, keyPath: WritableKeyPath<State, SelectedState>, skipFirstState: Bool = false)
+    {
+        // Create a subscription for the new subscriber.
+        let originalSubscription = Subscription<State>()
+        
+        // Transform by selecting a subState with keyPath
+        var transformedSubscription = originalSubscription.select(keyPath)
+        if skipFirstState {
+            transformedSubscription = transformedSubscription.skipFirstState()
+        }
+        transformedSubscription = transformedSubscription.skipRepeats()
+        _subscribeAny(subscriber, originalSubscription: originalSubscription,
+                   transformedSubscription: transformedSubscription)
+    }
+    
+    fileprivate func _subscribeAny<SelectedState, S: AnyStoreSubscriber>(
+        _ subscriber: S, originalSubscription: Subscription<State>,
+        transformedSubscription: Subscription<SelectedState>?)
+    {
+        let subscriptionBox = self.subscriptionBox(
+            originalSubscription: originalSubscription,
+            transformedSubscription: transformedSubscription,
+            subscriber: subscriber
+        )
+
+        subscriptions.update(with: subscriptionBox)
+
+        if let state = self.state {
+            originalSubscription.newValues(oldState: nil, newState: state)
+        }
+    }
+}
+
