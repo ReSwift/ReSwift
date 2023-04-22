@@ -248,7 +248,6 @@ extension Store where State: Equatable {
 extension Store {
    public func subscribeAny<S: AnyStoreSubscriber, SelectedState: Equatable>(
     _ subscriber: S, keyPath: WritableKeyPath<State, SelectedState>, skipFirstState: Bool = false) {
-        
         // Create a subscription for the new subscriber.
         let originalSubscription = Subscription<State>()
 
@@ -269,10 +268,8 @@ extension Store {
     
     public func subscribeAny<S: AnyStoreSubscriber, SelectedState: Equatable>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?) {
-            
          // Create a subscription for the new subscriber.
          let originalSubscription = Subscription<State>()
-         
          // Call the optional transformation closure. This allows callers to modify
          // the subscription, e.g. in order to subselect parts of the store's state.
          var transformedSubscription = transform?(originalSubscription)
@@ -288,7 +285,6 @@ extension Store {
     fileprivate func _subscribeAny<SelectedState, S: AnyStoreSubscriber>(
         _ subscriber: S, originalSubscription: Subscription<State>,
         transformedSubscription: Subscription<SelectedState>?) {
-            
         let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
             transformedSubscription: transformedSubscription,
