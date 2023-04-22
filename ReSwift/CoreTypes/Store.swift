@@ -246,27 +246,49 @@ extension Store where State: Equatable {
 // MARK: Allow subscriptions using Any, so State not strongly typed
 
 extension Store {
-    
    public func subscribeAny<S: AnyStoreSubscriber, SelectedState: Equatable>(
-    _ subscriber: S, keyPath: WritableKeyPath<State, SelectedState>, skipFirstState: Bool = false)
-    {
+    _ subscriber: S, keyPath: WritableKeyPath<State, SelectedState>, skipFirstState: Bool = false) {
+        
         // Create a subscription for the new subscriber.
         let originalSubscription = Subscription<State>()
-        
-        // Transform by selecting a subState with keyPath
+
+        // Transform by selecting a subState using the keyPath arg
         var transformedSubscription = originalSubscription.select(keyPath)
+
+        if subscriptionsAutomaticallySkipRepeats {
+            transformedSubscription = transformedSubscription.skipRepeats()
+        }
+
         if skipFirstState {
             transformedSubscription = transformedSubscription.skipFirstState()
         }
-        transformedSubscription = transformedSubscription.skipRepeats()
+
         _subscribeAny(subscriber, originalSubscription: originalSubscription,
-                   transformedSubscription: transformedSubscription)
+                      transformedSubscription: transformedSubscription)
     }
+    
+    public func subscribeAny<S: AnyStoreSubscriber, SelectedState: Equatable>(
+        _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?) {
+            
+         // Create a subscription for the new subscriber.
+         let originalSubscription = Subscription<State>()
+         
+         // Call the optional transformation closure. This allows callers to modify
+         // the subscription, e.g. in order to subselect parts of the store's state.
+         var transformedSubscription = transform?(originalSubscription)
+
+         if subscriptionsAutomaticallySkipRepeats {
+             transformedSubscription = transformedSubscription?.skipRepeats()
+         }
+          
+         _subscribeAny(subscriber, originalSubscription: originalSubscription,
+                    transformedSubscription: transformedSubscription)
+     }
     
     fileprivate func _subscribeAny<SelectedState, S: AnyStoreSubscriber>(
         _ subscriber: S, originalSubscription: Subscription<State>,
-        transformedSubscription: Subscription<SelectedState>?)
-    {
+        transformedSubscription: Subscription<SelectedState>?) {
+            
         let subscriptionBox = self.subscriptionBox(
             originalSubscription: originalSubscription,
             transformedSubscription: transformedSubscription,
@@ -280,4 +302,3 @@ extension Store {
         }
     }
 }
-
