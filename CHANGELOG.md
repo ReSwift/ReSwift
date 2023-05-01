@@ -6,6 +6,11 @@
 
 **Other:**
 
+# 6.2.0 
+
+**Other:**
+- Removed old deployment targets and support for Swift versions prior to 5.5. Version 6.2 and newer now require macOS 10.13, iOS 12, tvOS 12, watchOS 4. (#509) -- @DivineDominion
+
 # 6.1.1
 
 *Released: 2023-01-06*
