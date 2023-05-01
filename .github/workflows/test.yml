@@ -20,7 +20,7 @@ jobs:
       - name: Select Xcode
         uses: MobileDevOps/xcode-select-version-action@v1.0.0
         with:
-          xcode-select-version: "14.2"
+          xcode-select-version: "13.2.1"
       
       - name: SwiftPM Test
         run: swift test
@@ -35,7 +35,7 @@ jobs:
       - name: Select Xcode
         uses: MobileDevOps/xcode-select-version-action@v1.0.0
         with:
-          xcode-select-version: "14.2"
+          xcode-select-version: "13.2.1"
       
       - name: Pod Lint
         run: pod lib lint --verbose --allow-warnings
