@@ -102,7 +102,7 @@ jobs:
           action: test
           update_codecov: true
 
-    runs-on: {{ matrix.os }}
+    runs-on: "${{ matrix.os }}"
     steps:
 
       - name: Checkout
