@@ -128,7 +128,7 @@ jobs:
 
       - name: Convert code coverage
         if: matrix.update_codecov == true
-        uses: sersoft-gmbh/xcode-coverage-action@v1.0.0
+        uses: sersoft-gmbh/xcode-coverage-action@v3
         id: xcode-cov
 
       - name: Codecov
