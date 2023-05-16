@@ -67,7 +67,7 @@ jobs:
           os: macos-13
           xcode: "14.3"
           sdk: "iphonesimulator"
-          destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+          destination: "OS=16.4,name=iPhone 14 Pro"
           swift_version: "5.8"
           action: test
           update_codecov: false
