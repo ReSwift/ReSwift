@@ -66,7 +66,7 @@ jobs:
         - scheme: iOS
           xcode: "13.2.1"
           sdk: "iphonesimulator"
-          destination: "platform=iOS Simulator,OS=15.2,name=iPhone 12 Pro Max"
+          destination: "OS=15.2,name=iPhone 12 Pro Max"
           swift_version: "5.5"
           action: test
           update_codecov: false
