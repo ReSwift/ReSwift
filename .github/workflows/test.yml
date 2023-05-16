@@ -111,8 +111,6 @@ jobs:
         run: |
           xcodebuild \
             ONLY_ACTIVE_ARCH=YES \
-            GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
-            GCC_GENERATE_TEST_COVERAGE_FILES=YES \
             SWIFT_VERSION=${{ matrix.SWIFT_VERSION }} \
             -configuration Debug \
             -project "${{ env.FRAMEWORK_NAME }}.xcodeproj" \
@@ -120,16 +118,3 @@ jobs:
             -sdk "${{ matrix.sdk }}" \
             -destination "${{ matrix.destination }}" \
              ${{ matrix.action }}
-             
-      - name: Convert code coverage
-        if: matrix.update_codecov == true
-        uses: sersoft-gmbh/xcode-coverage-action@v1.0.0
-        id: xcode-cov
-      
-      - name: Codecov
-        if: matrix.update_codecov == true
-        uses: codecov/codecov-action@v2
-        with:
-          files: ${{join(fromJSON(steps.xcode-cov.outputs.files), ',')}}
-          fail_ci_if_error: true
-          verbose: true
