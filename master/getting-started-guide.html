@@ -356,8 +356,8 @@
 
     <span class="c1">// subscribe when VC appears</span>
     <span class="c1">// we are only interested in repository sub-state, filter it out of the overall state</span>
-    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">subcription</span> <span class="k">in</span>
-        <span class="n">subcription</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span> <span class="n">state</span><span class="o">.</span><span class="n">repositories</span> <span class="p">}</span>
+    <span class="n">store</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">subscription</span> <span class="k">in</span>
+        <span class="n">subscription</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span> <span class="n">state</span><span class="o">.</span><span class="n">repositories</span> <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
