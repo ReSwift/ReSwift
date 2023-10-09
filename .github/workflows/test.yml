@@ -64,8 +64,8 @@ jobs:
         # Latest iOS Build
         - scheme: iOS
           xcode: "14.2"
-          sdk: "iphonesimulator16.2"
-          destination: "OS=16.2,name=iPhone 12 Pro Max"
+          sdk: "iphonesimulator"
+          destination: "OS=16.2,name=iPhone 13 Pro Max"
           swift_version: "5.7"
           action: test
           update_codecov: false
@@ -74,7 +74,7 @@ jobs:
         - scheme: watchOS
           xcode: "14.2"
           sdk: "watchsimulator"
-          destination: "OS=9.1,name=Apple Watch Series 6 - 44mm"
+          destination: "OS=9.1,name=Apple Watch Series 8 (45mm)"
           swift_version: "5.7"
           action: build
           update_codecov: false
