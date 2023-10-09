@@ -87,15 +87,6 @@ jobs:
           destination: "OS=16.2,name=Apple TV 4K"
           swift_version: "5.7"
           action: test
-
-        # Swift 5.2 for backwards compatibility
-        - scheme: macOS
-          xcode: "11.7"
-          sdk: "macosx10.15"
-          destination: "platform=macOS"
-          swift_version: "5.2"
-          action: test
-          update_codecov: true
     
     steps:
     
