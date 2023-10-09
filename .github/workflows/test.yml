@@ -65,7 +65,7 @@ jobs:
         # Latest iOS Build
         - scheme: iOS
           xcode: "14.2"
-          sdk: "iphonesimulator15.2"
+          sdk: "iphonesimulator16.2"
           destination: "OS=16.2,name=iPhone 12 Pro Max"
           swift_version: "5.7"
           action: test
