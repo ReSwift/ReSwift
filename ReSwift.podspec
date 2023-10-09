@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
 
   s.requires_arc     = true
   s.source_files     = 'ReSwift/**/*.swift'
-  s.swift_versions   = [ "5.7", "5.6", "5.5" ]
+  s.swift_versions   = [ "5.9", "5.8", "5.7", "5.6", "5.5" ]
 end
