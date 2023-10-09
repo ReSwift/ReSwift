@@ -42,7 +42,6 @@ jobs:
 
   test:
     runs-on: macos-12
-    timeout-minutes: 4
     
     env:
       LC_CTYPE: en_US.UTF-8
@@ -84,7 +83,7 @@ jobs:
         - scheme: tvOS
           xcode: "14.2"
           sdk: "appletvsimulator"
-          destination: "OS=16.2,name=Apple TV 4K"
+          destination: "OS=16.1,name=Apple TV 4K (at 1080p) (2nd generation)"
           swift_version: "5.7"
           action: test
     
