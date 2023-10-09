@@ -11,7 +11,7 @@ on:
 jobs:
 
   swiftpm:
-    runs-on: macos-11
+    runs-on: macos-12
     
     steps:
       - name: Checkout
@@ -55,37 +55,37 @@ jobs:
         
         # Latest MacOS Build, with Codecov
         - scheme: macOS
-          xcode: "13.2.1"
-          sdk: "macosx12.1"
+          xcode: "14.2"
+          sdk: "macosx13.1"
           destination: "platform=macOS"
-          swift_version: "5.5"
+          swift_version: "5.7"
           action: test
           update_codecov: true
           
         # Latest iOS Build
         - scheme: iOS
-          xcode: "13.2.1"
+          xcode: "14.2"
           sdk: "iphonesimulator15.2"
-          destination: "OS=15.2,name=iPhone 12 Pro Max"
-          swift_version: "5.5"
+          destination: "OS=16.2,name=iPhone 12 Pro Max"
+          swift_version: "5.7"
           action: test
           update_codecov: false
           
         # Latest watchOS Build
         - scheme: watchOS
-          xcode: "13.2.1"
+          xcode: "14.2"
           sdk: "watchsimulator"
-          destination: "OS=8.3,name=Apple Watch Series 6 - 44mm"
-          swift_version: "5.5"
+          destination: "OS=9.1,name=Apple Watch Series 6 - 44mm"
+          swift_version: "5.7"
           action: build
           update_codecov: false
         
         # Latest tvOS Build
         - scheme: tvOS
-          xcode: "13.2.1"
+          xcode: "14.2"
           sdk: "appletvsimulator"
-          destination: "OS=15.2,name=Apple TV 4K"
-          swift_version: "5.5"
+          destination: "OS=16.2,name=Apple TV 4K"
+          swift_version: "5.7"
           action: test
 
         # Swift 5.2 for backwards compatibility
