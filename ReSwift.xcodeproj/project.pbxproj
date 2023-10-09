@@ -683,6 +683,7 @@
 		};
 		621C06541C277459008029AE /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -697,6 +698,7 @@
 		};
 		73E545D31D22B0D600D114E8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -707,7 +709,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"";
+			shellScript = "\"$SRCROOT/BuildPhases/run-swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
