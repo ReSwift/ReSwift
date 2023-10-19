@@ -2,11 +2,6 @@
 
 [![Build Status](https://img.shields.io/travis/ReSwift/ReSwift/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwift.svg?style=flat-square)](https://cocoapods.org/pods/ReSwift) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift/blob/master/LICENSE.md) [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg?style=flat-square)](https://houndci.com)
 
-**Supported Swift Versions:** Swift 4.2, 5.x
-
-For Swift 3.2 or 4.0 Support use [Release 5.0.0](https://github.com/ReSwift/ReSwift/releases/tag/5.0.0) or earlier.
-For Swift 2.2 Support use [Release 2.0.0](https://github.com/ReSwift/ReSwift/releases/tag/2.0.0) or earlier.
-
 # Introduction
 
 ReSwift is a [Redux](https://github.com/reactjs/redux)-like implementation of the unidirectional data flow architecture in Swift. ReSwift helps you to separate three important concerns of your app's components:
@@ -215,7 +210,7 @@ github "ReSwift/ReSwift"
 You can install ReSwift via [Accio](https://github.com/JamitLabs/Accio) by adding the following line to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "5.0.0")),
+.package(url: "https://github.com/ReSwift/ReSwift.git", .upToNextMajor(from: "6.0.0")),
 ```
 
 Next, add `ReSwift` to your App targets dependencies like so:
@@ -241,7 +236,7 @@ import PackageDescription
 let package = Package(
     [...]
     dependencies: [
-        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "5.0.0"),
+        .package(url: "https://github.com/ReSwift/ReSwift.git", from: "6.0.0"),
     ]
 )
 ```
